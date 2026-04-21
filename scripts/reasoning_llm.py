@@ -86,7 +86,7 @@ class ReasoningOpenRouterLLM(OpenAILLM):
             return "synthesizer"
         if "impartial judge" in first:
             return "judge"
-        if "careful, helpful expert" in first:
+        if "careful, helpful expert" in first or "expert assistant" in first:
             return "teacher"
         return "unknown"
 
@@ -113,12 +113,22 @@ class ReasoningOpenRouterLLM(OpenAILLM):
         kwargs["extra_body"] = extra_body
 
         # Get the raw completion directly so we can access `.reasoning`.
+        # Split generation_kwargs: OpenAI-standard fields go top-level;
+        # extra_body (server-specific extensions like repetition_penalty or
+        # chat_template_kwargs) gets merged with any per-call extra_body kwarg.
+        gen = dict(self.generation_kwargs or {})  # type: ignore[arg-type]
+        gen_extra_body = dict(gen.pop("extra_body", None) or {})
+        call_extra_body = dict(kwargs.pop("extra_body", None) or {})
+        merged_extra_body = {**gen_extra_body, **call_extra_body}
+        if merged_extra_body:
+            kwargs["extra_body"] = merged_extra_body
+
         client = self._aclient  # type: ignore[attr-defined]
         completion = await client.chat.completions.create(
             model=self.model,
             messages=input,
             n=num_generations,
-            **{k: v for k, v in self.generation_kwargs.items() if k != "extra_body"},  # type: ignore[attr-defined]
+            **gen,
             **kwargs,
         )
 
@@ -175,7 +185,7 @@ class LocalInlineThinkLLM(OpenAILLM):
             return "synthesizer"
         if "impartial judge" in first:
             return "judge"
-        if "careful, helpful expert" in first:
+        if "careful, helpful expert" in first or "expert assistant" in first:
             return "teacher"
         return "unknown"
 
@@ -190,12 +200,22 @@ class LocalInlineThinkLLM(OpenAILLM):
         num_generations: int = 1,
         **kwargs: Any,
     ) -> Dict[str, Any]:
+        # Split generation_kwargs: OpenAI-standard fields go top-level;
+        # extra_body (server-specific extensions like repetition_penalty or
+        # chat_template_kwargs) gets merged with any per-call extra_body kwarg.
+        gen = dict(self.generation_kwargs or {})  # type: ignore[arg-type]
+        gen_extra_body = dict(gen.pop("extra_body", None) or {})
+        call_extra_body = dict(kwargs.pop("extra_body", None) or {})
+        merged_extra_body = {**gen_extra_body, **call_extra_body}
+        if merged_extra_body:
+            kwargs["extra_body"] = merged_extra_body
+
         client = self._aclient  # type: ignore[attr-defined]
         completion = await client.chat.completions.create(
             model=self.model,
             messages=input,
             n=num_generations,
-            **{k: v for k, v in self.generation_kwargs.items() if k != "extra_body"},  # type: ignore[attr-defined]
+            **gen,
             **kwargs,
         )
 

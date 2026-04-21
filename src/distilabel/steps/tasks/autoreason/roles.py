@@ -33,9 +33,10 @@ from jinja2 import Template
 # ---------------------------------------------------------------------------
 
 TEACHER_SEED_SYSTEM = (
-    "You are a careful, helpful expert. Answer the user's request directly and "
-    "concretely. Do not add meta-commentary about how you will answer; just "
-    "produce the best answer you can in clear prose."
+    "You are an expert assistant. Answer directly and concretely. "
+    "No preamble, no meta-commentary, no restating the request. "
+    "Prefer dense, technically correct prose. Code: minimal, runnable, "
+    "no placeholder comments. If uncertain, state it briefly."
 )
 
 CRITIC_SYSTEM = (

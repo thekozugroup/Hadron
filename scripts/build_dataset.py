@@ -22,7 +22,7 @@ import sys
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Dict, Iterable, List, Optional
+from typing import Any, Dict, Iterable, List, Optional
 
 from huggingface_hub import hf_hub_download
 
@@ -51,6 +51,11 @@ class Config:
     max_concurrency: int
     rpm: int
     rpd: int
+    temperature: Optional[float]
+    top_p: Optional[float]
+    repetition_penalty: Optional[float]
+    enable_thinking: bool
+    max_tokens: Optional[int]
 
 
 def prompt_id(text: str, prefix: str) -> str:
@@ -174,18 +179,36 @@ async def amain(cfg: Config) -> int:
         flush=True,
     )
 
+    # Build generation_kwargs from sampling + thinking config.
+    gen_kwargs: Dict[str, Any] = {}
+    if cfg.temperature is not None:
+        gen_kwargs["temperature"] = cfg.temperature
+    if cfg.top_p is not None:
+        gen_kwargs["top_p"] = cfg.top_p
+    if cfg.max_tokens is not None:
+        gen_kwargs["max_tokens"] = cfg.max_tokens
+    extra_body: Dict[str, Any] = {}
+    if cfg.repetition_penalty is not None:
+        extra_body["repetition_penalty"] = cfg.repetition_penalty
+    if cfg.enable_thinking:
+        extra_body["chat_template_kwargs"] = {"enable_thinking": True}
+    if extra_body:
+        gen_kwargs["extra_body"] = extra_body
+
     if cfg.provider == "openrouter":
         llm = ReasoningOpenRouterLLM(
             model=cfg.model,
             base_url=cfg.base_url,
             api_key=os.environ["OPENROUTER_API_KEY"],
             reasoning_effort=os.environ.get("REASONING_EFFORT", "high"),
+            generation_kwargs=gen_kwargs,
         )
     elif cfg.provider == "local":
         llm = LocalInlineThinkLLM(
             model=cfg.model,
             base_url=cfg.base_url,
             api_key=os.environ.get("OPENROUTER_API_KEY", "local-dummy"),
+            generation_kwargs=gen_kwargs,
         )
     else:
         raise ValueError(f"unknown provider: {cfg.provider!r}")
@@ -264,6 +287,13 @@ def parse_args() -> Config:
     ap.add_argument("--max-concurrency", type=int, default=3)
     ap.add_argument("--rpm", type=int, default=15)
     ap.add_argument("--rpd", type=int, default=900)
+    ap.add_argument("--temperature", type=float, default=None)
+    ap.add_argument("--top-p", type=float, default=None)
+    ap.add_argument("--repetition-penalty", type=float, default=None)
+    ap.add_argument("--enable-thinking", action="store_true",
+                    help="pass chat_template_kwargs.enable_thinking=True to the server")
+    ap.add_argument("--max-tokens", type=int, default=None,
+                    help="cap completion tokens per call (forwarded as OpenAI max_tokens)")
     args = ap.parse_args()
     base_url = args.base_url or (
         "http://localhost:8081/v1" if args.provider == "local" else "https://openrouter.ai/api/v1"
@@ -283,6 +313,11 @@ def parse_args() -> Config:
         max_concurrency=args.max_concurrency,
         rpm=args.rpm,
         rpd=args.rpd,
+        temperature=args.temperature,
+        top_p=args.top_p,
+        repetition_penalty=args.repetition_penalty,
+        enable_thinking=args.enable_thinking,
+        max_tokens=args.max_tokens,
     )
 
 

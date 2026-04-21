@@ -1,0 +1,35 @@
+{
+  "tally": {
+    "autoreason": 3
+  },
+  "details": [
+    {
+      "seed": 1000,
+      "mapping": {
+        "X1": "baseline",
+        "X2": "autoreason"
+      },
+      "winner": "autoreason",
+      "raw": "WINNER: X2"
+    },
+    {
+      "seed": 1001,
+      "mapping": {
+        "X1": "autoreason",
+        "X2": "baseline"
+      },
+      "winner": "autoreason",
+      "raw": "WINNER: X1"
+    },
+    {
+      "seed": 1002,
+      "mapping": {
+        "X1": "baseline",
+        "X2": "autoreason"
+      },
+      "winner": "autoreason",
+      "raw": "WINNER: X2"
+    }
+  ],
+  "judge_model": "openai/gpt-oss-20b:free"
+}
