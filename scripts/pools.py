@@ -40,15 +40,19 @@ REASONING_SPECIALIST: str = "minimax/minimax-m2.5:free"
 # Code specialist (trained on code corpora).
 CODE_SPECIALIST: str = "qwen/qwen3-coder:free"
 
-# Judge pool — diverse mid-tier families. Panel diversity > panel size.
+# Judge pool — primary panel for AutoReason Borda ranking.
+# Designed around the 2 Gemma 4 models as the core discriminators, with
+# GLM 4.5 Air + two other non-Google families for cross-family diversity.
+# Seven judges, four families: Google (3), Zhipu (1), OpenAI (1), Meta (1),
+# NVIDIA (1). Panel diversity outperforms panel size of identical judges.
 JUDGE_POOL: List[str] = [
-    "openai/gpt-oss-20b:free",               # OpenAI family
-    "google/gemma-3-27b-it:free",            # Google Gemma
-    "google/gemma-3-12b-it:free",            # Google Gemma (smaller)
-    "nvidia/nemotron-nano-9b-v2:free",       # NVIDIA Nemotron
-    "nvidia/nemotron-3-nano-30b-a3b:free",   # NVIDIA Nemotron (larger)
-    "meta-llama/llama-3.3-70b-instruct:free",# Meta (also in generalist — fine for judging)
-    "z-ai/glm-4.5-air:free",                 # Zhipu GLM
+    "google/gemma-4-26b-a4b-it:free",        # Google Gemma 4 MoE
+    "google/gemma-4-31b-it:free",            # Google Gemma 4 dense
+    "google/gemma-3-27b-it:free",            # Google Gemma 3 (legacy cross-check)
+    "z-ai/glm-4.5-air:free",                 # Zhipu GLM family
+    "openai/gpt-oss-20b:free",               # OpenAI open weights
+    "meta-llama/llama-3.3-70b-instruct:free",# Meta Llama
+    "nvidia/nemotron-3-nano-30b-a3b:free",   # NVIDIA Nemotron
 ]
 
 
