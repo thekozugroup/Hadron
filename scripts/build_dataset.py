@@ -195,6 +195,10 @@ async def amain(cfg: Config) -> int:
     if extra_body:
         gen_kwargs["extra_body"] = extra_body
 
+    # Thinking-capable models can take minutes per call; raise the HTTP
+    # client timeout well above the 120s distilabel default.
+    call_timeout_s = int(os.environ.get("LLM_CALL_TIMEOUT", "900"))
+
     if cfg.provider == "openrouter":
         llm = ReasoningOpenRouterLLM(
             model=cfg.model,
@@ -202,6 +206,7 @@ async def amain(cfg: Config) -> int:
             api_key=os.environ["OPENROUTER_API_KEY"],
             reasoning_effort=os.environ.get("REASONING_EFFORT", "high"),
             generation_kwargs=gen_kwargs,
+            timeout=call_timeout_s,
         )
     elif cfg.provider == "local":
         llm = LocalInlineThinkLLM(
@@ -209,6 +214,7 @@ async def amain(cfg: Config) -> int:
             base_url=cfg.base_url,
             api_key=os.environ.get("OPENROUTER_API_KEY", "local-dummy"),
             generation_kwargs=gen_kwargs,
+            timeout=call_timeout_s,
         )
     else:
         raise ValueError(f"unknown provider: {cfg.provider!r}")

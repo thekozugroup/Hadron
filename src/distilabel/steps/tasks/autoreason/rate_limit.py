@@ -207,6 +207,11 @@ def _default_is_rate_limit_error(exc: BaseException) -> bool:
         return True
     if "overloaded" in msg or "server overloaded" in msg:
         return True
+    # Transient network / reasoning-model slowness — retry rather than drop.
+    if "timed out" in msg or "timeout" in msg:
+        return True
+    if "connection" in msg and ("reset" in msg or "aborted" in msg or "refused" in msg):
+        return True
     return False
 
 
