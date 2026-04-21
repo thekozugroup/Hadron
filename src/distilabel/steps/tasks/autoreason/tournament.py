@@ -76,7 +76,10 @@ async def _invoke(llm: "LLM", messages: list, limiter: Optional[AsyncTokenBucket
 
     if limiter is None:
         return await _call()
-    return await rate_limited_call(limiter, _call)
+    return await rate_limited_call(
+        limiter, _call,
+        max_retries=10, base_backoff=1.0, max_backoff=120.0,
+    )
 
 
 class TournamentRunner:

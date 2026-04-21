@@ -143,6 +143,11 @@ def _all_llms(runner: TournamentRunner) -> List:
     return list(seen.values())
 
 
+def _is_persistent_rate_limit(exc_msg: str) -> bool:
+    s = (exc_msg or "").lower()
+    return any(k in s for k in ("429", "rate", "too many requests", "temporarily rate-limited"))
+
+
 async def run_one(
     runner: TournamentRunner, sample: Dict
 ) -> Optional[Dict]:
@@ -223,6 +228,16 @@ async def amain(cfg: Config) -> int:
         extra_body["repetition_penalty"] = cfg.repetition_penalty
     if cfg.enable_thinking:
         extra_body["chat_template_kwargs"] = {"enable_thinking": True}
+    # OpenRouter provider filter: skip upstream providers the user explicitly
+    # wants to avoid. Default excludes Venice (historically heavy rate-limits
+    # + provider-level degradation). Override via IGNORE_PROVIDERS env var.
+    if cfg.provider == "openrouter":
+        ignore_list = [
+            p.strip() for p in
+            os.environ.get("IGNORE_PROVIDERS", "Venice").split(",") if p.strip()
+        ]
+        if ignore_list:
+            extra_body["provider"] = {"ignore": ignore_list}
     if extra_body:
         gen_kwargs["extra_body"] = extra_body
 
@@ -338,6 +353,46 @@ async def amain(cfg: Config) -> int:
                 flush=True,
             )
             row = await run_one(runner, sample)
+
+            # Sample-level fallback: if the routed teacher is persistently
+            # rate-limited (provider saturation, not our key), rotate to
+            # the next generalist in the pool and retry up to 3 different
+            # teachers before giving up on the sample.
+            if cfg.use_pool:
+                tried = {sample.get("_teacher_id")}
+                for _retry in range(3):
+                    if row is None or "error" not in (row or {}):
+                        break
+                    err_msg = (row or {}).get("error", "")
+                    if not _is_persistent_rate_limit(err_msg):
+                        break
+                    remaining_pool = [m for m in cfg.teacher_pool if m not in tried]
+                    if not remaining_pool:
+                        break
+                    swap_id = remaining_pool[0]
+                    tried.add(swap_id)
+                    swap_llm = _get_llm(swap_id)
+                    print(f"  ↻ 429 on {sample.get('_teacher_id')} — swapping teacher → {swap_id}",
+                          flush=True)
+                    sample["_teacher_id"] = swap_id
+                    sample["_route"] = classify_route(sample["instruction"]) + "/fallback"
+                    # rebuild runner with new teacher (judges unchanged)
+                    runner = TournamentRunner(
+                        llm=swap_llm,
+                        num_judges=cfg.num_judges,
+                        max_iterations=cfg.max_iterations,
+                        convergence_k=cfg.convergence_k,
+                        max_concurrency=cfg.max_concurrency,
+                        rate_limiter=_get_limiter(swap_id),
+                        rng_seed_base=cfg.rng_seed,
+                        role_llms={"teacher": swap_llm, "author_b": swap_llm,
+                                   "synthesizer": swap_llm, "critic": swap_llm},
+                        judge_pool=[_get_llm(mid) for mid in cfg.judge_pool],
+                        limiter_map={mid: _get_limiter(mid)
+                                     for mid in ({swap_id} | set(cfg.judge_pool))},
+                    )
+                    row = await run_one(runner, sample)
+
             if row is None or "error" in row:
                 err = (row or {}).get("error", "unknown")
                 print(f"  ✗ FAIL: {err}", flush=True)
