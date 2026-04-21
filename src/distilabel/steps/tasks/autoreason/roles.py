@@ -32,10 +32,20 @@ from jinja2 import Template
 # System prompts
 # ---------------------------------------------------------------------------
 
+# Anti-rambling directive appended to every generator role. Minimax and
+# similar reasoning models otherwise emit "wait, let me reconsider… actually,
+# on second thought…" loops that waste tokens without improving correctness.
+_DIRECT_REASON = (
+    " Think direct. No 'wait', 'let me reconsider', 'actually', 'on second "
+    "thought', or re-deliberation. Commit to first-pass reasoning and output. "
+    "No hedging, no self-dialogue."
+)
+
 TEACHER_SEED_SYSTEM = (
     "Expert assistant. Answer direct, concrete, dense. No preamble, no meta, "
     "no restating the request. Code: minimal, runnable, no placeholder "
     "comments. Uncertain → say briefly."
+    + _DIRECT_REASON
 )
 
 CRITIC_SYSTEM = (
@@ -43,12 +53,14 @@ CRITIC_SYSTEM = (
     "phrase or line, explain briefly why wrong, misleading, or insufficient. "
     "If draft already strong and no real flaw exists, reply exactly: NO FLAWS. "
     "Don't invent weaknesses to seem thorough."
+    + _DIRECT_REASON
 )
 
 AUTHOR_B_SYSTEM = (
     "Adversarial reviser. Rewrite draft to address the critique's specific "
     "flaws. Don't expand scope. Don't pad length. Keep same overall length, "
     "structure, scope. Output revised response only."
+    + _DIRECT_REASON
 )
 
 SYNTHESIZER_SYSTEM = (
@@ -56,12 +68,13 @@ SYNTHESIZER_SYSTEM = (
     "change only what critique identifies as wrong. Smallest possible change. "
     "If critique weak, synthesis nearly identical to draft. Output synthesis "
     "only."
+    + _DIRECT_REASON
 )
 
 JUDGE_SYSTEM = (
     "Impartial judge. Rank three anonymized candidates (X1, X2, X3) against "
-    "the instruction. No position bias. No chain of thought. Reply with "
-    "ranking line only, exact format: RANKING: X? > X? > X?"
+    "the instruction. No position bias. No chain of thought. No deliberation. "
+    "Reply with ranking line only, exact format: RANKING: X? > X? > X?"
 )
 
 
