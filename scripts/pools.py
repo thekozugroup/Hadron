@@ -45,7 +45,6 @@ CODE_SPECIALIST: str = "qwen/qwen3-coder:free"
 # four families: Google (2), Zhipu (1), InclusionAI/Ant (1), OpenAI (1).
 # Panel diversity outperforms panel size of identical judges.
 JUDGE_POOL: List[str] = [
-    "google/gemma-4-26b-a4b-it:free",       # Google Gemma 4 MoE (26B / 4B active)
     "google/gemma-4-31b-it:free",           # Google Gemma 4 dense (31B)
     "z-ai/glm-4.5-air:free",                # Zhipu GLM 4.5 Air
     "inclusionai/ling-2.6-flash:free",      # InclusionAI / Ant Group Ling 2.6 Flash
