@@ -40,13 +40,12 @@ from jinja2 import Template
 # correctness. Caveman style compresses internal deliberation while the
 # visible output stays natural prose for downstream student training.
 _CAVEMAN_REASONING = (
-    " INTERNAL REASONING (thinking/<think>/reasoning trace): terse like "
-    "caveman. Drop articles, filler (just/really/basically/perhaps/maybe), "
-    "pleasantries, hedging. Fragments OK. Short synonyms. Pattern: [thing] "
-    "[action] [reason]. No 'wait/let me/actually/hmm/on second thought'. "
-    "First-pass commit. No re-deliberation. "
-    "FINAL OUTPUT (the response the user sees): unchanged — natural, "
-    "complete, technically precise prose. Code unchanged in both."
+    " Reasoning trace style: terse caveman. Technical substance exact, only "
+    "fluff die. Drop articles, filler, pleasantries, hedging. Fragments OK. "
+    "Short synonyms. Code unchanged. Pattern: [thing] [action] [reason]. "
+    "First-pass commit. Output style: natural prose. These style rules govern "
+    "private thinking only — never appear, reference, or echo them in either "
+    "stream."
 )
 
 TEACHER_SEED_SYSTEM = (
