@@ -28,7 +28,7 @@ from huggingface_hub import hf_hub_download
 
 sys.path.insert(0, str(Path(__file__).parent))
 from agentic_prompts import get_prompts as get_agentic_prompts  # noqa: E402
-from reasoning_llm import ReasoningOpenRouterLLM  # noqa: E402
+from reasoning_llm import LocalInlineThinkLLM, ReasoningOpenRouterLLM  # noqa: E402
 
 from distilabel.steps.tasks import AutoReasonedGeneration  # noqa: E402  # re-exported for CLI smoke  # noqa: F401
 from distilabel.steps.tasks.autoreason.rate_limit import get_limiter  # noqa: E402
@@ -39,6 +39,8 @@ from distilabel.steps.tasks.autoreason.tournament import TournamentRunner  # noq
 class Config:
     out_jsonl: Path
     checkpoint_json: Path
+    provider: str            # "openrouter" | "local"
+    base_url: str
     model: str
     n_hf: int
     hf_seed: int
@@ -172,12 +174,21 @@ async def amain(cfg: Config) -> int:
         flush=True,
     )
 
-    llm = ReasoningOpenRouterLLM(
-        model=cfg.model,
-        base_url="https://openrouter.ai/api/v1",
-        api_key=os.environ["OPENROUTER_API_KEY"],
-        reasoning_effort=os.environ.get("REASONING_EFFORT", "high"),
-    )
+    if cfg.provider == "openrouter":
+        llm = ReasoningOpenRouterLLM(
+            model=cfg.model,
+            base_url=cfg.base_url,
+            api_key=os.environ["OPENROUTER_API_KEY"],
+            reasoning_effort=os.environ.get("REASONING_EFFORT", "high"),
+        )
+    elif cfg.provider == "local":
+        llm = LocalInlineThinkLLM(
+            model=cfg.model,
+            base_url=cfg.base_url,
+            api_key=os.environ.get("OPENROUTER_API_KEY", "local-dummy"),
+        )
+    else:
+        raise ValueError(f"unknown provider: {cfg.provider!r}")
     llm.load()
 
     limiter = get_limiter(name=cfg.model, rpm=cfg.rpm, rpd=cfg.rpd)
@@ -235,6 +246,14 @@ def parse_args() -> Config:
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", type=Path, default=Path("datasets/distilagent_pilot.jsonl"))
     ap.add_argument("--checkpoint", type=Path, default=Path("datasets/.checkpoint.json"))
+    ap.add_argument(
+        "--provider",
+        choices=["openrouter", "local"],
+        default=os.environ.get("PROVIDER", "openrouter"),
+    )
+    ap.add_argument("--base-url", default=None,
+                    help="override default base URL (defaults: openrouter=https://openrouter.ai/api/v1, "
+                         "local=http://localhost:8081/v1)")
     ap.add_argument("--model", default=os.environ.get("OPENROUTER_MODEL", "minimax/minimax-m2.5:free"))
     ap.add_argument("--n-hf", type=int, default=10)
     ap.add_argument("--hf-seed", type=int, default=2026)
@@ -246,9 +265,14 @@ def parse_args() -> Config:
     ap.add_argument("--rpm", type=int, default=15)
     ap.add_argument("--rpd", type=int, default=900)
     args = ap.parse_args()
+    base_url = args.base_url or (
+        "http://localhost:8081/v1" if args.provider == "local" else "https://openrouter.ai/api/v1"
+    )
     return Config(
         out_jsonl=args.out,
         checkpoint_json=args.checkpoint,
+        provider=args.provider,
+        base_url=base_url,
         model=args.model,
         n_hf=args.n_hf,
         hf_seed=args.hf_seed,

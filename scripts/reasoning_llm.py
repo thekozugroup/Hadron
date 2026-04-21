@@ -1,24 +1,47 @@
-"""OpenRouter LLM wrapper that captures reasoning/thinking traces.
+"""LLM wrappers that capture reasoning/thinking traces.
 
-Reasoning-capable models on OpenRouter (minimax m2.x, deepseek-r1, etc.)
-emit a separate `reasoning` field in the assistant message. distilabel's
-OpenAILLM drops it. This subclass:
+Two providers are supported, both returning the normal `generations`
+field so the AutoReason tournament is unchanged:
 
-  * Requests reasoning via extra_body `{"reasoning": {"effort": "high"}}`.
-  * Captures the reasoning text on each agenerate() call.
-  * Appends (role_hint, reasoning_text, final_text) tuples to a buffer
-    that can be read / reset between samples.
+  * `ReasoningOpenRouterLLM` — OpenRouter reasoning-capable models
+    (minimax m2.x, deepseek-r1). Pulls `choices[0].message.reasoning`.
 
-The tournament uses the normal `generations` field as before — reasoning
-is sidecar data threaded via the buffer, so no changes to tournament.py.
+  * `LocalInlineThinkLLM` — any OpenAI-compatible server that emits
+    Qwen3-style inline `<think>…</think>` reasoning in the content.
+    Works with mlx-lm's server, vLLM, Ollama with Qwen3, etc.
+    Strips the think block out of the returned text and stores it in
+    the reasoning buffer.
 """
 from __future__ import annotations
 
+import re
 from typing import Any, Dict, List, Optional, Tuple
 
 from pydantic import Field, PrivateAttr
 
 from distilabel.models.llms.openai import OpenAILLM
+
+
+_THINK_RE = re.compile(r"<think>(.*?)</think>\s*", re.DOTALL | re.IGNORECASE)
+
+
+def _split_think(text: str) -> Tuple[str, str]:
+    """Return (reasoning, stripped_text) from a content string that may
+    contain one or more <think>...</think> blocks. Reasoning is joined
+    with blank lines; stripped_text is the content with think blocks removed.
+    If no think tag is present, returns ("", text).
+    """
+    if not text:
+        return "", text
+    thoughts: List[str] = []
+
+    def _collect(m):
+        thoughts.append(m.group(1).strip())
+        return ""
+
+    stripped = _THINK_RE.sub(_collect, text).strip()
+    reasoning = "\n\n".join(thoughts)
+    return reasoning, stripped
 
 
 class ReasoningOpenRouterLLM(OpenAILLM):
@@ -113,6 +136,88 @@ class ReasoningOpenRouterLLM(OpenAILLM):
 
         # Populate token statistics if usage is present.
         usage = getattr(completion, "usage", None)
+        if usage is not None:
+            if getattr(usage, "prompt_tokens", None) is not None:
+                input_tokens = [usage.prompt_tokens] * num_generations
+            if getattr(usage, "completion_tokens", None) is not None:
+                output_tokens = [usage.completion_tokens] * num_generations
+
+        return {
+            "generations": generations,
+            "statistics": {
+                "input_tokens": input_tokens,
+                "output_tokens": output_tokens,
+            },
+        }
+
+
+class LocalInlineThinkLLM(OpenAILLM):
+    """OpenAI-compatible client for local servers that emit `<think>…</think>`
+    inline (Qwen3-family default). Strips the think block from the returned
+    generation and stores it in a role-keyed reasoning buffer.
+
+    Does NOT request any extra_body — many local servers reject unknown
+    fields. Works out of the box with mlx-lm server, vLLM, Ollama.
+    """
+
+    _reasoning_buffer: List[Tuple[str, str, str]] = PrivateAttr(default_factory=list)
+
+    def _role_hint_from_input(self, input_msgs) -> str:
+        try:
+            first = (input_msgs[0].get("content") or "")[:120].lower()
+        except Exception:  # noqa: BLE001
+            return "unknown"
+        if "rigorous critic" in first:
+            return "critic"
+        if "adversarial reviser" in first:
+            return "author_b"
+        if "conservative synthesizer" in first:
+            return "synthesizer"
+        if "impartial judge" in first:
+            return "judge"
+        if "careful, helpful expert" in first:
+            return "teacher"
+        return "unknown"
+
+    def drain_reasoning(self) -> List[Tuple[str, str, str]]:
+        out = list(self._reasoning_buffer)
+        self._reasoning_buffer.clear()
+        return out
+
+    async def agenerate(  # type: ignore[override]
+        self,
+        input: Any,
+        num_generations: int = 1,
+        **kwargs: Any,
+    ) -> Dict[str, Any]:
+        client = self._aclient  # type: ignore[attr-defined]
+        completion = await client.chat.completions.create(
+            model=self.model,
+            messages=input,
+            n=num_generations,
+            **{k: v for k, v in self.generation_kwargs.items() if k != "extra_body"},  # type: ignore[attr-defined]
+            **kwargs,
+        )
+
+        generations: List[str] = []
+        role_hint = self._role_hint_from_input(input)
+        for choice in completion.choices:
+            msg = choice.message
+            raw = (msg.content or "") if msg else ""
+            reasoning_inline, stripped = _split_think(raw)
+            # Also pick up a separate reasoning field if the server provides one.
+            sep_reasoning = (
+                getattr(msg, "reasoning", None)
+                or getattr(msg, "reasoning_content", None)
+                or ""
+            )
+            reasoning = (sep_reasoning + "\n\n" + reasoning_inline).strip() if sep_reasoning else reasoning_inline
+            generations.append(stripped)
+            self._reasoning_buffer.append((role_hint, reasoning, stripped))
+
+        usage = getattr(completion, "usage", None)
+        input_tokens = [0] * num_generations
+        output_tokens = [0] * num_generations
         if usage is not None:
             if getattr(usage, "prompt_tokens", None) is not None:
                 input_tokens = [usage.prompt_tokens] * num_generations
