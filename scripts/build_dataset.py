@@ -68,6 +68,7 @@ class Config:
     teacher_pool: List[str]
     judge_pool: List[str]
     rng_seed: int
+    no_routing: bool
 
 
 def prompt_id(text: str, prefix: str) -> str:
@@ -228,16 +229,13 @@ async def amain(cfg: Config) -> int:
         extra_body["repetition_penalty"] = cfg.repetition_penalty
     if cfg.enable_thinking:
         extra_body["chat_template_kwargs"] = {"enable_thinking": True}
-    # OpenRouter provider filter: skip upstream providers the user explicitly
-    # wants to avoid. Default excludes Venice (historically heavy rate-limits
-    # + provider-level degradation). Override via IGNORE_PROVIDERS env var.
+    # Optional OpenRouter provider filter. Empty by default — over-filtering
+    # breaks requests with '404 All providers ignored'. Set IGNORE_PROVIDERS
+    # only if you need to steer around a specific backend.
     if cfg.provider == "openrouter":
-        ignore_list = [
-            p.strip() for p in
-            os.environ.get("IGNORE_PROVIDERS", "Venice").split(",") if p.strip()
-        ]
-        if ignore_list:
-            extra_body["provider"] = {"ignore": ignore_list}
+        raw = os.environ.get("IGNORE_PROVIDERS", "").strip()
+        if raw:
+            extra_body["provider"] = {"ignore": [p.strip() for p in raw.split(",") if p.strip()]}
     if extra_body:
         gen_kwargs["extra_body"] = extra_body
 
@@ -304,11 +302,17 @@ async def amain(cfg: Config) -> int:
                 rng_seed_base=cfg.rng_seed,
             )
 
-        # Pool mode: route teacher by domain, reuse for author/synth,
-        # use mixed judge pool for discriminators.
-        teacher_id = route_teacher(
-            sample["instruction"], cfg.teacher_pool, seed=cfg.rng_seed
-        )
+        # Pool mode: route teacher by domain (unless --no-routing), reuse
+        # for author/synth, use mixed judge pool for discriminators.
+        if cfg.no_routing:
+            # Deterministic round-robin across the teacher pool keyed by
+            # prompt hash so repeated runs pick the same teacher per prompt.
+            rng = random.Random(cfg.rng_seed ^ (hash(sample["instruction"]) & 0x7FFFFFFF))
+            teacher_id = rng.choice(cfg.teacher_pool)
+        else:
+            teacher_id = route_teacher(
+                sample["instruction"], cfg.teacher_pool, seed=cfg.rng_seed
+            )
         teacher_llm = _get_llm(teacher_id)
         role_llms = {
             "teacher": teacher_llm,
@@ -457,6 +461,8 @@ def parse_args() -> Config:
     ap.add_argument("--judge-pool", type=str, default=None,
                     help="comma-separated judge model IDs; defaults to pools.JUDGE_POOL")
     ap.add_argument("--rng-seed", type=int, default=42)
+    ap.add_argument("--no-routing", action="store_true",
+                    help="pool mode: skip domain specialists, just round-robin the teacher pool")
     args = ap.parse_args()
     base_url = args.base_url or (
         "http://localhost:8081/v1" if args.provider == "local" else "https://openrouter.ai/api/v1"
@@ -488,6 +494,7 @@ def parse_args() -> Config:
         teacher_pool=teacher_pool,
         judge_pool=judge_pool,
         rng_seed=args.rng_seed,
+        no_routing=args.no_routing,
         temperature=args.temperature,
         top_p=args.top_p,
         repetition_penalty=args.repetition_penalty,

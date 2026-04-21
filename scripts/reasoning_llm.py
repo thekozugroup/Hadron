@@ -137,10 +137,25 @@ class ReasoningOpenRouterLLM(OpenAILLM):
         output_tokens = [0] * num_generations
         role_hint = self._role_hint_from_input(input)
 
-        for i, choice in enumerate(completion.choices):
-            msg = choice.message
+        # Defensive: some providers (OpenRouter free tier on cold/saturated
+        # backends) return responses where .choices is None rather than []
+        # — iterating None raises TypeError mid-tournament. Treat as empty.
+        choices = getattr(completion, "choices", None) or []
+        if not choices:
+            raise RuntimeError(
+                f"empty completion from {self.model!r} "
+                f"(choices is None or empty — provider likely returned a "
+                f"partial / errored payload)"
+            )
+
+        for i, choice in enumerate(choices):
+            msg = getattr(choice, "message", None)
             text = (msg.content or "") if msg else ""
-            reasoning = getattr(msg, "reasoning", None) or getattr(msg, "reasoning_content", None) or ""
+            reasoning = (
+                getattr(msg, "reasoning", None)
+                or getattr(msg, "reasoning_content", None)
+                or ""
+            )
             generations.append(text)
             self._reasoning_buffer.append((role_hint, reasoning or "", text))
 
@@ -221,8 +236,14 @@ class LocalInlineThinkLLM(OpenAILLM):
 
         generations: List[str] = []
         role_hint = self._role_hint_from_input(input)
-        for choice in completion.choices:
-            msg = choice.message
+        choices = getattr(completion, "choices", None) or []
+        if not choices:
+            raise RuntimeError(
+                f"empty completion from {self.model!r} "
+                f"(choices is None or empty)"
+            )
+        for choice in choices:
+            msg = getattr(choice, "message", None)
             raw = (msg.content or "") if msg else ""
             reasoning_inline, stripped = _split_think(raw)
             # Also pick up a separate reasoning field if the server provides one.
