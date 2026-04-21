@@ -16,7 +16,7 @@ from typing import List
 
 import pytest
 
-from distilabel.utils.lists import flatten_responses
+from distilagent.utils.lists import flatten_responses
 
 
 @pytest.mark.parametrize(

@@ -14,7 +14,7 @@
 
 from pydantic import BaseModel
 
-from distilabel.utils.serialization import _extra_serializable_fields, _Serializable
+from distilagent.utils.serialization import _extra_serializable_fields, _Serializable
 
 
 def test_extra_serializable_fields() -> None:

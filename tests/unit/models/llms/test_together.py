@@ -15,7 +15,7 @@
 import os
 from unittest import mock
 
-from distilabel.models.llms.together import TogetherLLM
+from distilagent.models.llms.together import TogetherLLM
 
 
 class TestTogetherLLM:
@@ -54,7 +54,7 @@ class TestTogetherLLM:
             "offline_batch_generation_block_until_done": None,
             "use_offline_batch_generation": False,
             "type_info": {
-                "module": "distilabel.models.llms.together",
+                "module": "distilagent.models.llms.together",
                 "name": "TogetherLLM",
             },
         }

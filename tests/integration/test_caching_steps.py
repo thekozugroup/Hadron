@@ -19,12 +19,12 @@ from uuid import uuid4
 
 from pydantic import PrivateAttr
 
-from distilabel.pipeline import Pipeline
-from distilabel.steps import LoadDataFromDicts
-from distilabel.steps.base import Step, StepInput
+from distilagent.pipeline import Pipeline
+from distilagent.steps import LoadDataFromDicts
+from distilagent.steps.base import Step, StepInput
 
 if TYPE_CHECKING:
-    from distilabel.pipeline.batch import _Batch
+    from distilagent.pipeline.batch import _Batch
 
 
 class DummyStep(Step):

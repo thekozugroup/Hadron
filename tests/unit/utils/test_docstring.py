@@ -14,7 +14,7 @@
 
 import textwrap
 
-from distilabel.utils.docstring import parse_google_docstring
+from distilagent.utils.docstring import parse_google_docstring
 
 
 def test_parse_google_docstring() -> None:

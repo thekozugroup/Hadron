@@ -3,13 +3,16 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "distilabel"
-description = "Distilabel is an AI Feedback (AIF) framework for building datasets with and for LLMs."
+name = "distilagent"
+description = "AutoReason tournament refinement fused with distilabel — higher-quality teacher labels for LLM distillation."
 readme = "README.md"
 requires-python = ">=3.9"
 license = "Apache-2.0"
-keywords = ["llm", "annotation", "alignment", "synthetic", "data", "rlaif"]
-authors = [{ name = "Argilla", email = "admin@argilla.io" }]
+keywords = ["llm", "distillation", "autoreason", "synthetic-data", "fine-tuning", "agentic"]
+authors = [
+    { name = "thekozugroup", email = "thekozugroup@gmail.com" },
+    { name = "Argilla (upstream distilabel)", email = "admin@argilla.io" },
+]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Programming Language :: Python",
@@ -43,10 +46,10 @@ dependencies = [
 dynamic = ["version"]
 
 [project.scripts]
-distilabel = "distilabel.cli.app:app"
+distilagent = "distilagent.cli.app:app"
 
 [project.entry-points."mkdocs.plugins"]
-"distilabel/components-gallery" = "distilabel.utils.mkdocs.components_gallery:ComponentsGalleryPlugin"
+"distilagent/components-gallery" = "distilagent.utils.mkdocs.components_gallery:ComponentsGalleryPlugin"
 
 [project.optional-dependencies]
 dev = ["ruff == 0.8.1", "pre-commit >= 3.5.0"]
@@ -118,12 +121,12 @@ installer = "pip"
 pip-args = ["--find-links", "https://flashinfer.ai/whl/cu124/torch2.5/flashinfer-python"]
 
 [project.urls]
-Documentation = "https://distilabel.argilla.io/"
-Issues = "https://github.com/argilla/distilabel/issues"
-Source = "https://github.com/argilla/distilabel"
+Source = "https://github.com/thekozugroup/distilagent"
+Issues = "https://github.com/thekozugroup/distilagent/issues"
+Upstream = "https://github.com/argilla-io/distilabel"
 
 [tool.hatch.version]
-path = "src/distilabel/__init__.py"
+path = "src/distilagent/__init__.py"
 
 [tool.ruff]
 line-length = 88

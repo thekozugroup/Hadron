@@ -15,7 +15,7 @@
 import os
 from unittest import mock
 
-from distilabel.utils.ray import script_executed_in_ray_cluster
+from distilagent.utils.ray import script_executed_in_ray_cluster
 
 
 def test_script_executed_on_ray_cluster() -> None:

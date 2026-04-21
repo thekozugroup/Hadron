@@ -17,7 +17,7 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import nest_asyncio
 import pytest
 
-from distilabel.models.llms.ollama import OllamaLLM
+from distilagent.models.llms.ollama import OllamaLLM
 
 
 @patch("ollama.AsyncClient")
@@ -114,7 +114,7 @@ class TestOllamaLLM:
             "offline_batch_generation_block_until_done": None,
             "use_offline_batch_generation": False,
             "type_info": {
-                "module": "distilabel.models.llms.ollama",
+                "module": "distilagent.models.llms.ollama",
                 "name": "OllamaLLM",
             },
         }

@@ -14,8 +14,8 @@
 
 import pytest
 
-from distilabel.models.llms.openai import OpenAILLM
-from distilabel.steps.tasks.magpie.generator import MagpieGenerator
+from distilagent.models.llms.openai import OpenAILLM
+from distilagent.steps.tasks.magpie.generator import MagpieGenerator
 from tests.unit.conftest import DummyMagpieLLM
 
 
@@ -204,7 +204,7 @@ class TestMagpieGenerator:
             ],
             "use_cache": True,
             "type_info": {
-                "module": "distilabel.steps.tasks.magpie.generator",
+                "module": "distilagent.steps.tasks.magpie.generator",
                 "name": "MagpieGenerator",
             },
         }

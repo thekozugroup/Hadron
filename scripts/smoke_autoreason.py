@@ -10,8 +10,8 @@ import os
 import sys
 import time
 
-from distilabel.models import OpenAILLM
-from distilabel.steps.tasks import AutoReasonedGeneration
+from distilagent.models import OpenAILLM
+from distilagent.steps.tasks import AutoReasonedGeneration
 
 API_KEY = os.environ["OPENROUTER_API_KEY"]
 MODEL = os.environ.get("OPENROUTER_MODEL", "minimax/minimax-m2.5:free")

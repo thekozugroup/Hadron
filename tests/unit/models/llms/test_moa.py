@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from distilabel.models.llms.moa import MOA_SYSTEM_PROMPT, MixtureOfAgentsLLM
+from distilagent.models.llms.moa import MOA_SYSTEM_PROMPT, MixtureOfAgentsLLM
 from tests.unit.conftest import DummyAsyncLLM
 
 

@@ -15,7 +15,7 @@
 import os
 from unittest import mock
 
-from distilabel.models.llms.openrouter import OpenRouterLLM
+from distilagent.models.llms.openrouter import OpenRouterLLM
 
 
 class TestOpenRouterLLM:
@@ -54,7 +54,7 @@ class TestOpenRouterLLM:
             "offline_batch_generation_block_until_done": None,
             "use_offline_batch_generation": False,
             "type_info": {
-                "module": "distilabel.models.llms.openrouter",
+                "module": "distilagent.models.llms.openrouter",
                 "name": "OpenRouterLLM",
             },
         }

@@ -17,8 +17,8 @@ from typing import Union
 
 import pytest
 
-from distilabel.models.mixins.magpie import MagpieChatTemplateMixin
-from distilabel.steps import tasks as tasks_
+from distilagent.models.mixins.magpie import MagpieChatTemplateMixin
+from distilagent.steps import tasks as tasks_
 from tests.unit.conftest import DummyLLM
 
 # The tasks not listed here don't have a print method (or don't have a print method that works)

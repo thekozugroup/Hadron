@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from distilabel.models.llms.base import LLM
-from distilabel.pipeline.local import Pipeline
-from distilabel.steps.tasks.evol_instruct.evol_complexity.base import (
+from distilagent.models.llms.base import LLM
+from distilagent.pipeline.local import Pipeline
+from distilagent.steps.tasks.evol_instruct.evol_complexity.base import (
     EvolComplexity,
 )
-from distilabel.steps.tasks.evol_instruct.evol_complexity.utils import (
+from distilagent.steps.tasks.evol_instruct.evol_complexity.utils import (
     MUTATION_TEMPLATES,
 )
 

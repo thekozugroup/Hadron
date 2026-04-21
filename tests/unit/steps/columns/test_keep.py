@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from distilabel.pipeline.local import Pipeline
-from distilabel.steps.columns.keep import KeepColumns
+from distilagent.pipeline.local import Pipeline
+from distilagent.steps.columns.keep import KeepColumns
 
 
 class TestKeepColumns:

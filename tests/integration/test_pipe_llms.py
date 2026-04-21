@@ -15,16 +15,16 @@
 import os
 from typing import TYPE_CHECKING, Dict, List
 
-from distilabel.mixins.runtime_parameters import RuntimeParameter
-from distilabel.models.llms.huggingface.transformers import TransformersLLM
-from distilabel.models.llms.openai import OpenAILLM
-from distilabel.pipeline.local import Pipeline
-from distilabel.steps.base import Step, StepInput
-from distilabel.steps.generators.huggingface import LoadDataFromHub
-from distilabel.steps.tasks.text_generation import TextGeneration
+from distilagent.mixins.runtime_parameters import RuntimeParameter
+from distilagent.models.llms.huggingface.transformers import TransformersLLM
+from distilagent.models.llms.openai import OpenAILLM
+from distilagent.pipeline.local import Pipeline
+from distilagent.steps.base import Step, StepInput
+from distilagent.steps.generators.huggingface import LoadDataFromHub
+from distilagent.steps.tasks.text_generation import TextGeneration
 
 if TYPE_CHECKING:
-    from distilabel.typing import StepOutput
+    from distilagent.typing import StepOutput
 
 
 class RenameColumns(Step):

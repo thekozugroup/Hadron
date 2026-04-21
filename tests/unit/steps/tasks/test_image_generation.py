@@ -14,7 +14,7 @@
 
 import pytest
 
-from distilabel.steps.tasks.image_generation import ImageGeneration
+from distilagent.steps.tasks.image_generation import ImageGeneration
 from tests.unit.conftest import DummyAsyncImageGenerationModel
 
 

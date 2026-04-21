@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from distilabel.errors import DistilabelUserError
+from distilagent.errors import DistilabelUserError
 
 
 def test_distilabel_user_error() -> None:
@@ -23,5 +23,5 @@ def test_distilabel_user_error() -> None:
     )
     assert (
         str(msg)
-        == "This is an error message.\n\nFor further information visit 'https://distilabel.argilla.io/latest/sections/getting_started/faq/'"
+        == "This is an error message.\n\nFor further information visit 'https://distilagent.argilla.io/latest/sections/getting_started/faq/'"
     )

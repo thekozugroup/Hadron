@@ -19,11 +19,11 @@ from unittest import mock
 
 import pytest
 
-from distilabel.models.llms.base import LLM
-from distilabel.models.mixins.cuda_device_placement import CudaDevicePlacementMixin
+from distilagent.models.llms.base import LLM
+from distilagent.models.mixins.cuda_device_placement import CudaDevicePlacementMixin
 
 if TYPE_CHECKING:
-    from distilabel.typing import ChatType
+    from distilagent.typing import ChatType
 
 
 @pytest.fixture

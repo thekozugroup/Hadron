@@ -14,7 +14,7 @@
 
 import pytest
 
-from distilabel.steps.filtering.embedding import EmbeddingDedup
+from distilagent.steps.filtering.embedding import EmbeddingDedup
 
 SAMPLE_DATA = [
     {

@@ -19,7 +19,7 @@ from typing import Any, Dict, List, Optional, Tuple
 
 from pydantic import Field, PrivateAttr
 
-from distilabel.models.llms.openai import OpenAILLM
+from distilagent.models.llms.openai import OpenAILLM
 
 
 _THINK_RE = re.compile(r"<think>(.*?)</think>\s*", re.DOTALL | re.IGNORECASE)

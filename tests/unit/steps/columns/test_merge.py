@@ -16,7 +16,7 @@ from typing import Any, Dict, List, Optional
 
 import pytest
 
-from distilabel.steps.columns.merge import MergeColumns
+from distilagent.steps.columns.merge import MergeColumns
 
 
 class TestMergeColumns:

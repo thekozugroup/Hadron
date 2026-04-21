@@ -15,8 +15,8 @@
 from typing import TYPE_CHECKING
 from unittest import mock
 
-from distilabel.pipeline.local import Pipeline
-from distilabel.steps.base import StepResources
+from distilagent.pipeline.local import Pipeline
+from distilagent.steps.base import StepResources
 
 from .utils import DummyGeneratorStep, DummyStep1, DummyStep2
 
@@ -25,7 +25,7 @@ if TYPE_CHECKING:
 
 
 class TestPipeline:
-    @mock.patch("distilabel.pipeline.local._StepWrapper")
+    @mock.patch("distilagent.pipeline.local._StepWrapper")
     def test_run_steps(self, step_wrapper_mock: mock.MagicMock) -> None:
         with Pipeline(name="unit-test-pipeline") as pipeline:
             dummy_generator = DummyGeneratorStep(name="dummy_generator_step")
@@ -144,11 +144,11 @@ class TestPipeline:
 
         with (
             mock.patch(
-                "distilabel.pipeline.local.script_executed_in_ray_cluster",
+                "distilagent.pipeline.local.script_executed_in_ray_cluster",
                 return_value=True,
             ),
             mock.patch(
-                "distilabel.pipeline.local.Pipeline.ray", return_value=run_pipeline_mock
+                "distilagent.pipeline.local.Pipeline.ray", return_value=run_pipeline_mock
             ) as ray_mock,
         ):
             pipeline.run()

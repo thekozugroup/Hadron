@@ -14,14 +14,14 @@
 
 from typing import TYPE_CHECKING, Any
 
-from distilabel.models.llms.base import AsyncLLM
-from distilabel.pipeline import Pipeline
-from distilabel.steps import CombineOutputs, LoadDataFromDicts
-from distilabel.steps.generators.data_sampler import DataSampler
-from distilabel.steps.tasks import TextGeneration
+from distilagent.models.llms.base import AsyncLLM
+from distilagent.pipeline import Pipeline
+from distilagent.steps import CombineOutputs, LoadDataFromDicts
+from distilagent.steps.generators.data_sampler import DataSampler
+from distilagent.steps.tasks import TextGeneration
 
 if TYPE_CHECKING:
-    from distilabel.typing import FormattedInput, GenerateOutput
+    from distilagent.typing import FormattedInput, GenerateOutput
 
 
 class DummyAsyncLLM(AsyncLLM):

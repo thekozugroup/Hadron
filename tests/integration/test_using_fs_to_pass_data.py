@@ -16,11 +16,11 @@ from typing import TYPE_CHECKING, List
 
 import numpy as np
 
-from distilabel.pipeline import Pipeline
-from distilabel.steps import GeneratorStep, StepInput, step
+from distilagent.pipeline import Pipeline
+from distilagent.steps import GeneratorStep, StepInput, step
 
 if TYPE_CHECKING:
-    from distilabel.steps import GeneratorStepOutput, StepOutput
+    from distilagent.steps import GeneratorStepOutput, StepOutput
 
 
 class NumpyBigArrayGenerator(GeneratorStep):

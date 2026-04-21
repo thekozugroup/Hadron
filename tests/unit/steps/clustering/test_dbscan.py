@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-from distilabel.steps.clustering.dbscan import DBSCAN
+from distilagent.steps.clustering.dbscan import DBSCAN
 
 
 class TestDBSCAN:

@@ -20,7 +20,7 @@ import numpy as np
 import pytest
 from PIL import Image
 
-from distilabel.models.image_generation.huggingface.inference_endpoints import (
+from distilagent.models.image_generation.huggingface.inference_endpoints import (
     InferenceEndpointsImageGeneration,
 )
 

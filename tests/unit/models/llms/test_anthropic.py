@@ -20,7 +20,7 @@ from unittest.mock import AsyncMock, MagicMock, Mock, patch
 import nest_asyncio
 import pytest
 
-from distilabel.models.llms.anthropic import AnthropicLLM
+from distilagent.models.llms.anthropic import AnthropicLLM
 
 from .utils import DummyUserDetail
 
@@ -144,7 +144,7 @@ class TestAnthropicLLM:
                     "timeout": 600.0,
                     "structured_output": None,
                     "type_info": {
-                        "module": "distilabel.models.llms.anthropic",
+                        "module": "distilagent.models.llms.anthropic",
                         "name": "AnthropicLLM",
                     },
                 },
@@ -167,7 +167,7 @@ class TestAnthropicLLM:
                         "max_retries": 1,
                     },
                     "type_info": {
-                        "module": "distilabel.models.llms.anthropic",
+                        "module": "distilagent.models.llms.anthropic",
                         "name": "AnthropicLLM",
                     },
                 },
@@ -191,7 +191,7 @@ class TestAnthropicLLM:
             "offline_batch_generation_block_until_done": None,
             "use_offline_batch_generation": False,
             "type_info": {
-                "module": "distilabel.models.llms.anthropic",
+                "module": "distilagent.models.llms.anthropic",
                 "name": "AnthropicLLM",
             },
         }

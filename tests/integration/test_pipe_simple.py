@@ -14,14 +14,14 @@
 
 from typing import TYPE_CHECKING, Dict, List
 
-from distilabel.distiset import Distiset
-from distilabel.mixins.runtime_parameters import RuntimeParameter
-from distilabel.pipeline.local import Pipeline
-from distilabel.steps.base import Step, StepInput
-from distilabel.steps.generators.data import LoadDataFromDicts
+from distilagent.distiset import Distiset
+from distilagent.mixins.runtime_parameters import RuntimeParameter
+from distilagent.pipeline.local import Pipeline
+from distilagent.steps.base import Step, StepInput
+from distilagent.steps.generators.data import LoadDataFromDicts
 
 if TYPE_CHECKING:
-    from distilabel.typing import StepOutput
+    from distilagent.typing import StepOutput
 
 DATA = [
     {"prompt": "Tell me a joke"},

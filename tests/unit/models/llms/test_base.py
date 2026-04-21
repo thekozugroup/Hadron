@@ -14,7 +14,7 @@
 
 import pytest
 
-from distilabel.errors import DistilabelNotImplementedError
+from distilagent.errors import DistilabelNotImplementedError
 from tests.unit.conftest import DummyLLM
 
 

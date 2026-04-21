@@ -16,7 +16,7 @@ from typing import Any, Dict
 
 import pytest
 
-from distilabel.steps.tasks.apigen.semantic_checker import APIGenSemanticChecker
+from distilagent.steps.tasks.apigen.semantic_checker import APIGenSemanticChecker
 from tests.unit.conftest import DummyLLM
 
 SAMPLE_DATA = [

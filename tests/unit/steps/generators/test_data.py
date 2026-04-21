@@ -13,8 +13,8 @@
 # limitations under the License.
 import pytest
 
-from distilabel.pipeline.local import Pipeline
-from distilabel.steps.generators.data import LoadDataFromDicts
+from distilagent.pipeline.local import Pipeline
+from distilagent.steps.generators.data import LoadDataFromDicts
 
 
 class TestLoadDataFromDicts:

@@ -17,11 +17,11 @@ from typing import TYPE_CHECKING, Any, Dict, List
 
 import pytest
 
-from distilabel.steps.tasks.math_shepherd.completer import MathShepherdCompleter
+from distilagent.steps.tasks.math_shepherd.completer import MathShepherdCompleter
 from tests.unit.conftest import DummyLLM
 
 if TYPE_CHECKING:
-    from distilabel.typing import GenerateOutput
+    from distilagent.typing import GenerateOutput
 
 
 class MathShepherdCompleterLLM(DummyLLM):

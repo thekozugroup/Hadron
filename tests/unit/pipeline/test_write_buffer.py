@@ -15,10 +15,10 @@
 import tempfile
 from pathlib import Path
 
-from distilabel.constants import STEPS_OUTPUTS_PATH
-from distilabel.distiset import Distiset, create_distiset
-from distilabel.pipeline.local import Pipeline
-from distilabel.pipeline.write_buffer import _WriteBuffer
+from distilagent.constants import STEPS_OUTPUTS_PATH
+from distilagent.distiset import Distiset, create_distiset
+from distilagent.pipeline.local import Pipeline
+from distilagent.pipeline.write_buffer import _WriteBuffer
 from tests.unit.pipeline.utils import (
     DummyGeneratorStep,
     DummyStep1,

@@ -18,10 +18,10 @@ import pandas as pd
 import pytest
 from datasets import Dataset
 
-from distilabel.pipeline import Pipeline
-from distilabel.steps import make_generator_step
-from distilabel.steps.base import Step, StepInput
-from distilabel.typing import StepOutput
+from distilagent.pipeline import Pipeline
+from distilagent.steps import make_generator_step
+from distilagent.steps.base import Step, StepInput
+from distilagent.typing import StepOutput
 
 if TYPE_CHECKING:
     pass

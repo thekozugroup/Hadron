@@ -19,9 +19,9 @@ from typing import TYPE_CHECKING, Any, Dict, List, Optional
 import pytest
 from pydantic import ValidationError
 
-from distilabel.mixins.runtime_parameters import RuntimeParameter
-from distilabel.pipeline.local import Pipeline
-from distilabel.steps.tasks.base import Task
+from distilagent.mixins.runtime_parameters import RuntimeParameter
+from distilagent.pipeline.local import Pipeline
+from distilagent.steps.tasks.base import Task
 from tests.unit.conftest import (
     DummyAsyncLLM,
     DummyTask,

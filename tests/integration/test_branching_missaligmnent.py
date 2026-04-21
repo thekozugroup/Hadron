@@ -14,11 +14,11 @@
 
 from typing import TYPE_CHECKING
 
-from distilabel.pipeline import Pipeline
-from distilabel.steps import GroupColumns, LoadDataFromDicts, StepInput, step
+from distilagent.pipeline import Pipeline
+from distilagent.steps import GroupColumns, LoadDataFromDicts, StepInput, step
 
 if TYPE_CHECKING:
-    from distilabel.steps import StepOutput
+    from distilagent.steps import StepOutput
 
 
 @step(inputs=["instruction"], outputs=["response"])

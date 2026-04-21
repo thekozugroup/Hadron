@@ -15,12 +15,12 @@
 import pytest
 from pydantic import ValidationError
 
-from distilabel.models.llms.base import LLM
-from distilabel.pipeline.local import Pipeline
-from distilabel.steps.tasks.evol_quality.base import (
+from distilagent.models.llms.base import LLM
+from distilagent.pipeline.local import Pipeline
+from distilagent.steps.tasks.evol_quality.base import (
     EvolQuality,
 )
-from distilabel.steps.tasks.evol_quality.utils import MUTATION_TEMPLATES
+from distilagent.steps.tasks.evol_quality.utils import MUTATION_TEMPLATES
 
 
 class TestEvolQuality:

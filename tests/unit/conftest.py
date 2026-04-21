@@ -20,13 +20,13 @@ from urllib.request import urlretrieve
 import pytest
 from pydantic import PrivateAttr
 
-from distilabel.models.image_generation.base import AsyncImageGenerationModel
-from distilabel.models.llms.base import LLM, AsyncLLM
-from distilabel.models.mixins.magpie import MagpieChatTemplateMixin
-from distilabel.steps.tasks.base import Task
+from distilagent.models.image_generation.base import AsyncImageGenerationModel
+from distilagent.models.llms.base import LLM, AsyncLLM
+from distilagent.models.mixins.magpie import MagpieChatTemplateMixin
+from distilagent.steps.tasks.base import Task
 
 if TYPE_CHECKING:
-    from distilabel.typing import ChatType, FormattedInput, GenerateOutput
+    from distilagent.typing import ChatType, FormattedInput, GenerateOutput
 
 
 # Defined here too, so that the serde still works
@@ -118,7 +118,7 @@ class DummyAsyncImageGenerationModel(AsyncImageGenerationModel):
         np.random.seed(42)
         arr = np.random.randint(0, 255, (100, 100, 3), dtype=np.uint8)
         random_image = Image.fromarray(arr, "RGB")
-        from distilabel.models.image_generation.utils import image_to_str
+        from distilagent.models.image_generation.utils import image_to_str
 
         img_str = image_to_str(random_image)
         return [{"images": [img_str]} for _ in range(num_generations)]

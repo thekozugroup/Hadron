@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from distilabel.pipeline import Pipeline
-from distilabel.steps import LoadDataFromDicts, StepInput, StepOutput, step
+from distilagent.pipeline import Pipeline
+from distilagent.steps import LoadDataFromDicts, StepInput, StepOutput, step
 
 
 @step(inputs=["instruction"], outputs=["response"])

@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from distilabel.pipeline.local import Pipeline
-from distilabel.steps.deita import DeitaFiltering
+from distilagent.pipeline.local import Pipeline
+from distilagent.steps.deita import DeitaFiltering
 
 
 class TestDeitaFiltering:

@@ -15,7 +15,7 @@
 import tempfile
 from pathlib import Path
 
-from distilabel.utils.files import list_files_in_dir
+from distilagent.utils.files import list_files_in_dir
 
 
 def test_list_files_in_dir() -> None:

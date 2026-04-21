@@ -13,9 +13,9 @@
 # limitations under the License.
 
 
-from distilabel.constants import DISTILABEL_METADATA_KEY
-from distilabel.pipeline.local import Pipeline
-from distilabel.steps.columns.group import GroupColumns
+from distilagent.constants import DISTILABEL_METADATA_KEY
+from distilagent.pipeline.local import Pipeline
+from distilagent.steps.columns.group import GroupColumns
 
 
 class TestGroupColumns:

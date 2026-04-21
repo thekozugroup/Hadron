@@ -15,12 +15,12 @@
 import pytest
 from pydantic import ValidationError
 
-from distilabel.models.llms.base import LLM
-from distilabel.pipeline.local import Pipeline
-from distilabel.steps.tasks.evol_instruct.base import (
+from distilagent.models.llms.base import LLM
+from distilagent.pipeline.local import Pipeline
+from distilagent.steps.tasks.evol_instruct.base import (
     EvolInstruct,
 )
-from distilabel.steps.tasks.evol_instruct.utils import (
+from distilagent.steps.tasks.evol_instruct.utils import (
     MUTATION_TEMPLATES,
 )
 
@@ -262,7 +262,7 @@ class TestEvolInstruct:
             ],
             "use_cache": True,
             "type_info": {
-                "module": "distilabel.steps.tasks.evol_instruct.base",
+                "module": "distilagent.steps.tasks.evol_instruct.base",
                 "name": "EvolInstruct",
             },
         }

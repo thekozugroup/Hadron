@@ -17,7 +17,7 @@ from typing import List
 import nltk
 import pytest
 
-from distilabel.steps.filtering.minhash import (
+from distilagent.steps.filtering.minhash import (
     MinHashDedup,
     tokenize_on_ngrams,
     tokenized_on_words,

@@ -18,11 +18,11 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from distilabel.pipeline import Pipeline
-from distilabel.steps import LoadDataFromDicts, StepInput, StepResources, step
+from distilagent.pipeline import Pipeline
+from distilagent.steps import LoadDataFromDicts, StepInput, StepResources, step
 
 if TYPE_CHECKING:
-    from distilabel.typing import StepOutput
+    from distilagent.typing import StepOutput
 
 
 @step(outputs=["generation"])

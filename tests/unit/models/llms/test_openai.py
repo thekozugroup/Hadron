@@ -24,8 +24,8 @@ import orjson
 import pytest
 from openai.types import Batch
 
-from distilabel.exceptions import DistilabelOfflineBatchGenerationNotFinishedException
-from distilabel.models.llms.openai import _OPENAI_BATCH_API_MAX_FILE_SIZE, OpenAILLM
+from distilagent.exceptions import DistilabelOfflineBatchGenerationNotFinishedException
+from distilagent.models.llms.openai import _OPENAI_BATCH_API_MAX_FILE_SIZE, OpenAILLM
 
 from .utils import DummyUserDetail
 
@@ -696,7 +696,7 @@ class TestOpenAILLM:
                     "offline_batch_generation_block_until_done": None,
                     "use_offline_batch_generation": False,
                     "type_info": {
-                        "module": "distilabel.models.llms.openai",
+                        "module": "distilagent.models.llms.openai",
                         "name": "OpenAILLM",
                     },
                 },
@@ -724,7 +724,7 @@ class TestOpenAILLM:
                     "offline_batch_generation_block_until_done": None,
                     "use_offline_batch_generation": False,
                     "type_info": {
-                        "module": "distilabel.models.llms.openai",
+                        "module": "distilagent.models.llms.openai",
                         "name": "OpenAILLM",
                     },
                 },

@@ -14,7 +14,7 @@
 
 import numpy as np
 
-from distilabel.steps.clustering.umap import UMAP
+from distilagent.steps.clustering.umap import UMAP
 
 
 class TestUMAP:

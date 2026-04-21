@@ -16,7 +16,7 @@ from typing import List, Optional
 
 from pydantic import Field, SecretStr
 
-from distilabel.mixins.runtime_parameters import (
+from distilagent.mixins.runtime_parameters import (
     RuntimeParameter,
     RuntimeParametersMixin,
 )

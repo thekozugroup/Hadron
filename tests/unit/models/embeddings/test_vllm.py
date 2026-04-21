@@ -14,7 +14,7 @@
 
 from unittest.mock import MagicMock, Mock
 
-from distilabel.models.embeddings.vllm import vLLMEmbeddings
+from distilagent.models.embeddings.vllm import vLLMEmbeddings
 
 
 # @patch("vllm.entrypoints.LLM")

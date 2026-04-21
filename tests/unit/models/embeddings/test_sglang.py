@@ -14,7 +14,7 @@
 
 from unittest.mock import MagicMock, Mock
 
-from distilabel.models.embeddings.sglang import SGLangEmbeddings
+from distilagent.models.embeddings.sglang import SGLangEmbeddings
 
 
 class TestSentenceTransformersEmbeddings:

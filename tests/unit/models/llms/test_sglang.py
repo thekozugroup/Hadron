@@ -24,8 +24,8 @@ from openai.types.completion_usage import CompletionUsage
 from pydantic import BaseModel
 from transformers import AutoTokenizer
 
-from distilabel.models.llms import SGLang
-from distilabel.models.llms.sglang import ClientSGLang
+from distilagent.models.llms import SGLang
+from distilagent.models.llms.sglang import ClientSGLang
 
 
 class Character(BaseModel):
@@ -168,7 +168,7 @@ class TestSGLang:
     ) -> None:
         llm = SGLang(model="dummy")
         tokenizer = AutoTokenizer.from_pretrained(
-            "distilabel-internal-testing/tiny-random-mistral"
+            "distilagent-internal-testing/tiny-random-mistral"
         )
         llm._tokenizer = tokenizer
         sglang_mock = mock.MagicMock()
@@ -253,7 +253,7 @@ class TestClientSGLang:
     ) -> None:
         llm = ClientSGLang(
             base_url="http://localhost:8000/v1",
-            tokenizer="distilabel-internal-testing/tiny-random-mistral",
+            tokenizer="distilagent-internal-testing/tiny-random-mistral",
         )
 
         llm.load()

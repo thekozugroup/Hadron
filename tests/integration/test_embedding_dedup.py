@@ -17,12 +17,12 @@ from typing import TYPE_CHECKING
 import faiss
 import numpy as np
 
-from distilabel.pipeline import Pipeline
-from distilabel.steps import FaissNearestNeighbour, LoadDataFromDicts, StepInput, step
-from distilabel.steps.filtering.embedding import EmbeddingDedup
+from distilagent.pipeline import Pipeline
+from distilagent.steps import FaissNearestNeighbour, LoadDataFromDicts, StepInput, step
+from distilagent.steps.filtering.embedding import EmbeddingDedup
 
 if TYPE_CHECKING:
-    from distilabel.typing import StepOutput
+    from distilagent.typing import StepOutput
 
 
 SAMPLE_DATA = [

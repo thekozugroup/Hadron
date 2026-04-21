@@ -16,7 +16,7 @@ from typing import Any
 
 import pytest
 
-from distilabel.utils.chat import is_openai_format
+from distilagent.utils.chat import is_openai_format
 
 
 @pytest.mark.parametrize(

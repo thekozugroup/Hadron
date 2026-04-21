@@ -16,9 +16,9 @@ from typing import Any, Dict, List, Union
 
 import pytest
 
-from distilabel.errors import DistilabelUserError
-from distilabel.pipeline.local import Pipeline
-from distilabel.steps.tasks.text_generation import ChatGeneration, TextGeneration
+from distilagent.errors import DistilabelUserError
+from distilagent.pipeline.local import Pipeline
+from distilagent.steps.tasks.text_generation import ChatGeneration, TextGeneration
 from tests.unit.conftest import DummyAsyncLLM
 
 

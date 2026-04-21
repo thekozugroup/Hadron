@@ -19,13 +19,13 @@ from typing import List, Optional
 import pytest
 from pydantic import ValidationError
 
-from distilabel.constants import ROUTING_BATCH_FUNCTION_ATTR_NAME
-from distilabel.mixins.runtime_parameters import RuntimeParameter
-from distilabel.pipeline.local import Pipeline
-from distilabel.steps.base import GeneratorStep, GlobalStep, Step, StepInput
-from distilabel.steps.decorator import step
-from distilabel.typing import GeneratorStepOutput, StepOutput
-from distilabel.utils.serialization import TYPE_INFO_KEY
+from distilagent.constants import ROUTING_BATCH_FUNCTION_ATTR_NAME
+from distilagent.mixins.runtime_parameters import RuntimeParameter
+from distilagent.pipeline.local import Pipeline
+from distilagent.steps.base import GeneratorStep, GlobalStep, Step, StepInput
+from distilagent.steps.decorator import step
+from distilagent.typing import GeneratorStepOutput, StepOutput
+from distilagent.utils.serialization import TYPE_INFO_KEY
 
 
 class DummyStep(Step):

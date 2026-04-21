@@ -46,9 +46,9 @@ from pools import (  # noqa: E402
     route_teacher,
 )
 
-from distilabel.steps.tasks import AutoReasonedGeneration  # noqa: E402  # re-exported for CLI smoke  # noqa: F401
-from distilabel.steps.tasks.autoreason.rate_limit import get_limiter  # noqa: E402
-from distilabel.steps.tasks.autoreason.tournament import TournamentRunner  # noqa: E402
+from distilagent.steps.tasks import AutoReasonedGeneration  # noqa: E402  # re-exported for CLI smoke  # noqa: F401
+from distilagent.steps.tasks.autoreason.rate_limit import get_limiter  # noqa: E402
+from distilagent.steps.tasks.autoreason.tournament import TournamentRunner  # noqa: E402
 
 
 @dataclass
@@ -248,7 +248,7 @@ async def amain(cfg: Config) -> int:
         gen_kwargs["extra_body"] = extra_body
 
     # Thinking-capable models can take minutes per call; raise the HTTP
-    # client timeout well above the 120s distilabel default.
+    # client timeout well above the 120s distilagent default.
     call_timeout_s = int(os.environ.get("LLM_CALL_TIMEOUT", "900"))
 
     def _make_llm(model_id: str):

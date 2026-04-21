@@ -17,8 +17,8 @@ import time
 
 import pytest
 
-from distilabel.steps.tasks.autoreason import rate_limit as rl
-from distilabel.steps.tasks.autoreason.rate_limit import (
+from distilagent.steps.tasks.autoreason import rate_limit as rl
+from distilagent.steps.tasks.autoreason.rate_limit import (
     AsyncTokenBucket,
     get_limiter,
     rate_limited_call,

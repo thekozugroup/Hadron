@@ -18,12 +18,12 @@ from typing import TYPE_CHECKING, List
 
 import pytest
 
-from distilabel.pipeline.local import Pipeline
-from distilabel.steps.argilla.base import ArgillaBase
-from distilabel.steps.base import StepInput
+from distilagent.pipeline.local import Pipeline
+from distilagent.steps.argilla.base import ArgillaBase
+from distilagent.steps.base import StepInput
 
 if TYPE_CHECKING:
-    from distilabel.typing import StepOutput
+    from distilagent.typing import StepOutput
 
 
 class CustomArgilla(ArgillaBase):

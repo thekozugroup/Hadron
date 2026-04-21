@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from distilabel.pipeline.batch import _Batch
+from distilagent.pipeline.batch import _Batch
 
 
 class TestBatch:
@@ -123,7 +123,7 @@ class TestBatch:
             "accumulated": False,
             "created_from": {},
             "batch_routed_to": [],
-            "type_info": {"module": "distilabel.pipeline.batch", "name": "_Batch"},
+            "type_info": {"module": "distilagent.pipeline.batch", "name": "_Batch"},
         }
 
         batch = _Batch(
@@ -146,7 +146,7 @@ class TestBatch:
             "accumulated": False,
             "created_from": {"step0": [(0, 5), (1, 5)]},
             "batch_routed_to": ["step2", "step3"],
-            "type_info": {"module": "distilabel.pipeline.batch", "name": "_Batch"},
+            "type_info": {"module": "distilagent.pipeline.batch", "name": "_Batch"},
         }
 
     def test_from_dict(self) -> None:
@@ -158,7 +158,7 @@ class TestBatch:
                 "data": [[{"a": 1}, {"a": 2}, {"a": 3}]],
                 "accumulated": False,
                 "type_info": {
-                    "module": "distilabel.pipeline.batch",
+                    "module": "distilagent.pipeline.batch",
                     "name": "_Batch",
                 },
             }

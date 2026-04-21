@@ -16,14 +16,14 @@ from typing import Generator
 
 import pytest
 
-from distilabel.models.llms.huggingface.transformers import TransformersLLM
+from distilagent.models.llms.huggingface.transformers import TransformersLLM
 
 
 # load the model just once for all the tests in the module
 @pytest.fixture(scope="module")
 def transformers_llm() -> Generator[TransformersLLM, None, None]:
     llm = TransformersLLM(
-        model="distilabel-internal-testing/tiny-random-mistral",
+        model="distilagent-internal-testing/tiny-random-mistral",
         model_kwargs={"is_decoder": True},
         cuda_devices=[],
         torch_dtype="float16",
@@ -37,7 +37,7 @@ class TestTransformersLLM:
     def test_model_name(self, transformers_llm: TransformersLLM) -> None:
         assert (
             transformers_llm.model_name
-            == "distilabel-internal-testing/tiny-random-mistral"
+            == "distilagent-internal-testing/tiny-random-mistral"
         )
 
     def test_prepare_input(self, transformers_llm: TransformersLLM) -> None:
@@ -101,7 +101,7 @@ class TestTransformersLLM:
         from pydantic import SecretStr
 
         llm = TransformersLLM(
-            model="distilabel-internal-testing/tiny-random-mistral",
+            model="distilagent-internal-testing/tiny-random-mistral",
             token=SecretStr("hf_secrettoken123456789"),
             model_kwargs={"is_decoder": True},
             cuda_devices=[],
@@ -116,7 +116,7 @@ class TestTransformersLLM:
             "generation_kwargs": {},
             "jobs_ids": None,
             "magpie_pre_query_template": None,
-            "model": "distilabel-internal-testing/tiny-random-mistral",
+            "model": "distilagent-internal-testing/tiny-random-mistral",
             "model_kwargs": {"is_decoder": True},
             "offline_batch_generation_block_until_done": None,
             "revision": "main",
@@ -125,7 +125,7 @@ class TestTransformersLLM:
             "torch_dtype": "float16",
             "trust_remote_code": False,
             "type_info": {
-                "module": "distilabel.models.llms.huggingface.transformers",
+                "module": "distilagent.models.llms.huggingface.transformers",
                 "name": "TransformersLLM",
             },
             "use_fast": True,
@@ -139,5 +139,5 @@ class TestTransformersLLM:
 
         # Test round-trip deserialization works (without token)
         reconstructed = TransformersLLM.from_dict(actual_dump)
-        assert reconstructed.model == "distilabel-internal-testing/tiny-random-mistral"
+        assert reconstructed.model == "distilagent-internal-testing/tiny-random-mistral"
         assert reconstructed.model_kwargs == {"is_decoder": True}

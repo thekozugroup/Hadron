@@ -17,11 +17,11 @@ from typing import TYPE_CHECKING, Dict, List, Optional, Union
 
 import pytest
 
-from distilabel.steps.tasks.text_classification import TextClassification
+from distilagent.steps.tasks.text_classification import TextClassification
 from tests.unit.conftest import DummyAsyncLLM
 
 if TYPE_CHECKING:
-    from distilabel.typing import FormattedInput, GenerateOutput
+    from distilagent.typing import FormattedInput, GenerateOutput
 
 
 class TextClassificationLLM(DummyAsyncLLM):

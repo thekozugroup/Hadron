@@ -18,7 +18,7 @@ from unittest import mock
 
 import pytest
 
-from distilabel.models.llms.azure import AzureOpenAILLM
+from distilagent.models.llms.azure import AzureOpenAILLM
 
 from .utils import DummyUserDetail
 
@@ -43,7 +43,7 @@ class TestAzureOpenAILLM:
         assert llm.api_version == self.api_version
 
     def test_azure_openai_llm_env_vars(self) -> None:
-        from distilabel.models.llms.azure import (
+        from distilagent.models.llms.azure import (
             _AZURE_OPENAI_API_KEY_ENV_VAR_NAME,
             _AZURE_OPENAI_ENDPOINT_ENV_VAR_NAME,
         )
@@ -79,7 +79,7 @@ class TestAzureOpenAILLM:
                     "offline_batch_generation_block_until_done": None,
                     "use_offline_batch_generation": False,
                     "type_info": {
-                        "module": "distilabel.models.llms.azure",
+                        "module": "distilagent.models.llms.azure",
                         "name": "AzureOpenAILLM",
                     },
                 },
@@ -107,7 +107,7 @@ class TestAzureOpenAILLM:
                     "offline_batch_generation_block_until_done": None,
                     "use_offline_batch_generation": False,
                     "type_info": {
-                        "module": "distilabel.models.llms.azure",
+                        "module": "distilagent.models.llms.azure",
                         "name": "AzureOpenAILLM",
                     },
                 },

@@ -14,10 +14,10 @@
 
 import pytest
 
-from distilabel.pipeline._dag import DAG
-from distilabel.pipeline.batch_manager import _BatchManager
-from distilabel.pipeline.local import Pipeline
-from distilabel.steps.base import GeneratorStep, GlobalStep, Step
+from distilagent.pipeline._dag import DAG
+from distilagent.pipeline.batch_manager import _BatchManager
+from distilagent.pipeline.local import Pipeline
+from distilagent.steps.base import GeneratorStep, GlobalStep, Step
 
 from .utils import DummyGeneratorStep, DummyGlobalStep, DummyStep1, DummyStep2
 

@@ -19,11 +19,11 @@ from unittest import mock
 
 import pytest
 
-from distilabel.pipeline._dag import DAG
-from distilabel.pipeline.batch import _Batch
-from distilabel.pipeline.batch_manager import _BatchManager, _BatchManagerStep
-from distilabel.pipeline.local import Pipeline
-from distilabel.steps.base import GeneratorStep, GlobalStep, Step
+from distilagent.pipeline._dag import DAG
+from distilagent.pipeline.batch import _Batch
+from distilagent.pipeline.batch_manager import _BatchManager, _BatchManagerStep
+from distilagent.pipeline.local import Pipeline
+from distilagent.steps.base import GeneratorStep, GlobalStep, Step
 
 from .utils import DummyGeneratorStep, DummyStep1, DummyStep2
 
@@ -1166,7 +1166,7 @@ class TestBatchManagerStep:
                         "created_from": {},
                         "batch_routed_to": [],
                         "type_info": {
-                            "module": "distilabel.pipeline.batch",
+                            "module": "distilagent.pipeline.batch",
                             "name": "_Batch",
                         },
                     }
@@ -1193,7 +1193,7 @@ class TestBatchManagerStep:
                         "created_from": {},
                         "batch_routed_to": [],
                         "type_info": {
-                            "module": "distilabel.pipeline.batch",
+                            "module": "distilagent.pipeline.batch",
                             "name": "_Batch",
                         },
                     }
@@ -1211,7 +1211,7 @@ class TestBatchManagerStep:
                     "batch_routed_to": [],
                     "created_from": {},
                     "type_info": {
-                        "module": "distilabel.pipeline.batch",
+                        "module": "distilagent.pipeline.batch",
                         "name": "_Batch",
                     },
                 }
@@ -1227,7 +1227,7 @@ class TestBatchManagerStep:
             "step_signature": None,
             "use_cache": False,
             "type_info": {
-                "module": "distilabel.pipeline.batch_manager",
+                "module": "distilagent.pipeline.batch_manager",
                 "name": "_BatchManagerStep",
             },
         }
@@ -1431,7 +1431,7 @@ class TestBatchManagerStep:
                 "seq_no": 0,
                 "last_batch_received": [],
                 "type_info": {
-                    "module": "distilabel.pipeline.batch_manager",
+                    "module": "distilagent.pipeline.batch_manager",
                     "name": "_BatchManagerStep",
                 },
             }
@@ -1913,7 +1913,7 @@ class TestBatchManager:
                             "batch_routed_to": [],
                             "created_from": {},
                             "type_info": {
-                                "module": "distilabel.pipeline.batch",
+                                "module": "distilagent.pipeline.batch",
                                 "name": "_Batch",
                             },
                         }
@@ -1929,7 +1929,7 @@ class TestBatchManager:
                     "step_signature": None,
                     "use_cache": False,
                     "type_info": {
-                        "module": "distilabel.pipeline.batch_manager",
+                        "module": "distilagent.pipeline.batch_manager",
                         "name": "_BatchManagerStep",
                     },
                 },
@@ -1946,7 +1946,7 @@ class TestBatchManager:
                     "size": 0,
                     "accumulated": False,
                     "type_info": {
-                        "module": "distilabel.pipeline.batch",
+                        "module": "distilagent.pipeline.batch",
                         "name": "_Batch",
                     },
                 }
@@ -1963,7 +1963,7 @@ class TestBatchManager:
                     "size": 0,
                     "accumulated": False,
                     "type_info": {
-                        "module": "distilabel.pipeline.batch",
+                        "module": "distilagent.pipeline.batch",
                         "name": "_Batch",
                     },
                 }
@@ -1971,7 +1971,7 @@ class TestBatchManager:
             "last_batch_flag_sent_to": ["step99"],
             "received_batch_seq_nos": {"step3": [0]},
             "type_info": {
-                "module": "distilabel.pipeline.batch_manager",
+                "module": "distilagent.pipeline.batch_manager",
                 "name": "_BatchManager",
             },
         }
@@ -2008,7 +2008,7 @@ class TestBatchManager:
                                     "created_from": {},
                                     "batch_routed_to": [],
                                     "type_info": {
-                                        "module": "distilabel.pipeline.batch_manager",
+                                        "module": "distilagent.pipeline.batch_manager",
                                         "name": "_Batch",
                                     },
                                 }
@@ -2017,7 +2017,7 @@ class TestBatchManager:
                         "seq_no": 0,
                         "last_batch_received": [],
                         "type_info": {
-                            "module": "distilabel.pipeline.batch_manager",
+                            "module": "distilagent.pipeline.batch_manager",
                             "name": "_BatchManagerStep",
                         },
                     },
@@ -2049,7 +2049,7 @@ class TestBatchManager:
                                     "created_from": {},
                                     "batch_routed_to": [],
                                     "type_info": {
-                                        "module": "distilabel.pipeline.batch_manager",
+                                        "module": "distilagent.pipeline.batch_manager",
                                         "name": "_Batch",
                                     },
                                 }
@@ -2058,7 +2058,7 @@ class TestBatchManager:
                         "seq_no": 0,
                         "last_batch_received": [],
                         "type_info": {
-                            "module": "distilabel.pipeline.batch_manager",
+                            "module": "distilagent.pipeline.batch_manager",
                             "name": "_BatchManagerStep",
                         },
                     },
@@ -2074,7 +2074,7 @@ class TestBatchManager:
                         "created_from": {},
                         "batch_routed_to": [],
                         "type_info": {
-                            "module": "distilabel.pipeline.batch_manager",
+                            "module": "distilagent.pipeline.batch_manager",
                             "name": "_Batch",
                         },
                     },
@@ -2088,7 +2088,7 @@ class TestBatchManager:
                         "created_from": {},
                         "batch_routed_to": [],
                         "type_info": {
-                            "module": "distilabel.pipeline.batch_manager",
+                            "module": "distilagent.pipeline.batch_manager",
                             "name": "_Batch",
                         },
                     },
@@ -2104,7 +2104,7 @@ class TestBatchManager:
                         "created_from": {},
                         "batch_routed_to": [],
                         "type_info": {
-                            "module": "distilabel.pipeline.batch_manager",
+                            "module": "distilagent.pipeline.batch_manager",
                             "name": "_Batch",
                         },
                     },
@@ -2118,7 +2118,7 @@ class TestBatchManager:
                         "created_from": {},
                         "batch_routed_to": [],
                         "type_info": {
-                            "module": "distilabel.pipeline.batch_manager",
+                            "module": "distilagent.pipeline.batch_manager",
                             "name": "_Batch",
                         },
                     },
@@ -2126,7 +2126,7 @@ class TestBatchManager:
                 "last_batch_flag_sent_to": ["step3"],
                 "received_batch_seq_nos": {"step3": [0]},
                 "type_info": {
-                    "module": "distilabel.pipeline.batch_manager",
+                    "module": "distilagent.pipeline.batch_manager",
                     "name": "_BatchManager",
                 },
             }

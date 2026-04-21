@@ -17,11 +17,11 @@ from typing import Any, Dict, Literal, Type, Union
 import pytest
 from pydantic import BaseModel
 
-from distilabel.models.llms.huggingface.transformers import TransformersLLM
-from distilabel.steps.tasks.structured_outputs.outlines import (
+from distilagent.models.llms.huggingface.transformers import TransformersLLM
+from distilagent.steps.tasks.structured_outputs.outlines import (
     model_to_schema,
 )
-from distilabel.typing import OutlinesStructuredOutputType
+from distilagent.typing import OutlinesStructuredOutputType
 
 
 class DummyUserTest(BaseModel):
@@ -63,7 +63,7 @@ DUMP_JSON = {
     "use_magpie_template": False,
     "disable_cuda_device_placement": False,
     "type_info": {
-        "module": "distilabel.models.llms.huggingface.transformers",
+        "module": "distilagent.models.llms.huggingface.transformers",
         "name": "TransformersLLM",
     },
 }
@@ -92,7 +92,7 @@ DUMP_REGEX = {
     "use_magpie_template": False,
     "disable_cuda_device_placement": False,
     "type_info": {
-        "module": "distilabel.models.llms.huggingface.transformers",
+        "module": "distilagent.models.llms.huggingface.transformers",
         "name": "TransformersLLM",
     },
 }
@@ -123,7 +123,7 @@ class TestOutlinesIntegration:
         self, format: str, schema: Union[str, Type[BaseModel]], prompt: str
     ) -> None:
         llm = TransformersLLM(
-            model="distilabel-internal-testing/tiny-random-mistral",
+            model="distilagent-internal-testing/tiny-random-mistral",
             structured_output=OutlinesStructuredOutputType(
                 format=format, schema=schema
             ),

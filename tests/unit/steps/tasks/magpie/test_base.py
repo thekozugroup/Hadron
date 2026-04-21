@@ -18,8 +18,8 @@ from unittest import mock
 
 import pytest
 
-from distilabel.models.llms.openai import OpenAILLM
-from distilabel.steps.tasks.magpie.base import MAGPIE_MULTI_TURN_SYSTEM_PROMPT, Magpie
+from distilagent.models.llms.openai import OpenAILLM
+from distilagent.steps.tasks.magpie.base import MAGPIE_MULTI_TURN_SYSTEM_PROMPT, Magpie
 from tests.unit.conftest import DummyMagpieLLM
 
 
@@ -951,7 +951,7 @@ class TestMagpie:
             ],
             "use_cache": True,
             "type_info": {
-                "module": "distilabel.steps.tasks.magpie.base",
+                "module": "distilagent.steps.tasks.magpie.base",
                 "name": "Magpie",
             },
         }

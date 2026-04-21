@@ -20,9 +20,9 @@ from typing import Generator, Union
 import pytest
 from datasets import Dataset, IterableDataset
 
-from distilabel.distiset import Distiset
-from distilabel.pipeline import Pipeline
-from distilabel.steps.generators.huggingface import (
+from distilagent.distiset import Distiset
+from distilagent.pipeline import Pipeline
+from distilagent.steps.generators.huggingface import (
     LoadDataFromDisk,
     LoadDataFromFileSystem,
     LoadDataFromHub,
@@ -36,7 +36,7 @@ DISTILABEL_RUN_SLOW_TESTS = os.getenv("DISTILABEL_RUN_SLOW_TESTS", False)
 def dataset_loader() -> Generator[Union[Dataset, IterableDataset], None, None]:
     load_hub_dataset = LoadDataFromHub(
         name="load_dataset",
-        repo_id="distilabel-internal-testing/instruction-dataset-mini",
+        repo_id="distilagent-internal-testing/instruction-dataset-mini",
         split="test",
         batch_size=2,
         pipeline=Pipeline(name="dataset-pipeline"),
@@ -55,7 +55,7 @@ class TestLoadDataFromHub:
     def test_runtime_parameters(self, streaming: bool, ds_type) -> None:
         load_hub_dataset = LoadDataFromHub(
             name="load_dataset",
-            repo_id="distilabel-internal-testing/instruction-dataset-mini",
+            repo_id="distilagent-internal-testing/instruction-dataset-mini",
             split="test",
             streaming=streaming,
             batch_size=2,

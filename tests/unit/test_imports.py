@@ -15,7 +15,7 @@
 
 def test_imports() -> None:
     # ruff: noqa
-    from distilabel.models.llms import (
+    from distilagent.models.llms import (
         AnthropicLLM,
         AnyscaleLLM,
         AsyncLLM,
@@ -36,9 +36,9 @@ def test_imports() -> None:
         vLLM,
     )
 
-    from distilabel.pipeline import Pipeline
+    from distilagent.pipeline import Pipeline
 
-    from distilabel.steps import (
+    from distilagent.steps import (
         StepResources,
         GroupColumns,
         MergeColumns,
@@ -64,7 +64,7 @@ def test_imports() -> None:
         step,
     )
 
-    from distilabel.steps.tasks import (
+    from distilagent.steps.tasks import (
         Task,
         GeneratorTask,
         ChatItem,

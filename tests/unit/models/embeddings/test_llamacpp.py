@@ -16,7 +16,7 @@
 import numpy as np
 import pytest
 
-from distilabel.models.embeddings import LlamaCppEmbeddings
+from distilagent.models.embeddings import LlamaCppEmbeddings
 
 
 class TestLlamaCppEmbeddings:

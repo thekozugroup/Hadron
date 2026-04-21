@@ -16,8 +16,8 @@ from typing import Any, Dict, Union
 
 import pytest
 
-from distilabel.pipeline.local import Pipeline
-from distilabel.steps.tasks.quality_scorer import QualityScorer
+from distilagent.pipeline.local import Pipeline
+from distilagent.steps.tasks.quality_scorer import QualityScorer
 from tests.unit.conftest import DummyAsyncLLM
 
 

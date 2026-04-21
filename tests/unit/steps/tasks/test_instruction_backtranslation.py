@@ -14,12 +14,12 @@
 
 from typing import Any, List
 
-from distilabel.models.llms.base import LLM
-from distilabel.pipeline.local import Pipeline
-from distilabel.steps.tasks.instruction_backtranslation import (
+from distilagent.models.llms.base import LLM
+from distilagent.pipeline.local import Pipeline
+from distilagent.steps.tasks.instruction_backtranslation import (
     InstructionBacktranslation,
 )
-from distilabel.typing import ChatType, GenerateOutput
+from distilagent.typing import ChatType, GenerateOutput
 
 
 class InstructionBacktranslationLLM(LLM):

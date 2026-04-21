@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from distilabel.steps.tasks.autoreason.borda import borda_count, pick_winner
-from distilabel.steps.tasks.autoreason.types import JudgeVote
+from distilagent.steps.tasks.autoreason.borda import borda_count, pick_winner
+from distilagent.steps.tasks.autoreason.types import JudgeVote
 
 
 class TestBordaCount:

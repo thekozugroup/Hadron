@@ -20,7 +20,7 @@ from unittest.mock import AsyncMock, MagicMock, Mock, patch
 import nest_asyncio
 import pytest
 
-from distilabel.models.llms.groq import GroqLLM
+from distilagent.models.llms.groq import GroqLLM
 
 from .utils import DummyUserDetail
 
@@ -142,7 +142,7 @@ class TestGroqLLM:
                     "offline_batch_generation_block_until_done": None,
                     "use_offline_batch_generation": False,
                     "type_info": {
-                        "module": "distilabel.models.llms.groq",
+                        "module": "distilagent.models.llms.groq",
                         "name": "GroqLLM",
                     },
                 },
@@ -168,7 +168,7 @@ class TestGroqLLM:
                     "offline_batch_generation_block_until_done": None,
                     "use_offline_batch_generation": False,
                     "type_info": {
-                        "module": "distilabel.models.llms.groq",
+                        "module": "distilagent.models.llms.groq",
                         "name": "GroqLLM",
                     },
                 },

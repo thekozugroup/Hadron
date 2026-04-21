@@ -18,7 +18,7 @@ from typing import Any, Dict, Generator
 import pytest
 from pydantic import BaseModel
 
-from distilabel.models.llms.mlx import MlxLLM
+from distilagent.models.llms.mlx import MlxLLM
 
 from .utils import DummyUserDetail
 
@@ -123,7 +123,7 @@ class TestMlxLLM:
                     "tokenizer_config": {},
                     "use_magpie_template": False,
                     "type_info": {
-                        "module": "distilabel.models.llms.mlx",
+                        "module": "distilagent.models.llms.mlx",
                         "name": "MlxLLM",
                     },
                 },
@@ -149,7 +149,7 @@ class TestMlxLLM:
                     "offline_batch_generation_block_until_done": None,
                     "use_offline_batch_generation": False,
                     "type_info": {
-                        "module": "distilabel.models.llms.mlx",
+                        "module": "distilagent.models.llms.mlx",
                         "name": "MlxLLM",
                     },
                 },

@@ -16,7 +16,7 @@ from typing import Optional
 
 import pytest
 
-from distilabel.steps.truncate import TruncateTextColumn
+from distilagent.steps.truncate import TruncateTextColumn
 
 
 @pytest.mark.parametrize(

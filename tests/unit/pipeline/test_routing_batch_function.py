@@ -14,14 +14,14 @@
 
 from typing import List
 
-from distilabel.pipeline.batch import _Batch
-from distilabel.pipeline.local import Pipeline
-from distilabel.pipeline.routing_batch_function import (
+from distilagent.pipeline.batch import _Batch
+from distilagent.pipeline.local import Pipeline
+from distilagent.pipeline.routing_batch_function import (
     RoutingBatchFunction,
     routing_batch_function,
     sample_n_steps,
 )
-from distilabel.utils.serialization import TYPE_INFO_KEY
+from distilagent.utils.serialization import TYPE_INFO_KEY
 from tests.unit.pipeline.utils import DummyGeneratorStep, DummyStep1, DummyStep2
 
 
@@ -98,7 +98,7 @@ class TestRoutingBatchFunction:
             "step": upstream_step.name,
             "description": routing_batch_function.description,
             TYPE_INFO_KEY: {
-                "module": "distilabel.pipeline.routing_batch_function",
+                "module": "distilagent.pipeline.routing_batch_function",
                 "name": "sample_n_steps",
                 "kwargs": {"n": 2},
             },
@@ -109,7 +109,7 @@ class TestRoutingBatchFunction:
             "step": "upstream_step",
             "description": "Sample 2 steps from the list of downstream steps.",
             TYPE_INFO_KEY: {
-                "module": "distilabel.pipeline.routing_batch_function",
+                "module": "distilagent.pipeline.routing_batch_function",
                 "name": "sample_n_steps",
                 "kwargs": {"n": 2},
             },

@@ -17,10 +17,10 @@ from typing import Any, List
 
 from typing_extensions import override
 
-from distilabel.models.llms.base import LLM
-from distilabel.pipeline.local import Pipeline
-from distilabel.steps.tasks.structured_generation import StructuredGeneration
-from distilabel.typing import GenerateOutput, StructuredInput
+from distilagent.models.llms.base import LLM
+from distilagent.pipeline.local import Pipeline
+from distilagent.steps.tasks.structured_generation import StructuredGeneration
+from distilagent.typing import GenerateOutput, StructuredInput
 
 
 class DummyStructuredLLM(LLM):

@@ -18,11 +18,11 @@ from typing import TYPE_CHECKING, List
 
 import pytest
 
-from distilabel.pipeline import Pipeline, routing_batch_function
-from distilabel.steps import LoadDataFromDicts, StepInput, step
+from distilagent.pipeline import Pipeline, routing_batch_function
+from distilagent.steps import LoadDataFromDicts, StepInput, step
 
 if TYPE_CHECKING:
-    from distilabel.typing import StepOutput
+    from distilagent.typing import StepOutput
 
 
 @routing_batch_function()

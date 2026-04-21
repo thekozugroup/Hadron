@@ -19,8 +19,8 @@ from unittest.mock import patch
 import argilla as rg
 import pytest
 
-from distilabel.pipeline.local import Pipeline
-from distilabel.steps.argilla.text_generation import TextGenerationToArgilla
+from distilagent.pipeline.local import Pipeline
+from distilagent.steps.argilla.text_generation import TextGenerationToArgilla
 
 
 @pytest.fixture
@@ -157,7 +157,7 @@ class TestTextGenerationToArgilla:
             ],
             "use_cache": True,
             "type_info": {
-                "module": "distilabel.steps.argilla.text_generation",
+                "module": "distilagent.steps.argilla.text_generation",
                 "name": "TextGenerationToArgilla",
             },
         }

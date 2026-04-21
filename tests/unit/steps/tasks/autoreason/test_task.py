@@ -16,7 +16,7 @@
 
 These tests wire up a scripted async LLM, drive the task end-to-end, and
 assert on the shape and contents of the emitted rows. The scripted LLM
-subclasses :class:`distilabel.models.llms.base.AsyncLLM` so that pydantic
+subclasses :class:`distilagent.models.llms.base.AsyncLLM` so that pydantic
 validation on ``Task.llm`` passes without gymnastics.
 """
 
@@ -27,18 +27,18 @@ from typing import TYPE_CHECKING, Any, Callable, Dict, List, Optional, Union
 import pytest
 from pydantic import PrivateAttr
 
-from distilabel.models.llms.base import AsyncLLM
-from distilabel.steps.tasks.autoreason.roles import (
+from distilagent.models.llms.base import AsyncLLM
+from distilagent.steps.tasks.autoreason.roles import (
     AUTHOR_B_SYSTEM,
     CRITIC_SYSTEM,
     JUDGE_SYSTEM,
     SYNTHESIZER_SYSTEM,
     TEACHER_SEED_SYSTEM,
 )
-from distilabel.steps.tasks.autoreason.task import AutoReasonedGeneration
+from distilagent.steps.tasks.autoreason.task import AutoReasonedGeneration
 
 if TYPE_CHECKING:
-    from distilabel.typing import FormattedInput, GenerateOutput
+    from distilagent.typing import FormattedInput, GenerateOutput
 
 
 ScriptEntry = Union[List[Any], Callable[[int, list], str]]
@@ -323,7 +323,7 @@ def test_failure_produces_empty_row_with_error_metadata():
     assert row["autoreason_iterations"] == 0
     assert row["autoreason_converged"] is False
     # Error is stashed in distilabel_metadata
-    from distilabel.constants import DISTILABEL_METADATA_KEY
+    from distilagent.constants import DISTILABEL_METADATA_KEY
 
     meta = row[DISTILABEL_METADATA_KEY]
     assert any("autoreason_error" in k for k in meta.keys())

@@ -19,8 +19,8 @@ from unittest.mock import patch
 import argilla as rg
 import pytest
 
-from distilabel.pipeline.local import Pipeline
-from distilabel.steps.argilla.preference import PreferenceToArgilla
+from distilagent.pipeline.local import Pipeline
+from distilagent.steps.argilla.preference import PreferenceToArgilla
 
 
 @pytest.fixture
@@ -192,7 +192,7 @@ class TestPreferenceToArgilla:
             ],
             "use_cache": True,
             "type_info": {
-                "module": "distilabel.steps.argilla.preference",
+                "module": "distilagent.steps.argilla.preference",
                 "name": "PreferenceToArgilla",
             },
         }

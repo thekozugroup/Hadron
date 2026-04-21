@@ -16,8 +16,8 @@ from typing import Any, Dict, Union
 
 import pytest
 
-from distilabel.errors import DistilabelUserError
-from distilabel.steps.tasks.decorator import task
+from distilagent.errors import DistilabelUserError
+from distilagent.steps.tasks.decorator import task
 from tests.unit.conftest import DummyLLM
 
 

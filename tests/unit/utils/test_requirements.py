@@ -16,17 +16,17 @@ from typing import List
 
 import pytest
 
-from distilabel.pipeline import Pipeline
-from distilabel.steps import Step
-from distilabel.steps.base import StepInput
-from distilabel.typing import StepOutput
-from distilabel.utils.requirements import requirements
+from distilagent.pipeline import Pipeline
+from distilagent.steps import Step
+from distilagent.steps.base import StepInput
+from distilagent.typing import StepOutput
+from distilagent.utils.requirements import requirements
 
 from ..pipeline.utils import DummyGeneratorStep
 
 
 def test_add_requirements_decorator():
-    @requirements(["distilabel>=0.0.1"])
+    @requirements(["distilagent>=0.0.1"])
     class CustomStep(Step):
         @property
         def inputs(self) -> List[str]:
@@ -41,14 +41,14 @@ def test_add_requirements_decorator():
                 input["response"] = "unit test"
             yield inputs
 
-    assert CustomStep.requirements == ["distilabel>=0.0.1"]
+    assert CustomStep.requirements == ["distilagent>=0.0.1"]
 
 
 @pytest.mark.parametrize(
     "requirements_pipeline, expected",
     [
-        ([], ["distilabel>=0.0.1", "numpy"]),
-        (["candle_holder"], ["candle_holder", "distilabel>=0.0.1", "numpy"]),
+        ([], ["distilagent>=0.0.1", "numpy"]),
+        (["candle_holder"], ["candle_holder", "distilagent>=0.0.1", "numpy"]),
     ],
 )
 def test_add_requirements_to_pipeline(
@@ -56,7 +56,7 @@ def test_add_requirements_to_pipeline(
 ) -> None:
     # Check the pipeline has the requirements from the steps defined within it.
 
-    @requirements(["distilabel>=0.0.1"])
+    @requirements(["distilagent>=0.0.1"])
     class CustomStep(Step):
         @property
         def inputs(self) -> List[str]:
@@ -100,10 +100,10 @@ def test_add_requirements_to_pipeline(
 
 
 def test_requirements_on_step_decorator() -> None:
-    from distilabel.mixins.runtime_parameters import RuntimeParameter
-    from distilabel.steps.decorator import step
+    from distilagent.mixins.runtime_parameters import RuntimeParameter
+    from distilagent.steps.decorator import step
 
-    @requirements(["distilabel>=0.0.1"])
+    @requirements(["distilagent>=0.0.1"])
     @step(inputs=["instruction"], outputs=["generation"])
     def UnitTestStep(
         inputs: StepInput,
@@ -113,4 +113,4 @@ def test_requirements_on_step_decorator() -> None:
         """A dummy step for the unit test"""
         yield []
 
-    assert UnitTestStep.requirements == ["distilabel>=0.0.1"]
+    assert UnitTestStep.requirements == ["distilagent>=0.0.1"]

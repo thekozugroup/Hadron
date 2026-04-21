@@ -16,7 +16,7 @@ from typing import List
 
 import pytest
 
-from distilabel.steps.generators.data_sampler import DataSampler
+from distilagent.steps.generators.data_sampler import DataSampler
 
 
 @pytest.mark.parametrize(

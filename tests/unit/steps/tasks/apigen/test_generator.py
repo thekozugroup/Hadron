@@ -18,11 +18,11 @@ from typing import TYPE_CHECKING, List, Union
 
 import pytest
 
-from distilabel.steps.tasks.apigen.generator import APIGenGenerator
+from distilagent.steps.tasks.apigen.generator import APIGenGenerator
 from tests.unit.conftest import DummyLLM
 
 if TYPE_CHECKING:
-    from distilabel.typing import FormattedInput, GenerateOutput
+    from distilagent.typing import FormattedInput, GenerateOutput
 
 
 class DummyAPIGenLLM(DummyLLM):

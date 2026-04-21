@@ -16,13 +16,13 @@ from typing import TYPE_CHECKING, Dict, List
 
 import pytest
 
-from distilabel.mixins.runtime_parameters import RuntimeParameter
-from distilabel.pipeline.ray import RayPipeline
-from distilabel.steps.base import Step, StepInput
-from distilabel.steps.generators.data import LoadDataFromDicts
+from distilagent.mixins.runtime_parameters import RuntimeParameter
+from distilagent.pipeline.ray import RayPipeline
+from distilagent.steps.base import Step, StepInput
+from distilagent.steps.generators.data import LoadDataFromDicts
 
 if TYPE_CHECKING:
-    from distilabel.typing import StepOutput
+    from distilagent.typing import StepOutput
 
 DATA = [
     {"prompt": "Tell me a joke"},

@@ -16,9 +16,9 @@ from typing import Any, Dict, List, Union
 
 import pytest
 
-from distilabel.models.llms.base import LLM
-from distilabel.steps.tasks.ultrafeedback import UltraFeedback
-from distilabel.typing import ChatType, GenerateOutput
+from distilagent.models.llms.base import LLM
+from distilagent.steps.tasks.ultrafeedback import UltraFeedback
+from distilagent.typing import ChatType, GenerateOutput
 
 
 class UltraFeedbackLLM(LLM):

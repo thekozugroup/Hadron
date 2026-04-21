@@ -16,16 +16,16 @@ from unittest import mock
 
 import pytest
 
-from distilabel.mixins.runtime_parameters import RuntimeParameter
-from distilabel.pipeline.local import Pipeline
-from distilabel.steps.base import (
+from distilagent.mixins.runtime_parameters import RuntimeParameter
+from distilagent.pipeline.local import Pipeline
+from distilagent.steps.base import (
     GeneratorStep,
     GlobalStep,
     Step,
     StepInput,
 )
-from distilabel.steps.decorator import step
-from distilabel.typing import GeneratorStepOutput, StepOutput
+from distilagent.steps.decorator import step
+from distilagent.typing import GeneratorStepOutput, StepOutput
 
 
 class TestStepDecorator:

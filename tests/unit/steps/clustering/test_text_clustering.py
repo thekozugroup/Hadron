@@ -17,11 +17,11 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from distilabel.steps.clustering.text_clustering import TextClustering
+from distilagent.steps.clustering.text_clustering import TextClustering
 from tests.unit.conftest import DummyAsyncLLM
 
 if TYPE_CHECKING:
-    from distilabel.typing import FormattedInput, GenerateOutput
+    from distilagent.typing import FormattedInput, GenerateOutput
 
 
 class ClusteringLLM(DummyAsyncLLM):

@@ -17,9 +17,9 @@ from typing import Any, List
 
 import pytest
 
-from distilabel.models.llms.base import LLM
-from distilabel.pipeline.local import Pipeline
-from distilabel.steps.tasks.improving_text_embeddings import (
+from distilagent.models.llms.base import LLM
+from distilagent.pipeline.local import Pipeline
+from distilagent.steps.tasks.improving_text_embeddings import (
     BitextRetrievalGenerator,
     EmbeddingTaskGenerator,
     GenerateLongTextMatchingData,
@@ -28,7 +28,7 @@ from distilabel.steps.tasks.improving_text_embeddings import (
     GenerateTextRetrievalData,
     MonolingualTripletGenerator,
 )
-from distilabel.typing import ChatType, GenerateOutput
+from distilagent.typing import ChatType, GenerateOutput
 
 
 class MockLLM(LLM):

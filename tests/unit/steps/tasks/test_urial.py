@@ -14,7 +14,7 @@
 
 import pytest
 
-from distilabel.steps.tasks.urial import URIAL
+from distilagent.steps.tasks.urial import URIAL
 from tests.unit.conftest import DummyAsyncLLM
 
 

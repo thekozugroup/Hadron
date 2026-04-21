@@ -17,7 +17,7 @@ from typing import TYPE_CHECKING, Any, Dict, List, Optional
 
 import pytest
 
-from distilabel.steps.tasks.math_shepherd.generator import (
+from distilagent.steps.tasks.math_shepherd.generator import (
     FEW_SHOTS_GSM8K,
     RULES_GSM8K,
     SYSTEM_PROMPT,
@@ -26,7 +26,7 @@ from distilabel.steps.tasks.math_shepherd.generator import (
 from tests.unit.conftest import DummyLLM
 
 if TYPE_CHECKING:
-    from distilabel.typing import GenerateOutput
+    from distilagent.typing import GenerateOutput
 
 
 class MathShepherdGeneratorLLM(DummyLLM):

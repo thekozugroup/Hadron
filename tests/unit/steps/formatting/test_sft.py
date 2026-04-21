@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from distilabel.pipeline import Pipeline
-from distilabel.steps.formatting.sft import (
+from distilagent.pipeline import Pipeline
+from distilagent.steps.formatting.sft import (
     FormatChatGenerationSFT,
     FormatTextGenerationSFT,
 )

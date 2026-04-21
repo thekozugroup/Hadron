@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from distilabel.steps import ExpandColumns
-from distilabel.steps.tasks.math_shepherd.utils import FormatPRM, parse_json_response
+from distilagent.steps import ExpandColumns
+from distilagent.steps.tasks.math_shepherd.utils import FormatPRM, parse_json_response
 
 
 class TestFormatPRM:

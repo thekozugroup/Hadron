@@ -22,7 +22,7 @@ from vertexai.generative_models import (
     Part,
 )
 
-from distilabel.models.llms.vertexai import VertexAILLM
+from distilagent.models.llms.vertexai import VertexAILLM
 
 
 @patch("vertexai.generative_models.GenerativeModel.generate_content_async")
@@ -104,7 +104,7 @@ class TestVertexAILLM:
             "offline_batch_generation_block_until_done": None,
             "use_offline_batch_generation": False,
             "type_info": {
-                "module": "distilabel.models.llms.vertexai",
+                "module": "distilagent.models.llms.vertexai",
                 "name": "VertexAILLM",
             },
         }

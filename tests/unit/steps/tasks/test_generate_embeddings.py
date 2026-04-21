@@ -16,15 +16,15 @@ from typing import Generator
 
 import pytest
 
-from distilabel.models.llms.huggingface.transformers import TransformersLLM
-from distilabel.pipeline.local import Pipeline
-from distilabel.steps.tasks.generate_embeddings import GenerateEmbeddings
+from distilagent.models.llms.huggingface.transformers import TransformersLLM
+from distilagent.pipeline.local import Pipeline
+from distilagent.steps.tasks.generate_embeddings import GenerateEmbeddings
 
 
 @pytest.fixture(scope="module")
 def transformers_llm() -> Generator[TransformersLLM, None, None]:
     llm = TransformersLLM(
-        model="distilabel-internal-testing/tiny-random-mistral",
+        model="distilagent-internal-testing/tiny-random-mistral",
         cuda_devices=[],
     )
     llm.load()

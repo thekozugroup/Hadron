@@ -15,11 +15,11 @@
 from typing import TYPE_CHECKING
 from unittest import mock
 
-from distilabel.pipeline import Pipeline
-from distilabel.steps import LoadDataFromDicts, StepInput, step
+from distilagent.pipeline import Pipeline
+from distilagent.steps import LoadDataFromDicts, StepInput, step
 
 if TYPE_CHECKING:
-    from distilabel.typing import StepOutput
+    from distilagent.typing import StepOutput
 
 
 @step(inputs=["instruction"], outputs=["instruction2"])

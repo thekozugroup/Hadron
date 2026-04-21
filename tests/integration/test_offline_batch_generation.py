@@ -15,14 +15,14 @@
 from tempfile import TemporaryDirectory
 from typing import TYPE_CHECKING, Any, List, Union
 
-from distilabel.exceptions import DistilabelOfflineBatchGenerationNotFinishedException
-from distilabel.models.llms import LLM
-from distilabel.pipeline import Pipeline
-from distilabel.steps import LoadDataFromDicts
-from distilabel.steps.tasks import TextGeneration
+from distilagent.exceptions import DistilabelOfflineBatchGenerationNotFinishedException
+from distilagent.models.llms import LLM
+from distilagent.pipeline import Pipeline
+from distilagent.steps import LoadDataFromDicts
+from distilagent.steps.tasks import TextGeneration
 
 if TYPE_CHECKING:
-    from distilabel.typing import FormattedInput, GenerateOutput
+    from distilagent.typing import FormattedInput, GenerateOutput
 
 
 class DummyOfflineBatchGenerateLLM(LLM):

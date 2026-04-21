@@ -14,7 +14,7 @@
 
 import pytest
 
-from distilabel.steps.reward_model import RewardModelScore
+from distilagent.steps.reward_model import RewardModelScore
 
 
 class TestRewardModelScore:

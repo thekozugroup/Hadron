@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from distilabel.constants import DISTILABEL_METADATA_KEY
-from distilabel.steps.columns.combine import CombineOutputs
+from distilagent.constants import DISTILABEL_METADATA_KEY
+from distilagent.steps.columns.combine import CombineOutputs
 
 
 class TestCombineOutputs:

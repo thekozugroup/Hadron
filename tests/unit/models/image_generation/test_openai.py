@@ -17,7 +17,7 @@ from unittest.mock import AsyncMock, MagicMock, Mock, patch
 import nest_asyncio
 import pytest
 
-from distilabel.models.image_generation.openai import OpenAIImageGeneration
+from distilagent.models.image_generation.openai import OpenAIImageGeneration
 
 
 @patch("openai.OpenAI")

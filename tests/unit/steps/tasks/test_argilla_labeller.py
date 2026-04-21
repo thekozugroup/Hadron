@@ -17,9 +17,9 @@ from typing import Any, Dict, List
 
 import pytest
 
-from distilabel.pipeline.local import Pipeline
-from distilabel.steps.tasks.argilla_labeller import ArgillaLabeller
-from distilabel.typing import ChatItem
+from distilagent.pipeline.local import Pipeline
+from distilagent.steps.tasks.argilla_labeller import ArgillaLabeller
+from distilagent.typing import ChatItem
 from tests.unit.conftest import DummyAsyncLLM
 
 

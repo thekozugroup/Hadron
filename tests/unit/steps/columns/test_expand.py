@@ -17,8 +17,8 @@ from typing import Union
 
 import pytest
 
-from distilabel.pipeline.local import Pipeline
-from distilabel.steps.columns.expand import ExpandColumns
+from distilagent.pipeline.local import Pipeline
+from distilagent.steps.columns.expand import ExpandColumns
 
 
 class TestExpandColumns:

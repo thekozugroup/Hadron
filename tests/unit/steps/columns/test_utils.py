@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from distilabel.constants import DISTILABEL_METADATA_KEY
-from distilabel.steps.columns.utils import merge_distilabel_metadata
+from distilagent.constants import DISTILABEL_METADATA_KEY
+from distilagent.steps.columns.utils import merge_distilabel_metadata
 
 
 def test_merge_distilabel_metadata() -> None:
