@@ -232,8 +232,12 @@ class LocalInlineThinkLLM(OpenAILLM):
                 or ""
             )
             reasoning = (sep_reasoning + "\n\n" + reasoning_inline).strip() if sep_reasoning else reasoning_inline
-            generations.append(stripped)
-            self._reasoning_buffer.append((role_hint, reasoning, stripped))
+            # Gemma-family thinking format sometimes puts the final answer at
+            # the tail of reasoning_content and leaves content empty. Fall back
+            # so the tournament sees real text to critique/rank.
+            text_for_tournament = stripped if stripped else reasoning
+            generations.append(text_for_tournament)
+            self._reasoning_buffer.append((role_hint, reasoning, text_for_tournament))
 
         usage = getattr(completion, "usage", None)
         input_tokens = [0] * num_generations
