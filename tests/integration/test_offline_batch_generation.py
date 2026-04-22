@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 from tempfile import TemporaryDirectory
 from typing import TYPE_CHECKING, Any, List, Union
 
-from distilagent.exceptions import DistilabelOfflineBatchGenerationNotFinishedException
+from distilagent.exceptions import DistilAgentOfflineBatchGenerationNotFinishedException
 from distilagent.models.llms import LLM
 from distilagent.pipeline import Pipeline
 from distilagent.steps import LoadDataFromDicts
@@ -23,7 +23,6 @@ from distilagent.steps.tasks import TextGeneration
 
 if TYPE_CHECKING:
     from distilagent.typing import FormattedInput, GenerateOutput
-
 
 class DummyOfflineBatchGenerateLLM(LLM):
     def load(self) -> None:
@@ -47,7 +46,7 @@ class DummyOfflineBatchGenerateLLM(LLM):
         # Simulate that the first time we create the jobs
         if not self.jobs_ids:
             self.jobs_ids = ("1234", "5678")
-            raise DistilabelOfflineBatchGenerationNotFinishedException(
+            raise DistilAgentOfflineBatchGenerationNotFinishedException(
                 jobs_ids=self.jobs_ids  # type: ignore
             )
         return [
@@ -59,7 +58,6 @@ class DummyOfflineBatchGenerateLLM(LLM):
                 },
             }
         ] * len(inputs)
-
 
 def test_offline_batch_generation() -> None:
     with TemporaryDirectory() as tmp_dir:

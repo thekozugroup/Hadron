@@ -50,7 +50,6 @@ from distilagent.steps.tasks import AutoReasonedGeneration  # noqa: E402  # re-e
 from distilagent.steps.tasks.autoreason.rate_limit import get_limiter  # noqa: E402
 from distilagent.steps.tasks.autoreason.tournament import TournamentRunner  # noqa: E402
 
-
 @dataclass
 class Config:
     out_jsonl: Path
@@ -78,11 +77,9 @@ class Config:
     rng_seed: int
     no_routing: bool
 
-
 def prompt_id(text: str, prefix: str) -> str:
     h = hashlib.sha1(text.encode("utf-8")).hexdigest()[:12]
     return f"{prefix}-{h}"
-
 
 def load_hf_samples(n: int, seed: int) -> List[Dict]:
     """Random-sample n lines from the 1M-line prompts.txt."""
@@ -115,7 +112,6 @@ def load_hf_samples(n: int, seed: int) -> List[Dict]:
         for t in reservoir
     ]
 
-
 def load_agentic_samples() -> List[Dict]:
     return [
         {
@@ -127,20 +123,17 @@ def load_agentic_samples() -> List[Dict]:
         for p in get_agentic_prompts()
     ]
 
-
 def load_checkpoint(path: Path) -> Dict:
     if path.exists():
         with open(path) as f:
             return json.load(f)
     return {"completed_ids": [], "failed": {}}
 
-
 def save_checkpoint(path: Path, state: Dict) -> None:
     tmp = path.with_suffix(".tmp")
     with open(tmp, "w") as f:
         json.dump(state, f, indent=2)
     tmp.replace(path)
-
 
 def _all_llms(runner: TournamentRunner) -> List:
     """Return every unique LLM instance the runner might call."""
@@ -151,11 +144,9 @@ def _all_llms(runner: TournamentRunner) -> List:
         seen.setdefault(id(v), v)
     return list(seen.values())
 
-
 def _is_persistent_rate_limit(exc_msg: str) -> bool:
     s = (exc_msg or "").lower()
     return any(k in s for k in ("429", "rate", "too many requests", "temporarily rate-limited"))
-
 
 async def run_one(
     runner: TournamentRunner, sample: Dict
@@ -204,7 +195,6 @@ async def run_one(
         "reasoning_total_chars": sum(len(e["reasoning"]) for e in reasoning_entries),
     }
     return row
-
 
 async def amain(cfg: Config) -> int:
     samples: List[Dict] = []
@@ -432,7 +422,6 @@ async def amain(cfg: Config) -> int:
     print(f"output: {cfg.out_jsonl}")
     return 0
 
-
 def parse_args() -> Config:
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", type=Path, default=Path("datasets/distilagent_pilot.jsonl"))
@@ -509,7 +498,6 @@ def parse_args() -> Config:
         enable_thinking=args.enable_thinking,
         max_tokens=args.max_tokens,
     )
-
 
 if __name__ == "__main__":
     sys.exit(asyncio.run(amain(parse_args())))

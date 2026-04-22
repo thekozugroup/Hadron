@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,13 +17,12 @@ from queue import Queue
 from typing import Any, Dict, List, Optional, Union, cast
 
 from distilagent.constants import LAST_BATCH_SENT_FLAG
-from distilagent.errors import DISTILABEL_DOCS_URL
-from distilagent.exceptions import DistilabelOfflineBatchGenerationNotFinishedException
+from distilagent.errors import DISTILAGENT_DOCS_URL
+from distilagent.exceptions import DistilAgentOfflineBatchGenerationNotFinishedException
 from distilagent.models.mixins.cuda_device_placement import CudaDevicePlacementMixin
 from distilagent.pipeline.batch import _Batch
 from distilagent.steps.base import GeneratorStep, Step, _Step
 from distilagent.typing import StepLoadStatus
-
 
 class _StepWrapper:
     """Wrapper to run the `Step`.
@@ -248,7 +247,7 @@ class _StepWrapper:
                     data = (
                         batch.data
                         if isinstance(
-                            e, DistilabelOfflineBatchGenerationNotFinishedException
+                            e, DistilAgentOfflineBatchGenerationNotFinishedException
                         )
                         else None
                     )
@@ -292,7 +291,6 @@ class _StepWrapper:
         )
         self.output_queue.put(batch)
 
-
 class _StepWrapperException(Exception):
     """Exception to be raised when an error occurs in the `_StepWrapper` class.
 
@@ -312,7 +310,7 @@ class _StepWrapperException(Exception):
         subprocess_exception: Exception,
         data: Optional[List[List[Dict[str, Any]]]] = None,
     ) -> None:
-        self.message = f"{message}\n\nFor further information visit '{DISTILABEL_DOCS_URL}api/pipeline/step_wrapper'"
+        self.message = f"{message}\n\nFor further information visit '{DISTILAGENT_DOCS_URL}api/pipeline/step_wrapper'"
         self.step = step
         self.code = code
         self.subprocess_exception = subprocess_exception

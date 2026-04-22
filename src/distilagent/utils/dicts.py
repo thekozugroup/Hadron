@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ from itertools import chain
 from typing import Any, Dict, List, TypeVar
 
 _K = TypeVar("_K")
-
 
 def group_dicts(*dicts: Dict[_K, Any], flatten: bool = False) -> Dict[_K, List[Any]]:
     """Combines multiple dictionaries into a single dictionary joining the values
@@ -43,10 +42,8 @@ def group_dicts(*dicts: Dict[_K, Any], flatten: bool = False) -> Dict[_K, List[A
         }
     return combined_dict
 
-
 def flatten_dict(x: Dict[Any, Any]) -> Dict[Any, Any]:
     return {k: json.dumps(v) if isinstance(v, dict) else v for k, v in x.items()}
-
 
 def merge_dicts(*dict_lists: dict) -> list[dict]:
     """

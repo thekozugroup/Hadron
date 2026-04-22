@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -33,7 +33,6 @@ else:
         iterator = iter(iterable)
         while batch := tuple(islice(iterator, n)):
             yield batch
-
 
 # Copy pasted from https://docs.python.org/3/library/itertools.html#itertools-recipes
 # Just added the type hints and use `if`s instead of `match`

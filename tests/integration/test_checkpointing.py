@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,16 +23,13 @@ from distilagent.steps.base import Step, StepInput
 
 dataset = Dataset.from_dict({"a": [1, 2] * 50, "b": [5, 6] * 50})
 
-
 if TYPE_CHECKING:
     from distilagent.typing import StepOutput
-
 
 class DoNothing(Step):
     def process(self, *inputs: StepInput) -> "StepOutput":
         for input in inputs:
             yield input
-
 
 @pytest.mark.skip(reason="Currently cannot obtain the correct HF_TOKEN from the CI")
 def test_checkpointing() -> None:
@@ -52,7 +49,6 @@ def test_checkpointing() -> None:
     fs = HfFileSystem()
     filenames = fs.glob(f"datasets/{dataset_name}/**/*.jsonl")
     assert len(filenames) == 2
-
 
 if __name__ == "__main__":
     test_checkpointing()

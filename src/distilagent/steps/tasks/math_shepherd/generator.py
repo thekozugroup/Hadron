@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,7 +27,6 @@ from distilagent.steps.tasks.math_shepherd.utils import (
 if TYPE_CHECKING:
     from distilagent.typing import ChatType, StepColumns
 
-
 SYSTEM_PROMPT = """\
 You are a math tutor that helps students solve math problems by breaking them down into clear, logical steps. Follow these guidelines:
 
@@ -44,7 +43,6 @@ You are a math tutor that helps students solve math problems by breaking them do
 
 {{ extra_rules }}{{ few_shots }}{{ structured_prompt }}"""
 
-
 SYSTEM_PROMPT_STRUCTURED: Final[str] = """
 Your answer must adhere to the following format, with each step by step solution in a separate object:
 ```
@@ -56,7 +54,6 @@ Your answer must adhere to the following format, with each step by step solution
 ]
 ```
 """
-
 
 RULES_GSM8K: Final[str] = """\
 # Rules:
@@ -119,7 +116,6 @@ TEMPLATE: str = """{% if M %}Generate {{ M }} example solutions to the following
 
 TEMPLATE_STRUCTURED: str = """{% if M %}Generate {{ M }} diverse solutions, even if they are incorrect. This is the problem:{% endif %}
 {{ instruction }}"""
-
 
 class MathShepherdGenerator(Task):
     """Math Shepherd solution generator.

@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,8 +14,7 @@
 
 import re
 
-from distilagent.errors import DistilabelUserError
-
+from distilagent.errors import DistilAgentUserError
 
 def check_column_in_template(
     column: str, template: str, page: str = "components-gallery/tasks/textgeneration/"
@@ -28,7 +27,7 @@ def check_column_in_template(
         page: The page to redirect the user for help . Defaults to "components-gallery/tasks/textgeneration/".
 
     Raises:
-        DistilabelUserError: Custom error if the column is not present in the template.
+        DistilAgentUserError: Custom error if the column is not present in the template.
     """
     pattern = (
         r"(?:{%.*?\b"
@@ -38,7 +37,7 @@ def check_column_in_template(
         + r"\s*}})"
     )
     if not re.search(pattern, template):
-        raise DistilabelUserError(
+        raise DistilAgentUserError(
             (
                 f"You required column name '{column}', but is not present in the template, "
                 "ensure the 'columns' match with the 'template' to avoid errors."

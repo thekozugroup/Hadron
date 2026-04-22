@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
 
 from distilagent.steps.tasks.autoreason.borda import borda_count, pick_winner
 from distilagent.steps.tasks.autoreason.types import JudgeVote
-
 
 class TestBordaCount:
     def test_single_judge_simple_ranking(self) -> None:
@@ -122,7 +121,6 @@ class TestBordaCount:
 
         assert totals == {"A": n_judges, "B": 0, "AB": 2 * n_judges}
         assert pick_winner(totals) == "AB"
-
 
 class TestPickWinnerTieBreakers:
     def test_three_way_tie_prefers_a(self) -> None:

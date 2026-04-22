@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,16 +24,13 @@ from distilagent.steps.tasks.autoreason.rate_limit import (
     rate_limited_call,
 )
 
-
 pytestmark = pytest.mark.asyncio
-
 
 @pytest.fixture(autouse=True)
 def _clear_registry():
     rl._REGISTRY.clear()
     yield
     rl._REGISTRY.clear()
-
 
 # -----------------------------
 # 1. Basic RPM enforcement
@@ -56,7 +53,6 @@ async def test_rpm_basic_enforcement():
         f"61st acquire waited {wait_elapsed:.3f}s (expected ~1s)"
     )
 
-
 # -----------------------------
 # 2. RPM refill over time
 # -----------------------------
@@ -71,7 +67,6 @@ async def test_rpm_refill_over_time():
     await bucket.acquire(1)
     elapsed = time.perf_counter() - t0
     assert elapsed < 0.3, f"post-refill acquire took {elapsed:.3f}s"
-
 
 # -----------------------------
 # 3. RPD enforcement
@@ -100,7 +95,6 @@ async def test_rpd_enforcement(monkeypatch):
     assert waited >= 0.1, f"4th acquire waited {waited:.3f}s (expected ~0.3s)"
     assert waited <= 1.5
 
-
 # -----------------------------
 # 4. get_limiter singleton behaviour
 # -----------------------------
@@ -118,7 +112,6 @@ async def test_get_limiter_singleton_and_update():
     assert a.rpm == 120
     assert a.rpd == 200
 
-
 # -----------------------------
 # 5. rate_limited_call — no error
 # -----------------------------
@@ -133,7 +126,6 @@ async def test_rate_limited_call_success_no_retries():
     result = await rate_limited_call(bucket, fn)
     assert result == "ok"
     assert calls["n"] == 1
-
 
 # -----------------------------
 # 6. rate_limited_call — retries on 429 then succeeds
@@ -154,7 +146,6 @@ async def test_rate_limited_call_retries_on_429_then_succeeds():
     assert result == "success"
     assert calls["n"] == 3  # 2 failures + 1 success
 
-
 # -----------------------------
 # 7. rate_limited_call — gives up after max_retries
 # -----------------------------
@@ -173,7 +164,6 @@ async def test_rate_limited_call_gives_up_after_max_retries():
     assert "429" in str(excinfo.value)
     assert calls["n"] == 3
 
-
 # -----------------------------
 # 8. rate_limited_call — non-rate-limit error propagates immediately
 # -----------------------------
@@ -190,7 +180,6 @@ async def test_rate_limited_call_non_rate_limit_error_propagates():
             bucket, fn, max_retries=5, base_backoff=0.01, max_backoff=0.02
         )
     assert calls["n"] == 1
-
 
 # -----------------------------
 # Bonus: status_code=429 attr detection

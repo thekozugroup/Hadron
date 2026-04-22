@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -37,7 +37,6 @@ _EXCLUDE_FROM_SIGNATURE_DEFAULTS = {
     "llm_jobs_ids",
     "llm_offline_batch_generation_block_until_done",
 }
-
 
 class SignatureMixin(BaseModel):
     """Mixin for creating a signature (for cache) of the class.

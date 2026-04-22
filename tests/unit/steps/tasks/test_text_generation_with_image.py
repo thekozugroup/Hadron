@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,6 @@ np.random.seed(42)
 img_pil = Image.fromarray(
     np.random.randint(0, 255, (100, 100, 3), dtype=np.uint8), "RGB"
 )
-
 
 class TestTextGenerationWithImage:
     def test_format_input(self) -> None:
@@ -81,7 +80,7 @@ class TestTextGenerationWithImage:
                 "instruction": "test",
                 "image": image,
                 "generation": "output",
-                "distilabel_metadata": {
+                "distilagent_metadata": {
                     "raw_output_text_generation_with_image_0": "output",
                     "raw_input_text_generation_with_image_0": [
                         {

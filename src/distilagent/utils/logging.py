@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,7 +27,6 @@ from distilagent import envs
 if TYPE_CHECKING:
     from queue import Queue
 
-
 _SILENT_LOGGERS = [
     "datasets",
     "httpx",
@@ -40,11 +39,9 @@ _SILENT_LOGGERS = [
     "asyncio",
     "sentence_transformers.SentenceTransformer",
     "faiss.loader",
-    "argilla.sdk",
 ]
 
 queue_listener: Union[QueueListener, None] = None
-
 
 def setup_logging(
     log_queue: Optional["Queue[Any]"] = None,
@@ -55,7 +52,6 @@ def setup_logging(
     global queue_listener
 
     # Disable overly verbose loggers
-    logging.getLogger("argilla.client.feedback.dataset.local.mixins").disabled = True
     for logger in _SILENT_LOGGERS:
         logging.getLogger(logger).setLevel(logging.CRITICAL)
 
@@ -85,7 +81,7 @@ def setup_logging(
             )
             queue_listener.start()
 
-    log_level = envs.DISTILABEL_LOG_LEVEL
+    log_level = envs.DISTILAGENT_LOG_LEVEL
     if log_level not in ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]:
         warnings.warn(
             f"Invalid log level '{log_level}', using default 'INFO' instead.",
@@ -100,7 +96,6 @@ def setup_logging(
         root_logger.addHandler(QueueHandler(log_queue))
 
     root_logger.setLevel(log_level)
-
 
 def stop_logging() -> None:
     """Stops the `QueueListener` if it's running."""

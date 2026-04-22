@@ -4,14 +4,13 @@ build-backend = "hatchling.build"
 
 [project]
 name = "distilagent"
-description = "AutoReason tournament refinement fused with distilabel — higher-quality teacher labels for LLM distillation."
+description = "AutoReason tournament refinement for LLM distillation — higher-quality teacher labels via blind-Borda self-judging."
 readme = "README.md"
 requires-python = ">=3.9"
 license = "Apache-2.0"
 keywords = ["llm", "distillation", "autoreason", "synthetic-data", "fine-tuning", "agentic"]
 authors = [
     { name = "thekozugroup", email = "thekozugroup@gmail.com" },
-    { name = "Argilla (upstream distilabel)", email = "admin@argilla.io" },
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -78,7 +77,6 @@ tests = [
 
 # Optional LLMs, integrations, etc
 anthropic = ["anthropic >= 0.20.0"]
-argilla = ["argilla >= 2.0.0", "ipython"]
 cohere = ["cohere >= 5.2.0"]
 groq = ["groq >= 0.4.1"]
 hf-inference-endpoints = ["huggingface_hub >= 0.31.0"]
@@ -123,7 +121,6 @@ pip-args = ["--find-links", "https://flashinfer.ai/whl/cu124/torch2.5/flashinfer
 [project.urls]
 Source = "https://github.com/thekozugroup/distilagent"
 Issues = "https://github.com/thekozugroup/distilagent/issues"
-Upstream = "https://github.com/argilla-io/distilabel"
 
 [tool.hatch.version]
 path = "src/distilagent/__init__.py"

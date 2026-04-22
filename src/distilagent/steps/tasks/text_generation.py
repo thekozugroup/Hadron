@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,14 +17,13 @@ from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
 from jinja2 import Template
 from pydantic import Field, PrivateAttr
 
-from distilagent.errors import DistilabelUserError
+from distilagent.errors import DistilAgentUserError
 from distilagent.steps.tasks.base import Task
 from distilagent.utils.chat import is_openai_format
 from distilagent.utils.template import check_column_in_template
 
 if TYPE_CHECKING:
     from distilagent.typing import ChatType, StepColumns
-
 
 class TextGeneration(Task):
     """Text generation with an `LLM` given a prompt.
@@ -245,14 +244,14 @@ class TextGeneration(Task):
         # and we cannot check it so easily.
         if self.columns == ["instruction"]:
             if is_openai_format(input["instruction"]):
-                raise DistilabelUserError(
+                raise DistilAgentUserError(
                     "Providing `instruction` formatted as an OpenAI chat / conversation is"
                     " deprecated, you should use `ChatGeneration` with `messages` as input instead.",
                     page="components-gallery/tasks/textgeneration/",
                 )
 
             if not isinstance(input["instruction"], str):
-                raise DistilabelUserError(
+                raise DistilAgentUserError(
                     f"Input `instruction` must be a string. Got: {input['instruction']}.",
                     page="components-gallery/tasks/textgeneration/",
                 )
@@ -279,7 +278,6 @@ class TextGeneration(Task):
         """The output is formatted as a dictionary with the `generation`. The `model_name`
         will be automatically included within the `process` method of `Task`."""
         return {"generation": output}
-
 
 class ChatGeneration(Task):
     """Generates text based on a conversation.
@@ -350,14 +348,14 @@ class ChatGeneration(Task):
         are already formatted that way i.e. following the OpenAI chat format."""
 
         if not is_openai_format(input["messages"]):
-            raise DistilabelUserError(
+            raise DistilAgentUserError(
                 "Input `messages` must be an OpenAI chat-like format conversation. "
                 f"Got: {input['messages']}. Please check: 'https://cookbook.openai.com/examples/how_to_format_inputs_to_chatgpt_models'.",
                 page="components-gallery/tasks/chatgeneration/",
             )
 
         if input["messages"][-1]["role"] != "user":
-            raise DistilabelUserError(
+            raise DistilAgentUserError(
                 "The last message must be from the user. Please check: "
                 "'https://cookbook.openai.com/examples/how_to_format_inputs_to_chatgpt_models'.",
                 page="components-gallery/tasks/chatgeneration/",

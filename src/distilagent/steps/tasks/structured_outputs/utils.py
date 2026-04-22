@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@ from typing import Any, Dict, List, Optional, Type, Union
 
 from pydantic import BaseModel, Field, create_model
 
-
 def schema_as_dict(
     schema: Union[str, Dict[str, Any], Type[BaseModel]],
 ) -> Dict[str, Any]:
@@ -30,13 +29,11 @@ def schema_as_dict(
 
     return schema.model_json_schema()
 
-
 # NOTE: The following functions were copied from:
 # https://github.com/pydantic/pydantic/issues/643#issuecomment-1999755873
 # and slightly modified to work with nested models.
 # It would be nice to find the original source of this code to give credit.
 # Other option would be working with this library: https://github.com/c32168/dyntamic
-
 
 def json_schema_to_model(json_schema: Dict[str, Any]) -> Type[BaseModel]:
     """Converts a JSON schema to a `pydantic.BaseModel` class.
@@ -66,7 +63,6 @@ def json_schema_to_model(json_schema: Dict[str, Any]) -> Type[BaseModel]:
     # Create the BaseModel class using create_model().
     return create_model(model_name, **field_definitions)
 
-
 def resolve_refs(schema_element: Any, defs: Optional[Dict[str, Any]] = None) -> Any:
     """Resolves JSON schema references.
 
@@ -93,7 +89,6 @@ def resolve_refs(schema_element: Any, defs: Optional[Dict[str, Any]] = None) -> 
         return [resolve_refs(item, defs) for item in schema_element]
     # Return other types as-is
     return schema_element
-
 
 def json_schema_to_pydantic_field(
     name: str,
@@ -140,12 +135,10 @@ def json_schema_to_pydantic_field(
         ),
     )
 
-
 def handle_any_of(json_schema: Dict[str, Any]) -> Any:
     """Handle 'anyOf' in JSON schema."""
     types = [json_schema_to_pydantic_type(schema) for schema in json_schema["anyOf"]]
     return Union[tuple(types)]
-
 
 def handle_array(json_schema: Dict[str, Any]) -> Any:
     """Handle 'array' type in JSON schema."""
@@ -155,14 +148,12 @@ def handle_array(json_schema: Dict[str, Any]) -> Any:
         return List[item_type]
     return List
 
-
 def handle_object(json_schema: Dict[str, Any]) -> Any:
     """Handle 'object' type in JSON schema."""
     properties = json_schema.get("properties")
     if properties:
         return json_schema_to_model(json_schema)
     return Dict
-
 
 def json_schema_to_pydantic_type(json_schema: Dict[str, Any]) -> Any:
     """Converts a JSON schema type to a Pydantic type.

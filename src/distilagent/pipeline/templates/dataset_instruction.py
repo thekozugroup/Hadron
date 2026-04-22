@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,6 @@ from distilagent.steps import ExpandColumns, KeepColumns
 from distilagent.steps.tasks import SelfInstruct, TextGeneration
 
 MODEL = "meta-llama/Meta-Llama-3.1-8B-Instruct"
-
 
 class DatasetInstructionResponsePipeline(BasePipelineTemplate):
     """Generates instructions and responses for a dataset with input documents.

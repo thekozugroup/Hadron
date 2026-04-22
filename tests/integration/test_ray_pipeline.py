@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -107,7 +107,6 @@ DATA = [
     {"prompt": "What's the capital of Spain?"},
 ]
 
-
 class RenameColumns(Step):
     rename_mappings: RuntimeParameter[Dict[str, str]] = None
 
@@ -127,7 +126,6 @@ class RenameColumns(Step):
             )
         yield outputs
 
-
 class GenerateResponse(Step):
     @property
     def inputs(self) -> List[str]:
@@ -146,7 +144,6 @@ class GenerateResponse(Step):
     @property
     def outputs(self) -> List[str]:
         return ["response"]
-
 
 @pytest.mark.skip_python_versions(["3.12"])
 def test_run_pipeline() -> None:

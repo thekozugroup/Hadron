@@ -21,9 +21,7 @@ from pydantic import Field, PrivateAttr
 
 from distilagent.models.llms.openai import OpenAILLM
 
-
 _THINK_RE = re.compile(r"<think>(.*?)</think>\s*", re.DOTALL | re.IGNORECASE)
-
 
 def _split_think(text: str) -> Tuple[str, str]:
     """Return (reasoning, stripped_text) from a content string that may
@@ -42,7 +40,6 @@ def _split_think(text: str) -> Tuple[str, str]:
     stripped = _THINK_RE.sub(_collect, text).strip()
     reasoning = "\n\n".join(thoughts)
     return reasoning, stripped
-
 
 class ReasoningOpenRouterLLM(OpenAILLM):
     """OpenAILLM that also captures OpenRouter `reasoning` output.
@@ -174,7 +171,6 @@ class ReasoningOpenRouterLLM(OpenAILLM):
                 "output_tokens": output_tokens,
             },
         }
-
 
 class LocalInlineThinkLLM(OpenAILLM):
     """OpenAI-compatible client for local servers that emit `<think>…</think>`

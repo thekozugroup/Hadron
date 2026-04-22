@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@ from typing import List
 import pytest
 
 from distilagent.steps.generators.data_sampler import DataSampler
-
 
 @pytest.mark.parametrize(
     "samples, size, batch_size, expected",

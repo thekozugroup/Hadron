@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,14 +22,12 @@ from distilagent.models.llms.llamacpp import LlamaCppLLM
 
 from .utils import DummyUserDetail
 
-
 def download_tinyllama() -> None:
     if not os.path.exists("tinyllama.gguf"):
         urllib.request.urlretrieve(
             "https://huggingface.co/TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF/resolve/main/tinyllama-1.1b-chat-v1.0.Q2_K.gguf",
             "tinyllama.gguf",
         )
-
 
 @pytest.fixture(scope="module")
 def llm() -> Generator[LlamaCppLLM, None, None]:
@@ -39,7 +37,6 @@ def llm() -> Generator[LlamaCppLLM, None, None]:
     llm.load()
 
     yield llm
-
 
 class TestLlamaCppLLM:
     def test_no_tokenizer_magpie_raise_value_error(self) -> None:

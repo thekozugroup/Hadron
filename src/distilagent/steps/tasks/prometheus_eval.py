@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,12 +26,11 @@ from jinja2 import Template
 from pydantic import Field, PrivateAttr, model_validator
 from typing_extensions import Self
 
-from distilagent.errors import DistilabelUserError
+from distilagent.errors import DistilAgentUserError
 from distilagent.steps.tasks.base import Task
 
 if TYPE_CHECKING:
     from distilagent.typing import ChatType
-
 
 _DEFAULT_RUBRICS = {
     "helpfulness": """[Does the model provide relevant and useful responses to the user's needs or questions?]
@@ -70,7 +69,6 @@ Score 4: The model frequently exhibits strong reasoning skills, effectively addr
 Score 5: The model consistently demonstrates advanced reasoning abilities, providing logically sound, coherent, and sophisticated responses to complex queries.
 """.strip(),
 }
-
 
 class PrometheusEval(Task):
     """Critique and rank the quality of generations from an `LLM` using Prometheus 2.0.
@@ -315,7 +313,7 @@ class PrometheusEval(Task):
     @model_validator(mode="after")
     def validate_rubric_and_rubrics(self) -> Self:
         if not isinstance(self.rubrics, dict) or len(self.rubrics) < 1:
-            raise DistilabelUserError(
+            raise DistilAgentUserError(
                 "Provided `rubrics` must be a Python dictionary with string keys and string values.",
                 page="components-gallery/tasks/prometheuseval/",
             )
@@ -326,7 +324,7 @@ class PrometheusEval(Task):
             return bool(re.match(pattern, rubric, re.MULTILINE))
 
         if not all(rubric_matches_pattern(value) for value in self.rubrics.values()):
-            raise DistilabelUserError(
+            raise DistilAgentUserError(
                 "Provided rubrics should match the format of the default rubrics, which"
                 " is as follows: `[<scoring criteria>]\nScore 1: <description>\nScore 2: <description>\n"
                 "Score 3: <description>\nScore 4: <description>\nScore 5: <description>`; replacing"
@@ -336,7 +334,7 @@ class PrometheusEval(Task):
             )
 
         if self.rubric not in self.rubrics:
-            raise DistilabelUserError(
+            raise DistilAgentUserError(
                 f"Provided rubric '{self.rubric}' is not among the available rubrics: {', '.join(self.rubrics.keys())}.",
                 page="components-gallery/tasks/prometheuseval/",
             )
@@ -391,7 +389,7 @@ class PrometheusEval(Task):
 
         if self.mode == "absolute":
             if not isinstance(input["generation"], str):
-                raise DistilabelUserError(
+                raise DistilAgentUserError(
                     f"Provided `generation` is of type {type(input['generation'])} but a string"
                     " should be provided instead.",
                     page="components-gallery/tasks/prometheuseval/",
@@ -411,7 +409,7 @@ class PrometheusEval(Task):
                 )
                 or len(input["generations"]) != 2
             ):
-                raise DistilabelUserError(
+                raise DistilAgentUserError(
                     f"Provided `generations` is of type {type(input['generations'])} but a list of strings with length 2 should be provided instead.",
                     page="components-gallery/tasks/prometheuseval/",
                 )

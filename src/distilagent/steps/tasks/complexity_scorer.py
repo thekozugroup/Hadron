@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,9 +32,7 @@ from distilagent.steps.tasks.base import Task
 if TYPE_CHECKING:
     from distilagent.typing import ChatType
 
-
 _PARSE_SCORE_LINE_REGEX = re.compile(r"\[\d+\] score: (\d+)", re.IGNORECASE)
-
 
 class ComplexityScorer(Task):
     """Score instructions based on their complexity using an `LLM`.
@@ -84,7 +82,7 @@ class ComplexityScorer(Task):
             )
         )
         # result
-        # [{'instructions': ['plain instruction', 'highly complex instruction'], 'model_name': 'test', 'scores': [1, 5], 'distilabel_metadata': {'raw_output_complexity_scorer_0': 'output'}}]
+        # [{'instructions': ['plain instruction', 'highly complex instruction'], 'model_name': 'test', 'scores': [1, 5], 'distilagent_metadata': {'raw_output_complexity_scorer_0': 'output'}}]
         ```
 
         Generate structured output with default schema:
@@ -109,7 +107,7 @@ class ComplexityScorer(Task):
             )
         )
         # result
-        # [{'instructions': ['plain instruction', 'highly complex instruction'], 'model_name': 'test', 'scores': [1, 2], 'distilabel_metadata': {'raw_output_complexity_scorer_0': '{ \\n  "scores": [\\n    1, \\n    2\\n  ]\\n}'}}]
+        # [{'instructions': ['plain instruction', 'highly complex instruction'], 'model_name': 'test', 'scores': [1, 2], 'distilagent_metadata': {'raw_output_complexity_scorer_0': '{ \\n  "scores": [\\n    1, \\n    2\\n  ]\\n}'}}]
         ```
 
     Citations:

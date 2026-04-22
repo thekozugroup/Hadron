@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,37 +12,35 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from distilagent.constants import DISTILABEL_METADATA_KEY
-from distilagent.steps.columns.utils import merge_distilabel_metadata
+from distilagent.constants import DISTILAGENT_METADATA_KEY
+from distilagent.steps.columns.utils import merge_distilagent_metadata
 
-
-def test_merge_distilabel_metadata() -> None:
+def test_merge_distilagent_metadata() -> None:
     rows = [
-        {DISTILABEL_METADATA_KEY: {"a": 1, "b": 1}},
-        {DISTILABEL_METADATA_KEY: {"a": 2, "b": 2}},
+        {DISTILAGENT_METADATA_KEY: {"a": 1, "b": 1}},
+        {DISTILAGENT_METADATA_KEY: {"a": 2, "b": 2}},
     ]
-    result = merge_distilabel_metadata(*rows)
+    result = merge_distilagent_metadata(*rows)
     assert result == {"a": [1, 2], "b": [1, 2]}
 
-
-def test_merge_distilabel_metadata_list() -> None:
+def test_merge_distilagent_metadata_list() -> None:
     rows = [
         {
-            DISTILABEL_METADATA_KEY: [
+            DISTILAGENT_METADATA_KEY: [
                 {"a": 1.0, "b": 1.0},
                 {"a": 1.1, "b": 1.1},
                 {"a": 1.2, "b": 1.2},
             ]
         },
         {
-            DISTILABEL_METADATA_KEY: [
+            DISTILAGENT_METADATA_KEY: [
                 {"a": 2.0, "b": 2.0},
                 {"a": 2.1, "b": 2.1},
                 {"a": 2.2, "b": 2.2},
             ]
         },
     ]
-    result = merge_distilabel_metadata(*rows)
+    result = merge_distilagent_metadata(*rows)
     assert result == [
         {"a": 1.0, "b": 1.0},
         {"a": 1.1, "b": 1.1},

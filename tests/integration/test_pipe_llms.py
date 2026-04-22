@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,6 @@ from distilagent.steps.tasks.text_generation import TextGeneration
 if TYPE_CHECKING:
     from distilagent.typing import StepOutput
 
-
 class RenameColumns(Step):
     rename_mappings: RuntimeParameter[Dict[str, str]] = None
 
@@ -47,7 +46,6 @@ class RenameColumns(Step):
                     {self.rename_mappings.get(k, k): v for k, v in item.items()}  # type: ignore
                 )
             yield outputs
-
 
 def test_pipeline_with_llms_serde() -> None:
     with Pipeline(name="unit-test-pipeline") as pipeline:

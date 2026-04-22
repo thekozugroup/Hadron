@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,6 @@ from distilagent.steps import GeneratorStep, StepInput, step
 if TYPE_CHECKING:
     from distilagent.steps import GeneratorStepOutput, StepOutput
 
-
 class NumpyBigArrayGenerator(GeneratorStep):
     num_batches: int
 
@@ -37,11 +36,9 @@ class NumpyBigArrayGenerator(GeneratorStep):
                 i == self.num_batches - 1,
             )  # type: ignore
 
-
 @step(step_type="global")
 def ReceiveArrays(inputs: StepInput) -> "StepOutput":
     yield inputs
-
 
 def test_passing_data_through_fs_only_global_steps() -> None:
     with Pipeline(name="dummy") as pipeline:
@@ -54,7 +51,6 @@ def test_passing_data_through_fs_only_global_steps() -> None:
     distiset = pipeline.run(use_fs_to_pass_data=False, use_cache=False)
 
     assert len(distiset["default"]["train"]) == 500
-
 
 def test_passing_data_through_fs() -> None:
     with Pipeline(name="dummy") as pipeline:

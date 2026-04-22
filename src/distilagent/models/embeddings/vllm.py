@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,6 @@ from distilagent.models.mixins.cuda_device_placement import CudaDevicePlacementM
 
 if TYPE_CHECKING:
     from vllm import LLM as _vLLM
-
 
 class vLLMEmbeddings(Embeddings, CudaDevicePlacementMixin):
     """`vllm` library implementation for embedding generation.
@@ -55,7 +54,7 @@ class vLLMEmbeddings(Embeddings, CudaDevicePlacementMixin):
 
         embeddings.load()
 
-        results = embeddings.encode(inputs=["distilagent is awesome!", "and Argilla!"])
+        results = embeddings.encode(inputs=["distilagent is awesome!", "and !"])
         # [
         #   [-0.05447685346007347, -0.01623094454407692, ...],
         #   [4.4889533455716446e-05, 0.044016145169734955, ...],

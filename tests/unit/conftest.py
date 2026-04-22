@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,7 +28,6 @@ from distilagent.steps.tasks.base import Task
 if TYPE_CHECKING:
     from distilagent.typing import ChatType, FormattedInput, GenerateOutput
 
-
 # Defined here too, so that the serde still works
 class DummyAsyncLLM(AsyncLLM):
     structured_output: Any = None
@@ -53,7 +52,6 @@ class DummyAsyncLLM(AsyncLLM):
             },
         }
 
-
 class DummyLLM(LLM):
     structured_output: Any = None
 
@@ -77,7 +75,6 @@ class DummyLLM(LLM):
             }
         ] * len(inputs)
 
-
 class DummyMagpieLLM(LLM, MagpieChatTemplateMixin):
     def load(self) -> None:
         pass
@@ -99,7 +96,6 @@ class DummyMagpieLLM(LLM, MagpieChatTemplateMixin):
             }
             for _ in range(len(inputs))
         ]
-
 
 class DummyAsyncImageGenerationModel(AsyncImageGenerationModel):
     def load(self) -> None:
@@ -123,7 +119,6 @@ class DummyAsyncImageGenerationModel(AsyncImageGenerationModel):
         img_str = image_to_str(random_image)
         return [{"images": [img_str]} for _ in range(num_generations)]
 
-
 class DummyTask(Task):
     @property
     def inputs(self) -> List[str]:
@@ -144,15 +139,12 @@ class DummyTask(Task):
     ) -> Dict[str, Any]:
         return {"output": output, "info_from_input": input["additional_info"]}  # type: ignore
 
-
 class DummyTaskOfflineBatchGeneration(DummyTask):
     _can_be_used_with_offline_batch_generation = True
-
 
 @pytest.fixture
 def dummy_llm() -> AsyncLLM:
     return DummyAsyncLLM()
-
 
 @pytest.fixture(scope="session")
 def local_llamacpp_model_path(tmp_path_factory):

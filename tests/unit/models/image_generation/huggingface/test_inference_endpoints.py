@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 
 from unittest.mock import AsyncMock, MagicMock, patch
 
@@ -29,7 +28,6 @@ return_value.get_model_status.return_value = MagicMock(
     state="Loaded", framework="text-generation-inference"
 )
 return_value._resolve_url.return_value = "http://localhost:8000"
-
 
 @patch("huggingface_hub.AsyncInferenceClient", return_value=return_value)
 @patch("huggingface_hub.InferenceClient", return_value=return_value)

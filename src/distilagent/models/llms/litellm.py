@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -31,7 +31,6 @@ if TYPE_CHECKING:
     from litellm import Choices
     from litellm.types.utils import ModelResponse
     from pydantic import BaseModel
-
 
 class LiteLLM(AsyncLLM):
     """LiteLLM implementation running the async API client.

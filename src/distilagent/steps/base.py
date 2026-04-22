@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ from typing import (
 from pydantic import BaseModel, ConfigDict, Field, PositiveInt, PrivateAttr
 from typing_extensions import Annotated, Self
 
-from distilagent.errors import DistilabelTypeError, DistilabelUserError
+from distilagent.errors import DistilAgentTypeError, DistilAgentUserError
 from distilagent.mixins.requirements import RequirementsMixin
 from distilagent.mixins.runtime_parameters import (
     RuntimeParameter,
@@ -57,11 +57,9 @@ if TYPE_CHECKING:
         UpstreamConnectableSteps,
     )
 
-
 DEFAULT_INPUT_BATCH_SIZE = 50
 
-
-_STEP_INPUT_ANNOTATION = "distilabel_step_input"
+_STEP_INPUT_ANNOTATION = "distilagent_step_input"
 StepInput = Annotated[List[Dict[str, Any]], _STEP_INPUT_ANNOTATION]
 """StepInput is just an `Annotated` alias of the typing `List[Dict[str, Any]]` with
 extra metadata that allows `distilagent` to perform validations over the `process` step
@@ -69,7 +67,6 @@ method defined in each `Step`"""
 
 # Pattern to convert PascalCase to snake_case
 PATTERN_PASCAL_NAME = re.compile(r"(?<!^)(?=[A-Z])")
-
 
 def _infer_step_name(
     step_cls_name: str, pipeline: Optional["BasePipeline"] = None
@@ -104,7 +101,6 @@ def _infer_step_name(
             name = f"{base_name}_{idx + 1}"
     return name
 
-
 class StepResources(RuntimeParametersMixin, BaseModel):
     """A class to define the resources assigned to a `_Step`.
 
@@ -134,7 +130,6 @@ class StepResources(RuntimeParametersMixin, BaseModel):
         description="A dictionary containing names of custom resources and the"
         " number of those resources required for each step replica.",
     )
-
 
 class _Step(
     RuntimeParametersMixin,
@@ -451,7 +446,7 @@ class _Step(
         for parameter in self.process_parameters:
             if is_parameter_annotated_with(parameter, _STEP_INPUT_ANNOTATION):
                 if step_input_parameter is not None:
-                    raise DistilabelTypeError(
+                    raise DistilAgentTypeError(
                         f"Step '{self.name}' should have only one parameter with type"
                         " hint `StepInput`.",
                         page="sections/how_to_guides/basic/step/#defining-custom-steps",
@@ -471,7 +466,7 @@ class _Step(
 
         for input in self.input_mappings:
             if input not in self.inputs:
-                raise DistilabelUserError(
+                raise DistilAgentUserError(
                     f"The input column '{input}' doesn't exist in the inputs of the"
                     f" step '{self.name}'. Inputs of the step are: {self.inputs}."
                     " Please, review the `inputs_mappings` argument of the step.",
@@ -490,7 +485,7 @@ class _Step(
 
         for output in self.output_mappings:
             if output not in self.outputs:
-                raise DistilabelUserError(
+                raise DistilAgentUserError(
                     f"The output column '{output}' doesn't exist in the outputs of the"
                     f" step '{self.name}'. Outputs of the step are: {self.outputs}."
                     " Please, review the `outputs_mappings` argument of the step.",
@@ -611,7 +606,6 @@ class _Step(
         dump = super()._model_dump(obj, **kwargs)
         dump["runtime_parameters_info"] = self.get_runtime_parameters_info()
         return dump
-
 
 class Step(_Step, ABC):
     """Base class for the steps that can be included in a `Pipeline`.
@@ -750,7 +744,6 @@ class Step(_Step, ABC):
 
         return result
 
-
 class GeneratorStep(_Step, ABC):
     """A special kind of `Step` that is able to generate data i.e. it doesn't receive
     any input from the previous steps.
@@ -812,7 +805,6 @@ class GeneratorStep(_Step, ABC):
                 ],
                 last_batch,
             )
-
 
 class GlobalStep(Step, ABC):
     """A special kind of `Step` which it's `process` method receives all the data processed

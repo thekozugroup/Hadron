@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,6 @@ from distilagent.steps.tasks.apigen.execution_checker import APIGenExecutionChec
 
 SAMPLE_LIB = Path(__file__).parent / "_sample_module.py"
 SAMPLE_LIB_FOLDER = Path(__file__).parent / "_sample_lib"
-
 
 class TestAPIGenExecutionChecker:
     @pytest.mark.parametrize("lib", (SAMPLE_LIB, SAMPLE_LIB_FOLDER))

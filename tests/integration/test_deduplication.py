@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
 
 from distilagent.pipeline import Pipeline
 from distilagent.steps import LoadDataFromDicts, MinHashDedup
-
 
 def test_minhash_deduplication() -> None:
     with Pipeline() as pipeline:
@@ -44,7 +43,6 @@ def test_minhash_deduplication() -> None:
     ds = distiset["default"]["train"]
     ds_dedup = ds.filter(lambda x: x["keep_row_after_minhash_filtering"])
     assert len(ds_dedup) == 4
-
 
 if __name__ == "__main__":
     test_minhash_deduplication()

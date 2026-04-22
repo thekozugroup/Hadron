@@ -37,7 +37,6 @@ JUDGE_SYSTEM = (
     "WINNER: TIE."
 )
 
-
 def user_msg(instruction: str, t1: str, t2: str) -> str:
     return (
         f"INSTRUCTION:\n{instruction}\n\n"
@@ -45,7 +44,6 @@ def user_msg(instruction: str, t1: str, t2: str) -> str:
         f"--- X2 ---\n{t2}\n\n"
         "Which is better? Reply only with 'WINNER: X1' or 'WINNER: X2' or 'WINNER: TIE'."
     )
-
 
 async def judge_once(client: AsyncOpenAI, seed: int) -> tuple[str, str, dict]:
     rng = random.Random(seed)
@@ -88,7 +86,6 @@ async def judge_once(client: AsyncOpenAI, seed: int) -> tuple[str, str, dict]:
         real_winner = "UNPARSED"
     return real_winner, raw, mapping
 
-
 async def main():
     client = AsyncOpenAI(api_key=API_KEY, base_url="https://openrouter.ai/api/v1")
     n = int(os.environ.get("JUDGE_RUNS", "5"))
@@ -111,7 +108,6 @@ async def main():
     print(f"\njudge model: {JUDGE_MODEL}")
     with open(os.path.join(os.path.dirname(__file__), "judge_results.json"), "w") as f:
         json.dump({"tally": dict(tally), "details": details, "judge_model": JUDGE_MODEL}, f, indent=2)
-
 
 if __name__ == "__main__":
     asyncio.run(main())

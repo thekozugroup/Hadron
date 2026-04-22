@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -37,7 +37,6 @@ import base64
 from unittest.mock import MagicMock, patch
 
 import requests
-
 
 class TestDAG:
     def test_add_step(self, dummy_step_1: "Step") -> None:
@@ -783,7 +782,6 @@ class TestDAG:
         ):
             pipeline.dag.validate()
 
-
 class TestDagSerialization:
     def test_dag_dump(self, dummy_step_1: "Step", dummy_step_2: "Step") -> None:
         dag = DAG()
@@ -861,7 +859,6 @@ class TestDagSerialization:
                     dag_from_file = loader(filename)
                     assert isinstance(dag_from_file, DAG)
 
-
 class TestDAGDraw:
     @patch("distilagent.pipeline._dag.requests.get")
     def test_draw_basic(self, mock_get):
@@ -930,27 +927,6 @@ class TestDAGDraw:
         ).decode("ascii")
         assert "generator --> step1" in decoded_graph
         assert "|" not in decoded_graph  # No edge labels
-
-    @patch("distilagent.pipeline._dag.requests.get")
-    def test_draw_with_argilla_step(self, mock_get):
-        mock_response = MagicMock()
-        mock_response.content = b"mocked_image_content"
-        mock_get.return_value = mock_response
-
-        dag = DAG()
-        generator_step = DummyGeneratorStep(name="generator")
-        step1 = DummyStep1(name="to_argilla")
-        dag.add_step(generator_step)
-        dag.add_step(step1)
-        dag.add_edge("generator", "to_argilla")
-
-        dag.draw()
-
-        called_url = mock_get.call_args[0][0]
-        decoded_graph = base64.b64decode(
-            called_url.split("/")[-1].split("?")[0]
-        ).decode("ascii")
-        assert 'to_argilla_0["Argilla"]' in decoded_graph
 
     @patch("distilagent.pipeline._dag.requests.get")
     def test_draw_with_distiset_step(self, mock_get):

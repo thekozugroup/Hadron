@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ from typing_extensions import override
 
 from distilagent.steps.tasks.base import GeneratorTask, Task
 from distilagent.typing import ChatType, GeneratorStepOutput
-
 
 # BASE CLASSES
 class _JSONFormatter(ABC):
@@ -104,7 +103,6 @@ class _JSONFormatter(ABC):
 
         return {key: output.get(key, None) for key in self.keys}
 
-
 class _EmbeddingDataGeneration(_JSONFormatter, Task, ABC):
     """Base class for the subtasks related to embedding data generation as presented in the
     paper "Improving Text Embeddings with Large Language Models", including a pre-defined `load`
@@ -148,7 +146,6 @@ class _EmbeddingDataGeneration(_JSONFormatter, Task, ABC):
         case, it consists of the `task`; ideally produced in a previous task which should be
         preferrably `EmbeddingTaskGenerator` (as per the original implementation)."""
         return ["task"]
-
 
 class _EmbeddingDataGenerator(_JSONFormatter, GeneratorTask, ABC):
     """Base class for the subtasks related to embedding data generation as presented in the
@@ -229,7 +226,6 @@ class _EmbeddingDataGenerator(_JSONFormatter, GeneratorTask, ABC):
     @override
     def _sample_input(self) -> ChatType:
         return self.prompt
-
 
 # IMPLEMENTED TASKS
 class EmbeddingTaskGenerator(GeneratorTask):
@@ -404,7 +400,6 @@ class EmbeddingTaskGenerator(GeneratorTask):
     def _sample_input(self) -> ChatType:
         return self.prompt
 
-
 class GenerateTextRetrievalData(_EmbeddingDataGeneration):
     """Generate text retrieval data with an `LLM` to later on train an embedding model.
 
@@ -536,7 +531,6 @@ class GenerateTextRetrievalData(_EmbeddingDataGeneration):
             "hard_negative_document",
         ]
 
-
 class GenerateShortTextMatchingData(_EmbeddingDataGeneration):
     """Generate short text matching data with an `LLM` to later on train an embedding model.
 
@@ -626,7 +620,6 @@ class GenerateShortTextMatchingData(_EmbeddingDataGeneration):
         """Contains the `keys` that will be parsed from the `LLM` output into a Python dict."""
         return ["input", "positive_document"]
 
-
 class GenerateLongTextMatchingData(_EmbeddingDataGeneration):
     """Generate long text matching data with an `LLM` to later on train an embedding model.
 
@@ -715,7 +708,6 @@ class GenerateLongTextMatchingData(_EmbeddingDataGeneration):
     def keys(self) -> List[str]:
         """Contains the `keys` that will be parsed from the `LLM` output into a Python dict."""
         return ["input", "positive_document"]
-
 
 class GenerateTextClassificationData(_EmbeddingDataGeneration):
     """Generate text classification data with an `LLM` to later on train an embedding model.
@@ -823,7 +815,6 @@ class GenerateTextClassificationData(_EmbeddingDataGeneration):
         """Contains the `keys` that will be parsed from the `LLM` output into a Python dict."""
         return ["input_text", "label", "misleading_label"]
 
-
 class MonolingualTripletGenerator(_EmbeddingDataGenerator):
     """Generate monolingual triplets with an `LLM` to later on train an embedding model.
 
@@ -911,7 +902,6 @@ class MonolingualTripletGenerator(_EmbeddingDataGenerator):
     def keys(self) -> List[str]:
         """Contains the `keys` that will be parsed from the `LLM` output into a Python dict."""
         return ["S1", "S2", "S3"]
-
 
 class BitextRetrievalGenerator(_EmbeddingDataGenerator):
     """Generate bitext retrieval data with an `LLM` to later on train an embedding model.

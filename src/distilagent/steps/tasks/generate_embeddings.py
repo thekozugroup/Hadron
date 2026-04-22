@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,14 +14,13 @@
 
 from typing import TYPE_CHECKING, Any, Dict
 
-from distilagent.errors import DistilabelUserError
+from distilagent.errors import DistilAgentUserError
 from distilagent.models.llms.base import LLM
 from distilagent.steps.base import Step, StepInput
 from distilagent.utils.chat import is_openai_format
 
 if TYPE_CHECKING:
     from distilagent.typing import ChatType, StepColumns, StepOutput
-
 
 class GenerateEmbeddings(Step):
     """Generate embeddings using the last hidden state of an `LLM`.
@@ -128,7 +127,7 @@ class GenerateEmbeddings(Step):
         if is_openai_format(text):
             return text
 
-        raise DistilabelUserError(
+        raise DistilAgentUserError(
             f"Couldn't format input for step {self.name}. The `text` input column has to"
             " be a string or a list of dictionaries in OpenAI chat-like format.",
             page="components-gallery/tasks/generateembeddings/",

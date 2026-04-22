@@ -50,7 +50,6 @@ BAD_START = re.compile(
     re.I,
 )
 
-
 def score(reasoning: str) -> dict:
     d = {"chars": len(reasoning), "tokens_est": len(reasoning) // 4}
     for name, rx in VIOLATIONS.items():
@@ -58,7 +57,6 @@ def score(reasoning: str) -> dict:
     d["bad_start"] = bool(BAD_START.match(reasoning or ""))
     d["total_violations"] = sum(v for k, v in d.items() if k not in ("chars", "tokens_est", "bad_start"))
     return d
-
 
 async def one_call(llm, user_text: str) -> tuple[str, str, float]:
     messages = [
@@ -73,7 +71,6 @@ async def one_call(llm, user_text: str) -> tuple[str, str, float]:
         return "", out["generations"][0], dt
     _role, reasoning, text = buf[-1]
     return reasoning, text, dt
-
 
 async def main():
     llm = ReasoningOpenRouterLLM(
@@ -125,7 +122,6 @@ async def main():
         if total.get(k, 0) > 0:
             print(f"    {k:15s} {total[k]}")
     print(f"  bad-start count: {total.get('bad_start', 0)} / {len(TEST_PROMPTS)}")
-
 
 if __name__ == "__main__":
     asyncio.run(main())

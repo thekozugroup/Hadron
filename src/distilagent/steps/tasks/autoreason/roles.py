@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -87,7 +87,6 @@ JUDGE_SYSTEM = (
     "only, exact format: RANKING: X? > X? > X?"
 )
 
-
 # ---------------------------------------------------------------------------
 # Jinja2 templates (user messages)
 # ---------------------------------------------------------------------------
@@ -144,7 +143,6 @@ _JUDGE_USER_TMPL = Template(
     keep_trailing_newline=False,
 )
 
-
 # ---------------------------------------------------------------------------
 # Render functions
 # ---------------------------------------------------------------------------
@@ -152,14 +150,12 @@ _JUDGE_USER_TMPL = Template(
 ChatMessage = Dict[str, str]
 ChatType = List[ChatMessage]
 
-
 def render_teacher_seed(instruction: str) -> ChatType:
     """Render the plain teacher/seed prompt."""
     return [
         {"role": "system", "content": TEACHER_SEED_SYSTEM},
         {"role": "user", "content": _TEACHER_SEED_USER_TMPL.render(instruction=instruction)},
     ]
-
 
 def render_critic(instruction: str, draft: str) -> ChatType:
     """Render the critic prompt."""
@@ -170,7 +166,6 @@ def render_critic(instruction: str, draft: str) -> ChatType:
             "content": _CRITIC_USER_TMPL.render(instruction=instruction, draft=draft),
         },
     ]
-
 
 def render_author_b(instruction: str, draft: str, critique: str) -> ChatType:
     """Render the adversarial author B prompt."""
@@ -184,7 +179,6 @@ def render_author_b(instruction: str, draft: str, critique: str) -> ChatType:
         },
     ]
 
-
 def render_synthesizer(instruction: str, draft: str, critique: str) -> ChatType:
     """Render the conservative synthesizer prompt."""
     return [
@@ -196,7 +190,6 @@ def render_synthesizer(instruction: str, draft: str, critique: str) -> ChatType:
             ),
         },
     ]
-
 
 def render_judge(
     instruction: str,
@@ -244,11 +237,9 @@ def render_judge(
     ]
     return messages, label_permutation
 
-
 # ---------------------------------------------------------------------------
 # Parsers
 # ---------------------------------------------------------------------------
-
 
 def parse_critique(raw: str) -> Tuple[str, bool]:
     """Parse a critic response.
@@ -261,9 +252,7 @@ def parse_critique(raw: str) -> Tuple[str, bool]:
     no_flaws = "no flaws" in text.lower()
     return text, no_flaws
 
-
 _VALID_DISPLAY_LABELS = {"X1", "X2", "X3"}
-
 
 def parse_judge_ranking(
     raw: str,

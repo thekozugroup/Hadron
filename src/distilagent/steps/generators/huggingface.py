@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -42,20 +42,18 @@ from pydantic import Field, PrivateAttr
 from upath import UPath
 
 from distilagent.distiset import Distiset
-from distilagent.errors import DistilabelUserError
+from distilagent.errors import DistilAgentUserError
 from distilagent.mixins.runtime_parameters import RuntimeParameter
 from distilagent.steps.base import GeneratorStep
 
 if TYPE_CHECKING:
     from distilagent.typing import GeneratorStepOutput
 
-
 T = TypeVar("T")
 
 # To avoid using repo_id in LoadDataFromFileSystem:
 # https://github.com/pydantic/pydantic/discussions/7076#discussioncomment-6699138
 ExcludedField = Annotated[T, Field(exclude=True)]
-
 
 class LoadDataFromHub(GeneratorStep):
     """Loads a dataset from the Hugging Face Hub.
@@ -258,7 +256,6 @@ class LoadDataFromHub(GeneratorStep):
                 return ds[self.config].info
             return ds.info
 
-
 class LoadDataFromFileSystem(LoadDataFromHub):
     """Loads a dataset from a file in your filesystem.
 
@@ -454,7 +451,6 @@ class LoadDataFromFileSystem(LoadDataFromHub):
 
         return self._dataset.column_names
 
-
 class LoadDataFromDisk(LoadDataFromHub):
     """Load a dataset that was previously saved to disk.
 
@@ -574,7 +570,7 @@ class LoadDataFromDisk(LoadDataFromHub):
                 storage_options=self.storage_options,
             )
             if self.config not in ds.keys():
-                raise DistilabelUserError(
+                raise DistilAgentUserError(
                     f"Configuration '{self.config}' not found in the Distiset, available ones"
                     f" are: {list(ds.keys())}. Please try changing the `config` parameter to one "
                     "of the available configurations.\n\n",

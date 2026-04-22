@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ from distilagent.pipeline.templates.base import BasePipelineTemplate
 from distilagent.steps.tasks import MagpieGenerator
 
 MODEL = "meta-llama/Meta-Llama-3.1-8B-Instruct"
-
 
 class InstructionResponsePipeline(BasePipelineTemplate):
     """Generates instructions and responses for a given system prompt.

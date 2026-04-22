@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,8 +16,7 @@ from pathlib import Path
 
 from huggingface_hub import DatasetCard
 
-TEMPLATE_DISTILABEL_DATASET_CARD_PATH = Path(__file__).parent / "distilagent_template.md"
-
+TEMPLATE_DISTILAGENT_DATASET_CARD_PATH = Path(__file__).parent / "distilagent_template.md"
 
 AVAILABLE_SIZE_CATEGORIES = {
     1_000: "n<1K",
@@ -32,15 +31,13 @@ AVAILABLE_SIZE_CATEGORIES = {
     1_000_000_000_000: "100B<n<1T",
 }
 
-
 def size_categories_parser(input_size: int) -> str:
     for size, category in AVAILABLE_SIZE_CATEGORIES.items():
         if input_size < size:
             return category
     return "n>1T"
 
+class DistilAgentDatasetCard(DatasetCard):
+    """A `DatasetCard` subclass that uses the DistilAgent template by default."""
 
-class DistilabelDatasetCard(DatasetCard):
-    """A `DatasetCard` subclass that uses the Distilabel template by default."""
-
-    default_template_path = TEMPLATE_DISTILABEL_DATASET_CARD_PATH
+    default_template_path = TEMPLATE_DISTILAGENT_DATASET_CARD_PATH

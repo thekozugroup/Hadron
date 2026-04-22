@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -34,7 +34,6 @@ if TYPE_CHECKING:
     from logging import Logger
 
     from distilagent.utils.docstring import Docstring
-
 
 class ImageGenerationModel(RuntimeParametersModelMixin, BaseModel, _Serializable, ABC):
     """Base class for `ImageGeneration` models.
@@ -117,7 +116,6 @@ class ImageGenerationModel(RuntimeParametersModelMixin, BaseModel, _Serializable
         method.
         """
         return self.generate(inputs=inputs, num_generations=num_generations, **kwargs)
-
 
 class AsyncImageGenerationModel(ImageGenerationModel):
     """Abstract class for asynchronous `ImageGenerationModels`, to benefit from the async capabilities

@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@ from pathlib import Path
 from typing import Final
 
 # Steps related constants
-DISTILABEL_METADATA_KEY: Final[str] = "distilabel_metadata"
+DISTILAGENT_METADATA_KEY: Final[str] = "distilagent_metadata"
 
 # Cache
 BASE_CACHE_DIR = Path.home() / ".cache" / "distilagent"
@@ -31,8 +31,8 @@ CONVERGENCE_STEP_ATTR_NAME: Final[str] = "convergence_step"
 LAST_BATCH_SENT_FLAG: Final[str] = "last_batch_sent"
 
 # Pipeline execution related constants
-PIPELINE_NAME_ENV_NAME = "DISTILABEL_PIPELINE_NAME"
-PIPELINE_CACHE_ID_ENV_NAME = "DISTILABEL_PIPELINE_CACHE_ID"
+PIPELINE_NAME_ENV_NAME = "DISTILAGENT_PIPELINE_NAME"
+PIPELINE_CACHE_ID_ENV_NAME = "DISTILAGENT_PIPELINE_CACHE_ID"
 SIGINT_HANDLER_CALLED_ENV_NAME = "sigint_handler_called"
 
 # Data paths constants
@@ -46,14 +46,13 @@ PIPELINE_CONFIG_FILENAME: Final[str] = "pipeline.yaml"
 PIPELINE_LOG_FILENAME: Final[str] = "pipeline.log"
 
 # Docs page for the custom errors
-DISTILABEL_DOCS_URL: Final[str] = "https://distilagent.argilla.io/latest/"
-
+DISTILAGENT_DOCS_URL: Final[str] = ""
 
 __all__ = [
     "BASE_CACHE_DIR",
     "CONVERGENCE_STEP_ATTR_NAME",
-    "DISTILABEL_DOCS_URL",
-    "DISTILABEL_METADATA_KEY",
+    "DISTILAGENT_DOCS_URL",
+    "DISTILAGENT_METADATA_KEY",
     "DISTISET_ARTIFACTS_FOLDER",
     "DISTISET_CONFIG_FOLDER",
     "INPUT_QUEUE_ATTR_NAME",

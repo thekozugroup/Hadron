@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@ import inspect
 from typing_extensions import Annotated
 
 from distilagent.utils.typing_ import is_parameter_annotated_with
-
 
 def test_is_parameter_annotated_with() -> None:
     def dummy_function(arg: Annotated[int, "unit-test"], arg2: int) -> None:

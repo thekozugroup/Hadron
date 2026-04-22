@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,11 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-from distilagent.constants import DISTILABEL_METADATA_KEY
+from distilagent.constants import DISTILAGENT_METADATA_KEY
 from distilagent.pipeline.local import Pipeline
 from distilagent.steps.columns.group import GroupColumns
-
 
 class TestGroupColumns:
     def test_init(self) -> None:
@@ -45,14 +43,14 @@ class TestGroupColumns:
         )
         output = next(
             group.process(
-                [{"a": 1, "b": 2, DISTILABEL_METADATA_KEY: {"model": "model-1"}}],
-                [{"a": 3, "b": 4, DISTILABEL_METADATA_KEY: {"model": "model-2"}}],
+                [{"a": 1, "b": 2, DISTILAGENT_METADATA_KEY: {"model": "model-1"}}],
+                [{"a": 3, "b": 4, DISTILAGENT_METADATA_KEY: {"model": "model-2"}}],
             )
         )
         assert output == [
             {
                 "grouped_a": [1, 3],
                 "grouped_b": [2, 4],
-                DISTILABEL_METADATA_KEY: {"model": ["model-1", "model-2"]},
+                DISTILAGENT_METADATA_KEY: {"model": ["model-1", "model-2"]},
             }
         ]

@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ from distilagent.models.llms.huggingface.transformers import TransformersLLM
 from distilagent.pipeline.local import Pipeline
 from distilagent.steps.tasks.generate_embeddings import GenerateEmbeddings
 
-
 @pytest.fixture(scope="module")
 def transformers_llm() -> Generator[TransformersLLM, None, None]:
     llm = TransformersLLM(
@@ -30,7 +29,6 @@ def transformers_llm() -> Generator[TransformersLLM, None, None]:
     llm.load()
 
     yield llm
-
 
 class TestGenerateEmbeddings:
     def test_process(self, transformers_llm: TransformersLLM) -> None:

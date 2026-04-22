@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
 
 from distilagent.steps import ExpandColumns
 from distilagent.steps.tasks.math_shepherd.utils import FormatPRM, parse_json_response
-
 
 class TestFormatPRM:
     def test_process(self) -> None:
@@ -47,7 +46,7 @@ class TestFormatPRM:
                                 "Step 3: Add the amount of blue and white fiber: 2 (blue) + 1 (white) = <<2+1=3>>3 bolts of fiber in total. The answer is: 3 +",
                             ],
                         ],
-                        "distilabel_metadata": {
+                        "distilagent_metadata": {
                             "statistics_completer_math_shepherd_completer_0": {
                                 "input_tokens": [793],
                                 "output_tokens": [361],
@@ -72,7 +71,7 @@ class TestFormatPRM:
                 ],
                 "input": "Janet’s ducks lay 16 eggs per day. She eats three for breakfast every morning and bakes muffins for her friends every day with four. She sells the remainder at the farmers' market daily for $2 per fresh duck egg. How much in dollars does she make every day at the farmers' market? Step 1: Determine the amount of blue fiber needed: 2 bolts of blue fiber are required. ки\nStep 2: Calculate the amount of white fiber needed: Since it's half that much, we can divide 2 by 2: 2 / 2 = <<2/2=1>>1 bolt of white fiber. ки\nStep 3: Add the amount of blue and white fiber: 2 (blue) + 1 (white) = <<2+1=3>>3 bolts of fiber in total. The answer is: 3 ки",
                 "label": "Janet’s ducks lay 16 eggs per day. She eats three for breakfast every morning and bakes muffins for her friends every day with four. She sells the remainder at the farmers' market daily for $2 per fresh duck egg. How much in dollars does she make every day at the farmers' market? Step 1: Determine the amount of blue fiber needed: 2 bolts of blue fiber are required. +\nStep 2: Calculate the amount of white fiber needed: Since it's half that much, we can divide 2 by 2: 2 / 2 = <<2/2=1>>1 bolt of white fiber. +\nStep 3: Add the amount of blue and white fiber: 2 (blue) + 1 (white) = <<2+1=3>>3 bolts of fiber in total. The answer is: 3 +",
-                "distilabel_metadata": {
+                "distilagent_metadata": {
                     "statistics_completer_math_shepherd_completer_0": {
                         "input_tokens": [264],
                         "output_tokens": [120],
@@ -88,7 +87,7 @@ class TestFormatPRM:
                 ],
                 "input": "Janet’s ducks lay 16 eggs per day. She eats three for breakfast every morning and bakes muffins for her friends every day with four. She sells the remainder at the farmers' market daily for $2 per fresh duck egg. How much in dollars does she make every day at the farmers' market? Step 1: Determine the amount of blue fiber needed: 2 bolts of blue fiber are required. ки\nStep 2: Calculate the amount of white fiber needed: Since it's half that much, we can multiply 2 by 0.5 (which is the same as dividing by 2): 2 * 0.5 = <<2*0.5=1>>1 bolt of white fiber. ки\nStep 3: Add the amount of blue and white fiber: 2 (blue) + 1 (white) = <<2+1=3>>3 bolts of fiber in total. The answer is: 3 ки",
                 "label": "Janet’s ducks lay 16 eggs per day. She eats three for breakfast every morning and bakes muffins for her friends every day with four. She sells the remainder at the farmers' market daily for $2 per fresh duck egg. How much in dollars does she make every day at the farmers' market? Step 1: Determine the amount of blue fiber needed: 2 bolts of blue fiber are required. +\nStep 2: Calculate the amount of white fiber needed: Since it's half that much, we can multiply 2 by 0.5 (which is the same as dividing by 2): 2 * 0.5 = <<2*0.5=1>>1 bolt of white fiber. +\nStep 3: Add the amount of blue and white fiber: 2 (blue) + 1 (white) = <<2+1=3>>3 bolts of fiber in total. The answer is: 3 +",
-                "distilabel_metadata": {
+                "distilagent_metadata": {
                     "statistics_completer_math_shepherd_completer_0": {
                         "input_tokens": [264],
                         "output_tokens": [120],
@@ -104,7 +103,7 @@ class TestFormatPRM:
                 ],
                 "input": "Janet’s ducks lay 16 eggs per day. She eats three for breakfast every morning and bakes muffins for her friends every day with four. She sells the remainder at the farmers' market daily for $2 per fresh duck egg. How much in dollars does she make every day at the farmers' market? Step 1: Determine the amount of blue fiber needed: 2 bolts of blue fiber are required. ки\nStep 2: Calculate the amount of white fiber needed: Since it's half that much, we can multiply 2 by 0.5 (which is the same as dividing by 2): 2 * 0.5 = <<2*0.5=1>>1 bolt of white fiber. ки\nStep 3: Add the amount of blue and white fiber: 2 (blue) + 1 (white) = <<2+1=3>>3 bolts of fiber in total. The answer is: 3 ки",
                 "label": "Janet’s ducks lay 16 eggs per day. She eats three for breakfast every morning and bakes muffins for her friends every day with four. She sells the remainder at the farmers' market daily for $2 per fresh duck egg. How much in dollars does she make every day at the farmers' market? Step 1: Determine the amount of blue fiber needed: 2 bolts of blue fiber are required. +\nStep 2: Calculate the amount of white fiber needed: Since it's half that much, we can multiply 2 by 0.5 (which is the same as dividing by 2): 2 * 0.5 = <<2*0.5=1>>1 bolt of white fiber. +\nStep 3: Add the amount of blue and white fiber: 2 (blue) + 1 (white) = <<2+1=3>>3 bolts of fiber in total. The answer is: 3 +",
-                "distilabel_metadata": {
+                "distilagent_metadata": {
                     "statistics_completer_math_shepherd_completer_0": {
                         "input_tokens": [264],
                         "output_tokens": [120],
@@ -141,7 +140,7 @@ class TestFormatPRM:
                                 "Step 3: Add the amount of blue and white fiber: 2 (blue) + 1 (white) = <<2+1=3>>3 bolts of fiber in total. The answer is: 3 +",
                             ],
                         ],
-                        "distilabel_metadata": {
+                        "distilagent_metadata": {
                             "statistics_completer_math_shepherd_completer_0": {
                                 "input_tokens": [793],
                                 "output_tokens": [361],
@@ -171,7 +170,7 @@ class TestFormatPRM:
                     "Step 3: Add the amount of blue and white fiber: 2 (blue) + 1 (white) = <<2+1=3>>3 bolts of fiber in total. The answer is: 3",
                 ],
                 "labels": [True, True, True],
-                "distilabel_metadata": {
+                "distilagent_metadata": {
                     "statistics_completer_math_shepherd_completer_0": {
                         "input_tokens": [264],
                         "output_tokens": [120],
@@ -192,7 +191,7 @@ class TestFormatPRM:
                     "Step 3: Add the amount of blue and white fiber: 2 (blue) + 1 (white) = <<2+1=3>>3 bolts of fiber in total. The answer is: 3",
                 ],
                 "labels": [True, True, True],
-                "distilabel_metadata": {
+                "distilagent_metadata": {
                     "statistics_completer_math_shepherd_completer_0": {
                         "input_tokens": [264],
                         "output_tokens": [120],
@@ -213,7 +212,7 @@ class TestFormatPRM:
                     "Step 3: Add the amount of blue and white fiber: 2 (blue) + 1 (white) = <<2+1=3>>3 bolts of fiber in total. The answer is: 3",
                 ],
                 "labels": [True, True, True],
-                "distilabel_metadata": {
+                "distilagent_metadata": {
                     "statistics_completer_math_shepherd_completer_0": {
                         "input_tokens": [264],
                         "output_tokens": [120],
@@ -221,7 +220,6 @@ class TestFormatPRM:
                 },
             },
         ]
-
 
 def test_parse_json_response():
     json_str = """{"solutions": [{"solution": "It\\'s 2 * 0.5 = 1 \\) bolt of white fiber"}]}"""

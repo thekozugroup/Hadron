@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,7 +32,6 @@ from distilagent.utils.huggingface import HF_TOKEN_ENV_VAR, get_hf_token
 if TYPE_CHECKING:
     from huggingface_hub import AsyncInferenceClient, InferenceClient
     from transformers import PreTrainedTokenizer
-
 
 class InferenceEndpointsBaseClient(BaseModel):
     model_id: Optional[str] = None

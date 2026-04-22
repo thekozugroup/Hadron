@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ from tests.unit.conftest import DummyAsyncLLM
 if TYPE_CHECKING:
     from distilagent.typing import FormattedInput, GenerateOutput
 
-
 class TextClassificationLLM(DummyAsyncLLM):
     n: int = 1
 
@@ -43,7 +42,6 @@ class TextClassificationLLM(DummyAsyncLLM):
                 "output_tokens": [12] * num_generations,
             },
         }
-
 
 class TestTextClassification:
     @pytest.mark.parametrize(
@@ -141,6 +139,6 @@ class TestTextClassification:
         assert result[0]["text"] == "SAMPLE_TEXT"
         assert result[0]["labels"] == json.loads(expected)["labels"]
         assert (
-            result[0]["distilabel_metadata"]["raw_output_text_classification_0"]
+            result[0]["distilagent_metadata"]["raw_output_text_classification_0"]
             == expected
         )

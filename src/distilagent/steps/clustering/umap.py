@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,7 +28,6 @@ if TYPE_CHECKING:
     from umap import UMAP as _UMAP
 
     from distilagent.typing import StepOutput
-
 
 class UMAP(GlobalStep):
     r"""UMAP is a general purpose manifold learning and dimension reduction algorithm.

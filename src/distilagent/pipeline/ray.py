@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@ from typing import TYPE_CHECKING, Any, Callable, Dict, List, Optional, Union
 
 from distilagent.constants import INPUT_QUEUE_ATTR_NAME, STEP_ATTR_NAME
 from distilagent.distiset import create_distiset
-from distilagent.errors import DistilabelUserError
+from distilagent.errors import DistilAgentUserError
 from distilagent.models.llms.vllm import vLLM
 from distilagent.pipeline.base import BasePipeline, set_pipeline_running_env_variables
 from distilagent.pipeline.step_wrapper import _StepWrapper
@@ -34,7 +34,6 @@ if TYPE_CHECKING:
     from distilagent.distiset import Distiset
     from distilagent.steps.base import _Step
     from distilagent.typing import InputDataset, LoadGroups
-
 
 class RayPipeline(BasePipeline):
     """Ray pipeline implementation allowing to run a pipeline in a Ray cluster."""
@@ -191,7 +190,7 @@ class RayPipeline(BasePipeline):
             if not hasattr(step, "llm"):
                 continue
             if step.llm.use_offline_batch_generation:  # type: ignore
-                raise DistilabelUserError(
+                raise DistilAgentUserError(
                     f"Step '{step_name}' uses an `LLM` with offline batch generation because"
                     "`use_offline_batch_generation=True`. `LLM`s using this method are not"
                     " supported in the Ray pipeline.",

@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,6 @@ from distilagent.pipeline.local import Pipeline
 from distilagent.steps.base import GeneratorStep, GlobalStep, Step
 
 from .utils import DummyGeneratorStep, DummyStep1, DummyStep2
-
 
 class TestBatchManagerStep:
     def test_add_batch(self) -> None:
@@ -1445,7 +1444,6 @@ class TestBatchManagerStep:
         assert batch_manager_step.input_batch_size is None
         assert batch_manager_step.seq_no == 0
         assert batch_manager_step.last_batch_received == []
-
 
 class TestBatchManager:
     def test_add_batch(self) -> None:

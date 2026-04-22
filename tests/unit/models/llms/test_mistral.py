@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,6 @@ try:
     from distilagent.models.llms.mistral import MistralLLM
 except ImportError:
     MistralLLM = None
-
 
 @pytest.mark.skipif(
     sys.version_info < (3, 9), reason="`mistralai` requires Python 3.9 or higher"

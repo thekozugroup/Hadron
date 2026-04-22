@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,7 +29,6 @@ from distilagent.utils.itertools import batched
 
 if TYPE_CHECKING:
     from distilagent.typing import StepOutput
-
 
 class TextClustering(TextClassification, GlobalTask):
     """Task that clusters a set of texts and generates summary labels for each cluster.
@@ -77,8 +76,6 @@ class TextClustering(TextClassification, GlobalTask):
         from distilagent.models import InferenceEndpointsLLM
         from distilagent.steps import UMAP, DBSCAN, TextClustering
         from distilagent.pipeline import Pipeline
-
-        ds_name = "argilla-warehouse/personahub-fineweb-edu-4-clustering-100k"
 
         with Pipeline(name="Text clustering dataset") as pipeline:
             batch_size = 500

@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ from distilagent.steps.generators.utils import make_generator_step
 
 data = [{"instruction": "Tell me a joke."}] * 10
 
-
 @pytest.mark.parametrize("dataset", (data, Dataset.from_list(data), pd.DataFrame(data)))
 def test_make_generator_step(
     dataset: Union[Dataset, pd.DataFrame, List[Dict[str, str]]],
@@ -41,7 +40,6 @@ def test_make_generator_step(
         assert isinstance(load_dataset.data, list)
 
     assert load_dataset.output_mappings == {"instruction": "other"}
-
 
 def test_make_generator_step_with_pipeline() -> None:
     pipeline = Pipeline()

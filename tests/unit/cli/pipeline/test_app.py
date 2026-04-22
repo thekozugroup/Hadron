@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ from distilagent.cli.app import app
 from tests.unit.cli.utils import TEST_PIPELINE_PATH
 
 runner = CliRunner()
-
 
 class TestPipelineRun:
     @mock.patch("distilagent.pipeline.local.Pipeline.run")
@@ -110,7 +109,6 @@ class TestPipelineRun:
         )
 
         assert result.exit_code == 1
-
 
 class TestPipelineInfo:
     def test_pipeline_info(self) -> None:

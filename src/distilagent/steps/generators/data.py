@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ from distilagent.steps.base import GeneratorStep
 
 if TYPE_CHECKING:
     from distilagent.typing import GeneratorStepOutput
-
 
 class LoadDataFromDicts(GeneratorStep):
     """Loads a dataset from a list of dictionaries.

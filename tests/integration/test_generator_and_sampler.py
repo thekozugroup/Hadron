@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ from distilagent.steps.tasks import TextGeneration
 if TYPE_CHECKING:
     from distilagent.typing import FormattedInput, GenerateOutput
 
-
 class DummyAsyncLLM(AsyncLLM):
     structured_output: Any = None
 
@@ -41,7 +40,6 @@ class DummyAsyncLLM(AsyncLLM):
             "generations": ["output" for _ in range(num_generations)],
             "statistics": {},
         }
-
 
 def get_pipeline():
     with Pipeline() as pipe:
@@ -61,7 +59,6 @@ def get_pipeline():
         [loader_1, sampler] >> combine >> text_generation
     return pipe
 
-
 def test_sampler():
     pipe = get_pipeline()
     distiset = pipe.run(use_cache=False)
@@ -70,7 +67,6 @@ def test_sampler():
     assert isinstance(row["sample"], list)
     assert len(row["sample"]) == 2
     assert isinstance(row["instruction"], str)
-
 
 if __name__ == "__main__":
     pipe = get_pipeline()

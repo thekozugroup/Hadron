@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,7 +27,6 @@ if TYPE_CHECKING:
 
 _AZURE_OPENAI_ENDPOINT_ENV_VAR_NAME = "AZURE_OPENAI_ENDPOINT"
 _AZURE_OPENAI_API_KEY_ENV_VAR_NAME = "AZURE_OPENAI_API_KEY"
-
 
 class AzureOpenAILLM(OpenAILLM):
     """Azure OpenAI LLM implementation running the async API client.

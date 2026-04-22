@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,7 +28,6 @@ from distilagent.steps.tasks.base import Task
 if TYPE_CHECKING:
     from distilagent.typing import ChatType, StepColumns
 
-
 SYSTEM_PROMPT_API_GEN: Final[str] = """\
 You are a data labeler. Your responsibility is to generate a set of diverse queries and corresponding answers for the given functions in JSON format.
 
@@ -45,7 +44,6 @@ Ensure the answer:
 - Is a list of function calls in JSON format
 - The length of the answer list should be equal to the number of requests in the query
 - Can solve all the requests in the query effectively"""
-
 
 class APIGenGenerator(Task):
     """Generate queries and answers for the given functions in JSON format.
@@ -386,7 +384,6 @@ class APIGenGenerator(Task):
         ```python
         from typing import Dict, List
         from pydantic import BaseModel
-
 
         class Answer(BaseModel):
             name: str

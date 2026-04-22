@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ import orjson
 from pydantic import NonNegativeInt, PositiveInt, validate_call
 
 from distilagent import envs
-from distilagent.exceptions import DistilabelOfflineBatchGenerationNotFinishedException
+from distilagent.exceptions import DistilAgentOfflineBatchGenerationNotFinishedException
 from distilagent.models.base_clients.openai import OpenAIBaseClient
 from distilagent.models.llms.base import AsyncLLM
 from distilagent.models.llms.utils import prepare_output
@@ -42,9 +42,7 @@ if TYPE_CHECKING:
         StructuredInput,
     )
 
-
 _OPENAI_BATCH_API_MAX_FILE_SIZE = 100 * 1024 * 1024  # 100MB
-
 
 class OpenAILLM(OpenAIBaseClient, AsyncLLM):
     """OpenAI LLM implementation running the async API client.
@@ -464,7 +462,7 @@ class OpenAILLM(OpenAIBaseClient, AsyncLLM):
             in `inputs`.
 
         Raises:
-            DistilabelOfflineBatchGenerationNotFinishedException: if the batch generation
+            DistilAgentOfflineBatchGenerationNotFinishedException: if the batch generation
                 is not finished yet.
             ValueError: if no job IDs were found to retrieve the results from.
         """
@@ -488,7 +486,7 @@ class OpenAILLM(OpenAIBaseClient, AsyncLLM):
                     "response_format": response_format,
                 },
             )
-            raise DistilabelOfflineBatchGenerationNotFinishedException(
+            raise DistilAgentOfflineBatchGenerationNotFinishedException(
                 jobs_ids=self.jobs_ids
             )
 
@@ -503,7 +501,7 @@ class OpenAILLM(OpenAIBaseClient, AsyncLLM):
 
         Raises:
             ValueError: if no job IDs were found to retrieve the results from.
-            DistilabelOfflineBatchGenerationNotFinishedException: if the batch generation
+            DistilAgentOfflineBatchGenerationNotFinishedException: if the batch generation
                 is not finished yet.
             RuntimeError: if the only batch job found failed.
         """
@@ -515,7 +513,7 @@ class OpenAILLM(OpenAIBaseClient, AsyncLLM):
             batch = self._get_openai_batch(batch_id)
 
             if batch.status in ("validating", "in_progress", "finalizing"):
-                raise DistilabelOfflineBatchGenerationNotFinishedException(
+                raise DistilAgentOfflineBatchGenerationNotFinishedException(
                     jobs_ids=self.jobs_ids
                 )
 
@@ -643,11 +641,11 @@ class OpenAILLM(OpenAIBaseClient, AsyncLLM):
 
         metadata = {"description": "distilagent"}
 
-        if distilabel_pipeline_name := envs.DISTILABEL_PIPELINE_NAME:
-            metadata["distilabel_pipeline_name"] = distilabel_pipeline_name
+        if distilagent_pipeline_name := envs.DISTILAGENT_PIPELINE_NAME:
+            metadata["distilagent_pipeline_name"] = distilagent_pipeline_name
 
-        if distilabel_pipeline_cache_id := envs.DISTILABEL_PIPELINE_CACHE_ID:
-            metadata["distilabel_pipeline_cache_id"] = distilabel_pipeline_cache_id
+        if distilagent_pipeline_cache_id := envs.DISTILAGENT_PIPELINE_CACHE_ID:
+            metadata["distilagent_pipeline_cache_id"] = distilagent_pipeline_cache_id
 
         batch = None
         try:
@@ -766,12 +764,12 @@ class OpenAILLM(OpenAIBaseClient, AsyncLLM):
 
     def _name_for_openai_files(self, file_no: int) -> str:
         if (
-            envs.DISTILABEL_PIPELINE_NAME is None
-            or envs.DISTILABEL_PIPELINE_CACHE_ID is None
+            envs.DISTILAGENT_PIPELINE_NAME is None
+            or envs.DISTILAGENT_PIPELINE_CACHE_ID is None
         ):
             return f"distilagent-pipeline-fileno-{file_no}.jsonl"
 
-        return f"distilagent-pipeline-{envs.DISTILABEL_PIPELINE_NAME}-{envs.DISTILABEL_PIPELINE_CACHE_ID}-fileno-{file_no}.jsonl"
+        return f"distilagent-pipeline-{envs.DISTILAGENT_PIPELINE_NAME}-{envs.DISTILAGENT_PIPELINE_CACHE_ID}-fileno-{file_no}.jsonl"
 
     @staticmethod
     def _get_llm_statistics(

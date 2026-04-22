@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,8 +27,8 @@ from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple, Union
 from pydantic import BaseModel, ConfigDict, Field, PrivateAttr
 
 from distilagent.constants import SIGINT_HANDLER_CALLED_ENV_NAME
-from distilagent.errors import DistilabelNotImplementedError, DistilabelUserError
-from distilagent.exceptions import DistilabelOfflineBatchGenerationNotFinishedException
+from distilagent.errors import DistilAgentNotImplementedError, DistilAgentUserError
+from distilagent.exceptions import DistilAgentOfflineBatchGenerationNotFinishedException
 from distilagent.mixins.runtime_parameters import (
     RuntimeParameter,
     RuntimeParametersModelMixin,
@@ -54,7 +54,6 @@ if in_notebook():
     import nest_asyncio
 
     nest_asyncio.apply()
-
 
 class LLM(RuntimeParametersModelMixin, BaseModel, _Serializable, ABC):
     """Base class for `LLM`s to be used in `distilagent` framework.
@@ -177,7 +176,7 @@ class LLM(RuntimeParametersModelMixin, BaseModel, _Serializable, ABC):
                     **kwargs,
                 )
 
-            # This will raise `DistilabelOfflineBatchGenerationNotFinishedException` right away
+            # This will raise `DistilAgentOfflineBatchGenerationNotFinishedException` right away
             # if the batch generation is not finished.
             return self.offline_batch_generate(
                 inputs=inputs,
@@ -211,7 +210,7 @@ class LLM(RuntimeParametersModelMixin, BaseModel, _Serializable, ABC):
                     num_generations=num_generations,
                     **kwargs,
                 )
-            except DistilabelOfflineBatchGenerationNotFinishedException as e:
+            except DistilAgentOfflineBatchGenerationNotFinishedException as e:
                 self._logger.info(
                     f"Waiting for the offline batch generation to finish: {e}. Sleeping"
                     f" for {self.offline_batch_generation_block_until_done} seconds before"
@@ -234,7 +233,7 @@ class LLM(RuntimeParametersModelMixin, BaseModel, _Serializable, ABC):
                     "Received a KeyboardInterrupt. Stopping polling for checking if the"
                     " offline batch generation is finished..."
                 )
-                raise DistilabelOfflineBatchGenerationNotFinishedException(
+                raise DistilAgentOfflineBatchGenerationNotFinishedException(
                     jobs_ids=self.jobs_ids  # type: ignore
                 ) from e
 
@@ -250,7 +249,7 @@ class LLM(RuntimeParametersModelMixin, BaseModel, _Serializable, ABC):
             A list containing the last hidden state for each sequence using a NumPy array
                 with shape [num_tokens, hidden_size].
         """
-        # TODO: update to use `DistilabelNotImplementedError`
+        # TODO: update to use `DistilAgentNotImplementedError`
         raise NotImplementedError(
             f"Method `get_last_hidden_states` is not implemented for `{self.__class__.__name__}`"
         )
@@ -269,7 +268,7 @@ class LLM(RuntimeParametersModelMixin, BaseModel, _Serializable, ABC):
         Returns:
             The structure to be used for the guided generation.
         """
-        # TODO: update to use `DistilabelNotImplementedError`
+        # TODO: update to use `DistilAgentNotImplementedError`
         raise NotImplementedError(
             f"Guided generation is not implemented for `{type(self).__name__}`"
         )
@@ -286,7 +285,7 @@ class LLM(RuntimeParametersModelMixin, BaseModel, _Serializable, ABC):
         This method should create jobs the first time is called and store the job ids, so
         the second and subsequent calls can retrieve the results of the batch generation.
         If subsequent calls are made before the batch generation is finished, then the method
-        should raise a `DistilabelOfflineBatchGenerationNotFinishedException`. This exception
+        should raise a `DistilAgentOfflineBatchGenerationNotFinishedException`. This exception
         will be handled automatically by the `Pipeline` which will store all the required
         information for recovering the pipeline execution when the batch generation is finished.
 
@@ -298,11 +297,10 @@ class LLM(RuntimeParametersModelMixin, BaseModel, _Serializable, ABC):
         Returns:
             A list containing the generations for each input.
         """
-        raise DistilabelNotImplementedError(
+        raise DistilAgentNotImplementedError(
             f"`offline_batch_generate` is not implemented for `{self.__class__.__name__}`",
             page="sections/how_to_guides/advanced/offline-batch-generation/",
         )
-
 
 class AsyncLLM(LLM):
     """Abstract class for asynchronous LLMs, so as to benefit from the async capabilities
@@ -455,7 +453,7 @@ class AsyncLLM(LLM):
 
         schema = structured_output.get("schema")
         if not schema:
-            raise DistilabelUserError(
+            raise DistilAgentUserError(
                 f"The `structured_output` argument must contain a schema: {structured_output}",
                 page="sections/how_to_guides/advanced/structured_generation/#instructor",
             )
@@ -510,7 +508,6 @@ class AsyncLLM(LLM):
             },
         )
         return arguments
-
 
 def merge_responses(
     responses: List["GenerateOutput"], n: int = 1

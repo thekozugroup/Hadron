@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,6 @@ from distilagent.models.mixins.cuda_device_placement import CudaDevicePlacementM
 
 if TYPE_CHECKING:
     from sglang import Engine
-
 
 class SGLangEmbeddings(Embeddings, CudaDevicePlacementMixin):
     """`sglang` library implementation for embedding generation.
@@ -53,7 +52,7 @@ class SGLangEmbeddings(Embeddings, CudaDevicePlacementMixin):
             from distilagent.models import SGLangEmbeddings
             embeddings = SGLangEmbeddings(model="intfloat/e5-mistral-7b-instruct")
             embeddings.load()
-            results = embeddings.encode(inputs=["distilagent is awesome!", "and Argilla!"])
+            results = embeddings.encode(inputs=["distilagent is awesome!", "and !"])
             print(results)
             # [
             #   [0.0203704833984375, -0.0060882568359375, ...],

@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@ import tblib
 
 from distilagent.constants import SIGINT_HANDLER_CALLED_ENV_NAME
 from distilagent.distiset import create_distiset
-from distilagent.exceptions import DistilabelOfflineBatchGenerationNotFinishedException
+from distilagent.exceptions import DistilAgentOfflineBatchGenerationNotFinishedException
 from distilagent.pipeline.base import BasePipeline, set_pipeline_running_env_variables
 from distilagent.pipeline.ray import RayPipeline
 from distilagent.pipeline.step_wrapper import _StepWrapper, _StepWrapperException
@@ -48,7 +48,6 @@ if TYPE_CHECKING:
     from distilagent.typing import InputDataset, LoadGroups
 
 _SUBPROCESS_EXCEPTION: Union[Exception, None] = None
-
 
 def _init_worker(
     log_queue: "Queue[Any]", pipeline_name: str, pipeline_cache_id: str
@@ -73,7 +72,6 @@ def _init_worker(
     set_pipeline_running_env_variables(pipeline_name, pipeline_cache_id)
     setup_logging(log_queue)
 
-
 # We create a custom `Pool` class so the created processes are not daemons, allowing
 # them to create child processes if necessary (for example when using `vLLM` with `tensor_parallel_size`)
 # https://stackoverflow.com/questions/6974695/python-process-pool-non-daemonic
@@ -86,10 +84,8 @@ class _NoDaemonProcess(mp.Process):
     def daemon(self, value: bool) -> None:  # type: ignore
         pass
 
-
 class _NoDaemonContext(type(mp.get_context())):
     Process = _NoDaemonProcess
-
 
 class _NoDaemonPool(Pool):
     def __init__(
@@ -106,7 +102,6 @@ class _NoDaemonPool(Pool):
             maxtasksperchild=maxtasksperchild,
             context=_NoDaemonContext(),  # type: ignore
         )
-
 
 class Pipeline(BasePipeline):
     """Local pipeline implementation using `multiprocessing`."""
@@ -338,7 +333,7 @@ class Pipeline(BasePipeline):
 
         # Handle tasks using an `LLM` using offline batch generation
         if isinstance(
-            e.subprocess_exception, DistilabelOfflineBatchGenerationNotFinishedException
+            e.subprocess_exception, DistilAgentOfflineBatchGenerationNotFinishedException
         ):
             self._logger.info(
                 f"⏹️ '{e.step.name}' task stopped pipeline execution: LLM offline batch"

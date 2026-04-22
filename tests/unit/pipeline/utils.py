@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ from distilagent.pipeline.batch import _Batch
 from distilagent.steps.base import GeneratorStep, GlobalStep, Step, StepInput
 from distilagent.typing import GeneratorStepOutput, StepOutput
 
-
 class DummyGeneratorStep(GeneratorStep):
     def process(self, offset: int = 0) -> GeneratorStepOutput:  # type: ignore
         yield [{"instruction": "Generate an email..."}], False
@@ -26,7 +25,6 @@ class DummyGeneratorStep(GeneratorStep):
     @property
     def outputs(self) -> List[str]:
         return ["instruction"]
-
 
 class DummyGlobalStep(GlobalStep):
     @property
@@ -39,7 +37,6 @@ class DummyGlobalStep(GlobalStep):
     @property
     def outputs(self) -> List[str]:
         return []
-
 
 class DummyStep1(Step):
     attr1: int = 5
@@ -55,7 +52,6 @@ class DummyStep1(Step):
     def outputs(self) -> List[str]:
         return ["response"]
 
-
 class DummyStep2(Step):
     @property
     def inputs(self) -> List[str]:
@@ -67,7 +63,6 @@ class DummyStep2(Step):
     @property
     def outputs(self) -> List[str]:
         return ["evol_response"]
-
 
 def batch_gen(
     step_name: str,

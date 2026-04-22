@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,15 +26,12 @@ if TYPE_CHECKING:
 
     from distilagent.typing import LLMStatistics
 
-
 class VertexChatItem(TypedDict):
     role: Literal["user", "model"]
     content: str
 
-
 VertexChatType = List[VertexChatItem]
 """VertexChatType is a type alias for a `list` of `dict`s following the VertexAI conversational format."""
-
 
 class VertexAILLM(AsyncLLM):
     """VertexAI LLM implementation running the async API clients for Gemini.
@@ -187,7 +184,6 @@ class VertexAILLM(AsyncLLM):
             "input_tokens": [content.usage_metadata.prompt_token_count],
             "output_tokens": [content.usage_metadata.candidates_token_count],
         }
-
 
 def _is_gemini_model(model: str) -> bool:
     """Returns `True` if the model is a model from the Vertex AI Gemini API.

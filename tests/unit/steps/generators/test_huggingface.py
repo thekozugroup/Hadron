@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,8 +29,7 @@ from distilagent.steps.generators.huggingface import (
 )
 from tests.unit.pipeline.utils import DummyStep1
 
-DISTILABEL_RUN_SLOW_TESTS = os.getenv("DISTILABEL_RUN_SLOW_TESTS", False)
-
+DISTILAGENT_RUN_SLOW_TESTS = os.getenv("DISTILAGENT_RUN_SLOW_TESTS", False)
 
 @pytest.fixture(scope="module")
 def dataset_loader() -> Generator[Union[Dataset, IterableDataset], None, None]:
@@ -43,9 +42,8 @@ def dataset_loader() -> Generator[Union[Dataset, IterableDataset], None, None]:
     )
     yield load_hub_dataset
 
-
 @pytest.mark.skipif(
-    not DISTILABEL_RUN_SLOW_TESTS,
+    not DISTILAGENT_RUN_SLOW_TESTS,
     reason="These tests depend on internet connection, are slow and depend mainly on HF API, we don't need to test them often.",
 )
 class TestLoadDataFromHub:
@@ -72,7 +70,6 @@ class TestLoadDataFromHub:
     def test_dataset_outputs(self, dataset_loader: LoadDataFromHub) -> None:
         # TODO: This test can be run with/without internet connection, we should emulate it here with a mock.
         assert dataset_loader.outputs == ["prompt", "completion", "meta"]
-
 
 class TestLoadDataFromFileSystem:
     @pytest.mark.parametrize("filetype", ["json", None])
@@ -152,7 +149,6 @@ class TestLoadDataFromFileSystem:
             dummy = DummyStep1(input_mappings={"instruction": "function"})
             loader >> dummy
         assert loader.outputs == ["type", "function"]
-
 
 class TestLoadDataFromDisk:
     def test_load_dataset_from_disk(self) -> None:

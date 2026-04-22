@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@ import os
 from unittest import mock
 
 from distilagent.models.llms.anyscale import AnyscaleLLM
-
 
 class TestAnyscaleLLM:
     model_id: str = "mistralai/Mixtral-8x7B-Instruct-v0.1"

@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,17 +15,16 @@
 from collections import defaultdict
 from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
 
-from distilagent.constants import DISTILABEL_METADATA_KEY
+from distilagent.constants import DISTILAGENT_METADATA_KEY
 
 if TYPE_CHECKING:
     from distilagent.steps.base import StepInput
 
-
-def merge_distilabel_metadata(
+def merge_distilagent_metadata(
     *output_dicts: Dict[str, Any],
 ) -> Union[Dict[str, Any], List[Dict[str, Any]]]:
     """
-    Merge the `DISTILABEL_METADATA_KEY` from multiple output dictionaries. `DISTILABEL_METADATA_KEY`
+    Merge the `DISTILAGENT_METADATA_KEY` from multiple output dictionaries. `DISTILAGENT_METADATA_KEY`
     can be either a dictionary containing metadata keys or a list containing dictionaries
     of metadata keys.
 
@@ -38,8 +37,8 @@ def merge_distilabel_metadata(
     merged_metadata = defaultdict(list)
 
     for output_dict in output_dicts:
-        metadata = output_dict.get(DISTILABEL_METADATA_KEY, {})
-        # If `distilabel_metadata_key` is a `list` then it contains dictionaries with
+        metadata = output_dict.get(DISTILAGENT_METADATA_KEY, {})
+        # If `distilagent_metadata_key` is a `list` then it contains dictionaries with
         # the metadata per `num_generations` created when `group_generations==True`
         if isinstance(metadata, list):
             if not isinstance(merged_metadata, list):
@@ -60,7 +59,6 @@ def merge_distilabel_metadata(
             final_metadata[key] = value_list
 
     return final_metadata
-
 
 def group_columns(
     *inputs: "StepInput",
@@ -98,13 +96,13 @@ def group_columns(
         # Iterate over dicts at the same index
         for d in dicts_at_index:
             # Extract metadata for merging
-            if DISTILABEL_METADATA_KEY in d:
+            if DISTILAGENT_METADATA_KEY in d:
                 metadata_dicts.append(
-                    {DISTILABEL_METADATA_KEY: d[DISTILABEL_METADATA_KEY]}
+                    {DISTILAGENT_METADATA_KEY: d[DISTILAGENT_METADATA_KEY]}
                 )
             # Iterate over key-value pairs in each dict
             for key, value in d.items():
-                if key == DISTILABEL_METADATA_KEY:
+                if key == DISTILAGENT_METADATA_KEY:
                     continue
                 # If the key is in the merge_keys, append the value to the existing list
                 if key in group_columns_dict.keys():
@@ -114,13 +112,12 @@ def group_columns(
                     combined_dict[key] = value
 
         if metadata_dicts:
-            combined_dict[DISTILABEL_METADATA_KEY] = merge_distilabel_metadata(
+            combined_dict[DISTILAGENT_METADATA_KEY] = merge_distilagent_metadata(
                 *metadata_dicts
             )
 
         result.append(combined_dict)
     return result
-
 
 def merge_columns(
     row: Dict[str, Any], columns: List[str], new_column: str = "combined_key"

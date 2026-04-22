@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ from distilagent.steps.tasks.apigen.utils import (
     execute_from_response,
     load_module_from_path,
 )
-
 
 @pytest.mark.parametrize(
     "function_name, answer, expected_result",

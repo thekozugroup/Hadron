@@ -26,7 +26,6 @@ import random
 from pathlib import Path
 from typing import Dict, List
 
-
 def load_rows(path: Path) -> List[Dict]:
     rows = []
     with open(path, encoding="utf-8") as f:
@@ -35,7 +34,6 @@ def load_rows(path: Path) -> List[Dict]:
             if line:
                 rows.append(json.loads(line))
     return rows
-
 
 def teacher_reasoning(row: Dict) -> str:
     """Return the reasoning text from the teacher-role call, if any.
@@ -49,7 +47,6 @@ def teacher_reasoning(row: Dict) -> str:
             return entry.get("reasoning", "") or ""
     return ""
 
-
 def row_to_gen_only(row: Dict) -> Dict:
     return {
         "messages": [
@@ -57,7 +54,6 @@ def row_to_gen_only(row: Dict) -> Dict:
             {"role": "assistant", "content": row["generation"] or ""},
         ]
     }
-
 
 def row_to_cot(row: Dict) -> Dict:
     reasoning = teacher_reasoning(row)
@@ -71,7 +67,6 @@ def row_to_cot(row: Dict) -> Dict:
             {"role": "assistant", "content": assistant},
         ]
     }
-
 
 def split(rows: List[Dict], seed: int) -> Dict[str, List[Dict]]:
     rng = random.Random(seed)
@@ -87,13 +82,11 @@ def split(rows: List[Dict], seed: int) -> Dict[str, List[Dict]]:
         "test": shuffled[n_train + n_valid :],
     }
 
-
 def write_jsonl(rows: List[Dict], path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         for r in rows:
             f.write(json.dumps(r, ensure_ascii=False) + "\n")
-
 
 def main() -> int:
     ap = argparse.ArgumentParser()
@@ -120,7 +113,6 @@ def main() -> int:
             )
             print(f"  {name}/{part}.jsonl  n={len(part_rows):>3}  chars={total_chars:>9,}")
     return 0
-
 
 if __name__ == "__main__":
     raise SystemExit(main())

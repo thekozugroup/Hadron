@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,12 +20,11 @@ from typing_extensions import Annotated
 
 RUNTIME_PARAM_REGEX = re.compile(r"(?P<key>[^.]+(?:\.[^=]+)+)=(?P<value>.+)")
 
-app = typer.Typer(help="Commands to run and inspect Distilabel pipelines.")
+app = typer.Typer(help="Commands to run and inspect DistilAgent pipelines.")
 
 ConfigOption = Annotated[
-    str, typer.Option(help="Path or URL to the Distilabel pipeline configuration file.")
+    str, typer.Option(help="Path or URL to the DistilAgent pipeline configuration file.")
 ]
-
 
 def parse_runtime_param(value: str) -> Tuple[List[str], str]:
     match = RUNTIME_PARAM_REGEX.match(value)
@@ -36,8 +35,7 @@ def parse_runtime_param(value: str) -> Tuple[List[str], str]:
         )
     return match.group("key").split("."), match.group("value")
 
-
-@app.command(name="run", help="Run a Distilabel pipeline.")
+@app.command(name="run", help="Run a DistilAgent pipeline.")
 def run(
     # `param` is `List[Tuple[Tuple[str, ...], str]]` after parsing
     param: Annotated[
@@ -110,8 +108,7 @@ def run(
             token=token,
         )
 
-
-@app.command(name="info", help="Get information about a Distilabel pipeline.")
+@app.command(name="info", help="Get information about a DistilAgent pipeline.")
 def info(config: ConfigOption) -> None:
     from distilagent.cli.pipeline.utils import display_pipeline_information, get_pipeline
 

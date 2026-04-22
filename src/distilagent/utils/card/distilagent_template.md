@@ -6,7 +6,7 @@
 
 # Dataset Card for {{ repo_id.split("/")[-1] }}
 
-This dataset was created with [distilagent](https://github.com/thekozugroup/distilagent) — AutoReason tournament refinement fused with [distilabel](https://github.com/argilla-io/distilabel) (upstream).
+This dataset was created with [distilagent](https://github.com/thekozugroup/distilagent) — an AutoReason-powered LLM distillation framework.
 
 {% if include_script%}
 The pipeline script was uploaded to easily reproduce the dataset:

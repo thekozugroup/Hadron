@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple, Union
 
 from pydantic import Field, PositiveInt, field_validator
 
-from distilagent.errors import DistilabelUserError
+from distilagent.errors import DistilAgentUserError
 from distilagent.mixins.runtime_parameters import (
     RuntimeParameter,
     RuntimeParametersMixin,
@@ -32,14 +32,12 @@ from distilagent.utils.dicts import merge_dicts
 if TYPE_CHECKING:
     from distilagent.typing import ChatType, LLMStatistics, StepColumns, StepOutput
 
-
 MAGPIE_MULTI_TURN_SYSTEM_PROMPT = (
     "You are a helpful Al assistant. The user will engage in a multi-round conversation"
     " with you, asking initial questions and following up with additional related questions."
     " Your goal is to provide thorough, relevant and insightful responses to help the user"
     " with their queries."
 )
-
 
 class MagpieBase(RuntimeParametersMixin):
     """Base class defining the generation logic of Magpie method.
@@ -108,7 +106,7 @@ class MagpieBase(RuntimeParametersMixin):
             if isinstance(system_prompts_values[0], tuple):
                 weights_sum = sum(weight for _, weight in system_prompts_values)  # type: ignore
                 if weights_sum != 1.0:
-                    raise DistilabelUserError(
+                    raise DistilAgentUserError(
                         "If `system_prompts` attribute is a dictionary containing tuples with"
                         " the system prompts and their probability of being chosen, then the"
                         " sum of the weights must be equal to 1.0."
@@ -200,7 +198,7 @@ class MagpieBase(RuntimeParametersMixin):
         ):
             row = {
                 "instruction": output["generations"][0],
-                "distilabel_metadata": {
+                "distilagent_metadata": {
                     f"statistics_{self.name}": output["statistics"]
                 },
             }  # type: ignore
@@ -357,10 +355,9 @@ class MagpieBase(RuntimeParametersMixin):
                 "model_name": self.llm.model_name,
             }
             if not self.only_instruction:
-                generation["distilabel_metadata"] = {f"statistics_{self.name}": stats}
+                generation["distilagent_metadata"] = {f"statistics_{self.name}": stats}
             generations.append(generation)
         return generations
-
 
 class Magpie(Task, MagpieBase):
     """Generates conversations using an instruct fine-tuned LLM.
@@ -549,7 +546,7 @@ class Magpie(Task, MagpieBase):
         super().model_post_init(__context)
 
         if not isinstance(self.llm, MagpieChatTemplateMixin):
-            raise DistilabelUserError(
+            raise DistilAgentUserError(
                 f"`Magpie` task can only be used with an `LLM` that uses the `MagpieChatTemplateMixin`."
                 f"`{self.llm.__class__.__name__}` doesn't use the aforementioned mixin.",
                 page="components-gallery/tasks/magpie/",

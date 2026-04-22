@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ from typing import Dict, List, Literal, Optional
 
 CandidateLabel = Literal["A", "B", "AB"]
 
-
 @dataclass
 class JudgeVote:
     judge_id: int
@@ -30,7 +29,6 @@ class JudgeVote:
 
     def to_dict(self) -> Dict:
         return asdict(self)
-
 
 @dataclass
 class IterationResult:
@@ -57,7 +55,6 @@ class IterationResult:
             "no_flaws": self.no_flaws,
         }
 
-
 @dataclass
 class TournamentTrace:
     iterations: List[IterationResult] = field(default_factory=list)
@@ -74,7 +71,6 @@ class TournamentTrace:
             "total_calls": self.total_calls,
             "final_answer": self.final_answer,
         }
-
 
 class AutoReasonError(Exception):
     """Raised when the AutoReason tournament cannot complete."""

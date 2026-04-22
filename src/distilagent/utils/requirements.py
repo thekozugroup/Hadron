@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ if TYPE_CHECKING:
     from distilagent.steps.base import _Step
 
 S = TypeVar("S", bound="_Step")
-
 
 def requirements(requirements: Union[List[str]]) -> Callable[[S], S]:
     """Decorator to add requirements to a Step.

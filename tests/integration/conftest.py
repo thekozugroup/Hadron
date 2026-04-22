@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,10 +18,9 @@ from typing import Generator
 
 import pytest
 
-
 @pytest.fixture(autouse=True)
 def temp_cache_dir() -> Generator[None, None, None]:
     """Set the cache directory to a temporary directory for all tests."""
     with tempfile.TemporaryDirectory() as tmpdirname:
-        os.environ["DISTILABEL_CACHE_DIR"] = tmpdirname
+        os.environ["DISTILAGENT_CACHE_DIR"] = tmpdirname
         yield

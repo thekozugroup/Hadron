@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,7 +30,6 @@ from distilagent.steps.tasks.improving_text_embeddings import (
 )
 from distilagent.typing import ChatType, GenerateOutput
 
-
 class MockLLM(LLM):
     output: str
 
@@ -53,7 +52,6 @@ class MockLLM(LLM):
                 },
             }
         ] * len(inputs)
-
 
 class TestEmbeddingTaskGenerator:
     @pytest.mark.parametrize(
@@ -86,7 +84,7 @@ class TestEmbeddingTaskGenerator:
                     {
                         "tasks": ["A", "B", "C"],
                         "model_name": "test",
-                        "distilabel_metadata": {
+                        "distilagent_metadata": {
                             "statistics_embedding_task_generator": {
                                 "input_tokens": 12,
                                 "output_tokens": 12,
@@ -102,7 +100,7 @@ class TestEmbeddingTaskGenerator:
                     {
                         "task": "A",
                         "model_name": "test",
-                        "distilabel_metadata": {
+                        "distilagent_metadata": {
                             "statistics_embedding_task_generator": {
                                 "input_tokens": 12,
                                 "output_tokens": 12,
@@ -112,7 +110,7 @@ class TestEmbeddingTaskGenerator:
                     {
                         "task": "B",
                         "model_name": "test",
-                        "distilabel_metadata": {
+                        "distilagent_metadata": {
                             "statistics_embedding_task_generator": {
                                 "input_tokens": 12,
                                 "output_tokens": 12,
@@ -122,7 +120,7 @@ class TestEmbeddingTaskGenerator:
                     {
                         "task": "C",
                         "model_name": "test",
-                        "distilabel_metadata": {
+                        "distilagent_metadata": {
                             "statistics_embedding_task_generator": {
                                 "input_tokens": 12,
                                 "output_tokens": 12,
@@ -134,7 +132,6 @@ class TestEmbeddingTaskGenerator:
             )
         )
         assert next(task.process()) == result
-
 
 class TestBitextRetrievalGenerator:
     @pytest.mark.parametrize(
@@ -185,7 +182,7 @@ class TestBitextRetrievalGenerator:
                     "S2": "B",
                     "S3": "C",
                     "model_name": "test",
-                    "distilabel_metadata": {
+                    "distilagent_metadata": {
                         "statistics_bitext_retrieval_generator": {
                             "input_tokens": 12,
                             "output_tokens": 12,
@@ -213,7 +210,6 @@ class TestBitextRetrievalGenerator:
             unique_prompts.add(task.prompt[-1]["content"])
 
         assert len(unique_prompts) == 1
-
 
 class TestMonolingualTripletGenerator:
     @pytest.mark.parametrize(
@@ -259,7 +255,7 @@ class TestMonolingualTripletGenerator:
                     "S2": "B",
                     "S3": "C",
                     "model_name": "test",
-                    "distilabel_metadata": {
+                    "distilagent_metadata": {
                         "statistics_monolingual_triplet_generator": {
                             "input_tokens": 12,
                             "output_tokens": 12,
@@ -284,7 +280,6 @@ class TestMonolingualTripletGenerator:
             task.load()
             unique_prompts.add(task.prompt[-1]["content"])
         assert len(unique_prompts) == 1
-
 
 class TestGenerateLongTextMatchingData:
     def test_format_input(self) -> None:
@@ -320,7 +315,7 @@ class TestGenerateLongTextMatchingData:
                 "input": "A",
                 "positive_document": "B",
                 "model_name": "test",
-                "distilabel_metadata": {
+                "distilagent_metadata": {
                     "statistics_generate_long_text_matching_data": {
                         "input_tokens": 12,
                         "output_tokens": 12,
@@ -328,7 +323,6 @@ class TestGenerateLongTextMatchingData:
                 },
             }
         ]
-
 
 class TestGenerateShortTextMatchingData:
     def test_format_input(self) -> None:
@@ -361,7 +355,7 @@ class TestGenerateShortTextMatchingData:
                 "input": "A",
                 "positive_document": "B",
                 "model_name": "test",
-                "distilabel_metadata": {
+                "distilagent_metadata": {
                     "statistics_generate_short_text_matching_data": {
                         "input_tokens": 12,
                         "output_tokens": 12,
@@ -387,7 +381,6 @@ class TestGenerateShortTextMatchingData:
             unique_prompts.add(task.format_input({"task": "A"})[-1]["content"])
 
         assert len(unique_prompts) == 1
-
 
 class TestGenerateTextClassificationData:
     def test_format_input(self) -> None:
@@ -429,7 +422,7 @@ class TestGenerateTextClassificationData:
                 "label": "B",
                 "misleading_label": "C",
                 "model_name": "test",
-                "distilabel_metadata": {
+                "distilagent_metadata": {
                     "statistics_generate_text_classification_data": {
                         "input_tokens": 12,
                         "output_tokens": 12,
@@ -457,7 +450,6 @@ class TestGenerateTextClassificationData:
             unique_prompts.add(task.format_input({"task": "A"})[-1]["content"])
 
         assert len(unique_prompts) == 1
-
 
 class TestGenerateTextRetrievalData:
     def test_format_input(self) -> None:
@@ -512,7 +504,7 @@ class TestGenerateTextRetrievalData:
                 "positive_document": "B",
                 "hard_negative_document": "C",
                 "model_name": "test",
-                "distilabel_metadata": {
+                "distilagent_metadata": {
                     "statistics_generate_text_retrieval_data": {
                         "input_tokens": 12,
                         "output_tokens": 12,

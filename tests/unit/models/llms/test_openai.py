@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,11 +24,10 @@ import orjson
 import pytest
 from openai.types import Batch
 
-from distilagent.exceptions import DistilabelOfflineBatchGenerationNotFinishedException
+from distilagent.exceptions import DistilAgentOfflineBatchGenerationNotFinishedException
 from distilagent.models.llms.openai import _OPENAI_BATCH_API_MAX_FILE_SIZE, OpenAILLM
 
 from .utils import DummyUserDetail
-
 
 @patch("openai.OpenAI")
 @patch("openai.AsyncOpenAI")
@@ -355,7 +354,7 @@ class TestOpenAILLM:
         llm._create_jobs = mock.MagicMock(return_value=("1234", "5678"))
 
         with pytest.raises(
-            DistilabelOfflineBatchGenerationNotFinishedException
+            DistilAgentOfflineBatchGenerationNotFinishedException
         ) as exception_info:
             llm.offline_batch_generate(
                 inputs=[{"role": "user", "content": "How much is 2+2?"}]  # type: ignore
@@ -469,7 +468,7 @@ class TestOpenAILLM:
             llm._check_and_get_batch_results()
 
     @pytest.mark.parametrize("status", ("validating", "in_progress", "finalizing"))
-    def test_check_and_get_batch_results_raises_distilabel_exception(
+    def test_check_and_get_batch_results_raises_distilagent_exception(
         self, async_openai_mock: MagicMock, openai_mock: MagicMock, status: str
     ) -> None:
         llm = OpenAILLM(model=self.model_id, api_key="api.key", jobs_ids=("1234",))  # type: ignore
@@ -489,7 +488,7 @@ class TestOpenAILLM:
         )
         llm.load()
 
-        with pytest.raises(DistilabelOfflineBatchGenerationNotFinishedException):
+        with pytest.raises(DistilAgentOfflineBatchGenerationNotFinishedException):
             llm._check_and_get_batch_results()
 
     @pytest.mark.parametrize("status", ("failed", "expired", "cancelled", "cancelling"))

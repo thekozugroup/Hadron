@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,6 @@ from upath import UPath
 from distilagent.distiset import Distiset
 from distilagent.utils.serialization import write_json
 
-
 @pytest.fixture(scope="function")
 def distiset() -> Distiset:
     return Distiset(
@@ -36,12 +35,10 @@ def distiset() -> Distiset:
         }
     )
 
-
 def make_fake_file(filename: Path) -> None:
     if not filename.parent.exists():
         filename.parent.mkdir(parents=True)
     filename.touch()
-
 
 def add_config_to_distiset(distiset: Distiset, folder: Path) -> Distiset:
     from distilagent.constants import DISTISET_CONFIG_FOLDER
@@ -53,7 +50,6 @@ def add_config_to_distiset(distiset: Distiset, folder: Path) -> Distiset:
     distiset.pipeline_path = pipeline_yaml
     distiset.log_filename_path = pipeline_log
     return distiset
-
 
 def add_artifacts_to_distiset(distiset: Distiset, folder: Path) -> Distiset:
     from distilagent.constants import DISTISET_ARTIFACTS_FOLDER
@@ -71,7 +67,6 @@ def add_artifacts_to_distiset(distiset: Distiset, folder: Path) -> Distiset:
     distiset.artifacts_path = artifacts_folder
 
     return distiset
-
 
 class TestDistiset:
     def test_train_test_split(self, distiset: Distiset) -> None:

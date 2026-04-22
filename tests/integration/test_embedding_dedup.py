@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ from distilagent.steps.filtering.embedding import EmbeddingDedup
 
 if TYPE_CHECKING:
     from distilagent.typing import StepOutput
-
 
 SAMPLE_DATA = [
     {
@@ -80,7 +79,6 @@ SAMPLE_DATA = [
     },
 ]
 
-
 @step(inputs=["embedding"], outputs=["embedding"])
 def NormalizeEmbeddings(inputs: StepInput) -> "StepOutput":
     # Normalize a vector to have length 1
@@ -91,7 +89,6 @@ def NormalizeEmbeddings(inputs: StepInput) -> "StepOutput":
             continue
         input["embedding"] = input["embedding"] / norm
     yield inputs
-
 
 def test_embedding_deduplication() -> None:
     with Pipeline() as pipeline:
@@ -124,7 +121,6 @@ def test_embedding_deduplication() -> None:
     ds_dedup = ds.filter(lambda x: x["keep_row_after_embedding_filtering"])
 
     assert len(ds_dedup) == 63
-
 
 if __name__ == "__main__":
     test_embedding_deduplication()

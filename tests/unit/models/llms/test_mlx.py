@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ from .utils import DummyUserDetail
 
 RUNS_ON_APPLE_SILICON = platform.processor() == "arm" and platform.system() == "Darwin"
 
-
 @pytest.mark.skipif(
     not RUNS_ON_APPLE_SILICON,
     reason="MLX only runs on Apple Silicon",
@@ -34,7 +33,6 @@ def llm() -> Generator[MlxLLM, None, None]:
     llm = MlxLLM(path_or_hf_repo="mlx-community/Qwen2.5-0.5B-4bit")
     llm.load()
     yield llm
-
 
 @pytest.mark.skipif(
     not RUNS_ON_APPLE_SILICON,

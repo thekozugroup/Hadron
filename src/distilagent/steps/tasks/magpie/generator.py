@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@ from typing import TYPE_CHECKING, Any, Dict, Union
 from pydantic import Field
 from typing_extensions import override
 
-from distilagent.errors import DistilabelUserError
+from distilagent.errors import DistilAgentUserError
 from distilagent.mixins.runtime_parameters import RuntimeParameter
 from distilagent.models.mixins.magpie import MagpieChatTemplateMixin
 from distilagent.steps.tasks.base import GeneratorTask
@@ -25,7 +25,6 @@ from distilagent.steps.tasks.magpie.base import MagpieBase
 
 if TYPE_CHECKING:
     from distilagent.typing import ChatType, GeneratorStepOutput, StepColumns
-
 
 class MagpieGenerator(GeneratorTask, MagpieBase):
     """Generator task the generates instructions or conversations using Magpie.
@@ -258,7 +257,7 @@ class MagpieGenerator(GeneratorTask, MagpieBase):
         super().model_post_init(__context)
 
         if not isinstance(self.llm, MagpieChatTemplateMixin):
-            raise DistilabelUserError(
+            raise DistilAgentUserError(
                 f"`Magpie` task can only be used with an `LLM` that uses the `MagpieChatTemplateMixin`."
                 f"`{self.llm.__class__.__name__}` doesn't use the aforementioned mixin.",
                 page="components-gallery/tasks/magpiegenerator/",

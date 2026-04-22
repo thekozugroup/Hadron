@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@ import tempfile
 from pathlib import Path
 
 from distilagent.utils.files import list_files_in_dir
-
 
 def test_list_files_in_dir() -> None:
     with tempfile.TemporaryDirectory() as temp_dir:

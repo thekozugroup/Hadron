@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@ import pytest
 
 from distilagent.models.mixins.magpie import MAGPIE_PRE_QUERY_TEMPLATES
 from tests.unit.conftest import DummyMagpieLLM
-
 
 class TestMagpieChatTemplateMixin:
     def test_magpie_pre_query_template_set(self) -> None:

@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,7 +25,6 @@ from distilagent.models.mixins.cuda_device_placement import CudaDevicePlacementM
 if TYPE_CHECKING:
     from distilagent.typing import ChatType
 
-
 @pytest.fixture
 def mock_pynvml() -> Generator[None, None, None]:
     """Mocks `pynvml` module and clears the environment variables before each test."""
@@ -36,7 +35,6 @@ def mock_pynvml() -> Generator[None, None, None]:
         pynvml.nvmlInit.return_value = 0
         pynvml.nvmlDeviceGetCount.return_value = 4
         yield
-
 
 class DummyCudaLLM(LLM, CudaDevicePlacementMixin):
     def load(self) -> None:
@@ -55,7 +53,6 @@ class DummyCudaLLM(LLM, CudaDevicePlacementMixin):
         self, inputs: List["ChatType"], num_generations: int = 1, **kwargs: Any
     ) -> List[List[Union[str, None]]]:
         return [["output" for _ in range(num_generations)] for _ in inputs]
-
 
 @pytest.mark.usefixtures("mock_pynvml")
 class TestCudaDevicePlacementMixin:

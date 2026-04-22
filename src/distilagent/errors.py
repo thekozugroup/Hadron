@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,14 +14,13 @@
 
 from typing import Optional
 
-from distilagent.constants import DISTILABEL_DOCS_URL
+from distilagent.constants import DISTILAGENT_DOCS_URL
 
 # The sitemap can be visited for the full list of pages:
-# SITEMAP_URL: Final[str] = "https://distilagent.argilla.io/latest/sitemap.xml"
+# SITEMAP_URL: Final[str] = ""
 
-
-class DistilabelError:
-    """A mixin class for common functionality shared by all Distilabel-specific errors.
+class DistilAgentError:
+    """A mixin class for common functionality shared by all DistilAgent-specific errors.
 
     Attributes:
         message: A message describing the error.
@@ -29,12 +28,12 @@ class DistilabelError:
 
     Examples:
         ```python
-        raise DistilabelUserError("This is an error message.")
+        raise DistilAgentUserError("This is an error message.")
         This is an error message.
 
-        raise DistilabelUserError("This is an error message.", page="sections/getting_started/faq/")
+        raise DistilAgentUserError("This is an error message.", page="sections/getting_started/faq/")
         This is an error message.
-        For further information visit 'https://distilagent.argilla.io/latest/sections/getting_started/faq/'
+        For further information visit ''
         ```
     """
 
@@ -46,22 +45,19 @@ class DistilabelError:
         if self.page is None:
             return self.message
         else:
-            return f"{self.message}\n\nFor further information visit '{DISTILABEL_DOCS_URL}{self.page}'"
+            return f"{self.message}\n\nFor further information visit '{DISTILAGENT_DOCS_URL}{self.page}'"
 
-
-class DistilabelUserError(DistilabelError, ValueError):
+class DistilAgentUserError(DistilAgentError, ValueError):
     """ValueError that we can redirect to a given page in the documentation."""
 
     pass
 
-
-class DistilabelTypeError(DistilabelError, TypeError):
+class DistilAgentTypeError(DistilAgentError, TypeError):
     """TypeError that we can redirect to a given page in the documentation."""
 
     pass
 
-
-class DistilabelNotImplementedError(DistilabelError, NotImplementedError):
+class DistilAgentNotImplementedError(DistilAgentError, NotImplementedError):
     """NotImplementedError that we can redirect to a given page in the documentation."""
 
     pass

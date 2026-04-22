@@ -20,7 +20,6 @@ INSTRUCTION = os.environ.get(
     "In three sentences, explain what makes the Transformer architecture different from RNNs.",
 )
 
-
 def main() -> int:
     print(f"Model: {MODEL}")
     print(f"Instruction: {INSTRUCTION}\n")
@@ -73,7 +72,6 @@ def main() -> int:
         json.dump(trace, f, indent=2, ensure_ascii=False)
     print(f"\nFull trace saved: {out_path}")
     return 0
-
 
 if __name__ == "__main__":
     sys.exit(main())

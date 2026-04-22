@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,11 +30,9 @@ _DAY_SECONDS: float = 86400.0
 
 _MINUTE_SECONDS: float = 60.0
 
-
 def _loop_time() -> float:
     """Return a monotonic clock tied to the running event loop."""
     return asyncio.get_event_loop().time()
-
 
 class AsyncTokenBucket:
     """Dual token bucket enforcing both RPM (minute) and RPD (day) limits."""
@@ -163,10 +161,8 @@ class AsyncTokenBucket:
             "next_rpd_refill_s": next_rpd_refill_s,
         }
 
-
 # Process-global registry keyed by name.
 _REGISTRY: Dict[str, AsyncTokenBucket] = {}
-
 
 def get_limiter(
     name: str, rpm: int, rpd: Optional[int] = None
@@ -185,7 +181,6 @@ def get_limiter(
     if existing.rpm != rpm or existing.rpd != rpd:
         existing.update_limits(rpm, rpd)
     return existing
-
 
 def _default_is_rate_limit_error(exc: BaseException) -> bool:
     # Status-code style: openai / httpx / openrouter client exceptions.
@@ -213,7 +208,6 @@ def _default_is_rate_limit_error(exc: BaseException) -> bool:
     if "connection" in msg and ("reset" in msg or "aborted" in msg or "refused" in msg):
         return True
     return False
-
 
 async def rate_limited_call(
     limiter: AsyncTokenBucket,

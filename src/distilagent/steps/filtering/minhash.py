@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -38,7 +38,6 @@ if TYPE_CHECKING:
 
     from distilagent.typing import StepOutput
 
-
 # Copied from: https://github.com/huggingface/datatrove/blob/main/src/datatrove/utils/text.py#L89C1-L95C65
 def ngrams(sequence: Iterable[str], n: int) -> Iterator[Tuple[str, ...]]:
     iterables = tee(sequence, n)
@@ -47,7 +46,6 @@ def ngrams(sequence: Iterable[str], n: int) -> Iterator[Tuple[str, ...]]:
         for _ in range(i):  # iterate through every order of ngrams
             next(sub_iterable, None)  # generate the ngrams within the window.
     return zip(*iterables)  # Unpack and flattens the iterables.
-
 
 def tokenized_on_words(texts: Iterable[str]) -> List[Set[bytes]]:
     """Tokenizes a list of texts into words, using `nltk.word_tokenize`.
@@ -61,7 +59,6 @@ def tokenized_on_words(texts: Iterable[str]) -> List[Set[bytes]]:
     from nltk.tokenize import word_tokenize
 
     return [{w.encode("utf-8") for w in word_tokenize(text)} for text in texts]
-
 
 def tokenize_on_ngrams(texts: Iterable[str], n: int = 1) -> List[Set[bytes]]:
     """Tokenizes a list of texts into ngrams, and returns the set of them as bytes.
@@ -78,7 +75,6 @@ def tokenize_on_ngrams(texts: Iterable[str], n: int = 1) -> List[Set[bytes]]:
         {"".join(ngram).encode("utf-8") for ngram in ngrams(text, n=n)}
         for text in texts
     ]
-
 
 class MinHashDedup(Step):
     """Deduplicates text using `MinHash` and `MinHashLSH`.

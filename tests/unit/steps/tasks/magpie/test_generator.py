@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@ import pytest
 from distilagent.models.llms.openai import OpenAILLM
 from distilagent.steps.tasks.magpie.generator import MagpieGenerator
 from tests.unit.conftest import DummyMagpieLLM
-
 
 class TestMagpieGenerator:
     def test_raise_value_error_llm_no_magpie_mixin(self) -> None:
@@ -184,12 +183,12 @@ class TestMagpieGenerator:
                 {
                     "name": "add_raw_output",
                     "optional": True,
-                    "description": "Whether to include the raw output of the LLM in the key `raw_output_<TASK_NAME>` of the `distilabel_metadata` dictionary output column",
+                    "description": "Whether to include the raw output of the LLM in the key `raw_output_<TASK_NAME>` of the `distilagent_metadata` dictionary output column",
                 },
                 {
                     "name": "add_raw_input",
                     "optional": True,
-                    "description": "Whether to include the raw input of the LLM in the key `raw_input_<TASK_NAME>` of the `distilabel_metadata` dictionary column",
+                    "description": "Whether to include the raw input of the LLM in the key `raw_input_<TASK_NAME>` of the `distilagent_metadata` dictionary column",
                 },
                 {
                     "name": "num_generations",

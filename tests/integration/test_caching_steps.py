@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,7 +25,6 @@ from distilagent.steps.base import Step, StepInput
 
 if TYPE_CHECKING:
     from distilagent.pipeline.batch import _Batch
-
 
 class DummyStep(Step):
     attr: int = 5
@@ -55,7 +54,6 @@ class DummyStep(Step):
     def outputs(self) -> List[str]:
         return ["response"]
 
-
 class DummyStep2(DummyStep):
     def process(
         self, *inputs: StepInput
@@ -68,10 +66,8 @@ class DummyStep2(DummyStep):
             outputs.append(output)
         yield outputs
 
-
 class OtherDummyStep(DummyStep):
     pass
-
 
 def test_cache() -> None:
     with TemporaryDirectory() as tmp_dir:
@@ -119,7 +115,6 @@ def test_cache() -> None:
             != distiset_2["default"]["train"].to_list()
         )
 
-
 def test_cache_with_step_cache_false() -> None:
     with TemporaryDirectory() as tmp_dir:
         with Pipeline(name="test_pipeline_caching", cache_dir=tmp_dir) as pipeline:
@@ -159,7 +154,6 @@ def test_cache_with_step_cache_false() -> None:
             distiset_0["default"]["train"].to_list()
             != distiset_1["default"]["train"].to_list()
         )
-
 
 def test_cache_with_step_changing() -> None:
     with TemporaryDirectory() as tmp_dir:
@@ -225,7 +219,6 @@ def test_cache_with_step_changing() -> None:
             != distiset_1["default"]["train"].to_list()
         )
 
-
 def test_cache_with_intermediate_step_cache_false() -> None:
     with TemporaryDirectory() as tmp_dir:
         with Pipeline(name="test_pipeline_caching", cache_dir=tmp_dir) as pipeline:
@@ -272,7 +265,6 @@ def test_cache_with_intermediate_step_cache_false() -> None:
             distiset_0["default"]["train"].to_list()
             != distiset_1["default"]["train"].to_list()
         )
-
 
 def test_cache_adding_step() -> None:
     with TemporaryDirectory() as tmp_dir:
@@ -343,7 +335,6 @@ def test_cache_adding_step() -> None:
         dict_1 = distiset_1["default"]["train"].to_dict()
         del dict_1["response_2"]
         assert dict_0 == dict_1
-
 
 def test_cache_adding_step_with_multiple_predecessor() -> None:
     with TemporaryDirectory() as tmp_dir:
@@ -416,7 +407,6 @@ def test_cache_adding_step_with_multiple_predecessor() -> None:
         ):
             assert row_1["response_1"] == row_0_a["response_1"]
             assert row_1["response_2"] == row_0_b["response_2"]
-
 
 def test_cache_with_offset() -> None:
     use_cache_per_step = True

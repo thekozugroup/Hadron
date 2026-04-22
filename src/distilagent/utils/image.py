@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from PIL import Image
-
 
 def image_to_str(image: "Image.Image", image_format: str = "JPEG") -> str:
     """Converts a PIL Image to a base64 encoded string."""

@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ from typing import (
 
 from pydantic import BaseModel
 
-from distilagent.errors import DistilabelUserError
+from distilagent.errors import DistilAgentUserError
 from distilagent.steps.tasks.structured_outputs.utils import schema_as_dict
 
 if TYPE_CHECKING:  # noqa
@@ -41,7 +41,6 @@ if TYPE_CHECKING:  # noqa
 
 Frameworks = Literal["transformers", "llamacpp", "mlx"]
 
-
 def _check_outlines_available() -> None:
     """Helper function to check outlines availability.
 
@@ -53,11 +52,9 @@ def _check_outlines_available() -> None:
             "Outlines is not installed. Please install it using `pip install outlines`."
         )
 
-
 def model_to_schema(schema: Type[BaseModel]) -> Dict[str, Any]:
     """Helper function to return a string representation of the schema from a `pydantic.BaseModel` class."""
     return json.dumps(schema.model_json_schema())
-
 
 def _create_outlines_model(
     llm: Union["Pipeline", "Llama", "nn.Module"],
@@ -75,7 +72,7 @@ def _create_outlines_model(
     _check_outlines_available()
 
     if framework not in get_args(Frameworks):
-        raise DistilabelUserError(
+        raise DistilAgentUserError(
             f"Invalid framework '{framework}'. Must be one of {get_args(Frameworks)}",
             page="sections/how_to_guides/advanced/structured_generation/",
         )
@@ -91,7 +88,6 @@ def _create_outlines_model(
         from outlines import from_mlxlm
 
         return from_mlxlm(llm._model, llm._tokenizer)
-
 
 def prepare_guided_output(
     structured_output: "OutlinesStructuredOutputType",
@@ -152,7 +148,7 @@ def prepare_guided_output(
 
         return {"processor": get_regex_logits_processor(None, outlines_model, schema)}
 
-    raise DistilabelUserError(
+    raise DistilAgentUserError(
         f"Invalid format '{format}'. Must be either 'json' or 'regex'.",
         page="sections/how_to_guides/advanced/structured_generation/",
     )

@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ from distilagent.steps.tasks.evol_quality.base import (
     EvolQuality,
 )
 from distilagent.steps.tasks.evol_quality.utils import MUTATION_TEMPLATES
-
 
 class TestEvolQuality:
     def test_with_errors(
@@ -60,7 +59,7 @@ class TestEvolQuality:
                     "response": "mock",
                     "evolved_response": "output",
                     "model_name": "test",
-                    "distilabel_metadata": {
+                    "distilagent_metadata": {
                         "statistics_task": {
                             "input_tokens": [12, 12],
                             "output_tokens": [12, 12],
@@ -87,7 +86,7 @@ class TestEvolQuality:
                     "response": "mock",
                     "evolved_responses": ["output", "output"],
                     "model_name": "test",
-                    "distilabel_metadata": {
+                    "distilagent_metadata": {
                         "statistics_task": {
                             "input_tokens": [12, 12],
                             "output_tokens": [12, 12],
@@ -198,12 +197,12 @@ class TestEvolQuality:
                     ],
                 },
                 {
-                    "description": "Whether to include the raw output of the LLM in the key `raw_output_<TASK_NAME>` of the `distilabel_metadata` dictionary output column",
+                    "description": "Whether to include the raw output of the LLM in the key `raw_output_<TASK_NAME>` of the `distilagent_metadata` dictionary output column",
                     "name": "add_raw_output",
                     "optional": True,
                 },
                 {
-                    "description": "Whether to include the raw input of the LLM in the key `raw_input_<TASK_NAME>` of the `distilabel_metadata` dictionary column",
+                    "description": "Whether to include the raw input of the LLM in the key `raw_input_<TASK_NAME>` of the `distilagent_metadata` dictionary column",
                     "name": "add_raw_input",
                     "optional": True,
                 },

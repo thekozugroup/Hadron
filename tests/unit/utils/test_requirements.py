@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ from distilagent.utils.requirements import requirements
 
 from ..pipeline.utils import DummyGeneratorStep
 
-
 def test_add_requirements_decorator():
     @requirements(["distilagent>=0.0.1"])
     class CustomStep(Step):
@@ -42,7 +41,6 @@ def test_add_requirements_decorator():
             yield inputs
 
     assert CustomStep.requirements == ["distilagent>=0.0.1"]
-
 
 @pytest.mark.parametrize(
     "requirements_pipeline, expected",
@@ -97,7 +95,6 @@ def test_add_requirements_to_pipeline(
     print("REQS", pipeline.requirements)
     print("REQS_PRIVATE", pipeline._requirements)
     assert pipeline.requirements == expected
-
 
 def test_requirements_on_step_decorator() -> None:
     from distilagent.mixins.runtime_parameters import RuntimeParameter

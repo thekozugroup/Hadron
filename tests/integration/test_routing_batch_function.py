@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,11 +24,9 @@ from distilagent.steps import LoadDataFromDicts, StepInput, step
 if TYPE_CHECKING:
     from distilagent.typing import StepOutput
 
-
 @routing_batch_function()
 def random_routing_batch(steps: List[str]) -> List[str]:
     return random.sample(steps, 2)
-
 
 @step(outputs=["generation"])
 def Generate(inputs: StepInput) -> "StepOutput":
@@ -39,7 +37,6 @@ def Generate(inputs: StepInput) -> "StepOutput":
         input["generation"] = "I slept for {} seconds".format(sleep_time)
     yield inputs
 
-
 @step(outputs=["generations"])
 def Generate2(inputs: StepInput) -> "StepOutput":
     sleep_time = random.uniform(1.0, 2.0)
@@ -47,7 +44,6 @@ def Generate2(inputs: StepInput) -> "StepOutput":
     for input in inputs:
         input["2generation"] = "I slept for {} seconds".format(sleep_time)
     yield inputs
-
 
 @step(outputs=["generations"])
 def CombineGenerations(*inputs: StepInput) -> "StepOutput":
@@ -71,7 +67,6 @@ def CombineGenerations(*inputs: StepInput) -> "StepOutput":
 
     yield combined_list
 
-
 @pytest.mark.xfail
 @pytest.mark.timeout(240)
 def test_routing_batch_function() -> None:
@@ -92,7 +87,6 @@ def test_routing_batch_function() -> None:
         assert row["index"] == i
         assert row["instruction"] == [f"Instruction {i}", f"Instruction {i}"]
         assert len(row["generations"]) == 2
-
 
 @pytest.mark.xfail
 @pytest.mark.timeout(240)
@@ -118,7 +112,6 @@ def test_routing_batch_function_irregular_batch_sizes() -> None:
         assert row["index"] == i
         assert row["instruction"] == [f"Instruction {i}", f"Instruction {i}"]
         assert len(row["generations"]) == 2
-
 
 @pytest.mark.xfail
 @pytest.mark.timeout(240)

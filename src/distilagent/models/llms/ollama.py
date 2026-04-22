@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,7 +32,6 @@ if TYPE_CHECKING:
     from ollama._types import ChatResponse, GenerateResponse
 
     from distilagent.typing import LLMStatistics, StandardInput
-
 
 # Copied from `ollama._types.Options`
 class Options(TypedDict, total=False):
@@ -72,7 +71,6 @@ class Options(TypedDict, total=False):
     mirostat_eta: float
     penalize_newline: bool
     stop: Sequence[str]
-
 
 class OllamaLLM(AsyncLLM, MagpieChatTemplateMixin):
     """Ollama LLM implementation running the Async API client.

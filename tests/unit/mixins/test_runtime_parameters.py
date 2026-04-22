@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ from distilagent.mixins.runtime_parameters import (
     RuntimeParametersMixin,
 )
 
-
 class DummyNestedClass(RuntimeParametersMixin):
     runtime_param1: RuntimeParameter[str] = Field(
         default=None, description="Runtime param 1"
@@ -29,7 +28,6 @@ class DummyNestedClass(RuntimeParametersMixin):
     runtime_param2: Optional[RuntimeParameter[str]] = Field(
         default=None, description="Runtime param 2"
     )
-
 
 class DummyClass(RuntimeParametersMixin):
     nested_class: DummyNestedClass
@@ -41,7 +39,6 @@ class DummyClass(RuntimeParametersMixin):
     runtime_param2: Optional[RuntimeParameter[SecretStr]] = Field(
         default=None, description="Runtime param 2"
     )
-
 
 class TestRuntimeParametersMixin:
     def test_runtime_parameters_names(self) -> None:

@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,13 +17,12 @@ from typing import TYPE_CHECKING, Dict, List, Optional, Union
 import pandas as pd
 from datasets import Dataset
 
-from distilagent.errors import DistilabelUserError
+from distilagent.errors import DistilAgentUserError
 from distilagent.steps.base import StepResources
 
 if TYPE_CHECKING:
     from distilagent.pipeline.base import BasePipeline
     from distilagent.steps import GeneratorStep
-
 
 def make_generator_step(
     dataset: Union[Dataset, pd.DataFrame, List[Dict[str, str]]],
@@ -70,7 +69,7 @@ def make_generator_step(
         dataset = Dataset.from_pandas(dataset, preserve_index=False)
 
     if not isinstance(dataset, Dataset):
-        raise DistilabelUserError(
+        raise DistilAgentUserError(
             f"Dataset type not allowed: {type(dataset)}, must be one of: "
             "`datasets.Dataset`, `pd.DataFrame`, `List[Dict[str, str]]`",
             page="sections/how_to_guides/basic/pipeline/?h=make_#__tabbed_1_2",

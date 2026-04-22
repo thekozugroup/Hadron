@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ import pytest
 from distilagent.models.llms.base import LLM
 from distilagent.steps.tasks.ultrafeedback import UltraFeedback
 from distilagent.typing import ChatType, GenerateOutput
-
 
 class UltraFeedbackLLM(LLM):
     structured_output: Any = None
@@ -47,7 +46,6 @@ class UltraFeedbackLLM(LLM):
             }
         ] * len(inputs)
 
-
 class TestUltraFeedback:
     def test_process_with_simple_aspect(self) -> None:
         task = UltraFeedback(
@@ -68,7 +66,7 @@ class TestUltraFeedback:
                 "ratings": [1, 2],
                 "rationales": ["text", "text"],
                 "model_name": "ultrafeedback-model",
-                "distilabel_metadata": {
+                "distilagent_metadata": {
                     "raw_output_ultrafeedback": "Type: 1\nRationale: text\nRating: 1\nRationale: text\n\nType: 2\nRationale: text\nRating: 2\nRationale: text",
                     "statistics_ultrafeedback": {
                         "input_tokens": 12,
@@ -99,7 +97,7 @@ class TestUltraFeedback:
                 "ratings": [1, 2],
                 "rationales-for-ratings": ["text", "text"],
                 "model_name": "ultrafeedback-model",
-                "distilabel_metadata": {
+                "distilagent_metadata": {
                     "raw_output_ultrafeedback": "Type: 1\nRationale: text\nRating: 1\nRationale: text\n\nType: 2\nRationale: text\nRating: 2\nRationale: text",
                     "statistics_ultrafeedback": {
                         "input_tokens": 12,

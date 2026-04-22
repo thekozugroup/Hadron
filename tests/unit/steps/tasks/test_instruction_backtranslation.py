@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ from distilagent.steps.tasks.instruction_backtranslation import (
     InstructionBacktranslation,
 )
 from distilagent.typing import ChatType, GenerateOutput
-
 
 class InstructionBacktranslationLLM(LLM):
     def load(self) -> None:
@@ -45,7 +44,6 @@ class InstructionBacktranslationLLM(LLM):
             }
             for _ in inputs
         ]
-
 
 class TestInstructionBacktranslation:
     def test_format_input(self) -> None:
@@ -94,7 +92,7 @@ class TestInstructionBacktranslation:
                 "score": 1,
                 "reason": "This is the reason.",
                 "model_name": "instruction-backtranslation-model",
-                "distilabel_metadata": {
+                "distilagent_metadata": {
                     "raw_output_instruction-backtranslation": "This is the reason. Score: 1",
                     "statistics_instruction-backtranslation": {
                         "input_tokens": 12,

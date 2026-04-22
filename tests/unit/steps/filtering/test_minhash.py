@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -33,19 +33,16 @@ texts: List[str] = [
     "This is another unique document.",
 ]
 
-
 def test_tokenize_on_words() -> None:
     tokenized = tokenized_on_words(texts)
     assert len(tokenized) == len(texts)
     assert tokenized[0] == {b".", b"This", b"a", b"document", b"is", b"test"}
-
 
 @pytest.mark.parametrize("n", [1, 3])
 def test_tokenize_on_ngrams(n: int) -> None:
     tokenized = tokenize_on_ngrams(texts, n=n)
     assert len(tokenized) == len(texts)
     assert all(len(t) == n for t in tokenized[0])
-
 
 class TestMinHashDedup:
     @pytest.mark.parametrize(

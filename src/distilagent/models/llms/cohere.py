@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -42,9 +42,7 @@ if TYPE_CHECKING:
 
     from distilagent.typing import LLMStatistics
 
-
 _COHERE_API_KEY_ENV_VAR_NAME = "COHERE_API_KEY"
-
 
 class CohereLLM(AsyncLLM):
     """Cohere API implementation using the async client for concurrent text generation.

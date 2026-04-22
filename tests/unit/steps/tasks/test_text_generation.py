@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,11 +16,10 @@ from typing import Any, Dict, List, Union
 
 import pytest
 
-from distilagent.errors import DistilabelUserError
+from distilagent.errors import DistilAgentUserError
 from distilagent.pipeline.local import Pipeline
 from distilagent.steps.tasks.text_generation import ChatGeneration, TextGeneration
 from tests.unit.conftest import DummyAsyncLLM
-
 
 class TestTextGeneration:
     def test_format_input(self) -> None:
@@ -101,7 +100,7 @@ class TestTextGeneration:
                 "instruction": "test",
                 "generation": "output",
                 "model_name": "test",
-                "distilabel_metadata": {
+                "distilagent_metadata": {
                     "raw_output_task": "output",
                     "statistics_task": {"input_tokens": 12, "output_tokens": 12},
                 },
@@ -172,9 +171,8 @@ class TestTextGeneration:
             add_raw_input=False,
             add_raw_output=False,
         )
-        with pytest.raises(DistilabelUserError):
+        with pytest.raises(DistilAgentUserError):
             task.load()
-
 
 class TestChatGeneration:
     def test_format_input(self) -> None:
@@ -231,7 +229,7 @@ class TestChatGeneration:
                 "messages": [{"role": "user", "content": "Tell me a joke."}],
                 "generation": "output",
                 "model_name": "test",
-                "distilabel_metadata": {
+                "distilagent_metadata": {
                     "raw_output_task": "output",
                     "statistics_task": {"input_tokens": 12, "output_tokens": 12},
                 },

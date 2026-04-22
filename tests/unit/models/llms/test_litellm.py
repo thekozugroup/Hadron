@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,11 +19,9 @@ import pytest
 
 from distilagent.models.llms.litellm import LiteLLM
 
-
 @pytest.fixture(params=["mistral/mistral-tiny", "gpt-4"])
 def model(request) -> list:
     return request.param
-
 
 @patch("litellm.acompletion")
 class TestLiteLLM:

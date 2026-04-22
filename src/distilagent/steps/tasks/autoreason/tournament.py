@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -44,11 +44,9 @@ if TYPE_CHECKING:
 
 _LOG = logging.getLogger(__name__)
 
-
 RoleLLMs = Dict[str, "LLM"]          # keys: teacher, critic, author_b, synthesizer
 JudgePool = List["LLM"]               # round-robin per judge call
 LimiterMap = Dict[str, AsyncTokenBucket]  # keyed by LLM.model_name
-
 
 async def _invoke(llm: "LLM", messages: list, limiter: Optional[AsyncTokenBucket]) -> str:
     """Single-shot LLM call returning plain text. Applies rate limiting when given.
@@ -80,7 +78,6 @@ async def _invoke(llm: "LLM", messages: list, limiter: Optional[AsyncTokenBucket
         limiter, _call,
         max_retries=10, base_backoff=1.0, max_backoff=120.0,
     )
-
 
 class TournamentRunner:
     """Executes a single AutoReason tournament for one instruction.

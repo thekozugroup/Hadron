@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,19 +26,15 @@ from distilagent.steps.tasks.autoreason.roles import (
     render_teacher_seed,
 )
 
-
 INSTRUCTION = "Explain why the sky appears blue during the day."
 DRAFT = "The sky is blue because of Rayleigh scattering of sunlight by air molecules."
 CRITIQUE = "The intro is weak because it does not mention wavelength dependence."
 
-
 def _roles(messages):
     return [m["role"] for m in messages]
 
-
 def _joined(messages):
     return "\n".join(m["content"] for m in messages)
-
 
 class TestRenderTeacherSeed:
     def test_two_messages_system_then_user(self):
@@ -49,7 +45,6 @@ class TestRenderTeacherSeed:
     def test_user_content_contains_instruction_verbatim(self):
         msgs = render_teacher_seed(INSTRUCTION)
         assert INSTRUCTION in msgs[1]["content"]
-
 
 class TestRenderCritic:
     def test_contains_draft_and_no_flaws_literal(self):
@@ -62,7 +57,6 @@ class TestRenderCritic:
         msgs = render_critic(INSTRUCTION, DRAFT)
         assert _roles(msgs) == ["system", "user"]
         assert INSTRUCTION in msgs[1]["content"]
-
 
 class TestRenderAuthorB:
     def test_contains_draft_and_critique(self):
@@ -79,7 +73,6 @@ class TestRenderAuthorB:
         assert "do not expand scope" in full
         assert "do not pad length" in full
 
-
 class TestRenderSynthesizer:
     def test_contains_draft_and_critique(self):
         msgs = render_synthesizer(INSTRUCTION, DRAFT, CRITIQUE)
@@ -95,7 +88,6 @@ class TestRenderSynthesizer:
         assert "smallest possible change" in synth
         assert "smallest possible change" not in author
         assert "minimal" in synth
-
 
 class TestRenderJudge:
     def test_deterministic_permutation(self):
@@ -144,7 +136,6 @@ class TestRenderJudge:
             perms.append(tuple(sorted(perm.items())))
         assert len(set(perms)) >= 2
 
-
 class TestParseCritique:
     def test_no_flaws_exact(self):
         text, flag = parse_critique("NO FLAWS")
@@ -165,7 +156,6 @@ class TestParseCritique:
         text, flag = parse_critique("")
         assert flag is False
         assert text == ""
-
 
 class TestParseJudgeRanking:
     perm = {"X1": "A", "X2": "B", "X3": "AB"}
@@ -214,7 +204,6 @@ class TestParseJudgeRanking:
         ranking, ok = parse_judge_ranking("", self.perm)
         assert ok is False
         assert ranking == []
-
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])

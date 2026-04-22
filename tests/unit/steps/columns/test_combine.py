@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,9 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from distilagent.constants import DISTILABEL_METADATA_KEY
+from distilagent.constants import DISTILAGENT_METADATA_KEY
 from distilagent.steps.columns.combine import CombineOutputs
-
 
 class TestCombineOutputs:
     def test_process(self) -> None:
@@ -26,14 +25,14 @@ class TestCombineOutputs:
                     {
                         "a": 1,
                         "b": 2,
-                        DISTILABEL_METADATA_KEY: {"model": "model-1", "a": 1},
+                        DISTILAGENT_METADATA_KEY: {"model": "model-1", "a": 1},
                     }
                 ],
                 [
                     {
                         "c": 3,
                         "d": 4,
-                        DISTILABEL_METADATA_KEY: {"model": "model-2", "b": 1},
+                        DISTILAGENT_METADATA_KEY: {"model": "model-2", "b": 1},
                     }
                 ],
             )
@@ -45,7 +44,7 @@ class TestCombineOutputs:
                 "b": 2,
                 "c": 3,
                 "d": 4,
-                DISTILABEL_METADATA_KEY: {
+                DISTILAGENT_METADATA_KEY: {
                     "model": ["model-1", "model-2"],
                     "a": 1,
                     "b": 1,

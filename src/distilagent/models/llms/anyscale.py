@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ from distilagent.mixins.runtime_parameters import RuntimeParameter
 from distilagent.models.llms.openai import OpenAILLM
 
 _ANYSCALE_API_KEY_ENV_VAR_NAME = "ANYSCALE_API_KEY"
-
 
 class AnyscaleLLM(OpenAILLM):
     """Anyscale LLM implementation running the async API client of OpenAI.

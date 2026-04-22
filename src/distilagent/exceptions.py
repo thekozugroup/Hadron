@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,24 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 from typing import Tuple
 
-
-class DistilabelException(Exception):
+class DistilAgentException(Exception):
     """Base exception (can be gracefully handled) for `distilagent` framework."""
 
     pass
 
-
-class DistilabelGenerationException(DistilabelException):
+class DistilAgentGenerationException(DistilAgentException):
     """Base exception for `LLM` generation errors."""
 
     pass
 
-
-class DistilabelOfflineBatchGenerationNotFinishedException(
-    DistilabelGenerationException
+class DistilAgentOfflineBatchGenerationNotFinishedException(
+    DistilAgentGenerationException
 ):
     """Exception raised when a batch generation is not finished."""
 

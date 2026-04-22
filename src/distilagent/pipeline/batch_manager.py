@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -35,7 +35,6 @@ from distilagent.utils.serialization import (
 
 if TYPE_CHECKING:
     from distilagent.utils.serialization import StrOrPath
-
 
 @dataclass
 class _BatchManagerStep(_Serializable):
@@ -708,7 +707,6 @@ class _BatchManagerStep(_Serializable):
     @property
     def signature(self) -> str:
         return f"{self.step_name}_{self.step_signature}"
-
 
 class _BatchManager(_Serializable):
     """Class to manage the batches received from the steps. It keeps track of the

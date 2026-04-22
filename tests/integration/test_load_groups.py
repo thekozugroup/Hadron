@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,13 +21,11 @@ from distilagent.steps import LoadDataFromDicts, StepInput, step
 if TYPE_CHECKING:
     from distilagent.typing import StepOutput
 
-
 @step(inputs=["instruction"], outputs=["instruction2"])
 def DummyStep(inputs: StepInput) -> "StepOutput":
     for input in inputs:
         input["instruction2"] = "miau"
     yield inputs
-
 
 @step(inputs=["instruction"], outputs=["instruction2"])
 def DummyStep2(*inputs: StepInput) -> "StepOutput":
@@ -39,13 +37,11 @@ def DummyStep2(*inputs: StepInput) -> "StepOutput":
         outputs.append(combined)
     yield outputs
 
-
 @step(inputs=["instruction"], outputs=["instruction2"], step_type="global")
 def GlobalDummyStep(inputs: StepInput) -> "StepOutput":
     for input in inputs:
         input["instruction2"] = "miau"
     yield inputs
-
 
 def test_load_groups() -> None:
     with Pipeline() as pipeline:
@@ -74,7 +70,6 @@ def test_load_groups() -> None:
         pipeline.run(load_groups=[[dummy_step_0.name], [dummy_step_3.name]])
 
     assert run_stage_mock.call_count == 6
-
 
 def test_load_groups_sequential_step_execution() -> None:
     with Pipeline() as pipeline:

@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
 # limitations under the License.
 
 from typing import List
-
 
 def flatten_responses(responses: List[List[str]]) -> List[str]:
     """Flattens the list of lists of strings into a single list of strings.

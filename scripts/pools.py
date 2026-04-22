@@ -51,7 +51,6 @@ JUDGE_POOL: List[str] = [
     "openai/gpt-oss-120b:free",             # OpenAI open weights 120B
 ]
 
-
 # ---------------------------------------------------------------------------
 # Domain routing
 # ---------------------------------------------------------------------------
@@ -78,7 +77,6 @@ _MATH_HINTS = re.compile(
     re.IGNORECASE,
 )
 
-
 def route_teacher(
     instruction: str,
     generalist_pool: List[str],
@@ -99,7 +97,6 @@ def route_teacher(
         raise ValueError("empty generalist pool")
     rng = random.Random(seed ^ (hash(instruction) & 0x7FFFFFFF))
     return rng.choice(generalist_pool)
-
 
 def classify_route(instruction: str) -> str:
     """Returns 'code' | 'reasoning' | 'general' — for logging/telemetry."""

@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
 import textwrap
 
 from distilagent.utils.docstring import parse_google_docstring
-
 
 def test_parse_google_docstring() -> None:
     def dummy_function() -> None:
@@ -63,8 +62,7 @@ def test_parse_google_docstring() -> None:
         "citations": [],
     }
 
-
-def test_parse_google_docstring_with_distilabel_peculiarities() -> None:
+def test_parse_google_docstring_with_distilagent_peculiarities() -> None:
     class DummyClass:
         """This is a dummy function.
 
@@ -112,7 +110,7 @@ def test_parse_google_docstring_with_distilabel_peculiarities() -> None:
             ```
 
         References:
-            - [Argilla](https://argilla.io)
+            - []()
 
         Citations:
 
@@ -177,7 +175,7 @@ def test_parse_google_docstring_with_distilabel_peculiarities() -> None:
         "categories": ["category1", "category2"],
         "icon": "icon_name",
         "references": {
-            "Argilla": "https://argilla.io",
+            "": "",
         },
         "returns": "",
         "raises": {},

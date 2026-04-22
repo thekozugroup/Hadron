@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -33,9 +33,8 @@ _CUDA_DEVICE_PLACEMENT_MIXIN_FILE = (
     / "distilagent"
     / "cuda_device_placement"
     / socket.gethostname()
-    / "distilabel_cuda_device_placement_mixin.json"
+    / "distilagent_cuda_device_placement_mixin.json"
 )
-
 
 class CudaDevicePlacementMixin(BaseModel):
     """Mixin class to assign CUDA devices to the `LLM` based on the `cuda_devices` attribute

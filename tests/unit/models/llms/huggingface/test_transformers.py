@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ import pytest
 
 from distilagent.models.llms.huggingface.transformers import TransformersLLM
 
-
 # load the model just once for all the tests in the module
 @pytest.fixture(scope="module")
 def transformers_llm() -> Generator[TransformersLLM, None, None]:
@@ -31,7 +30,6 @@ def transformers_llm() -> Generator[TransformersLLM, None, None]:
     llm.load()
 
     yield llm
-
 
 class TestTransformersLLM:
     def test_model_name(self, transformers_llm: TransformersLLM) -> None:

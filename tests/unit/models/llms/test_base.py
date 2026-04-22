@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,15 +14,14 @@
 
 import pytest
 
-from distilagent.errors import DistilabelNotImplementedError
+from distilagent.errors import DistilAgentNotImplementedError
 from tests.unit.conftest import DummyLLM
 
-
 class TestLLM:
-    def test_offline_batch_generate_raise_distilabel_not_implemented_error(
+    def test_offline_batch_generate_raise_distilagent_not_implemented_error(
         self,
     ) -> None:
         llm = DummyLLM()
 
-        with pytest.raises(DistilabelNotImplementedError):
+        with pytest.raises(DistilAgentNotImplementedError):
             llm.offline_batch_generate()

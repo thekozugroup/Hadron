@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,10 +15,9 @@
 import warnings
 from typing import Any, Dict, List, Union
 
-from distilagent.errors import DistilabelUserError
+from distilagent.errors import DistilAgentUserError
 from distilagent.steps.tasks.base import Task
 from distilagent.typing import StructuredInput
-
 
 class StructuredGeneration(Task):
     """Generate structured content for a given `instruction` using an `LLM`.
@@ -153,7 +152,7 @@ class StructuredGeneration(Task):
         """The input is formatted as a `ChatType` assuming that the instruction
         is the first interaction from the user within a conversation."""
         if not isinstance(input["instruction"], str):
-            raise DistilabelUserError(
+            raise DistilAgentUserError(
                 f"Input `instruction` must be a string. Got: {input['instruction']}.",
                 page="components-gallery/tasks/structuredgeneration/",
             )

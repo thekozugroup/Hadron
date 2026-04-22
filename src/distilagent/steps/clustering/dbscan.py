@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,7 +28,6 @@ if TYPE_CHECKING:
     from sklearn.cluster import DBSCAN as _DBSCAN
 
     from distilagent.typing import StepOutput
-
 
 class DBSCAN(GlobalStep):
     r"""DBSCAN (Density-Based Spatial Clustering of Applications with Noise) finds core

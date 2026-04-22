@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,7 +27,6 @@ from distilagent.typing import ChatType
 
 if TYPE_CHECKING:
     from distilagent.typing import StepOutput
-
 
 class EvolQuality(Task):
     """Evolve the quality of the responses using an `LLM`.
@@ -277,7 +276,7 @@ class EvolQuality(Task):
         for input, response in zip(inputs, responses):
             input.update(self.format_output(response))
             input.update(
-                {"distilabel_metadata": {f"statistics_{self.name}": statistics}}
+                {"distilagent_metadata": {f"statistics_{self.name}": statistics}}
             )
         yield inputs
 

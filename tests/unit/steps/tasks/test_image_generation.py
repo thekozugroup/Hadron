@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@ import pytest
 
 from distilagent.steps.tasks.image_generation import ImageGeneration
 from tests.unit.conftest import DummyAsyncImageGenerationModel
-
 
 class TestImageGeneration:
     def test_format_input(self) -> None:
@@ -43,7 +42,7 @@ class TestImageGeneration:
                 "prompt": "a white siamese cat",
                 "image": img_str,
                 "model_name": "test",
-                "distilabel_metadata": {
+                "distilagent_metadata": {
                     "raw_input_image_generation_0": "a white siamese cat",
                     "raw_output_image_generation_0": {
                         "images": [

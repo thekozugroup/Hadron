@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -58,7 +58,6 @@ from .utils import (
     DummyStep2,
 )
 
-
 class DummyPipeline(BasePipeline):
     @property
     def QueueClass(self) -> Callable:
@@ -75,7 +74,6 @@ class DummyPipeline(BasePipeline):
 
     def _stop(self) -> None:
         pass
-
 
 class TestGlobalPipelineManager:
     def teardown_method(self) -> None:
@@ -94,7 +92,6 @@ class TestGlobalPipelineManager:
         pipeline = DummyPipeline(name="unit-test-pipeline")
         _GlobalPipelineManager.set_pipeline(pipeline)
         assert _GlobalPipelineManager.get_pipeline() == pipeline
-
 
 class TestBasePipeline:
     def test_get_load_stages(self) -> None:
@@ -1189,7 +1186,7 @@ class TestBasePipeline:
 
     def test_cache_dir_env_variable(self) -> None:
         with mock.patch.dict(os.environ, clear=True):
-            os.environ["DISTILABEL_CACHE_DIR"] = "/tmp/unit-test"
+            os.environ["DISTILAGENT_CACHE_DIR"] = "/tmp/unit-test"
             pipeline = DummyPipeline(name="unit-test-pipeline")
             assert pipeline._cache_dir == Path("/tmp/unit-test")
 
@@ -1292,7 +1289,7 @@ class TestBasePipeline:
 
         with pytest.raises(
             ModuleNotFoundError,
-            match=r"Please install the following requirements to run the pipeline: \ndistilabel>=0.0.1\nrandom_requirement",
+            match=r"Please install the following requirements to run the pipeline: \ndistilagent>=0.0.1\nrandom_requirement",
         ):
             with DummyPipeline(
                 name="unit-test-pipeline", requirements=["random_requirement"]
@@ -1376,7 +1373,6 @@ class TestBasePipeline:
             pipeline._validate_load_groups(
                 load_groups=[[generator_step_1.name, dummy_step_2.name]]
             )
-
 
 class TestPipelineSerialization:
     @pytest.mark.parametrize(

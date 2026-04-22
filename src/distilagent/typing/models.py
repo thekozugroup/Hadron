@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,11 +32,9 @@ from distilagent.typing.base import ChatType
 
 LLMOutput = List[Union[str, None]]
 
-
 class Logprob(TypedDict):
     token: str
     logprob: float
-
 
 LLMLogprobs = List[List[List[Logprob]]]
 """A type alias representing the probability distributions output by an `LLM`.
@@ -47,23 +45,19 @@ Structure:
     - Innermost list: contains the log probabilities for each token in the vocabulary at that position
 """
 
-
 class TokenCount(TypedDict):
     input_tokens: List[int]
     output_tokens: List[int]
-
 
 LLMStatistics = Union[TokenCount, Dict[str, Any]]
 """Initially the LLMStatistics will contain the token count, but can have more variables.
 They can be added once we have them defined for every LLM.
 """
 
-
 class GenerateOutput(TypedDict):
     generations: LLMOutput
     statistics: LLMStatistics
     logprobs: NotRequired[LLMLogprobs]
-
 
 class OutlinesStructuredOutputType(TypedDict, total=False):
     """TypedDict to represent the structured output configuration from `outlines`."""
@@ -83,7 +77,6 @@ class OutlinesStructuredOutputType(TypedDict, total=False):
     `whitespace_pattern=r"[\n ]?"`
     """
 
-
 class InstructorStructuredOutputType(TypedDict, total=False):
     """TypedDict to represent the structured output configuration from `instructor`."""
 
@@ -97,7 +90,6 @@ class InstructorStructuredOutputType(TypedDict, total=False):
     max_retries: int
     """Number of times to reask the model in case of error, if not set will default to the model's default. """
 
-
 StructuredOutputType = Union[
     OutlinesStructuredOutputType, InstructorStructuredOutputType
 ]
@@ -109,7 +101,6 @@ StructuredInput = Tuple[StandardInput, Union[StructuredOutputType, None]]
 FormattedInput = Union[StandardInput, StructuredInput, str]
 """FormattedInput is an alias for the union of `StandardInput` and `StructuredInput` as generated
 by `format_input` and expected by the `LLM`s, as well as `ConversationType` for the vision language models."""
-
 
 if TYPE_CHECKING:
     from numpy import floating

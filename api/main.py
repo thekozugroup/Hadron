@@ -36,7 +36,6 @@ except Exception:  # noqa: BLE001
     GENERALIST_POOL = JUDGE_POOL = []
     CODE_SPECIALIST = REASONING_SPECIALIST = ""
 
-
 app = FastAPI(title="DistilAgent API", version="0.1.0")
 app.add_middleware(
     CORSMiddleware,
@@ -47,13 +46,11 @@ app.add_middleware(
 
 _runner: Optional[RunManager] = None
 
-
 def get_runner() -> RunManager:
     global _runner
     if _runner is None:
         _runner = RunManager(DATA_DIR, DB_PATH, SCRIPTS_DIR)
     return _runner
-
 
 class RunConfig(BaseModel):
     provider: str = "openrouter"
@@ -81,7 +78,6 @@ class RunConfig(BaseModel):
     rng_seed: int = 42
     openrouter_api_key: Optional[str] = None  # overrides env if set
 
-
 # -----------------------------------------------------------------------------
 # health & pools
 # -----------------------------------------------------------------------------
@@ -89,7 +85,6 @@ class RunConfig(BaseModel):
 @app.get("/api/health")
 def health() -> Dict[str, Any]:
     return {"status": "ok", "data_dir": str(DATA_DIR)}
-
 
 @app.get("/api/pools")
 def pools() -> Dict[str, Any]:
@@ -101,7 +96,6 @@ def pools() -> Dict[str, Any]:
         "defaults": RunConfig().model_dump(),
     }
 
-
 # -----------------------------------------------------------------------------
 # runs
 # -----------------------------------------------------------------------------
@@ -110,12 +104,10 @@ def pools() -> Dict[str, Any]:
 def list_runs() -> List[Dict[str, Any]]:
     return dbmod.list_runs(get_runner().conn)
 
-
 @app.post("/api/runs", status_code=201)
 async def create_run(cfg: RunConfig) -> Dict[str, Any]:
     run_id = await get_runner().start(cfg.model_dump())
     return {"run_id": run_id}
-
 
 @app.get("/api/runs/{run_id}")
 def get_run(run_id: str) -> Dict[str, Any]:
@@ -124,14 +116,12 @@ def get_run(run_id: str) -> Dict[str, Any]:
         raise HTTPException(404, "run not found")
     return run
 
-
 @app.post("/api/runs/{run_id}/cancel")
 async def cancel_run(run_id: str) -> Dict[str, Any]:
     ok = await get_runner().cancel(run_id)
     if not ok:
         raise HTTPException(404, "run not active")
     return {"cancelled": True}
-
 
 @app.get("/api/runs/{run_id}/download")
 def download_run(run_id: str) -> FileResponse:
@@ -142,7 +132,6 @@ def download_run(run_id: str) -> FileResponse:
     if not p.exists():
         raise HTTPException(404, "output file missing")
     return FileResponse(p, filename=f"distilagent_{run_id}.jsonl", media_type="application/x-ndjson")
-
 
 @app.get("/api/runs/{run_id}/samples")
 def run_samples(run_id: str, limit: int = 50) -> List[Dict[str, Any]]:
@@ -164,14 +153,12 @@ def run_samples(run_id: str, limit: int = 50) -> List[Dict[str, Any]]:
         })
     return out
 
-
 @app.get("/api/runs/{run_id}/samples/{sample_id}")
 def sample_detail(run_id: str, sample_id: str) -> Dict[str, Any]:
     s = get_runner().sample_by_id(run_id, sample_id)
     if not s:
         raise HTTPException(404, "sample not found")
     return s
-
 
 # -----------------------------------------------------------------------------
 # SSE event stream
@@ -206,14 +193,12 @@ async def sse(run_id: str, last_event_id: int = 0):
 
     return EventSourceResponse(generator())
 
-
 # -----------------------------------------------------------------------------
 # static frontend (mount LAST so /api/* takes precedence)
 # -----------------------------------------------------------------------------
 
 if WEB_DIST.exists():
     app.mount("/", StaticFiles(directory=str(WEB_DIST), html=True), name="web")
-
 
 @app.get("/")
 def root_stub() -> Dict[str, Any]:

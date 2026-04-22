@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@ from typing import Any, Union
 
 from pydantic.types import _SecretField
 from typing_extensions import Annotated, get_args, get_origin
-
 
 def is_parameter_annotated_with(parameter: inspect.Parameter, annotation: Any) -> bool:
     """Checks if a parameter type hint is `typing.Annotated` and in that case if it contains
@@ -40,7 +39,6 @@ def is_parameter_annotated_with(parameter: inspect.Parameter, annotation: Any) -
 
     return False
 
-
 def extract_annotation_inner_type(type_hint: Any) -> Any:
     """Extracts the inner type of an annotation.
 
@@ -58,7 +56,6 @@ def extract_annotation_inner_type(type_hint: Any) -> Any:
         return extract_annotation_inner_type(type_hint_args[0])
 
     return type_hint
-
 
 def is_type_pydantic_secret_field(type_: type) -> bool:
     """Checks if a type is a Pydantic `_SecretField`.

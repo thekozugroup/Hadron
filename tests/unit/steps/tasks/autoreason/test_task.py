@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -40,9 +40,7 @@ from distilagent.steps.tasks.autoreason.task import AutoReasonedGeneration
 if TYPE_CHECKING:
     from distilagent.typing import FormattedInput, GenerateOutput
 
-
 ScriptEntry = Union[List[Any], Callable[[int, list], str]]
-
 
 class ScriptedAsyncLLM(AsyncLLM):
     """Scripted :class:`AsyncLLM` that routes responses by role system prompt."""
@@ -107,7 +105,6 @@ class ScriptedAsyncLLM(AsyncLLM):
             "statistics": {"input_tokens": [0], "output_tokens": [0]},
         }
 
-
 class FailingAsyncLLM(AsyncLLM):
     """AsyncLLM that raises on every call."""
 
@@ -129,11 +126,9 @@ class FailingAsyncLLM(AsyncLLM):
     ) -> "GenerateOutput":
         raise RuntimeError(self._exc_message)
 
-
 # ---------------------------------------------------------------------------
 # Scripts
 # ---------------------------------------------------------------------------
-
 
 def _no_flaws_script(seed_text: str = "Seed answer for X") -> Dict[str, ScriptEntry]:
     """Script where the critic returns NO FLAWS every time (fast convergence)."""
@@ -144,7 +139,6 @@ def _no_flaws_script(seed_text: str = "Seed answer for X") -> Dict[str, ScriptEn
         "synthesizer": [],
         "judge": [],
     }
-
 
 def _echoing_teacher_no_flaws() -> Dict[str, ScriptEntry]:
     """Teacher echoes the user instruction; critic says NO FLAWS."""
@@ -162,7 +156,6 @@ def _echoing_teacher_no_flaws() -> Dict[str, ScriptEntry]:
         "judge": [],
     }
 
-
 def _one_round_then_converge(seed: str = "S") -> Dict[str, ScriptEntry]:
     """Run one real iteration (critique has flaws, judges vote), then NO FLAWS."""
     return {
@@ -175,7 +168,6 @@ def _one_round_then_converge(seed: str = "S") -> Dict[str, ScriptEntry]:
         # ahead of time, so return a format that parses: we'll craft via callable.
         "judge": (lambda _idx, inp: _vote_for_A(inp)),  # type: ignore[dict-item]
     }
-
 
 def _vote_for_A(messages: list) -> str:
     """Produce a judge RANKING line that ranks the real 'A' candidate first.
@@ -203,11 +195,9 @@ def _vote_for_A(messages: list) -> str:
     others = [lbl for lbl in ("X1", "X2", "X3") if lbl != a_label]
     return f"RANKING: {a_label} > {others[0]} > {others[1]}"
 
-
 # ---------------------------------------------------------------------------
 # Tests
 # ---------------------------------------------------------------------------
-
 
 def _make_task(
     llm, *, num_judges: int = 7, max_iterations: int = 15, **kwargs: Any
@@ -220,7 +210,6 @@ def _make_task(
     )
     task.load()
     return task
-
 
 def test_single_row_converges():
     llm = ScriptedAsyncLLM()
@@ -237,7 +226,6 @@ def test_single_row_converges():
     assert row["autoreason_converged"] is True
     assert row["autoreason_iterations"] >= 1
     assert row["model_name"] == "scripted"
-
 
 def test_multiple_rows():
     llm = ScriptedAsyncLLM()
@@ -259,7 +247,6 @@ def test_multiple_rows():
     assert "Question two" in gens[1]
     assert gens[0] != gens[1]
     assert results[0]["autoreason_trace"] != results[1]["autoreason_trace"]
-
 
 def test_runtime_params_respected():
     llm = ScriptedAsyncLLM()
@@ -286,7 +273,6 @@ def test_runtime_params_respected():
     if not iteration["no_flaws"]:
         assert len(iteration["votes"]) == 3
 
-
 def test_template_with_custom_columns():
     llm = ScriptedAsyncLLM()
     llm.set_script(_echoing_teacher_no_flaws())
@@ -309,7 +295,6 @@ def test_template_with_custom_columns():
     # The scripted teacher echoes the rendered user prompt back.
     assert "Python: async" in row["generation"]
 
-
 def test_failure_produces_empty_row_with_error_metadata():
     llm = FailingAsyncLLM()
     task = _make_task(llm, num_judges=3, max_iterations=2, convergence_k=2)
@@ -322,9 +307,9 @@ def test_failure_produces_empty_row_with_error_metadata():
     assert row["autoreason_trace"] is None
     assert row["autoreason_iterations"] == 0
     assert row["autoreason_converged"] is False
-    # Error is stashed in distilabel_metadata
-    from distilagent.constants import DISTILABEL_METADATA_KEY
+    # Error is stashed in distilagent_metadata
+    from distilagent.constants import DISTILAGENT_METADATA_KEY
 
-    meta = row[DISTILABEL_METADATA_KEY]
+    meta = row[DISTILAGENT_METADATA_KEY]
     assert any("autoreason_error" in k for k in meta.keys())
     # The full batch didn't crash — we got a row back.

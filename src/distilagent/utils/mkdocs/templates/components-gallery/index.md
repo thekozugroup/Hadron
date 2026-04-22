@@ -27,7 +27,7 @@ hide:
 
     ---
 
-    Explore all the available `LLM`s integrated with `distilabel`.
+    Explore all the available `LLM`s integrated with `distilagent`.
 
     [:octicons-arrow-right-24: LLMs](llms/index.md){ .bottom }
 
@@ -35,7 +35,7 @@ hide:
 
     ---
 
-    Explore all the available `ImageGenerationModels`s integrated with `distilabel`.
+    Explore all the available `ImageGenerationModels`s integrated with `distilagent`.
 
     [:octicons-arrow-right-24: ImageGenerationModels](image_generation/index.md){ .bottom }
 
@@ -43,7 +43,7 @@ hide:
 
     ---
 
-    Explore all the available `Embeddings` models integrated with `distilabel`.
+    Explore all the available `Embeddings` models integrated with `distilagent`.
 
     [:octicons-arrow-right-24: Embeddings](embeddings/index.md){ .bottom }
 
@@ -51,7 +51,7 @@ hide:
 
     ---
 
-    Explore all the available ready-to-use `Pipelines` integrated with `distilabel`.
+    Explore all the available ready-to-use `Pipelines` integrated with `distilagent`.
 
     [:octicons-arrow-right-24: Pipelines](pipelines/index.md){ .bottom }
 

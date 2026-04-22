@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -31,9 +31,8 @@ if TYPE_CHECKING:
 
     from distilagent.utils.docstring import Docstring
 
-
 _T = TypeVar("_T")
-_RUNTIME_PARAMETER_ANNOTATION = "distilabel_step_runtime_parameter"
+_RUNTIME_PARAMETER_ANNOTATION = "distilagent_step_runtime_parameter"
 RuntimeParameter = Annotated[
     Union[_T, None], Field(default=None), _RUNTIME_PARAMETER_ANNOTATION
 ]
@@ -44,7 +43,6 @@ RuntimeParametersNames = Dict[str, Union[bool, "RuntimeParametersNames"]]
 
 RuntimeParameterInfo = Dict[str, Any]
 """Alias for the information of the runtime parameters of a `Step`."""
-
 
 class RuntimeParametersMixin(BaseModel):
     """Mixin for classes that have `RuntimeParameter`s attributes.
@@ -191,7 +189,6 @@ class RuntimeParametersMixin(BaseModel):
             setattr(self, name, value)
             self._runtime_parameters[name] = value
 
-
 def _is_runtime_parameter(field: "FieldInfo") -> Tuple[bool, bool]:
     """Check if a `pydantic.BaseModel` field is a `RuntimeParameter` and if it's optional
     i.e. providing a value for the field in `Pipeline.run` is optional.
@@ -224,7 +221,6 @@ def _is_runtime_parameter(field: "FieldInfo") -> Tuple[bool, bool]:
             return True, is_optional
 
     return False, False
-
 
 class RuntimeParametersModelMixin(RuntimeParametersMixin):
     """Specific mixin for RuntimeParameters that affect the model classes, LLM,

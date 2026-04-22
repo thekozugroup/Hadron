@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,7 +28,6 @@ if TYPE_CHECKING:
     from PIL.Image import Image
 
     from distilagent.typing import ChatType, StepColumns
-
 
 class TextGenerationWithImage(TextGeneration):
     """Text generation with images with an `LLM` given a prompt.
@@ -103,7 +102,7 @@ class TextGenerationWithImage(TextGeneration):
         #         "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg",
         #         "generation": "Based on the visual cues in the image...",
         #         "model_name": "meta-llama/Llama-3.2-11B-Vision-Instruct"
-        #         ... # distilabel_metadata would be here
+        #         ... # distilagent_metadata would be here
         #     }
         # ]
         # result[0]["generation"]

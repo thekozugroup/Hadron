@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ from typing import (
     get_args,
 )
 
-from distilagent.errors import DistilabelUserError
+from distilagent.errors import DistilAgentUserError
 
 if TYPE_CHECKING:
     import instructor
@@ -33,7 +33,6 @@ if TYPE_CHECKING:
     from groq import AsyncGroq
     from mistralai.async_client import MistralAsyncClient
     from openai import AsyncAzureOpenAI, AsyncOpenAI
-
 
 InstructorFrameworks = Literal[
     "openai", "azure_openai", "anthropic", "cohere", "groq", "litellm", "mistral"
@@ -49,7 +48,6 @@ InstructorAvailableClients: TypeAlias = Union[
     "MistralAsyncClient",
 ]
 """Available clients that can be wrapped with `instructor`. """
-
 
 def _client_patcher(framework: InstructorFrameworks) -> Tuple[Callable, str]:
     """Helper function to return the appropriate instructor client for the given framework.
@@ -85,7 +83,6 @@ def _client_patcher(framework: InstructorFrameworks) -> Tuple[Callable, str]:
 
     return patch
 
-
 def prepare_instructor(
     client: InstructorAvailableClients,
     mode: Optional["instructor.Mode"] = None,
@@ -117,7 +114,7 @@ def prepare_instructor(
 
     mode = mode or default_mode
     if mode.value not in [m.value for m in instructor.mode.Mode]:
-        raise DistilabelUserError(
+        raise DistilAgentUserError(
             f"Invalid mode '{mode}'. Must be one of {[m.value for m in instructor.mode.Mode]}",
             page="sections/how_to_guides/advanced/structured_generation/#instructor",
         )

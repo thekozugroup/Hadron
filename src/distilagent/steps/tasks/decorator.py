@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,16 +18,14 @@ from typing import TYPE_CHECKING, Any, Callable, Dict, Final, List, Tuple, Type,
 
 import yaml
 
-from distilagent.errors import DistilabelUserError
+from distilagent.errors import DistilAgentUserError
 from distilagent.steps.tasks.base import Task
 from distilagent.typing import FormattedInput
 
 if TYPE_CHECKING:
     from distilagent.typing import StepColumns
 
-
 TaskFormattingOutputFunc = Callable[..., Dict[str, Any]]
-
 
 def task(
     inputs: Union["StepColumns", None] = None,
@@ -54,7 +52,7 @@ def task(
     def decorator(func: TaskFormattingOutputFunc) -> Type["Task"]:
         doc = inspect.getdoc(func)
         if doc is None:
-            raise DistilabelUserError(
+            raise DistilAgentUserError(
                 "When using the `task` decorator, including a docstring in the formatting"
                 " function is mandatory. The docstring must follow the format described"
                 " in the documentation.",
@@ -95,7 +93,6 @@ def task(
 
     return decorator
 
-
 _SYSTEM_PROMPT_YAML_KEY: Final[str] = "system_prompt"
 _USER_MESSAGE_TEMPLATE_YAML_KEY: Final[str] = "user_message_template"
 _DOCSTRING_FORMATTING_FUNCTION_ERROR: Final[str] = (
@@ -103,7 +100,6 @@ _DOCSTRING_FORMATTING_FUNCTION_ERROR: Final[str] = (
     " check the documentation and update the function to include a docstring with the expected"
     " format."
 )
-
 
 def _parse_docstring(docstring: str) -> Tuple[str, str]:
     """Parses the docstring of the formatting function that was built using the `task`
@@ -116,13 +112,13 @@ def _parse_docstring(docstring: str) -> Tuple[str, str]:
         A tuple containing the system prompt and the user message template.
 
     Raises:
-        DistilabelUserError: if the docstring doesn't follow the expected format or if
+        DistilAgentUserError: if the docstring doesn't follow the expected format or if
             the expected keys are missing.
     """
     parts = docstring.split("---")
 
     if len(parts) != 3:
-        raise DistilabelUserError(
+        raise DistilAgentUserError(
             _DOCSTRING_FORMATTING_FUNCTION_ERROR,
             page="",
         )
@@ -132,7 +128,7 @@ def _parse_docstring(docstring: str) -> Tuple[str, str]:
     try:
         parsed_yaml = yaml.safe_load(yaml_content)
         if not isinstance(parsed_yaml, dict):
-            raise DistilabelUserError(
+            raise DistilAgentUserError(
                 _DOCSTRING_FORMATTING_FUNCTION_ERROR,
                 page="",
             )
@@ -140,7 +136,7 @@ def _parse_docstring(docstring: str) -> Tuple[str, str]:
         system_prompt = parsed_yaml.get(_SYSTEM_PROMPT_YAML_KEY)
         user_template = parsed_yaml.get(_USER_MESSAGE_TEMPLATE_YAML_KEY)
         if system_prompt is None or user_template is None:
-            raise DistilabelUserError(
+            raise DistilAgentUserError(
                 "The formatting function decorated with `task` must include both the `system_prompt`"
                 " and `user_message_template` keys in the docstring. Please, check the documentation"
                 " and update the docstring of the formatting function to include the expected"
@@ -151,11 +147,9 @@ def _parse_docstring(docstring: str) -> Tuple[str, str]:
         return system_prompt.strip(), user_template.strip()
 
     except yaml.YAMLError as e:
-        raise DistilabelUserError(_DOCSTRING_FORMATTING_FUNCTION_ERROR, page="") from e
-
+        raise DistilAgentUserError(_DOCSTRING_FORMATTING_FUNCTION_ERROR, page="") from e
 
 TEMPLATE_PLACEHOLDERS_REGEX = re.compile(r"\{(\w+)\}")
-
 
 def _validate_templates(
     inputs: "StepColumns", system_prompt: str, user_message_template: str
@@ -169,7 +163,7 @@ def _validate_templates(
         user_message_template: the user message template.
 
     Raises:
-        DistilabelUserError: if the system prompt or the user message template contain
+        DistilAgentUserError: if the system prompt or the user message template contain
             invalid placeholders.
     """
     list_inputs = list(inputs.keys()) if isinstance(inputs, dict) else inputs
@@ -178,7 +172,7 @@ def _validate_templates(
         system_prompt, list_inputs
     )
     if not valid_system_prompt:
-        raise DistilabelUserError(
+        raise DistilAgentUserError(
             f"The formatting function decorated with `task` includes invalid placeholders"
             f" in the extracted `system_prompt` from the function docstring. Valid placeholders"
             f" are: {list_inputs}, but the following placeholders were found: {invalid_system_prompt_placeholders}."
@@ -190,7 +184,7 @@ def _validate_templates(
         _validate_template(user_message_template, list_inputs)
     )
     if not valid_user_message_template:
-        raise DistilabelUserError(
+        raise DistilAgentUserError(
             f"The formatting function decorated with `task` includes invalid placeholders"
             f" in the extracted `user_message_template` from the function docstring. Valid"
             f" placeholders are: {list_inputs}, but the following placeholders were found:"
@@ -198,7 +192,6 @@ def _validate_templates(
             " to only include the valid placeholders.",
             page="",
         )
-
 
 def _validate_template(
     template: str, allowed_placeholders: List[str]

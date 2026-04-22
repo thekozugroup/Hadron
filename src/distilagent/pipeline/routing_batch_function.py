@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ from typing import TYPE_CHECKING, Any, Callable, Dict, List, Optional, Union
 from pydantic import BaseModel, PrivateAttr
 from typing_extensions import Self
 
-from distilagent.errors import DistilabelUserError
+from distilagent.errors import DistilAgentUserError
 from distilagent.utils.serialization import (
     TYPE_INFO_KEY,
     _get_module_attr,
@@ -34,7 +34,6 @@ if TYPE_CHECKING:
 RoutingBatchFunc = Callable[[List[str]], List[str]]
 """Type alias for a routing batch function. It takes a list of all the downstream steps and
 returns a list with the names of the steps that should receive the batch."""
-
 
 class RoutingBatchFunction(BaseModel, _Serializable):
     """A thin wrapper around a routing batch function that can be used to route batches
@@ -135,7 +134,7 @@ class RoutingBatchFunction(BaseModel, _Serializable):
             routing batch function.
         """
         if not isinstance(other, list):
-            raise DistilabelUserError(
+            raise DistilAgentUserError(
                 f"Can only set a `routing_batch_function` for a list of steps. Got: {other}."
                 " Please, review the right-hand side of the `routing_batch_function >> other`"
                 " expression. It should be"
@@ -144,7 +143,7 @@ class RoutingBatchFunction(BaseModel, _Serializable):
             )
 
         if not self._step:
-            raise DistilabelUserError(
+            raise DistilAgentUserError(
                 "Routing batch function doesn't have an upstream step. Cannot connect downstream"
                 " steps before connecting the upstream step. Connect this routing batch"
                 " function to an upstream step using the `>>` operator. For example:"
@@ -235,7 +234,6 @@ class RoutingBatchFunction(BaseModel, _Serializable):
 
         return routing_batch_function
 
-
 def routing_batch_function(
     description: Optional[str] = None,
 ) -> Callable[[RoutingBatchFunc], RoutingBatchFunction]:
@@ -256,11 +254,9 @@ def routing_batch_function(
     from distilagent.pipeline import Pipeline, routing_batch_function
     from distilagent.steps import LoadDataFromHub, GroupColumns
 
-
     @routing_batch_function
     def random_routing_batch(steps: List[str]) -> List[str]:
         return random.sample(steps, 2)
-
 
     with Pipeline(name="routing-batch-function") as pipeline:
         load_data = LoadDataFromHub()
@@ -322,7 +318,6 @@ def routing_batch_function(
 
     return decorator
 
-
 def sample_n_steps(n: int) -> RoutingBatchFunction:
     """A simple function that creates a routing batch function that samples `n` steps from
     the list of all the downstream steps.
@@ -342,7 +337,6 @@ def sample_n_steps(n: int) -> RoutingBatchFunction:
     from distilagent.steps import LoadDataFromHub, GroupColumns
 
     random_routing_batch = sample_n_steps(2)
-
 
     with Pipeline(name="routing-batch-function") as pipeline:
         load_data = LoadDataFromHub()

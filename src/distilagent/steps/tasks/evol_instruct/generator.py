@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -34,7 +34,6 @@ from distilagent.utils.lists import flatten_responses
 
 if TYPE_CHECKING:
     from distilagent.typing import ChatType, GeneratorStepOutput, LLMStatistics
-
 
 class EvolInstructGenerator(GeneratorTask):
     """Generate evolved instructions using an `LLM`.
@@ -339,7 +338,7 @@ class EvolInstructGenerator(GeneratorTask):
                 formatted_generations = []
                 for mutated_instruction in instructions[-mutation_no:]:
                     mutated_instruction = self.format_output(mutated_instruction)
-                    mutated_instruction["distilabel_metadata"] = {
+                    mutated_instruction["distilagent_metadata"] = {
                         f"statistics_instruction_{self.name}": dict(statistics)
                     }
                     formatted_generations.append(mutated_instruction)
@@ -364,7 +363,7 @@ class EvolInstructGenerator(GeneratorTask):
             formatted_outputs = []
             for instruction, answer in zip(instructions, answers):
                 formatted_output = self.format_output(instruction, answer)
-                formatted_output["distilabel_metadata"] = {
+                formatted_output["distilagent_metadata"] = {
                     f"statistics_answer_{self.name}": dict(statistics)
                 }
                 formatted_outputs.append(formatted_output)

@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ from distilagent.models.image_generation.base import AsyncImageGenerationModel
 
 if TYPE_CHECKING:
     from PIL.Image import Image
-
 
 class InferenceEndpointsImageGeneration(  # type: ignore
     InferenceEndpointsBaseClient, AsyncImageGenerationModel

@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@ from distilagent.models.embeddings.sentence_transformers import (
     SentenceTransformerEmbeddings,
 )
 from distilagent.steps.embeddings.embedding_generation import EmbeddingGeneration
-
 
 class TestEmbeddingGeneration:
     def test_process(self) -> None:

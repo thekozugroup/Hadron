@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,14 +32,11 @@ from distilagent.steps.tasks.autoreason.tournament import TournamentRunner
 
 pytestmark = pytest.mark.asyncio
 
-
 # ---------------------------------------------------------------------------
 # ScriptedLLM test double
 # ---------------------------------------------------------------------------
 
-
 ScriptEntry = Union[List[Any], Callable[[int, list], str]]
-
 
 class ScriptedLLM:
     """Lightweight async LLM stub for tournament tests.
@@ -115,11 +112,9 @@ class ScriptedLLM:
             "statistics": {"input_tokens": [0], "output_tokens": [0]},
         }
 
-
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
-
 
 def judge_ranking_for(target_text: str, user_content: str) -> str:
     """Return ``"RANKING: <target> > <other1> > <other2>"`` where ``<target>``
@@ -164,11 +159,9 @@ def judge_ranking_for(target_text: str, user_content: str) -> str:
     others = [lbl for lbl in ("X1", "X2", "X3") if lbl != winner_label]
     return f"RANKING: {winner_label} > {others[0]} > {others[1]}"
 
-
 def _user_content(input: list) -> str:
     # Second message is the user message.
     return input[1]["content"]
-
 
 # ---------------------------------------------------------------------------
 # Constants (distinctive texts so judges can locate candidates)
@@ -179,11 +172,9 @@ B_TEXT = "<<<BEE>>>"
 AB_TEXT = "<<<SYNTH>>>"
 CRITIQUE_TEXT = "There is a specific flaw in paragraph 2."
 
-
 # ---------------------------------------------------------------------------
 # Tests
 # ---------------------------------------------------------------------------
-
 
 async def test_converges_when_A_defends_twice() -> None:
     """Critic always returns a critique; judges rank A first in both rounds."""
@@ -208,7 +199,6 @@ async def test_converges_when_A_defends_twice() -> None:
     assert trace.final_answer == SEED_TEXT
     assert trace.iterations[0].winner == "A"
     assert trace.iterations[1].winner == "A"
-
 
 async def test_no_flaws_early_exit() -> None:
     """Critic returns 'NO FLAWS' twice with convergence_k=2: stop at 2 iters."""
@@ -241,7 +231,6 @@ async def test_no_flaws_early_exit() -> None:
         assert it.winner == "A"
     assert trace.final_answer == SEED_TEXT
 
-
 async def test_b_wins_promotes_new_incumbent() -> None:
     """Iter 0: B wins. Iter 1 & 2: the promoted B (now A) wins twice to converge."""
     # Round 0 produces b_text = B_TEXT. After promotion, the new "A" is B_TEXT.
@@ -272,7 +261,6 @@ async def test_b_wins_promotes_new_incumbent() -> None:
     assert trace.iterations[2].winner == "A"
     assert trace.final_answer == B_TEXT
 
-
 async def test_ab_wins_promotes_synthesis() -> None:
     """Iter 0: AB wins. Iter 1 & 2: promoted AB defends twice."""
     def judge_fn(idx: int, inp: list) -> str:
@@ -298,7 +286,6 @@ async def test_ab_wins_promotes_synthesis() -> None:
     assert trace.iterations[1].winner == "A"
     assert trace.iterations[2].winner == "A"
     assert trace.final_answer == AB_TEXT
-
 
 async def test_max_iterations_hit_without_convergence() -> None:
     """Judges alternate winners so A never defends twice in a row."""
@@ -338,7 +325,6 @@ async def test_max_iterations_hit_without_convergence() -> None:
     # B wins all three; final incumbent is the last promoted B.
     assert trace.final_answer == b_texts[-1]
 
-
 async def test_majority_malformed_judges_keeps_A() -> None:
     """With >=4/7 judges unparseable, fail-safe keeps A; run 2 iters to converge."""
     def judge_fn(idx: int, inp: list) -> str:
@@ -372,7 +358,6 @@ async def test_majority_malformed_judges_keeps_A() -> None:
         assert it.borda == {"A": 0, "B": 0, "AB": 0}
     assert trace.final_answer == SEED_TEXT
 
-
 async def test_rate_limiter_is_invoked() -> None:
     """Confirm AsyncTokenBucket.acquire runs at least once."""
     bucket = AsyncTokenBucket(rpm=10000, name="test")
@@ -399,7 +384,6 @@ async def test_rate_limiter_is_invoked() -> None:
     assert end_remaining < start_remaining, (
         f"Rate limiter not invoked: remaining {end_remaining} >= start {start_remaining}"
     )
-
 
 async def test_total_calls_counter() -> None:
     """With num_judges=3, max_iterations=1 and a critique: expect 7 calls."""

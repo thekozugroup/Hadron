@@ -17,14 +17,12 @@ from threading import Lock
 
 _LOCK = Lock()
 
-
 def get_conn(db_path: Path) -> sqlite3.Connection:
     db_path.parent.mkdir(parents=True, exist_ok=True)
     conn = sqlite3.connect(db_path, check_same_thread=False)
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA journal_mode=WAL")
     return conn
-
 
 def init(conn: sqlite3.Connection) -> None:
     with conn:
@@ -64,7 +62,6 @@ def init(conn: sqlite3.Connection) -> None:
             "CREATE INDEX IF NOT EXISTS idx_events_run ON events(run_id, id)"
         )
 
-
 def new_run(conn: sqlite3.Connection, config: Dict[str, Any]) -> str:
     run_id = uuid.uuid4().hex[:12]
     with _LOCK, conn:
@@ -74,7 +71,6 @@ def new_run(conn: sqlite3.Connection, config: Dict[str, Any]) -> str:
         )
     return run_id
 
-
 def update_run(conn: sqlite3.Connection, run_id: str, **fields: Any) -> None:
     if not fields:
         return
@@ -83,18 +79,15 @@ def update_run(conn: sqlite3.Connection, run_id: str, **fields: Any) -> None:
     with _LOCK, conn:
         conn.execute(f"UPDATE runs SET {cols} WHERE id=?", vals)
 
-
 def get_run(conn: sqlite3.Connection, run_id: str) -> Optional[Dict[str, Any]]:
     row = conn.execute("SELECT * FROM runs WHERE id=?", (run_id,)).fetchone()
     return _row_to_dict(row)
-
 
 def list_runs(conn: sqlite3.Connection, limit: int = 100) -> List[Dict[str, Any]]:
     rows = conn.execute(
         "SELECT * FROM runs ORDER BY created_at DESC LIMIT ?", (limit,)
     ).fetchall()
     return [_row_to_dict(r) for r in rows]
-
 
 def append_event(conn: sqlite3.Connection, run_id: str, kind: str, payload: Dict[str, Any]) -> int:
     with _LOCK, conn:
@@ -103,7 +96,6 @@ def append_event(conn: sqlite3.Connection, run_id: str, kind: str, payload: Dict
             (run_id, time.time(), kind, json.dumps(payload)),
         )
         return cur.lastrowid
-
 
 def events_since(
     conn: sqlite3.Connection, run_id: str, last_id: int = 0, limit: int = 500
@@ -117,7 +109,6 @@ def events_since(
         {"id": r["id"], "ts": r["ts"], "kind": r["kind"], "payload": json.loads(r["payload"])}
         for r in rows
     ]
-
 
 def _row_to_dict(row) -> Optional[Dict[str, Any]]:
     if row is None:

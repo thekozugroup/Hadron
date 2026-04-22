@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ from typing import Final
 from huggingface_hub import constants
 
 HF_TOKEN_ENV_VAR: Final[str] = "HF_TOKEN"
-
 
 def get_hf_token(cls_name: str, token_arg: str) -> str:
     """Get the token for the hugging face API.

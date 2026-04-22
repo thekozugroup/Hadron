@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@ from typing import Callable, Dict, List, Tuple
 
 from typing_extensions import TypedDict
 
-
 class Docstring(TypedDict):
     short_description: str
     description: str
@@ -34,7 +33,6 @@ class Docstring(TypedDict):
     examples: Dict[str, str]
     note: str
     citations: List[str]
-
 
 def parse_google_docstring(func: Callable) -> Docstring:  # noqa: C901
     """Parses a Google-style docstring and returns a dictionary with its sections. It takes
@@ -189,7 +187,6 @@ def parse_google_docstring(func: Callable) -> Docstring:  # noqa: C901
 
     return sections
 
-
 def remove_leading_whitespaces(text: str, num_spaces: int = 8) -> str:
     """Removes the specified leading whitespaces from each line of a given string.
 
@@ -206,7 +203,6 @@ def remove_leading_whitespaces(text: str, num_spaces: int = 8) -> str:
         for line in lines
     ]
     return "\n".join(trimmed_lines)
-
 
 def get_bibtex(ref: str) -> str:
     r"""Get the bibtex citation from an arxiv url.

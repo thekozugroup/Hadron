@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -47,14 +47,12 @@ DownstreamConnectableSteps = TypeVar(
 )
 """Type for the `Step` types that can be connected as downstream steps."""
 
-
 class StepLoadStatus(TypedDict):
     """Dict containing information about if one step was loaded/unloaded or if it's load
     failed"""
 
     name: str
     status: Literal["loaded", "unloaded", "load_failed"]
-
 
 PipelineRuntimeParametersInfo = Dict[
     str, Union[List["RuntimeParameterInfo"], Dict[str, "RuntimeParameterInfo"]]

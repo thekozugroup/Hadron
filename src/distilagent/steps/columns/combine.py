@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,13 +14,12 @@
 
 from typing import TYPE_CHECKING
 
-from distilagent.constants import DISTILABEL_METADATA_KEY
+from distilagent.constants import DISTILAGENT_METADATA_KEY
 from distilagent.steps.base import Step, StepInput
-from distilagent.steps.columns.utils import merge_distilabel_metadata
+from distilagent.steps.columns.utils import merge_distilagent_metadata
 
 if TYPE_CHECKING:
     from distilagent.typing import StepOutput
-
 
 class CombineOutputs(Step):
     """Combine the outputs of several upstream steps.
@@ -84,14 +83,14 @@ class CombineOutputs(Step):
                     {
                         k: v
                         for k, v in output_dict.items()
-                        if k != DISTILABEL_METADATA_KEY
+                        if k != DISTILAGENT_METADATA_KEY
                     }
                 )
 
             if any(
-                DISTILABEL_METADATA_KEY in output_dict for output_dict in output_dicts
+                DISTILAGENT_METADATA_KEY in output_dict for output_dict in output_dicts
             ):
-                combined_dict[DISTILABEL_METADATA_KEY] = merge_distilabel_metadata(
+                combined_dict[DISTILAGENT_METADATA_KEY] = merge_distilagent_metadata(
                     *output_dicts
                 )
             combined_outputs.append(combined_dict)

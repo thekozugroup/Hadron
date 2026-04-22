@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -31,7 +31,6 @@ from distilagent.steps.tasks.base import Task
 from distilagent.typing import ChatType
 
 _PARSE_SCORE_LINE_REGEX = re.compile(r"\[\d+\] score: (\d+)", re.IGNORECASE)
-
 
 class QualityScorer(Task):
     """Score responses based on their quality using an `LLM`.
@@ -128,7 +127,7 @@ class QualityScorer(Task):
         [{'instruction': 'instruction',
         'responses': ['good response', 'weird response', 'bad response'],
         'scores': [1, 2, 3],
-        'distilabel_metadata': {'raw_output_quality_scorer_0': '{  "scores": [1, 2, 3] }'},
+        'distilagent_metadata': {'raw_output_quality_scorer_0': '{  "scores": [1, 2, 3] }'},
         'model_name': 'meta-llama/Meta-Llama-3.1-70B-Instruct'}]
         ```
 

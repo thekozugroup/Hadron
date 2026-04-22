@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ from distilagent.steps.base import Step, StepInput
 
 if TYPE_CHECKING:
     from distilagent.typing import StepColumns, StepOutput
-
 
 class FormatTextGenerationDPO(Step):
     """Format the output of your LLMs for Direct Preference Optimization (DPO).
@@ -193,7 +192,6 @@ class FormatTextGenerationDPO(Step):
                 item["rejected_rating"] = item["ratings"][rejected_idx]
 
             yield input
-
 
 class FormatChatGenerationDPO(Step):
     """Format the output of a combination of a `ChatGeneration` + a preference task for Direct Preference Optimization (DPO).

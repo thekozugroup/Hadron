@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -40,7 +40,6 @@ SAMPLE_DATA = [
         "execution_result": "Response for the node contents",
     },
 ]
-
 
 class TestAPIGenSemanticChecker:
     @pytest.mark.parametrize("use_default_structured_output", [True, False])

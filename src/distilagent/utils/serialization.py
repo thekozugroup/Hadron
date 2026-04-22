@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -46,13 +46,11 @@ from typing_extensions import Self
 
 T = TypeVar("T")
 
-DISTILABEL_FILENAME = "distilagent-file.json"
+DISTILAGENT_FILENAME = "distilagent-file.json"
 TYPE_INFO_KEY = "type_info"
-
 
 StrOrPath = Union[str, os.PathLike]
 SaveFormats = Literal["json", "yaml"]
-
 
 # Mapping to handle import paths that could have been serialized from previous versions
 _OLD_IMPORT_MODULE_ATTR: Dict[Tuple[str, str], Tuple[str, str]] = {
@@ -67,7 +65,6 @@ _OLD_IMPORT_MODULE_ATTR: Dict[Tuple[str, str], Tuple[str, str]] = {
     ),
 }
 
-
 def _get_module_attr(module: str, name: str) -> Type:
     """Gets a class given the module and the name of the class.
 
@@ -80,7 +77,6 @@ def _get_module_attr(module: str, name: str) -> Type:
 
     mod = importlib.import_module(module)
     return getattr(mod, name)
-
 
 def load_with_type_info(class_: Any) -> Any:
     """Creates an instance of a class from a dictionary containing the type info and the
@@ -121,7 +117,6 @@ def load_with_type_info(class_: Any) -> Any:
     instance = cls(**class_)
     return instance
 
-
 def write_json(filename: Path, data: Any) -> None:
     """Writes a JSON file to the given path, creating the parent dir if needed.
 
@@ -132,7 +127,6 @@ def write_json(filename: Path, data: Any) -> None:
     filename.parent.mkdir(parents=True, exist_ok=True)
     with open(filename, "wb") as f:
         f.write(orjson.dumps(data, option=orjson.OPT_SERIALIZE_NUMPY))
-
 
 def read_json(filename: StrOrPath) -> Any:
     """Reads a JSON file.
@@ -146,7 +140,6 @@ def read_json(filename: StrOrPath) -> Any:
     with open(filename, "rb") as f:
         return orjson.loads(f.read())
 
-
 def write_yaml(filename: Path, data: Dict[str, Any]) -> None:
     """Writes a YAML file to the given path, creating the parent dir if needed.
 
@@ -157,7 +150,6 @@ def write_yaml(filename: Path, data: Dict[str, Any]) -> None:
     filename.parent.mkdir(parents=True, exist_ok=True)
     with open(filename, "w") as file:
         yaml.dump(data, file, default_flow_style=False, sort_keys=False)
-
 
 def read_yaml(filename: StrOrPath) -> Dict[str, Any]:
     """Reads a YAML file.
@@ -170,7 +162,6 @@ def read_yaml(filename: StrOrPath) -> Dict[str, Any]:
     """
     with open(filename, "r") as file:
         return yaml.load(file, Loader=yaml.FullLoader)
-
 
 class _Serializable:
     """Base class for serializable classes. It provides the means to serialize and deserialize."""
@@ -264,11 +255,11 @@ class _Serializable:
             ValueError: if the provided `format` is not valid.
         """
         if path is None:
-            path = Path.cwd() / DISTILABEL_FILENAME
+            path = Path.cwd() / DISTILAGENT_FILENAME
         path = Path(path)
         if path.suffix == "":
             # If the path has no suffix, assume the user just wants a folder to write the task
-            path = path / DISTILABEL_FILENAME
+            path = path / DISTILAGENT_FILENAME
 
         if dump is None:
             dump = self.dump(**kwargs)
@@ -352,11 +343,9 @@ class _Serializable:
             f"Invalid file format: '{path.suffix}', must be one of {get_args(SaveFormats)}."
         )
 
-
 def _check_is_dir(path: StrOrPath) -> None:
     if Path(path).is_dir():
         raise ValueError(f"You must provide a file path, not a directory: {path}")
-
 
 def _extra_serializable_fields(obj: BaseModel) -> List[Dict[str, Dict[str, Any]]]:
     """Gets the information of the nested `_Serializable` attributes within another `_Serializable`

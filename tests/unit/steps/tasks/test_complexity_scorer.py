@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ import pytest
 from distilagent.pipeline.local import Pipeline
 from distilagent.steps.tasks.complexity_scorer import ComplexityScorer
 from tests.unit.conftest import DummyAsyncLLM
-
 
 class TestComplexityScorer:
     def test_format_input(self) -> None:

@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
 # limitations under the License.
 
 from typing import List, Optional, Tuple
-
 
 def get_value(matrix: List[List[int]], indices: Tuple[int, int]) -> Optional[int]:
     """Gets the value at the specified index in the matrix.

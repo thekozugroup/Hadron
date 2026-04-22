@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ from jinja2 import Template
 from pydantic import PositiveInt
 from typing_extensions import override
 
-from distilagent.constants import DISTILABEL_METADATA_KEY
+from distilagent.constants import DISTILAGENT_METADATA_KEY
 from distilagent.steps.base import StepInput
 from distilagent.steps.tasks.base import Task
 from distilagent.steps.tasks.math_shepherd.utils import (
@@ -29,7 +29,6 @@ from distilagent.utils.itertools import batched
 
 if TYPE_CHECKING:
     from distilagent.typing import ChatType, LLMStatistics, StepColumns, StepOutput
-
 
 SYSTEM_PROMPT = """\
 You are a math teacher who helps students by breaking down word problems into clear, logical steps.
@@ -90,7 +89,6 @@ Step 3: For the whole week (4 regular days plus Friday), the total is (40 * 4) +
 Step 2: On Friday, he borrows 40 + 40/100 * 40 = <<40+40/100*40=56>>56 books.
 Step 3: In a week, he borrows 5.7 * 7 = <<5.7*7=40>>40 books. The answer is: 40"""
 
-
 TEMPLATE: str = """Generate {{ N }} example solutions to the same problem, separated by a single `---` and nothing else.
 Response format:
 ```
@@ -109,14 +107,11 @@ This is the problem:
 {{ instruction }}
 """
 
-
 TEMPLATE_STRUCTURED: str = """Generate {{ N }} example solutions for the following problem:\n{{ instruction }}"""
-
 
 # Type aliases
 StepSolution = List[str]
 Completions = List[StepSolution]
-
 
 class MathShepherdCompleter(Task):
     """Math Shepherd Completer and auto-labeller task.
@@ -533,7 +528,7 @@ class MathShepherdCompleter(Task):
         raw_output: Union[str, None],
         raw_input: Union[list[dict[str, Any]], None],
     ) -> dict[str, Any]:
-        """Adds the `distilabel_metadata` to the input.
+        """Adds the `distilagent_metadata` to the input.
 
         This method comes for free in the general Tasks, but as we have reimplemented the `process`,
         we have to repeat it here.
@@ -549,21 +544,21 @@ class MathShepherdCompleter(Task):
         """
         input["model_name"] = self.llm.model_name
 
-        if DISTILABEL_METADATA_KEY not in input:
-            input[DISTILABEL_METADATA_KEY] = {}
+        if DISTILAGENT_METADATA_KEY not in input:
+            input[DISTILAGENT_METADATA_KEY] = {}
         # If the solutions are splitted afterwards, the statistics should be splitted
         # to avoid counting extra tokens
-        input[DISTILABEL_METADATA_KEY][f"statistics_{self.name}"] = statistics
+        input[DISTILAGENT_METADATA_KEY][f"statistics_{self.name}"] = statistics
 
         # Let some defaults in case something failed and we had None, otherwise when reading
         # the parquet files using pyarrow, the following error will appear:
         # ArrowInvalid: Schema
         if self.add_raw_input:
-            input[DISTILABEL_METADATA_KEY][f"raw_input_{self.name}"] = raw_input or [
+            input[DISTILAGENT_METADATA_KEY][f"raw_input_{self.name}"] = raw_input or [
                 {"content": "", "role": ""}
             ]
         if self.add_raw_output:
-            input[DISTILABEL_METADATA_KEY][f"raw_output_{self.name}"] = raw_output or ""
+            input[DISTILAGENT_METADATA_KEY][f"raw_output_{self.name}"] = raw_output or ""
         return input
 
     @override

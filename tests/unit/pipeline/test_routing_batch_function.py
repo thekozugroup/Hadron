@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ from distilagent.pipeline.routing_batch_function import (
 )
 from distilagent.utils.serialization import TYPE_INFO_KEY
 from tests.unit.pipeline.utils import DummyGeneratorStep, DummyStep1, DummyStep2
-
 
 class TestRoutingBatchFunction:
     def test_route_batch(self) -> None:
@@ -126,7 +125,6 @@ class TestRoutingBatchFunction:
 
         assert routing_batch_function_from_dict.dump() == routing_batch_function.dump()
 
-
 class TestRoutingBatchFunctionDecorator:
     def test_decorator(self) -> None:
         @routing_batch_function()
@@ -140,7 +138,6 @@ class TestRoutingBatchFunctionDecorator:
             steps=["step_1", "step_2", "step_3"],
         )
         assert routed_to == ["step_1", "step_2"]
-
 
 def test_sample_n_steps() -> None:
     steps = ["step_a", "step_b", "step_c", "step_d"]

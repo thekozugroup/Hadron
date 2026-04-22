@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,7 +30,6 @@ from distilagent.steps.tasks.autoreason.types import CandidateLabel, JudgeVote
 CANDIDATES: List[CandidateLabel] = ["A", "B", "AB"]
 # Tie-breaker order: prefer A (do-nothing bias), then AB (synthesis), then B.
 _TIE_BREAK_ORDER: List[CandidateLabel] = ["A", "AB", "B"]
-
 
 def borda_count(votes: List[JudgeVote]) -> Dict[CandidateLabel, int]:
     """Aggregate judge rankings into Borda totals.
@@ -64,7 +63,6 @@ def borda_count(votes: List[JudgeVote]) -> Dict[CandidateLabel, int]:
             totals[candidate] += (len(CANDIDATES) - 1) - position
 
     return totals
-
 
 def pick_winner(borda: Dict[CandidateLabel, int]) -> CandidateLabel:
     """Return the winning candidate from a Borda totals dict.

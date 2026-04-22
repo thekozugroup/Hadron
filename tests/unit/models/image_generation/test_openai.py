@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ import nest_asyncio
 import pytest
 
 from distilagent.models.image_generation.openai import OpenAIImageGeneration
-
 
 @patch("openai.OpenAI")
 @patch("openai.AsyncOpenAI")

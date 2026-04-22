@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
 from distilagent.steps.tasks.apigen.execution_checker import APIGenExecutionChecker
 from distilagent.steps.tasks.apigen.generator import APIGenGenerator
 from distilagent.steps.tasks.apigen.semantic_checker import APIGenSemanticChecker
-from distilagent.steps.tasks.argilla_labeller import ArgillaLabeller
 from distilagent.steps.tasks.autoreason.task import AutoReasonedGeneration
 from distilagent.steps.tasks.base import GeneratorTask, ImageTask, Task
 from distilagent.steps.tasks.clair import CLAIR
@@ -67,8 +66,6 @@ __all__ = [
     "APIGenExecutionChecker",
     "APIGenGenerator",
     "APIGenSemanticChecker",
-    "ArgillaLabeller",
-    "ArgillaLabeller",
     "AutoReasonedGeneration",
     "BitextRetrievalGenerator",
     "ChatGeneration",

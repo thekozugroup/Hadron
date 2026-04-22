@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ from distilagent.steps.tasks.evol_instruct.generator import (
 from distilagent.steps.tasks.evol_instruct.utils import (
     GENERATION_MUTATION_TEMPLATES,
 )
-
 
 class TestEvolInstructGenerator:
     def test_passing_pipeline(self, dummy_llm: LLM) -> None:
@@ -77,7 +76,7 @@ class TestEvolInstructGenerator:
                     {
                         "instruction": "output",
                         "model_name": "test",
-                        "distilabel_metadata": {
+                        "distilagent_metadata": {
                             "statistics_instruction_task": {
                                 "input_tokens": [12, 12],
                                 "output_tokens": [12, 12],
@@ -87,7 +86,7 @@ class TestEvolInstructGenerator:
                     {
                         "instruction": "output",
                         "model_name": "test",
-                        "distilabel_metadata": {
+                        "distilagent_metadata": {
                             "statistics_instruction_task": {
                                 "input_tokens": [12, 12],
                                 "output_tokens": [12, 12],
@@ -118,7 +117,7 @@ class TestEvolInstructGenerator:
                         "instruction": "output",
                         "answer": "output",
                         "model_name": "test",
-                        "distilabel_metadata": {
+                        "distilagent_metadata": {
                             "statistics_answer_task": {
                                 "input_tokens": [12],
                                 "output_tokens": [12],
@@ -240,12 +239,12 @@ class TestEvolInstructGenerator:
                     ],
                 },
                 {
-                    "description": "Whether to include the raw output of the LLM in the key `raw_output_<TASK_NAME>` of the `distilabel_metadata` dictionary output column",
+                    "description": "Whether to include the raw output of the LLM in the key `raw_output_<TASK_NAME>` of the `distilagent_metadata` dictionary output column",
                     "name": "add_raw_output",
                     "optional": True,
                 },
                 {
-                    "description": "Whether to include the raw input of the LLM in the key `raw_input_<TASK_NAME>` of the `distilabel_metadata` dictionary column",
+                    "description": "Whether to include the raw input of the LLM in the key `raw_input_<TASK_NAME>` of the `distilagent_metadata` dictionary column",
                     "name": "add_raw_input",
                     "optional": True,
                 },

@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ from distilagent.constants import (
     STEPS_OUTPUTS_PATH,
 )
 from distilagent.utils.card.dataset_card import (
-    DistilabelDatasetCard,
+    DistilAgentDatasetCard,
     size_categories_parser,
 )
 from distilagent.utils.docstring import get_bibtex, parse_google_docstring
@@ -51,7 +51,6 @@ from distilagent.utils.huggingface import get_hf_token
 
 if TYPE_CHECKING:
     from distilagent.pipeline._dag import DAG
-
 
 def is_PIL_available() -> bool:
     """Checks if the PIL library is available.
@@ -64,7 +63,6 @@ def is_PIL_available() -> bool:
     except ImportError:
         return False
     return True
-
 
 class Distiset(dict):
     """Convenient wrapper around `datasets.Dataset` to push to the Hugging Face Hub.
@@ -177,7 +175,7 @@ class Distiset(dict):
         token: Optional[str] = None,
         include_script: bool = False,
         filename_py: Optional[str] = None,
-    ) -> DistilabelDatasetCard:
+    ) -> DistilAgentDatasetCard:
         """Generates the dataset card for the `Distiset`.
 
         Note:
@@ -233,7 +231,7 @@ class Distiset(dict):
             "tags": ["synthetic", "distilagent", "rlaif"],
         }
 
-        card = DistilabelDatasetCard.from_template(
+        card = DistilAgentDatasetCard.from_template(
             card_data=DatasetCardData(**metadata),
             repo_id=repo_id,
             sample_records=sample_records,
@@ -658,7 +656,6 @@ class Distiset(dict):
 
         return self
 
-
 def create_distiset(  # noqa: C901
     data_dir: Path,
     pipeline_path: Optional[Path] = None,
@@ -695,7 +692,7 @@ def create_distiset(  # noqa: C901
         distiset = create_distiset(Path.home() / ".cache/distilagent/pipelines/path-to-pipe-hashname")
         ```
     """
-    from distilagent.constants import DISTILABEL_METADATA_KEY
+    from distilagent.constants import DISTILAGENT_METADATA_KEY
 
     logger = logging.getLogger("distilagent.distiset")
 
@@ -712,8 +709,8 @@ def create_distiset(  # noqa: C901
                 ds = load_dataset(
                     "parquet", name=file.stem, data_files={"train": files}
                 )
-                if not enable_metadata and DISTILABEL_METADATA_KEY in ds.column_names:
-                    ds = ds.remove_columns(DISTILABEL_METADATA_KEY)
+                if not enable_metadata and DISTILAGENT_METADATA_KEY in ds.column_names:
+                    ds = ds.remove_columns(DISTILAGENT_METADATA_KEY)
                 distiset[file.stem] = ds
             except ArrowInvalid:
                 logger.warning(f"❌ Failed to load the subset from '{file}' directory.")
@@ -755,7 +752,6 @@ def create_distiset(  # noqa: C901
         distiset._citations = _grab_citations(dag)
 
     return distiset
-
 
 def _grab_citations(dag: "DAG") -> List[str]:
     """Extracts the citations from the steps that form the DAG.

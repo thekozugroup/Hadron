@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,6 @@ from tests.unit.conftest import DummyLLM
 
 if TYPE_CHECKING:
     from distilagent.typing import GenerateOutput
-
 
 class MathShepherdCompleterLLM(DummyLLM):
     N: int = 3
@@ -73,7 +72,6 @@ class MathShepherdCompleterLLM(DummyLLM):
             for _ in range(len(inputs))
         ]
 
-
 DUMMY_STEPS = [
     "Step 1: Determine the total number of eggs Janet collects per day: Janet's ducks lay 16 eggs per day.",
     "Step 2: Calculate the number of eggs Janet uses for herself per day: She eats three for breakfast and bakes muffins with four eggs, for a total of 3 + 4 = <<3+4=7>>7 eggs.",
@@ -81,7 +79,6 @@ DUMMY_STEPS = [
     "Step 4: Calculate the total amount Janet makes at the farmers' market per day: 9 * $2 = <<9*2=18>>18 dollars.",
     "The answer is: $18",
 ]
-
 
 class TestMathShepherdCompleter:
     @pytest.mark.parametrize(
@@ -157,7 +154,7 @@ class TestMathShepherdCompleter:
                         "Step 3: Those 9 eggs are worth 9 * $2 = $<<9*2=18>>18. The answer is: 18 +",
                     ],
                 ],
-                "distilabel_metadata": {
+                "distilagent_metadata": {
                     "statistics_math_shepherd_completer_0": {
                         "input_tokens": [12],
                         "output_tokens": [12],
@@ -340,7 +337,7 @@ The answer is: 18""",
                     ],
                 ],
                 "model_name": "math-shepherd-completer",
-                "distilabel_metadata": {
+                "distilagent_metadata": {
                     "statistics_math_shepherd_completer_0": {
                         "input_tokens": [12],
                         "output_tokens": [12],
@@ -466,7 +463,7 @@ The answer is: 18""",
                 ],
                 "solutions": [[], [], []],
                 "model_name": "math-shepherd-completer",
-                "distilabel_metadata": {
+                "distilagent_metadata": {
                     "statistics_math_shepherd_completer_0": {
                         "input_tokens": [12],
                         "output_tokens": [12],

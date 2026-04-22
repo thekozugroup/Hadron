@@ -9,7 +9,7 @@ RUN --mount=type=cache,target=/root/.npm \
 COPY web/ ./
 RUN npm run build
 
-# ----- Stage 2: API runtime with distilabel + scripts ------------------------
+# ----- Stage 2: API runtime with distilagent package + scripts --------------
 FROM python:3.11-slim AS runtime
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
@@ -22,7 +22,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /app
 
-# Install distilabel fork (needed so `AutoReasonedGeneration` imports work).
+# Install the distilagent package so AutoReason + pipeline imports resolve.
 COPY pyproject.toml ./
 COPY src/ ./src/
 RUN pip install --no-cache-dir -e . \

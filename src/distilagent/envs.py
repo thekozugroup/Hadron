@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,14 +20,14 @@ from typing import TYPE_CHECKING, Any, Callable, Dict, List, Optional
 from distilagent import constants
 
 if TYPE_CHECKING:
-    DISTILABEL_LOG_LEVEL: str = "INFO"
-    DISTILABEL_PIPELINE_NAME: Optional[str] = None
-    DISTILABEL_PIPELINE_CACHE_ID: Optional[str] = None
-    DISTILABEL_CACHE_DIR: Optional[str] = None
+    DISTILAGENT_LOG_LEVEL: str = "INFO"
+    DISTILAGENT_PIPELINE_NAME: Optional[str] = None
+    DISTILAGENT_PIPELINE_CACHE_ID: Optional[str] = None
+    DISTILAGENT_CACHE_DIR: Optional[str] = None
 
 ENVIRONMENT_VARIABLES: Dict[str, Callable[[], Any]] = {
     # `distilagent` logging level.
-    "DISTILABEL_LOG_LEVEL": lambda: os.getenv("DISTILABEL_LOG_LEVEL", "INFO").upper(),
+    "DISTILAGENT_LOG_LEVEL": lambda: os.getenv("DISTILAGENT_LOG_LEVEL", "INFO").upper(),
     # The name of the `distilagent` pipeline currently running.
     constants.PIPELINE_NAME_ENV_NAME: lambda: os.getenv(
         constants.PIPELINE_NAME_ENV_NAME, None
@@ -37,16 +37,14 @@ ENVIRONMENT_VARIABLES: Dict[str, Callable[[], Any]] = {
         constants.PIPELINE_CACHE_ID_ENV_NAME, None
     ),
     # The cache ID of the `distilagent` pipeline currently running.
-    "DISTILABEL_CACHE_DIR": lambda: os.getenv("DISTILABEL_CACHE_DIR", None),
+    "DISTILAGENT_CACHE_DIR": lambda: os.getenv("DISTILAGENT_CACHE_DIR", None),
 }
-
 
 def __getattr__(name: str) -> Any:
     # lazy evaluation of environment variables
     if name in ENVIRONMENT_VARIABLES:
         return ENVIRONMENT_VARIABLES[name]()
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
-
 
 def __dir__() -> List[str]:
     return list(ENVIRONMENT_VARIABLES.keys())

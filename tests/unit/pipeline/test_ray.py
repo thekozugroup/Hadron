@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,14 +16,13 @@ from typing import Generator
 
 import pytest
 
-from distilagent.errors import DistilabelUserError
+from distilagent.errors import DistilAgentUserError
 from distilagent.models.llms.vllm import vLLM
 from distilagent.pipeline.ray import RayPipeline
 from distilagent.steps.base import StepResources
 from distilagent.steps.tasks.text_generation import TextGeneration
 from distilagent.utils.serialization import TYPE_INFO_KEY
 from tests.unit.conftest import DummyAsyncLLM, DummyTaskOfflineBatchGeneration
-
 
 @pytest.fixture
 def ray_test_cluster() -> Generator[None, None, None]:
@@ -45,7 +44,6 @@ def ray_test_cluster() -> Generator[None, None, None]:
 
     ray.shutdown()
 
-
 @pytest.mark.skip_python_versions(["3.12"])
 @pytest.mark.usefixtures("ray_test_cluster")
 class TestRayPipeline:
@@ -65,7 +63,7 @@ class TestRayPipeline:
             )
 
         with pytest.raises(
-            DistilabelUserError,
+            DistilAgentUserError,
             match="Step 'unit-test' uses an `LLM` with offline batch generation",
         ):
             pipeline._check_no_llms_using_offline_batch_generation()

@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -69,7 +69,6 @@ POSITIVE_NEGATIVE_SYSTEM_PROMPT: str = (
 )
 
 CONTEXT_INTRO: Final[str] = " Take into account the context given."
-
 
 class GenerateSentencePair(Task):
     """Generate a positive and negative (optionally) sentences given an anchor sentence.
@@ -164,7 +163,7 @@ class GenerateSentencePair(Task):
 
         generate_sentence_pair.load()
 
-        result = generate_sentence_pair.process([{"anchor": "Argilla is an open-source data curation platform for LLMs. Using Argilla, ..."}])
+        result = generate_sentence_pair.process([{"anchor": " is an open-source data curation platform for LLMs. Using , ..."}])
         ```
 
         Generating answers:
@@ -197,7 +196,7 @@ class GenerateSentencePair(Task):
         generate_sentence_pair = GenerateSentencePair(
             triplet=True, # `False` to generate only positive
             action="query",
-            context="Argilla is an open-source data curation platform for LLMs.",
+            context=" is an open-source data curation platform for LLMs.",
             llm=InferenceEndpointsLLM(
                 model_id="meta-llama/Meta-Llama-3.1-70B-Instruct",
                 tokenizer_id="meta-llama/Meta-Llama-3.1-70B-Instruct",
@@ -219,7 +218,7 @@ class GenerateSentencePair(Task):
         generate_sentence_pair = GenerateSentencePair(
             triplet=True, # `False` to generate only positive
             action="query",
-            context="Argilla is an open-source data curation platform for LLMs.",
+            context=" is an open-source data curation platform for LLMs.",
             hard_negative=True,
             llm=InferenceEndpointsLLM(
                 model_id="meta-llama/Meta-Llama-3.1-70B-Instruct",
@@ -242,7 +241,7 @@ class GenerateSentencePair(Task):
         generate_sentence_pair = GenerateSentencePair(
             triplet=True, # `False` to generate only positive
             action="query",
-            context="Argilla is an open-source data curation platform for LLMs.",
+            context=" is an open-source data curation platform for LLMs.",
             hard_negative=True,
             llm=InferenceEndpointsLLM(
                 model_id="meta-llama/Meta-Llama-3.1-70B-Instruct",

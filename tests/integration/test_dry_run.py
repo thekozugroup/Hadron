@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,13 +15,11 @@
 from distilagent.pipeline import Pipeline
 from distilagent.steps import LoadDataFromDicts, StepInput, StepOutput, step
 
-
 @step(inputs=["instruction"], outputs=["response"])
 def SucceedAlways(inputs: StepInput) -> "StepOutput":
     for input in inputs:
         input["response"] = "This step always succeeds"
     yield inputs
-
 
 def test_dry_run():
     load_dataset_name = "load_dataset"

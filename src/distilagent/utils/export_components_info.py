@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,7 +25,6 @@ from distilagent.steps.tasks.generate_embeddings import GenerateEmbeddings
 from distilagent.steps.tasks.pair_rm import PairRM
 from distilagent.utils.docstring import parse_google_docstring
 
-
 class ComponentsInfo(TypedDict):
     """A dictionary containing `distilagent` components information."""
 
@@ -34,7 +33,6 @@ class ComponentsInfo(TypedDict):
     steps: List
     tasks: List
     embeddings: List
-
 
 def export_components_info() -> ComponentsInfo:
     """Exports `distilagent` components (`LLM`s, `Step`s and `Task`s) information in a dictionary
@@ -78,9 +76,7 @@ def export_components_info() -> ComponentsInfo:
         ],
     }
 
-
 T = TypeVar("T", covariant=True)
-
 
 def _get_steps() -> List[Type["_Step"]]:
     """Get all `Step` subclasses, that are not abstract classes and not `Task` subclasses.
@@ -95,7 +91,6 @@ def _get_steps() -> List[Type["_Step"]]:
         and not issubclass(step_type, _Task)
         and step_type not in [PairRM, GenerateEmbeddings]
     ]
-
 
 def _get_tasks() -> List[Type["_Task"]]:
     """Get all `Task` subclasses, that are not abstract classes.
@@ -113,7 +108,6 @@ def _get_tasks() -> List[Type["_Task"]]:
 
     return tasks
 
-
 def _get_llms() -> List[Type["LLM"]]:
     """Get all `LLM` subclasses, that are not abstract classes.
 
@@ -125,7 +119,6 @@ def _get_llms() -> List[Type["LLM"]]:
         for llm_type in _recursive_subclasses(LLM)
         if not inspect.isabstract(llm_type)
     ]
-
 
 def _get_image_generation_models() -> List[Type["ImageGenerationModel"]]:
     """Get all `ImageGenerationModel` subclasses, that are not abstract classes.
@@ -142,7 +135,6 @@ def _get_image_generation_models() -> List[Type["ImageGenerationModel"]]:
         if not inspect.isabstract(igm_type)
     ]
 
-
 def _get_embeddings() -> List[Type["Embeddings"]]:
     """Get all `Embeddings` subclasses, that are not abstract classes.
 
@@ -155,7 +147,6 @@ def _get_embeddings() -> List[Type["Embeddings"]]:
         if not inspect.isabstract(embeddings_type)
     ]
 
-
 def _get_pipelines() -> List[Type["BasePipelineTemplate"]]:
     """Get all `Pipeline` subclasses, that are not abstract classes.
 
@@ -167,7 +158,6 @@ def _get_pipelines() -> List[Type["BasePipelineTemplate"]]:
         for pipeline_type in _recursive_subclasses(BasePipelineTemplate)
         if not inspect.isabstract(pipeline_type)
     ]
-
 
 # Reference: https://adamj.eu/tech/2024/05/10/python-all-subclasses/
 def _recursive_subclasses(klass: Type[T]) -> Generator[Type[T], None, None]:

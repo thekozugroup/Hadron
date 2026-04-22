@@ -1,4 +1,4 @@
-DistilAgent fuses [distilabel](https://github.com/argilla-io/distilabel) with [NousResearch's AutoReason](https://github.com/NousResearch/autoreason) tournament refinement so one teacher model produces distillation labels that are measurably better than its own single-shot output. Each prompt is answered, critiqued, adversarially revised, synthesized, and ranked by a blind Borda panel until "do nothing" wins twice. Full reasoning traces are captured per role for process-supervision fine-tuning.
+DistilAgent is an LLM distillation framework built around [NousResearch's AutoReason](https://github.com/NousResearch/autoreason) tournament refinement: a single teacher model produces distillation labels that are measurably better than its own single-shot output. Each prompt is answered, critiqued, adversarially revised, synthesized, and ranked by a blind Borda panel until "do nothing" wins twice. Full reasoning traces are captured per role for process-supervision fine-tuning.
 
 ## Screenshots
 
@@ -6,7 +6,7 @@ DistilAgent fuses [distilabel](https://github.com/argilla-io/distilabel) with [N
 
 ## How it works
 
-A new `AutoReasonedGeneration` Task drops into any distilabel pipeline. Each prompt runs through five fresh-context agent roles, each solving a different problem:
+The core `AutoReasonedGeneration` Task runs each prompt through five fresh-context agent roles, each solving a different problem:
 
 - **Teacher** — writes the incumbent draft **A**. Defines the quality ceiling; should be the strongest model you can afford.
 - **Critic** — finds *concrete, quotable* flaws in A or replies exactly `NO FLAWS`. Needs discrimination, not creativity. Anti-hallucination directives keep it honest.
@@ -33,7 +33,7 @@ Vanilla distillation is *one teacher pass per prompt* — whatever the model say
 ## Stack
 
 - Python 3.11, asyncio, pydantic v2
-- distilabel (forked from develop) as the pipeline runtime
+- Built-in pipeline runtime (async, pydantic v2, DAG-based Step/Task graph)
 - AutoReason tournament (A / B / AB + blind Borda) adapted from the NousResearch paper
 - OpenAI async SDK — OpenRouter, local vMLX, any OpenAI-compatible endpoint
 - MLX-LM for on-device Apple Silicon inference (Gemma 4, Qwen3)

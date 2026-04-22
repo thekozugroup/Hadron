@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -31,11 +31,9 @@ from tests.unit.conftest import (
 if TYPE_CHECKING:
     pass
 
-
 class DummyRuntimeLLM(DummyAsyncLLM):
     runtime_parameter: RuntimeParameter[int]
     runtime_parameter_optional: Optional[RuntimeParameter[int]] = field(default=None)
-
 
 class TestTask:
     def test_model_post_init_raise_valuerror_use_offline_batch_generation(self) -> None:
@@ -107,7 +105,7 @@ class TestTask:
                         "output": "output",
                         "info_from_input": "additional_info_0",
                         "model_name": "test",
-                        "distilabel_metadata": {
+                        "distilagent_metadata": {
                             "raw_output_task": "output",
                             "raw_input_task": [
                                 {"content": "", "role": "system"},
@@ -125,7 +123,7 @@ class TestTask:
                         "output": "output",
                         "info_from_input": "additional_info_0",
                         "model_name": "test",
-                        "distilabel_metadata": {
+                        "distilagent_metadata": {
                             "raw_output_task": "output",
                             "raw_input_task": [
                                 {"content": "", "role": "system"},
@@ -143,7 +141,7 @@ class TestTask:
                         "output": "output",
                         "info_from_input": "additional_info_1",
                         "model_name": "test",
-                        "distilabel_metadata": {
+                        "distilagent_metadata": {
                             "raw_output_task": "output",
                             "raw_input_task": [
                                 {"content": "", "role": "system"},
@@ -161,7 +159,7 @@ class TestTask:
                         "output": "output",
                         "info_from_input": "additional_info_1",
                         "model_name": "test",
-                        "distilabel_metadata": {
+                        "distilagent_metadata": {
                             "raw_output_task": "output",
                             "raw_input_task": [
                                 {"content": "", "role": "system"},
@@ -179,7 +177,7 @@ class TestTask:
                         "output": "output",
                         "info_from_input": "additional_info_2",
                         "model_name": "test",
-                        "distilabel_metadata": {
+                        "distilagent_metadata": {
                             "raw_output_task": "output",
                             "raw_input_task": [
                                 {"content": "", "role": "system"},
@@ -197,7 +195,7 @@ class TestTask:
                         "output": "output",
                         "info_from_input": "additional_info_2",
                         "model_name": "test",
-                        "distilabel_metadata": {
+                        "distilagent_metadata": {
                             "raw_output_task": "output",
                             "raw_input_task": [
                                 {"content": "", "role": "system"},
@@ -228,7 +226,7 @@ class TestTask:
                             "additional_info_0",
                         ],
                         "model_name": "test",
-                        "distilabel_metadata": [
+                        "distilagent_metadata": [
                             {
                                 "raw_output_task": "output",
                                 "raw_input_task": [
@@ -274,7 +272,7 @@ class TestTask:
                             "additional_info_1",
                         ],
                         "model_name": "test",
-                        "distilabel_metadata": [
+                        "distilagent_metadata": [
                             {
                                 "raw_output_task": "output",
                                 "raw_input_task": [
@@ -320,7 +318,7 @@ class TestTask:
                             "additional_info_2",
                         ],
                         "model_name": "test",
-                        "distilabel_metadata": [
+                        "distilagent_metadata": [
                             {
                                 "raw_output_task": "output",
                                 "raw_input_task": [
@@ -407,7 +405,7 @@ class TestTask:
         assert result == [
             {
                 "additional_info": "info",
-                "distilabel_metadata": {
+                "distilagent_metadata": {
                     "raw_input_task": [
                         {
                             "content": "",
@@ -429,7 +427,7 @@ class TestTask:
             },
             {
                 "additional_info": "info",
-                "distilabel_metadata": {
+                "distilagent_metadata": {
                     "raw_input_task": [
                         {
                             "content": "",
@@ -451,7 +449,7 @@ class TestTask:
             },
             {
                 "additional_info": "info",
-                "distilabel_metadata": {
+                "distilagent_metadata": {
                     "raw_input_task": [
                         {
                             "content": "",
@@ -623,12 +621,12 @@ class TestTask:
                         ],
                     },
                     {
-                        "description": "Whether to include the raw output of the LLM in the key `raw_output_<TASK_NAME>` of the `distilabel_metadata` dictionary output column",
+                        "description": "Whether to include the raw output of the LLM in the key `raw_output_<TASK_NAME>` of the `distilagent_metadata` dictionary output column",
                         "name": "add_raw_output",
                         "optional": True,
                     },
                     {
-                        "description": "Whether to include the raw input of the LLM in the key `raw_input_<TASK_NAME>` of the `distilabel_metadata` dictionary column",
+                        "description": "Whether to include the raw input of the LLM in the key `raw_input_<TASK_NAME>` of the `distilagent_metadata` dictionary column",
                         "name": "add_raw_input",
                         "optional": True,
                     },
@@ -677,10 +675,10 @@ class TestTask:
         if add_raw_output or add_raw_input:
             if add_raw_output:
                 assert (
-                    "raw_output_dummy_task_0" in result[0]["distilabel_metadata"].keys()
+                    "raw_output_dummy_task_0" in result[0]["distilagent_metadata"].keys()
                 )
             if add_raw_input:
                 assert (
-                    "raw_input_dummy_task_0" in result[0]["distilabel_metadata"].keys()
+                    "raw_input_dummy_task_0" in result[0]["distilagent_metadata"].keys()
                 )
-        assert "statistics_dummy_task_0" in result[0]["distilabel_metadata"].keys()
+        assert "statistics_dummy_task_0" in result[0]["distilagent_metadata"].keys()

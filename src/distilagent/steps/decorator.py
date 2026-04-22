@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -46,14 +46,12 @@ _STEP_MAPPING = {
 
 ProcessingFunc = Callable[..., Union["StepOutput", "GeneratorStepOutput"]]
 
-
 @overload
 def step(
     inputs: Union["StepColumns", None] = None,
     outputs: Union["StepColumns", None] = None,
     step_type: Literal["normal"] = "normal",
 ) -> Callable[..., Type["Step"]]: ...
-
 
 @overload
 def step(
@@ -62,14 +60,12 @@ def step(
     step_type: Literal["global"] = "global",
 ) -> Callable[..., Type["GlobalStep"]]: ...
 
-
 @overload
 def step(
     inputs: None = None,
     outputs: Union["StepColumns", None] = None,
     step_type: Literal["generator"] = "generator",
 ) -> Callable[..., Type["GeneratorStep"]]: ...
-
 
 def step(
     inputs: Union["StepColumns", None] = None,

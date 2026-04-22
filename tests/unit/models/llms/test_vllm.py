@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,20 +27,17 @@ from transformers import AutoTokenizer
 from distilagent.models.llms import vLLM
 from distilagent.models.llms.vllm import ClientvLLM
 
-
 class Character(BaseModel):
     name: str
     description: str
     role: str
     weapon: str
 
-
 class Animal(BaseModel):
     name: str
     species: str
     habitat: str
     diet: str
-
 
 SAMPLE_DATA = [
     [
@@ -100,7 +97,6 @@ SAMPLE_DATA = [
         },
     ]
 ]
-
 
 class TestvLLM:
     @pytest.mark.parametrize(
@@ -246,7 +242,6 @@ class TestvLLM:
             ]
         result = llm.generate(inputs=formatted_inputs, num_generations=num_generations)
         assert result == expected_result
-
 
 @mock.patch("openai.OpenAI")
 @mock.patch("openai.AsyncOpenAI")

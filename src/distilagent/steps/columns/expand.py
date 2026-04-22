@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ from distilagent.steps.base import Step, StepInput
 if TYPE_CHECKING:
     from distilagent.typing import StepColumns, StepOutput
 
-
 class ExpandColumns(Step):
     """Expand columns that contain lists into multiple rows.
 
@@ -40,11 +39,11 @@ class ExpandColumns(Step):
             set to True, the columns will be decoded before expanding. Alternatively, to specify
             columns that can be encoded, a list can be provided. In this case, the column names
             informed must be a subset of the columns selected for expansion.
-        split_statistics: A bool to inform whether the statistics in the `distilabel_metadata`
+        split_statistics: A bool to inform whether the statistics in the `distilagent_metadata`
             column should be split into multiple rows.
             If we want to expand some columns containing a list of strings that come from
             having parsed the output of an LLM, the tokens in the `statistics_{step_name}`
-            of the `distilabel_metadata` column should be splitted to avoid multiplying
+            of the `distilagent_metadata` column should be splitted to avoid multiplying
             them if we aggregate the data afterwards. For example, with a task that is supposed
             to generate a list of N instructions, and we want each of those N instructions in
             different rows, we should split the statistics by N.
@@ -108,7 +107,7 @@ class ExpandColumns(Step):
         # [{'instruction': 'instruction 1', 'generation': 'generation 1'}, {'instruction': 'instruction 1', 'generation': 'generation 2'}]
         ```
 
-        Expand the selected columns and split the statistics in the `distilabel_metadata` column:
+        Expand the selected columns and split the statistics in the `distilagent_metadata` column:
 
         ```python
         from distilagent.steps import ExpandColumns
@@ -125,7 +124,7 @@ class ExpandColumns(Step):
                     {
                         "instruction": "instruction 1",
                         "generation": ["generation 1", "generation 2"],
-                        "distilabel_metadata": {
+                        "distilagent_metadata": {
                             "statistics_generation": {
                                 "input_tokens": [12],
                                 "output_tokens": [12],
@@ -136,7 +135,7 @@ class ExpandColumns(Step):
             )
         )
         # >>> result
-        # [{'instruction': 'instruction 1', 'generation': 'generation 1', 'distilabel_metadata': {'statistics_generation': {'input_tokens': [6], 'output_tokens': [6]}}}, {'instruction': 'instruction 1', 'generation': 'generation 2', 'distilabel_metadata': {'statistics_generation': {'input_tokens': [6], 'output_tokens': [6]}}}]
+        # [{'instruction': 'instruction 1', 'generation': 'generation 1', 'distilagent_metadata': {'statistics_generation': {'input_tokens': [6], 'output_tokens': [6]}}}, {'instruction': 'instruction 1', 'generation': 'generation 2', 'distilagent_metadata': {'statistics_generation': {'input_tokens': [6], 'output_tokens': [6]}}}]
         ```
     """
 
@@ -217,10 +216,10 @@ class ExpandColumns(Step):
         metadata_visited = False
         expanded_rows = []
         # Update the columns here to avoid doing the validation on the `inputs`, as the
-        # `distilabel_metadata` is not defined on Pipeline creation on the DAG.
+        # `distilagent_metadata` is not defined on Pipeline creation on the DAG.
         columns = self.columns
         if self.split_statistics:
-            columns["distilabel_metadata"] = "distilabel_metadata"
+            columns["distilagent_metadata"] = "distilagent_metadata"
 
         for expand_column, new_column in columns.items():  # type: ignore
             data = input.get(expand_column)
@@ -237,7 +236,7 @@ class ExpandColumns(Step):
     def _split_metadata(
         self, input: Dict[str, Any], n: int, metadata_visited: bool = False
     ) -> None:
-        """Help method to split the statistics in `distilabel_metadata` column.
+        """Help method to split the statistics in `distilagent_metadata` column.
 
         Args:
             input: The input data.
@@ -246,14 +245,14 @@ class ExpandColumns(Step):
             metadata_visited: Bool to prevent from updating the data more than once.
 
         Returns:
-            Updated input with the `distilabel_metadata` updated.
+            Updated input with the `distilagent_metadata` updated.
         """
         # - If we want to split the statistics, we need to ensure that the metadata is present.
         # - Metadata can only be visited once per row to avoid successive splitting.
         # TODO: For an odd number of tokens, this will miss 1, we have to fix it.
         if (
             self.split_statistics
-            and (metadata := input.get("distilabel_metadata", {}))
+            and (metadata := input.get("distilagent_metadata", {}))
             and not metadata_visited
         ):
             for k, v in metadata.items():
@@ -276,13 +275,13 @@ class ExpandColumns(Step):
                     else:
                         output_tokens = [v["output_tokens"] // n]
 
-                    input["distilabel_metadata"][k] = {
+                    input["distilagent_metadata"][k] = {
                         "input_tokens": input_tokens,
                         "output_tokens": output_tokens,
                     }
                 metadata_visited = True
             # Once we have updated the metadata, Create a list out of it to let the
             # following section to expand it as any other column.
-            if isinstance(input["distilabel_metadata"], dict):
-                input["distilabel_metadata"] = [input["distilabel_metadata"]] * n
+            if isinstance(input["distilagent_metadata"], dict):
+                input["distilagent_metadata"] = [input["distilagent_metadata"]] * n
         return input, metadata_visited

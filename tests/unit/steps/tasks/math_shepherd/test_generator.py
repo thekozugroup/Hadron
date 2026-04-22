@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,7 +27,6 @@ from tests.unit.conftest import DummyLLM
 
 if TYPE_CHECKING:
     from distilagent.typing import GenerateOutput
-
 
 class MathShepherdGeneratorLLM(DummyLLM):
     M: Optional[int] = None
@@ -87,7 +86,6 @@ The answer is: 216 books."""
             }
             for _ in range(len(inputs))
         ]
-
 
 class TestMathShepherdGenerator:
     @pytest.mark.parametrize(

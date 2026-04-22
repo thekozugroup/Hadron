@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ import pyarrow.parquet as pq
 from upath import UPath
 
 from distilagent.utils.serialization import _Serializable
-
 
 @dataclass
 class _Batch(_Serializable):

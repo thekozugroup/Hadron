@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ from tests.unit.conftest import DummyAsyncLLM
 if TYPE_CHECKING:
     from distilagent.typing import FormattedInput, GenerateOutput
 
-
 class ClusteringLLM(DummyAsyncLLM):
     n: int = 1
 
@@ -41,7 +40,6 @@ class ClusteringLLM(DummyAsyncLLM):
                 "output_tokens": [12] * num_generations,
             },
         }
-
 
 class TestTextClustering:
     @pytest.mark.parametrize("n", [1, 3])

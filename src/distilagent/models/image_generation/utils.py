@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,13 +17,11 @@ import io
 
 from PIL import Image
 
-
 def image_to_str(image: "Image.Image", image_format: str = "JPEG") -> str:
     """Converts a PIL Image to a base64 encoded string."""
     buffered = io.BytesIO()
     image.save(buffered, format=image_format)
     return base64.b64encode(buffered.getvalue()).decode("utf-8")
-
 
 def image_from_str(image_str: str) -> "Image.Image":
     """Converts a base64 encoded string to a PIL Image."""

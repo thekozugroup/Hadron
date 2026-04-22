@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Distilabel Task integration for the AutoReason tournament.
+"""DistilAgent Task integration for the AutoReason tournament.
 
 This module exposes :class:`AutoReasonedGeneration`, a
 :class:`distilagent.steps.tasks.base.Task` that runs an AutoReason tournament
@@ -33,7 +33,7 @@ from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
 from jinja2 import Template
 from pydantic import Field, PrivateAttr
 
-from distilagent.constants import DISTILABEL_METADATA_KEY
+from distilagent.constants import DISTILAGENT_METADATA_KEY
 from distilagent.mixins.runtime_parameters import RuntimeParameter
 from distilagent.steps.tasks.autoreason.rate_limit import get_limiter
 from distilagent.steps.tasks.autoreason.tournament import TournamentRunner
@@ -44,8 +44,7 @@ if TYPE_CHECKING:
     from distilagent.steps.base import StepInput
     from distilagent.typing import ChatType, StepColumns, StepOutput
 
-
-# Distilabel depends on ``nest_asyncio`` and applies it when running inside a
+# DistilAgent depends on ``nest_asyncio`` and applies it when running inside a
 # notebook. Sub-processes launched by the pipeline orchestrator can also be
 # running inside an asyncio loop (e.g. via the LLM client), so we apply
 # ``nest_asyncio`` at import time to make ``asyncio.run`` resilient to already-
@@ -56,7 +55,6 @@ try:  # pragma: no cover - import side effect, best-effort
     nest_asyncio.apply()
 except Exception:  # pragma: no cover - nest_asyncio is optional at runtime
     nest_asyncio = None  # type: ignore[assignment]
-
 
 class AutoReasonedGeneration(Task):
     """Generate a response through an AutoReason tournament.
@@ -322,13 +320,13 @@ class AutoReasonedGeneration(Task):
         out["autoreason_iterations"] = len(trace.iterations)
         out["autoreason_converged"] = bool(trace.converged)
         out["model_name"] = self.llm.model_name
-        # Per-framework convention, stash metadata under DISTILABEL_METADATA_KEY.
-        meta = out.get(DISTILABEL_METADATA_KEY, {}) or {}
+        # Per-framework convention, stash metadata under DISTILAGENT_METADATA_KEY.
+        meta = out.get(DISTILAGENT_METADATA_KEY, {}) or {}
         meta[f"statistics_{self.name}"] = {
             "total_calls": trace.total_calls,
             "winner_source": trace.winner_source,
         }
-        out[DISTILABEL_METADATA_KEY] = meta
+        out[DISTILAGENT_METADATA_KEY] = meta
         return out
 
     def _empty_row(self, row: Dict[str, Any], error_message: str) -> Dict[str, Any]:
@@ -339,7 +337,7 @@ class AutoReasonedGeneration(Task):
         out["autoreason_iterations"] = 0
         out["autoreason_converged"] = False
         out["model_name"] = self.llm.model_name
-        meta = out.get(DISTILABEL_METADATA_KEY, {}) or {}
+        meta = out.get(DISTILAGENT_METADATA_KEY, {}) or {}
         meta[f"autoreason_error_{self.name}"] = error_message
-        out[DISTILABEL_METADATA_KEY] = meta
+        out[DISTILAGENT_METADATA_KEY] = meta
         return out

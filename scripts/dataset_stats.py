@@ -6,7 +6,6 @@ import json
 from collections import Counter
 from pathlib import Path
 
-
 def main(path: Path) -> int:
     if not path.exists():
         print(f"no such file: {path}")
@@ -53,7 +52,6 @@ def main(path: Path) -> int:
     for s, k in srcs.most_common():
         print(f"  {s:48s} {k}")
     return 0
-
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()

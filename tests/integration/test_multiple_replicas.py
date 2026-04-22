@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ from distilagent.steps import LoadDataFromDicts, StepInput, StepResources, step
 if TYPE_CHECKING:
     from distilagent.typing import StepOutput
 
-
 @step(outputs=["generation"])
 def Generate(inputs: StepInput) -> "StepOutput":
     # random sleep to simulate processing time
@@ -33,7 +32,6 @@ def Generate(inputs: StepInput) -> "StepOutput":
     for input in inputs:
         input["generation"] = "I slept for {} seconds".format(sleep_time)
     yield inputs
-
 
 @step(outputs=["generations"])
 def CombineGenerations(*inputs: StepInput) -> "StepOutput":
@@ -52,7 +50,6 @@ def CombineGenerations(*inputs: StepInput) -> "StepOutput":
         combined_list.append(combined_dict)
 
     yield combined_list
-
 
 @pytest.mark.xfail
 def test_multiple_replicas() -> None:

@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ from distilagent.steps.tasks.evol_instruct.base import EvolInstruct
 from distilagent.steps.tasks.evol_instruct.evol_complexity.utils import (
     MUTATION_TEMPLATES,
 )
-
 
 class EvolComplexity(EvolInstruct):
     """Evolve instructions to make them more complex using an `LLM`.

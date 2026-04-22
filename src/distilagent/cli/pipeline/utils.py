@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,14 +24,13 @@ from pydantic import HttpUrl, ValidationError
 from pydantic.type_adapter import TypeAdapter
 
 from distilagent.constants import ROUTING_BATCH_FUNCTION_ATTR_NAME, STEP_ATTR_NAME
-from distilagent.errors import DistilabelUserError
+from distilagent.errors import DistilAgentUserError
 from distilagent.pipeline.local import Pipeline
 
 if TYPE_CHECKING:
     from rich.panel import Panel
 
     from distilagent.pipeline.base import BasePipeline
-
 
 def parse_runtime_parameters(
     params: List[Tuple[List[str], str]],
@@ -58,7 +57,6 @@ def parse_runtime_parameters(
                 current = current.setdefault(key, {})
     return runtime_params
 
-
 def valid_http_url(url: str) -> bool:
     """Check if the URL is a valid HTTP URL.
 
@@ -74,7 +72,6 @@ def valid_http_url(url: str) -> bool:
         return False
 
     return True
-
 
 def _download_remote_file(url: str) -> str:
     """Downloads a file from a Hugging Face Hub repository.
@@ -93,7 +90,6 @@ def _download_remote_file(url: str) -> str:
     response.raise_for_status()
     return response
 
-
 def get_config_from_url(url: str) -> Dict[str, Any]:
     """Loads the pipeline configuration from a URL pointing to a JSON or YAML file.
 
@@ -107,7 +103,7 @@ def get_config_from_url(url: str) -> Dict[str, Any]:
         ValueError: If the file format is not supported.
     """
     if not url.endswith((".json", ".yaml", ".yml")):
-        raise DistilabelUserError(
+        raise DistilAgentUserError(
             f"Unsupported file format for '{url}'. Only JSON and YAML are supported",
             page="sections/how_to_guides/basic/pipeline/?h=seriali#serializing-the-pipeline",
         )
@@ -118,7 +114,6 @@ def get_config_from_url(url: str) -> Dict[str, Any]:
         return yaml.safe_load(content)
 
     return response.json()
-
 
 def get_pipeline_from_url(url: str, pipeline_name: str = "pipeline") -> "BasePipeline":
     """Downloads the file to the current working directory and loads the pipeline object
@@ -136,7 +131,7 @@ def get_pipeline_from_url(url: str, pipeline_name: str = "pipeline") -> "BasePip
         ValueError: If the file format is not supported.
     """
     if not url.endswith(".py"):
-        raise DistilabelUserError(
+        raise DistilAgentUserError(
             f"Unsupported file format for '{url}'. It must be a python file.",
             page="sections/how_to_guides/advanced/cli/#distilagent-pipeline-run",
         )
@@ -156,7 +151,6 @@ def get_pipeline_from_url(url: str, pipeline_name: str = "pipeline") -> "BasePip
         )
 
     return pipeline
-
 
 def get_pipeline(
     config_or_script: str, pipeline_name: str = "pipeline"
@@ -182,7 +176,7 @@ def get_pipeline(
     elif config_or_script.endswith(".py"):
         script = config_or_script
     else:
-        raise DistilabelUserError(
+        raise DistilAgentUserError(
             "The file must be a valid config file or python script with a pipeline.",
             page="sections/how_to_guides/advanced/cli/#distilagent-pipeline-run",
         )
@@ -203,7 +197,6 @@ def get_pipeline(
 
     raise FileNotFoundError(f"File '{config_or_script}' does not exist.")
 
-
 def display_pipeline_information(pipeline: "BasePipeline") -> None:
     """Displays the pipeline information to the console.
 
@@ -213,7 +206,6 @@ def display_pipeline_information(pipeline: "BasePipeline") -> None:
     from rich.console import Console
 
     Console().print(_build_pipeline_panel(pipeline))
-
 
 def _build_pipeline_panel(pipeline: "BasePipeline") -> "Panel":
     """Builds a panel to display the information of the pipeline.
@@ -260,7 +252,6 @@ def _build_pipeline_panel(pipeline: "BasePipeline") -> "Panel":
         expand=False,
         style="light_cyan3",
     )
-
 
 def _build_steps_panel(pipeline: "BasePipeline") -> "Panel":
     """Builds a panel to display the information of the steps.
@@ -336,7 +327,6 @@ def _build_steps_panel(pipeline: "BasePipeline") -> "Panel":
         style="light_cyan3",
     )
 
-
 def _build_steps_connection_panel(pipeline: "BasePipeline") -> "Panel":
     """Builds a panel to display the connections of the steps of the pipeline.
 
@@ -371,7 +361,6 @@ def _build_steps_connection_panel(pipeline: "BasePipeline") -> "Panel":
         style="light_cyan3",
         expand=True,
     )
-
 
 def _build_routing_batch_function_panel(pipeline: "BasePipeline") -> "Panel":
     """Builds a panel to display the routing batch function of the pipeline.

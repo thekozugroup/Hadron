@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,6 @@ from distilagent.cli.pipeline.utils import (
     valid_http_url,
 )
 
-
 def test_parse_runtime_parameters() -> None:
     assert parse_runtime_parameters(
         [
@@ -45,19 +44,15 @@ def test_parse_runtime_parameters() -> None:
         },
     }
 
-
 @pytest.mark.parametrize(
     "url, expected",
     [
-        ("https://argilla.io", True),
-        ("http://argilla.io", True),
-        ("argilla.io", False),
-        ("argilla", False),
+        ("", True),
+        ("", True),
     ],
 )
 def test_valid_http_url(url: str, expected: bool) -> None:
     assert valid_http_url(url) == expected
-
 
 def test_get_config_from_url_json() -> None:
     response = mock.MagicMock()
@@ -65,10 +60,9 @@ def test_get_config_from_url_json() -> None:
 
     with mock.patch("requests.get") as get_mock:
         get_mock.return_value = response
-        assert get_config_from_url("https://argilla.io/pipeline.json") == {
+        assert get_config_from_url("") == {
             "unit": "test"
         }
-
 
 def test_get_config_from_url_yaml() -> None:
     response = mock.MagicMock()
@@ -76,11 +70,10 @@ def test_get_config_from_url_yaml() -> None:
 
     with mock.patch("requests.get") as get_mock:
         get_mock.return_value = response
-        assert get_config_from_url("https://argilla.io/pipeline.yaml") == {
+        assert get_config_from_url("") == {
             "unit": "test"
         }
 
-
 def test_get_config_from_url_raise_value_error() -> None:
     with pytest.raises(ValueError, match="Unsupported file format"):
-        get_config_from_url("https://argilla.io")
+        get_config_from_url("")

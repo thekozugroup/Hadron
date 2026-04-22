@@ -36,7 +36,6 @@ _RE_SAMPLE_FAIL = re.compile(r"^\s*✗\s+FAIL:\s+(.*)$")
 _RE_POOL_WARM = re.compile(r"\[pool\]\s+warming (\d+) LLM clients")
 _RE_DONE = re.compile(r"\[done\]\s+completed\s+(\d+)\s+failed\s+(\d+)")
 
-
 class RunManager:
     """Process supervisor + log parser + event fanout."""
 

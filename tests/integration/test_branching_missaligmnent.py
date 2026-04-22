@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,18 +20,15 @@ from distilagent.steps import GroupColumns, LoadDataFromDicts, StepInput, step
 if TYPE_CHECKING:
     from distilagent.steps import StepOutput
 
-
 @step(inputs=["instruction"], outputs=["response"])
 def FailAlways(_: StepInput) -> "StepOutput":
     raise Exception("This step always fails")
-
 
 @step(inputs=["instruction"], outputs=["response"])
 def SucceedAlways(inputs: StepInput) -> "StepOutput":
     for input in inputs:
         input["response"] = "This step always succeeds"
     yield inputs
-
 
 def test_branching_missalignment_because_step_fails_processing_batch() -> None:
     with Pipeline(name="") as pipeline:

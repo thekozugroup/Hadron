@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,31 +21,25 @@ from distilagent.steps.base import GeneratorStep, GlobalStep, Step
 
 from .utils import DummyGeneratorStep, DummyGlobalStep, DummyStep1, DummyStep2
 
-
 @pytest.fixture(name="pipeline")
 def pipeline_fixture() -> Pipeline:
     return Pipeline(name="unit-test-pipeline")
-
 
 @pytest.fixture(name="dummy_step_1")
 def dummy_step_1_fixture(pipeline: "Pipeline") -> DummyStep1:
     return DummyStep1(name="dummy_step_1", pipeline=pipeline)
 
-
 @pytest.fixture(name="dummy_step_2")
 def dummy_step_2_fixture(pipeline: "Pipeline") -> DummyStep2:
     return DummyStep2(name="dummy_step_2", pipeline=pipeline)
-
 
 @pytest.fixture(name="dummy_generator_step")
 def dummy_generator_step_fixture(pipeline: "Pipeline") -> DummyGeneratorStep:
     return DummyGeneratorStep(name="dummy_generator_step", pipeline=pipeline)
 
-
 @pytest.fixture(name="dummy_global_step")
 def dummy_global_step_fixture(pipeline: "Pipeline") -> DummyGlobalStep:
     return DummyGlobalStep(name="dummy_global_step", pipeline=pipeline)
-
 
 @pytest.fixture(name="dummy_dag")
 def dummy_dag_fixture(
@@ -63,7 +57,6 @@ def dummy_dag_fixture(
     dag.add_edge("dummy_generator_step", "dummy_global_step")
     dag.add_edge("dummy_step_1", "dummy_step_2")
     return dag
-
 
 @pytest.fixture(name="dummy_batch_manager")
 def dummy_batch_manager_from_dag_fixture(dummy_dag: DAG) -> _BatchManager:

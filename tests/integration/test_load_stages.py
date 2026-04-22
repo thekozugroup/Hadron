@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,9 +29,7 @@ if TYPE_CHECKING:
     from distilagent.pipeline.batch import _Batch
     from distilagent.typing import StepOutput
 
-
 routing_batch_function = sample_n_steps(2)
-
 
 @step(inputs=["instruction"], outputs=["generation"])
 def Generate(input: StepInput) -> "StepOutput":
@@ -39,11 +37,9 @@ def Generate(input: StepInput) -> "StepOutput":
         row["generation"] = "I'VE GENERATED SOMETHING YAY"
     yield input
 
-
 @step(step_type="global")
 def Global(inputs: StepInput) -> "StepOutput":
     yield inputs
-
 
 def test_load_stages() -> None:
     with Pipeline(name="pipeline") as pipeline:
@@ -91,7 +87,6 @@ def test_load_stages() -> None:
         ]
     )
 
-
 def test_load_stages_with_routing_batch_function() -> None:
     with Pipeline(name="pipeline") as pipeline:
         load_data = LoadDataFromDicts(
@@ -114,7 +109,6 @@ def test_load_stages_with_routing_batch_function() -> None:
         pipeline.run(use_cache=False)
 
     all_steps_loaded_mock.assert_has_calls([mock.call(stage=0), mock.call(stage=1)])
-
 
 def test_load_stages_status_load_from_cache() -> None:
     with TemporaryDirectory() as tmp_dir:

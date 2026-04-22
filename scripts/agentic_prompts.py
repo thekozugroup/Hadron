@@ -14,12 +14,10 @@ from __future__ import annotations
 
 from typing import List, TypedDict
 
-
 class AgenticPrompt(TypedDict):
     id: str
     category: str
     instruction: str
-
 
 AGENTIC_PROMPTS: List[AgenticPrompt] = [
     {
@@ -206,10 +204,8 @@ AGENTIC_PROMPTS: List[AgenticPrompt] = [
     },
 ]
 
-
 def get_prompts() -> List[AgenticPrompt]:
     return list(AGENTIC_PROMPTS)
-
 
 if __name__ == "__main__":
     for p in AGENTIC_PROMPTS:

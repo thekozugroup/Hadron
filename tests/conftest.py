@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,13 +21,11 @@ if TYPE_CHECKING:
     from _pytest.config import Config
     from _pytest.nodes import Item
 
-
 def pytest_configure(config: "Config") -> None:
     config.addinivalue_line(
         "markers",
         "skip_python_versions(versions): mark test to be skipped on specified Python versions",
     )
-
 
 def pytest_collection_modifyitems(config: "Config", items: List["Item"]) -> None:
     current_version = f"{sys.version_info.major}.{sys.version_info.minor}"

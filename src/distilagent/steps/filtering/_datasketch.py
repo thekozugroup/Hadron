@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -33,7 +33,6 @@ from datasketch.storage import unordered_storage as _unordered_storage
 KEY_VALUE_DISK_DIR: Path = Path.home() / ".cache" / "distilagent" / "key_value_store"
 KV_DISK_LIST_NAME: Final[str] = "disckache_list_storage"
 KV_DISK_SET_NAME: Final[str] = "diskcache_set_storage"
-
 
 class DiskCacheListStorage(OrderedStorage):
     def __init__(self, config, name) -> None:
@@ -83,7 +82,6 @@ class DiskCacheListStorage(OrderedStorage):
     def close(self):
         self._db._cache.close()
 
-
 class DiskCacheSetStorage(UnorderedStorage, DiskCacheListStorage):
     def _get_db_name(self, name):
         return str(KEY_VALUE_DISK_DIR / f"{name}_{KV_DISK_SET_NAME}")
@@ -96,7 +94,6 @@ class DiskCacheSetStorage(UnorderedStorage, DiskCacheListStorage):
         res.update(vals)
         self._db[key] = res
 
-
 def ordered_storage(config, name=None):
     """Copy of `datasketch.storage.ordered_storage` with the addition of `DiskCacheListStorage`."""
     tp = config["type"]
@@ -104,14 +101,12 @@ def ordered_storage(config, name=None):
         return DiskCacheListStorage(config, name=name)
     return _ordered_storage(config, name=name)
 
-
 def unordered_storage(config, name=None):
     """Copy of `datasketch.storage.ordered_storage` with the addition of `DiskCacheSetStorage`."""
     tp = config["type"]
     if tp == "disk":
         return DiskCacheSetStorage(config, name=name)
     return _unordered_storage(config, name=name)
-
 
 class MinHashLSH(_MinHashLSH):
     """Custom implementation of `datasketch.MinHashLSH` to allow passing a custom

@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -41,7 +41,7 @@ from upath import UPath
 
 from distilagent import __version__, constants, envs
 from distilagent.distiset import create_distiset
-from distilagent.errors import DistilabelUserError
+from distilagent.errors import DistilAgentUserError
 from distilagent.mixins.requirements import RequirementsMixin
 from distilagent.pipeline._dag import DAG
 from distilagent.pipeline.batch import _Batch
@@ -94,9 +94,7 @@ if TYPE_CHECKING:
         log_file: Path
         stages_file: Path
 
-
 LoadStages = tuple[list[list[str]], list[list[str]]]
-
 
 class _GlobalPipelineManager:
     """Class to manage the global pipeline instance that will be used by the steps when
@@ -126,13 +124,11 @@ class _GlobalPipelineManager:
         """
         return cls._context_global_pipeline
 
-
 _STEP_LOAD_FAILED_CODE = -666
 _STEP_NOT_LOADED_CODE = -999
 _STEP_UNLOADED_CODE = -1000
 
 _PIPELINE_DEFAULT_NAME = "__default_pipeline_name__"
-
 
 class BasePipeline(ABC, RequirementsMixin, _Serializable):
     """Base class for a `distilagent` pipeline.
@@ -201,7 +197,7 @@ class BasePipeline(ABC, RequirementsMixin, _Serializable):
 
         if cache_dir:
             self._cache_dir = Path(cache_dir)
-        elif env_cache_dir := envs.DISTILABEL_CACHE_DIR:
+        elif env_cache_dir := envs.DISTILAGENT_CACHE_DIR:
             self._cache_dir = Path(env_cache_dir)
         else:
             self._cache_dir = constants.PIPELINES_CACHE_DIR
@@ -487,7 +483,7 @@ class BasePipeline(ABC, RequirementsMixin, _Serializable):
         for step_name in self.dag:
             step = self.dag.get_step(step_name)[constants.STEP_ATTR_NAME]
             if isinstance(step_name, GeneratorStep):
-                raise DistilabelUserError(
+                raise DistilAgentUserError(
                     "There is already a `GeneratorStep` in the pipeline, you can either"
                     " pass a `dataset` to the run method, or create a `GeneratorStep` explictly."
                     f" `GeneratorStep`: {step}",
@@ -545,7 +541,7 @@ class BasePipeline(ABC, RequirementsMixin, _Serializable):
             load_groups: the load groups to be checked.
 
         Raises:
-            DistilabelUserError: if something is not OK when checking the load groups.
+            DistilAgentUserError: if something is not OK when checking the load groups.
         """
 
         def check_predecessor_in_load_group(
@@ -574,7 +570,7 @@ class BasePipeline(ABC, RequirementsMixin, _Serializable):
         for load_group_num, steps_load_group in enumerate(load_groups):
             for step_name in steps_load_group:
                 if step_name not in self.dag.G:
-                    raise DistilabelUserError(
+                    raise DistilAgentUserError(
                         f"Step with name '{step_name}' included in group {load_group_num} of"
                         " the `load_groups` is not an step included in the pipeline. Please,"
                         " check that you're passing the correct step name and run again.",
@@ -588,7 +584,7 @@ class BasePipeline(ABC, RequirementsMixin, _Serializable):
                     step_name, steps_load_group, True
                 ):
                     # Improve this user error message
-                    raise DistilabelUserError(
+                    raise DistilAgentUserError(
                         f"Step with name '{step_name}' cannot be in the same load group"
                         f" as the step with name '{step_name_in_load_group}'. '{step_name_in_load_group}'"
                         f" is not an immediate predecessor of '{step_name}' and there are"
@@ -597,7 +593,7 @@ class BasePipeline(ABC, RequirementsMixin, _Serializable):
                     )
 
                 if step.is_global and len(steps_load_group) > 1:
-                    raise DistilabelUserError(
+                    raise DistilAgentUserError(
                         f"Global step '{step_name}' has been included in a load group along"
                         " more steps. Global steps cannot be included in a load group with"
                         " more steps as they will be loaded in a different stage to the"
@@ -606,7 +602,7 @@ class BasePipeline(ABC, RequirementsMixin, _Serializable):
                     )
 
                 if step_name in steps_included_in_load_group:
-                    raise DistilabelUserError(
+                    raise DistilAgentUserError(
                         f"Step with name '{step_name}' in load group {load_group_num} has"
                         " already been included in a previous load group. A step cannot be in more"
                         " than one load group.",
@@ -665,7 +661,7 @@ class BasePipeline(ABC, RequirementsMixin, _Serializable):
             return
 
         if "path" not in storage_parameters:
-            raise DistilabelUserError(
+            raise DistilAgentUserError(
                 "The 'path' key must be present in the `storage_parameters` dictionary"
                 " if it's not `None`.",
                 page="sections/how_to_guides/advanced/fs_to_pass_data/",
@@ -1929,7 +1925,6 @@ class BasePipeline(ABC, RequirementsMixin, _Serializable):
             self._stop()
 
         return signal.signal(signal.SIGINT, signal_handler)
-
 
 def set_pipeline_running_env_variables(
     pipeline_name: str, pipeline_cache_id: str

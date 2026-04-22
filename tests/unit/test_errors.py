@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,16 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from distilagent.errors import DistilabelUserError
+from distilagent.errors import DistilAgentUserError
 
-
-def test_distilabel_user_error() -> None:
-    msg = DistilabelUserError("This is an error message.")
+def test_distilagent_user_error() -> None:
+    msg = DistilAgentUserError("This is an error message.")
     assert str(msg) == "This is an error message."
-    msg = DistilabelUserError(
+    msg = DistilAgentUserError(
         "This is an error message.", page="sections/getting_started/faq/"
     )
     assert (
         str(msg)
-        == "This is an error message.\n\nFor further information visit 'https://distilagent.argilla.io/latest/sections/getting_started/faq/'"
+        == "This is an error message.\n\nFor further information visit ''"
     )

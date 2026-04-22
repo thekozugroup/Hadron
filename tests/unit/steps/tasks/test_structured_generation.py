@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ from distilagent.models.llms.base import LLM
 from distilagent.pipeline.local import Pipeline
 from distilagent.steps.tasks.structured_generation import StructuredGeneration
 from distilagent.typing import GenerateOutput, StructuredInput
-
 
 class DummyStructuredLLM(LLM):
     def load(self) -> None:
@@ -47,7 +46,6 @@ class DummyStructuredLLM(LLM):
             }
             for _ in inputs
         ]
-
 
 class TestStructuredGeneration:
     def test_format_input(self) -> None:
@@ -130,7 +128,7 @@ class TestStructuredGeneration:
                 },
                 "generation": '{"test": "output"}',
                 "model_name": "test",
-                "distilabel_metadata": {
+                "distilagent_metadata": {
                     "raw_output_task": '{"test": "output"}',
                     "statistics_task": {"input_tokens": 12, "output_tokens": 12},
                 },

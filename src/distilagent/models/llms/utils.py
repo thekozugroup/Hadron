@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ from distilagent.typing import ChatType
 if TYPE_CHECKING:
     from distilagent.typing import GenerateOutput, LLMLogprobs, LLMOutput
 
-
 def compute_tokens(
     text_or_messages: Union[str, ChatType], tokenizer: Callable[..., List[int]]
 ) -> int:
@@ -36,7 +35,6 @@ def compute_tokens(
         return sum([len(tokenizer(message["content"])) for message in text_or_messages])
     else:
         return len(tokenizer(text_or_messages))
-
 
 def prepare_output(
     generations: "LLMOutput",

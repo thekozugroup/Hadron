@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,6 @@ if TYPE_CHECKING:
     from transformers import PreTrainedModel, PreTrainedTokenizer
 
     from distilagent.typing import ChatType, StepColumns, StepOutput
-
 
 class RewardModelScore(Step, CudaDevicePlacementMixin):
     """Assign a score to a response using a Reward Model.

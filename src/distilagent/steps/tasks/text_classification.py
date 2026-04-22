@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,7 +25,6 @@ from distilagent.steps.tasks import Task
 if TYPE_CHECKING:
     from distilagent.typing import ChatType
 
-
 TEXT_CLASSIFICATION_TEMPLATE: str = """\
 # Instruction
 Please classify the {{ query_title.lower() }} by assigning the most appropriate labels.
@@ -48,7 +47,6 @@ Now, please give me the labels in JSON format, do not include any other text in 
 }
 ```
 """.rstrip()
-
 
 class TextClassification(Task):
     r"""Classifies text into one or more categories or labels.
@@ -113,7 +111,7 @@ class TextClassification(Task):
         # result
         # [{'text': 'This was a masterpiece. Not completely faithful to the books, but enthralling from beginning to end. Might be my favorite of the three.',
         # 'labels': 'positive',
-        # 'distilabel_metadata': {'raw_output_text_classification_0': '{\n    "labels": "positive"\n}',
+        # 'distilagent_metadata': {'raw_output_text_classification_0': '{\n    "labels": "positive"\n}',
         # 'raw_input_text_classification_0': [{'role': 'system',
         #     'content': 'You are an AI system specialized in generating labels to classify pieces of text. Your sole purpose is to analyze the given text and provide appropriate classification labels.'},
         #     {'role': 'user',
@@ -149,7 +147,7 @@ class TextClassification(Task):
         # result
         # [{'text': 'Can you tell me more about your return policy?',
         # 'labels': 'inquiry',
-        # 'distilabel_metadata': {'raw_output_text_classification_0': '{\n    "labels": "inquiry"\n}',
+        # 'distilagent_metadata': {'raw_output_text_classification_0': '{\n    "labels": "inquiry"\n}',
         # 'raw_input_text_classification_0': [{'role': 'system',
         #     'content': 'You are an AI system specialized in generating labels to classify pieces of text. Your sole purpose is to analyze the given text and provide appropriate classification labels.'},
         #     {'role': 'user',
@@ -184,7 +182,7 @@ class TextClassification(Task):
         # 'labels': ['Historical Researcher',
         # 'Cultural Specialist',
         # 'Ethnic Studies Expert'],
-        # 'distilabel_metadata': {'raw_output_text_classification_0': '{\n    "labels": ["Historical Researcher", "Cultural Specialist", "Ethnic Studies Expert"]\n}',
+        # 'distilagent_metadata': {'raw_output_text_classification_0': '{\n    "labels": ["Historical Researcher", "Cultural Specialist", "Ethnic Studies Expert"]\n}',
         # 'raw_input_text_classification_0': [{'role': 'system',
         #     'content': 'You are an AI system specialized in generating labels to classify pieces of text. Your sole purpose is to analyze the given text and provide appropriate classification labels.'},
         #     {'role': 'user',

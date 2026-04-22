@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@ from distilagent.steps.formatting.dpo import (
     FormatChatGenerationDPO,
     FormatTextGenerationDPO,
 )
-
 
 class TestFormatTextGenerationDPO:
     def test_process(self) -> None:
@@ -99,7 +98,6 @@ class TestFormatTextGenerationDPO:
                 "rejected_model": "C",
             }
         ]
-
 
 class TestFormatChatGenerationdpo:
     def test_process(self) -> None:

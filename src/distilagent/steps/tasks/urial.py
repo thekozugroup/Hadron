@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ from distilagent.steps.tasks import Task
 
 if TYPE_CHECKING:
     from distilagent.typing import ChatType, StepColumns
-
 
 class URIAL(Task):
     """Generates a response using a non-instruct fine-tuned model.
@@ -68,7 +67,7 @@ class URIAL(Task):
         #     {
         #         'instruction': "What's the most most common type of cloud?",
         #         'generation': 'Clouds are classified into three main types, high, middle, and low. The most common type of cloud is the middle cloud.',
-        #         'distilabel_metadata': {...},
+        #         'distilagent_metadata': {...},
         #         'model_name': 'meta-llama/Meta-Llama-3.1-8B'
         #     }
         # ]

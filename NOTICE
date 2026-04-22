@@ -1,0 +1,9 @@
+DistilAgent
+Copyright 2026-present, thekozugroup
+
+This product includes software derived from distilabel
+(https://github.com/argilla-io/distilabel), Copyright 2023-present,
+Argilla, Inc., licensed under the Apache License, Version 2.0.
+
+AutoReason tournament method adapted from
+https://github.com/NousResearch/autoreason.

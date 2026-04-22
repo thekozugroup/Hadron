@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,7 +27,6 @@ from distilagent.steps.decorator import step
 from distilagent.typing import GeneratorStepOutput, StepOutput
 from distilagent.utils.serialization import TYPE_INFO_KEY
 
-
 class DummyStep(Step):
     attr1: int = 5
 
@@ -44,7 +43,6 @@ class DummyStep(Step):
             input["response"] = "unit test"
         yield inputs
 
-
 class DummyGeneratorStep(GeneratorStep):
     @property
     def outputs(self) -> List[str]:
@@ -52,7 +50,6 @@ class DummyGeneratorStep(GeneratorStep):
 
     def process(self, inputs: StepInput) -> GeneratorStepOutput:  # type: ignore
         yield [], False
-
 
 class DummyGlobalStep(GlobalStep):
     @property
@@ -65,7 +62,6 @@ class DummyGlobalStep(GlobalStep):
 
     def process(self, inputs: StepInput) -> StepOutput:
         yield []
-
 
 class TestStep:
     def test_signature(self) -> None:
@@ -374,7 +370,6 @@ class TestStep:
 
             assert not artifact_path.exists()
 
-
 class TestGeneratorStep:
     def test_is_generator(self) -> None:
         step = DummyGeneratorStep(
@@ -388,7 +383,6 @@ class TestGeneratorStep:
         )
         assert not step.is_global
 
-
 class TestGlobalStep:
     def test_is_generator(self) -> None:
         step = DummyGlobalStep(
@@ -401,7 +395,6 @@ class TestGlobalStep:
             name="dummy", pipeline=Pipeline(name="unit-test-pipeline")
         )
         assert step.is_global
-
 
 class TestStepSerialization:
     def test_step_dump(self) -> None:

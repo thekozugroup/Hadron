@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -88,7 +88,6 @@ _PIPELINE_DETAIL_TEMPLATE = Template(
     ).read()
 )
 
-
 _STEPS_CATEGORY_TO_ICON = {
     "text-generation": ":material-text-box-edit:",
     "chat-generation": ":material-chat:",
@@ -133,7 +132,6 @@ _STEP_CATEGORY_TO_DESCRIPTION = {
     "helper": "Helper steps are used to do extra tasks during the pipeline execution.",
 }
 
-
 assert list(_STEP_CATEGORY_TO_DESCRIPTION.keys()) == list(
     _STEPS_CATEGORY_TO_ICON.keys()
 )
@@ -162,12 +160,10 @@ _CATEGORY_ORDER_INDEX = {
     for idx, category in enumerate(list(_STEP_CATEGORY_TO_DESCRIPTION.keys()))
 }
 
-
 class ComponentsGalleryConfig(Config):
     enabled = Type(bool, default=True)
     page_title = Type(str, default="Components Gallery")
     add_after_page = Type(str, default=None)
-
 
 class ComponentsGalleryPlugin(BasePlugin[ComponentsGalleryConfig]):
     """A MkDocs plugin to generate a components gallery page for `distilagent` components.
@@ -682,7 +678,6 @@ class ComponentsGalleryPlugin(BasePlugin[ComponentsGalleryConfig]):
             nav.items.append(page)
 
         return nav
-
 
 def _generate_mermaid_diagram_for_io(  # noqa: C901
     step_name: str, inputs: List[str], outputs: List[str]

@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ if TYPE_CHECKING:
     from types import ModuleType
 
     from distilagent.typing import StepColumns, StepOutput
-
 
 class PrepareExamples(Step):
     r"""Helper step to create examples from `query` and `answers` pairs used as Few Shots in APIGen.
@@ -91,7 +90,6 @@ class PrepareExamples(Step):
 
         yield outputs
 
-
 def load_module_from_path(path: str) -> "ModuleType":
     """Loads a python module from a given path.
 
@@ -115,11 +113,9 @@ def load_module_from_path(path: str) -> "ModuleType":
     spec.loader.exec_module(module)
     return module
 
-
 class FunctionResult(TypedDict):
     keep: bool
     execution_result: str
-
 
 def execute_from_response(
     function: Callable, call_answer: Union[Dict[str, Any], None]
@@ -159,14 +155,12 @@ def execute_from_response(
     except Exception as e:
         return FunctionResult(keep=False, execution_result=str(e))
 
-
 def remove_json_fences(text: str) -> str:
     pattern = r"^```json\n([\s\S]*)\n```$"
     match = re.match(pattern, text, re.MULTILINE)
     if match:
         return match.group(1)
     return text
-
 
 def remove_fences(text: str) -> str:
     pattern = r"^```\n([\s\S]*)\n```$"
@@ -175,10 +169,8 @@ def remove_fences(text: str) -> str:
         return match.group(1)
     return text
 
-
 def timeout_handler(signum, frame):
     raise TimeoutError("Function execution timed out")
-
 
 def run_function_with_timeout(function: Callable, timeout: int = 5, *args: Any) -> Any:
     """Run a function with a timeout, to limit the total time waiting for a result."""

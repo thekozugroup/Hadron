@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ from distilagent.constants import (
     ROUTING_BATCH_FUNCTION_ATTR_NAME,
     STEP_ATTR_NAME,
 )
-from distilagent.errors import DistilabelUserError
+from distilagent.errors import DistilAgentUserError
 from distilagent.pipeline.routing_batch_function import RoutingBatchFunction
 from distilagent.steps.base import GeneratorStep
 from distilagent.utils.serialization import (
@@ -52,7 +52,6 @@ if TYPE_CHECKING:
     from distilagent.steps.base import GeneratorStep, Step, _Step
 
 _MERMAID_URL = "https://mermaid.ink/img/"
-
 
 class DAG(_Serializable):
     """A Directed Acyclic Graph (DAG) to represent the pipeline.
@@ -397,7 +396,7 @@ class DAG(_Serializable):
                 # Validate that the steps in the first trophic level are `GeneratorStep`s
                 if trophic_level == 1:
                     if not isinstance(step, GeneratorStep):
-                        raise DistilabelUserError(
+                        raise DistilAgentUserError(
                             f"Step '{step_name}' cannot be a root step because it is not"
                             " a `GeneratorStep`. It should have a previous step in the pipeline.",
                             page="sections/how_to_guides/basic/step/#types-of-steps",
@@ -538,7 +537,7 @@ class DAG(_Serializable):
             node = self.get_step(predecessor)
             routing_batch_function = node.get(ROUTING_BATCH_FUNCTION_ATTR_NAME)
             if routing_batch_function is not None and len(predecessors) > 1:
-                raise DistilabelUserError(
+                raise DistilAgentUserError(
                     f"Step '{step.name}' cannot have multiple predecessors when the batches"
                     " of one are being routed with a `routing_batch_function`.",
                     page="sections/how_to_guides/basic/pipeline/?h=routing#routing-batches-to-specific-downstream-steps",
@@ -602,14 +601,14 @@ class DAG(_Serializable):
         if step_input_parameter is None:
             if num_predecessors > 1:
                 prev_steps = ", ".join([f"'{step_name}'" for step_name in predecessors])
-                raise DistilabelUserError(
+                raise DistilAgentUserError(
                     f"Step '{step_name}' should have a `*args` parameter with type hint"
                     f" `StepInput` to receive outputs from previous steps: {prev_steps}.",
                     page="sections/how_to_guides/basic/step/#define-steps-for-your-pipeline",
                 )
 
             prev_step_name = next(iter(predecessors))
-            raise DistilabelUserError(
+            raise DistilAgentUserError(
                 f"Step '{step_name}' should have a parameter with type hint `StepInput`"
                 f" to receive the output from the previous step: '{prev_step_name}'.",
                 page="sections/how_to_guides/basic/step/#define-steps-for-your-pipeline",
@@ -619,7 +618,7 @@ class DAG(_Serializable):
             num_predecessors > 1
             and step_input_parameter.kind != inspect.Parameter.VAR_POSITIONAL
         ):
-            raise DistilabelUserError(
+            raise DistilAgentUserError(
                 f"Step '{step_name}' should have a `*args` parameter with type hint `StepInput`"
                 f" to receive outputs from previous steps.",
                 page="sections/how_to_guides/basic/step/#define-steps-for-your-pipeline",
@@ -844,16 +843,10 @@ class DAG(_Serializable):
             except AttributeError:
                 step_inputs[step["name"]] = {"dynamic": True}
 
-        # Add Argilla and Distiset steps to the graph
         leaf_steps = self.leaf_steps
         for idx, leaf_step in enumerate(leaf_steps):
-            if "to_argilla" in leaf_step:
-                connections.append({"from": leaf_step, "to": [f"to_argilla_{idx}"]})
-                step_name_to_class[f"to_argilla_{idx}"] = "Argilla"
-                step_outputs[leaf_step] = {"records": True}
-            else:
-                connections.append({"from": leaf_step, "to": [f"distiset_{idx}"]})
-                step_name_to_class[f"distiset_{idx}"] = "Distiset"
+            connections.append({"from": leaf_step, "to": [f"distiset_{idx}"]})
+            step_name_to_class[f"distiset_{idx}"] = "Distiset"
 
         # Create a set of all steps in the graph
         all_steps = {con["from"] for con in connections} | {
@@ -960,7 +953,6 @@ class DAG(_Serializable):
         graph.append("classDef component text-align:center;")
         graph_styled = "\n".join(graph)
         return _to_mermaid_image(graph_styled)
-
 
 def _to_mermaid_image(graph_styled: str) -> str:
     """Converts a Mermaid graph to an image using the Mermaid Ink service.

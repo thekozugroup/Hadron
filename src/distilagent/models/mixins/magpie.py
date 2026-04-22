@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,7 +27,6 @@ MAGPIE_PRE_QUERY_TEMPLATES: Dict[MagpieAvailablePreQueryTemplates, str] = {
     "llama3": "<|begin_of_text|><|start_header_id|>user<|end_header_id|>\n\n",
     "qwen2": "<|im_start|>user\n",
 }
-
 
 class MagpieChatTemplateMixin(BaseModel, validate_assignment=True):
     """A simple mixin that adds the required logic to apply the pre-query template that

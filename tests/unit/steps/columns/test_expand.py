@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ import pytest
 from distilagent.pipeline.local import Pipeline
 from distilagent.steps.columns.expand import ExpandColumns
 
-
 class TestExpandColumns:
     def test_always_dict(self) -> None:
         expand_columns = ExpandColumns(
@@ -41,7 +40,7 @@ class TestExpandColumns:
                     {
                         "column1": [1, 2, 3],
                         "column2": ["a", "b", "c"],
-                        "distilabel_metadata": {
+                        "distilagent_metadata": {
                             "statistics_column1": {
                                 "input_tokens": [12],
                                 "output_tokens": [12],
@@ -93,7 +92,7 @@ class TestExpandColumns:
                     {
                         "column1": json.dumps([1, 2, 3]),
                         "column2": json.dumps(["a", "b", "c"]),
-                        "distilabel_metadata": {
+                        "distilagent_metadata": {
                             "statistics_column1": {
                                 "input_tokens": [12],
                                 "output_tokens": [12],
@@ -145,7 +144,7 @@ class TestExpandColumns:
                     {
                         "column1": [1, 2, 3],
                         "column2": ["a", "b", "c"],
-                        "distilabel_metadata": {
+                        "distilagent_metadata": {
                             "statistics_column1": {
                                 "input_tokens": [12],
                                 "output_tokens": [12],
@@ -197,7 +196,7 @@ class TestExpandColumns:
                     {
                         "column1": [1, 2, 3],
                         "column2": ["a", "b", "c"],
-                        "distilabel_metadata": {
+                        "distilagent_metadata": {
                             "statistics_column1": {
                                 "input_tokens": [793],
                                 "output_tokens": [361],
@@ -263,16 +262,16 @@ class TestExpandColumns:
             {
                 "column1": 1,
                 "column2": "a",
-                "distilabel_metadata": stats[0],
+                "distilagent_metadata": stats[0],
             },
             {
                 "column1": 2,
                 "column2": "b",
-                "distilabel_metadata": stats[1],
+                "distilagent_metadata": stats[1],
             },
             {
                 "column1": 3,
                 "column2": "c",
-                "distilabel_metadata": stats[2],
+                "distilagent_metadata": stats[2],
             },
         ]

@@ -1,4 +1,4 @@
-# Copyright 2023-present, Argilla, Inc.
+# Copyright 2026-present, thekozugroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ from distilagent.models.mixins.cuda_device_placement import CudaDevicePlacementM
 
 if TYPE_CHECKING:
     from llama_cpp import Llama
-
 
 class LlamaCppEmbeddings(Embeddings, CudaDevicePlacementMixin):
     """`LlamaCpp` library implementation for embedding generation.
@@ -74,7 +73,7 @@ class LlamaCppEmbeddings(Embeddings, CudaDevicePlacementMixin):
 
         embeddings.load()
 
-        results = embeddings.encode(inputs=["distilagent is awesome!", "and Argilla!"])
+        results = embeddings.encode(inputs=["distilagent is awesome!", "and !"])
         print(results)
         embeddings.unload()
         ```
@@ -91,7 +90,7 @@ class LlamaCppEmbeddings(Embeddings, CudaDevicePlacementMixin):
 
         embeddings.load()
 
-        results = embeddings.encode(inputs=["distilagent is awesome!", "and Argilla!"])
+        results = embeddings.encode(inputs=["distilagent is awesome!", "and !"])
         print(results)
         embeddings.unload()
         # [
@@ -121,7 +120,7 @@ class LlamaCppEmbeddings(Embeddings, CudaDevicePlacementMixin):
 
         embeddings.load()
 
-        results = embeddings.encode(inputs=["distilagent is awesome!", "and Argilla!"])
+        results = embeddings.encode(inputs=["distilagent is awesome!", "and !"])
         print(results)
         embeddings.unload()
         # [
@@ -129,7 +128,6 @@ class LlamaCppEmbeddings(Embeddings, CudaDevicePlacementMixin):
         #   [4.4889533455716446e-05, 0.044016145169734955, ...],
         # ]
         ```
-
 
     """
 
