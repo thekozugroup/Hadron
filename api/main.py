@@ -31,9 +31,12 @@ WEB_DIST = REPO_ROOT / "web" / "dist"
 import sys
 sys.path.insert(0, str(SCRIPTS_DIR))
 try:
-    from pools import GENERALIST_POOL, JUDGE_POOL, CODE_SPECIALIST, REASONING_SPECIALIST
+    from pools import (
+        GENERALIST_POOL, JUDGE_POOL, CODE_SPECIALIST, REASONING_SPECIALIST,
+        CODEX_TEACHER_POOL,
+    )
 except Exception:  # noqa: BLE001
-    GENERALIST_POOL = JUDGE_POOL = []
+    GENERALIST_POOL = JUDGE_POOL = CODEX_TEACHER_POOL = []
     CODE_SPECIALIST = REASONING_SPECIALIST = ""
 
 app = FastAPI(title="Hadron API", version="0.1.0")
@@ -53,7 +56,7 @@ def get_runner() -> RunManager:
     return _runner
 
 class RunConfig(BaseModel):
-    provider: str = "openrouter"
+    provider: str = "openrouter"   # openrouter | local | codex
     base_url: Optional[str] = None
     model: Optional[str] = "minimax/minimax-m2.5:free"
     use_pool: bool = True
@@ -93,7 +96,47 @@ def pools() -> Dict[str, Any]:
         "judge_pool": JUDGE_POOL,
         "code_specialist": CODE_SPECIALIST,
         "reasoning_specialist": REASONING_SPECIALIST,
+        "codex_teacher_pool": CODEX_TEACHER_POOL,
+        "codex_auth": _codex_auth_status(),
         "defaults": RunConfig().model_dump(),
+    }
+
+
+def _codex_auth_status() -> Dict[str, Any]:
+    """Return whether a Codex OAuth login exists + expiry info.
+
+    Returned by /api/pools so the frontend can enable/disable the codex
+    provider option without a separate round trip.
+    """
+    try:
+        sys.path.insert(0, str(SCRIPTS_DIR))
+        from codex_oauth import load_auth  # noqa: WPS433 — lazy import
+        auth = load_auth()
+        if not auth:
+            return {"signed_in": False}
+        import time as _t
+        return {
+            "signed_in": True,
+            "account_id": auth.account_id,
+            "expires_at": auth.expires_at,
+            "seconds_remaining": max(0, int(auth.expires_at - _t.time())),
+        }
+    except Exception as exc:  # noqa: BLE001
+        return {"signed_in": False, "error": str(exc)}
+
+
+@app.post("/api/codex/login")
+def codex_login_hint() -> Dict[str, Any]:
+    """Return a shell command the user runs in their own terminal to sign in.
+
+    We deliberately don't trigger the browser flow from inside the API: the
+    server process can't own the user's browser session cleanly. This keeps
+    the CLI script as the single source of truth for auth.
+    """
+    return {
+        "command": "python scripts/codex_oauth.py login",
+        "device_command": "python scripts/codex_oauth.py login --device",
+        "auth_path": str(Path.home() / ".hadron" / "codex_auth.json"),
     }
 
 # -----------------------------------------------------------------------------

@@ -37,6 +37,10 @@ from huggingface_hub import hf_hub_download
 sys.path.insert(0, str(Path(__file__).parent))
 from agentic_prompts import get_prompts as get_agentic_prompts  # noqa: E402
 from reasoning_llm import LocalInlineThinkLLM, ReasoningOpenRouterLLM  # noqa: E402
+try:
+    from codex_llm import CodexOAuthLLM  # noqa: E402
+except Exception:  # noqa: BLE001 — optional until httpx etc. available
+    CodexOAuthLLM = None  # type: ignore[assignment]
 from pools import (  # noqa: E402
     CODE_SPECIALIST,
     GENERALIST_POOL,
@@ -259,6 +263,17 @@ async def amain(cfg: Config) -> int:
                 generation_kwargs=gen_kwargs,
                 timeout=call_timeout_s,
             )
+        if cfg.provider == "codex":
+            if CodexOAuthLLM is None:
+                raise RuntimeError(
+                    "codex provider requires `httpx` — install via pip install 'httpx<0.28'"
+                )
+            return CodexOAuthLLM(
+                model=model_id or "gpt-5-codex",
+                reasoning_effort=os.environ.get("REASONING_EFFORT", "high"),
+                timeout_s=float(call_timeout_s),
+                generation_kwargs=gen_kwargs,
+            )
         raise ValueError(f"unknown provider: {cfg.provider!r}")
 
     llm_cache: Dict[str, Any] = {}
@@ -428,7 +443,7 @@ def parse_args() -> Config:
     ap.add_argument("--checkpoint", type=Path, default=Path("datasets/.checkpoint.json"))
     ap.add_argument(
         "--provider",
-        choices=["openrouter", "local"],
+        choices=["openrouter", "local", "codex"],
         default=os.environ.get("PROVIDER", "openrouter"),
     )
     ap.add_argument("--base-url", default=None,

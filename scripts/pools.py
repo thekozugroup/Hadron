@@ -51,6 +51,15 @@ JUDGE_POOL: List[str] = [
     "openai/gpt-oss-120b:free",             # OpenAI open weights 120B
 ]
 
+# Codex (ChatGPT Pro/Plus OAuth) teacher catalogue — strongest tier available
+# via subscription credits. Use via `python scripts/codex_oauth.py login` and
+# --provider codex.
+CODEX_TEACHER_POOL: List[str] = [
+    "gpt-5-codex",
+    "gpt-5-codex-mini",
+    "o4-mini",
+]
+
 # ---------------------------------------------------------------------------
 # Domain routing
 # ---------------------------------------------------------------------------
