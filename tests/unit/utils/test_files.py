@@ -15,7 +15,7 @@
 import tempfile
 from pathlib import Path
 
-from distilagent.utils.files import list_files_in_dir
+from hadron.utils.files import list_files_in_dir
 
 def test_list_files_in_dir() -> None:
     with tempfile.TemporaryDirectory() as temp_dir:

@@ -14,14 +14,14 @@
 
 from typing import TYPE_CHECKING, Any
 
-from distilagent.models.llms.base import AsyncLLM
-from distilagent.pipeline import Pipeline
-from distilagent.steps import CombineOutputs, LoadDataFromDicts
-from distilagent.steps.generators.data_sampler import DataSampler
-from distilagent.steps.tasks import TextGeneration
+from hadron.models.llms.base import AsyncLLM
+from hadron.pipeline import Pipeline
+from hadron.steps import CombineOutputs, LoadDataFromDicts
+from hadron.steps.generators.data_sampler import DataSampler
+from hadron.steps.tasks import TextGeneration
 
 if TYPE_CHECKING:
-    from distilagent.typing import FormattedInput, GenerateOutput
+    from hadron.typing import FormattedInput, GenerateOutput
 
 class DummyAsyncLLM(AsyncLLM):
     structured_output: Any = None

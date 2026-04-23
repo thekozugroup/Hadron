@@ -17,7 +17,7 @@ from typing import TYPE_CHECKING, Any, Dict, List, Optional
 
 import pytest
 
-from distilagent.steps.tasks.math_shepherd.generator import (
+from hadron.steps.tasks.math_shepherd.generator import (
     FEW_SHOTS_GSM8K,
     RULES_GSM8K,
     SYSTEM_PROMPT,
@@ -26,7 +26,7 @@ from distilagent.steps.tasks.math_shepherd.generator import (
 from tests.unit.conftest import DummyLLM
 
 if TYPE_CHECKING:
-    from distilagent.typing import GenerateOutput
+    from hadron.typing import GenerateOutput
 
 class MathShepherdGeneratorLLM(DummyLLM):
     M: Optional[int] = None

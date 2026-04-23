@@ -14,9 +14,9 @@
 
 from typing import List
 
-from distilagent.pipeline.batch import _Batch
-from distilagent.steps.base import GeneratorStep, GlobalStep, Step, StepInput
-from distilagent.typing import GeneratorStepOutput, StepOutput
+from hadron.pipeline.batch import _Batch
+from hadron.steps.base import GeneratorStep, GlobalStep, Step, StepInput
+from hadron.typing import GeneratorStepOutput, StepOutput
 
 class DummyGeneratorStep(GeneratorStep):
     def process(self, offset: int = 0) -> GeneratorStepOutput:  # type: ignore

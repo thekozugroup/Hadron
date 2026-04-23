@@ -1,4 +1,4 @@
-"""Convert a distilagent JSONL dataset into MLX-LoRA training format.
+"""Convert a hadron JSONL dataset into MLX-LoRA training format.
 
 Emits two variants side-by-side so you can A/B the distillation recipe:
 
@@ -90,7 +90,7 @@ def write_jsonl(rows: List[Dict], path: Path) -> None:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--in", dest="inp", type=Path, default=Path("datasets/distilagent_pilot.jsonl"))
+    ap.add_argument("--in", dest="inp", type=Path, default=Path("datasets/hadron_pilot.jsonl"))
     ap.add_argument("--out", type=Path, default=Path("datasets/mlx_lora"))
     ap.add_argument("--seed", type=int, default=2026)
     args = ap.parse_args()

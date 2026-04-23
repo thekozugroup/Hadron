@@ -18,10 +18,10 @@ import pandas as pd
 import pytest
 from datasets import Dataset
 
-from distilagent.pipeline import Pipeline
-from distilagent.steps import make_generator_step
-from distilagent.steps.base import Step, StepInput
-from distilagent.typing import StepOutput
+from hadron.pipeline import Pipeline
+from hadron.steps import make_generator_step
+from hadron.steps.base import Step, StepInput
+from hadron.typing import StepOutput
 
 if TYPE_CHECKING:
     pass

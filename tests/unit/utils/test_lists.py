@@ -16,7 +16,7 @@ from typing import List
 
 import pytest
 
-from distilagent.utils.lists import flatten_responses
+from hadron.utils.lists import flatten_responses
 
 @pytest.mark.parametrize(
     "input, expected",

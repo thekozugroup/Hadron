@@ -14,14 +14,14 @@
 
 from typing import List
 
-from distilagent.pipeline.batch import _Batch
-from distilagent.pipeline.local import Pipeline
-from distilagent.pipeline.routing_batch_function import (
+from hadron.pipeline.batch import _Batch
+from hadron.pipeline.local import Pipeline
+from hadron.pipeline.routing_batch_function import (
     RoutingBatchFunction,
     routing_batch_function,
     sample_n_steps,
 )
-from distilagent.utils.serialization import TYPE_INFO_KEY
+from hadron.utils.serialization import TYPE_INFO_KEY
 from tests.unit.pipeline.utils import DummyGeneratorStep, DummyStep1, DummyStep2
 
 class TestRoutingBatchFunction:
@@ -97,7 +97,7 @@ class TestRoutingBatchFunction:
             "step": upstream_step.name,
             "description": routing_batch_function.description,
             TYPE_INFO_KEY: {
-                "module": "distilagent.pipeline.routing_batch_function",
+                "module": "hadron.pipeline.routing_batch_function",
                 "name": "sample_n_steps",
                 "kwargs": {"n": 2},
             },
@@ -108,7 +108,7 @@ class TestRoutingBatchFunction:
             "step": "upstream_step",
             "description": "Sample 2 steps from the list of downstream steps.",
             TYPE_INFO_KEY: {
-                "module": "distilagent.pipeline.routing_batch_function",
+                "module": "hadron.pipeline.routing_batch_function",
                 "name": "sample_n_steps",
                 "kwargs": {"n": 2},
             },

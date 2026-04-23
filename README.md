@@ -1,8 +1,8 @@
-DistilAgent is an LLM distillation framework built around [NousResearch's AutoReason](https://github.com/NousResearch/autoreason) tournament refinement: a single teacher model produces distillation labels that are measurably better than its own single-shot output. Each prompt is answered, critiqued, adversarially revised, synthesized, and ranked by a blind Borda panel until "do nothing" wins twice. Full reasoning traces are captured per role for process-supervision fine-tuning.
+Hadron is an LLM distillation framework built around [NousResearch's AutoReason](https://github.com/NousResearch/autoreason) tournament refinement: a single teacher model produces distillation labels that are measurably better than its own single-shot output. Each prompt is answered, critiqued, adversarially revised, synthesized, and ranked by a blind Borda panel until "do nothing" wins twice. Full reasoning traces are captured per role for process-supervision fine-tuning.
 
 ## Screenshots
 
-![DistilAgent pipeline — raw prompts funnel through an A/B/AB tournament into a condensed refined dataset](./docs/screenshot.png)
+![Hadron pipeline — raw prompts funnel through an A/B/AB tournament into a condensed refined dataset](./docs/screenshot.png)
 
 ## How it works
 

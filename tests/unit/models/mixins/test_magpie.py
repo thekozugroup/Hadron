@@ -14,7 +14,7 @@
 
 import pytest
 
-from distilagent.models.mixins.magpie import MAGPIE_PRE_QUERY_TEMPLATES
+from hadron.models.mixins.magpie import MAGPIE_PRE_QUERY_TEMPLATES
 from tests.unit.conftest import DummyMagpieLLM
 
 class TestMagpieChatTemplateMixin:

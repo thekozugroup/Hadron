@@ -15,7 +15,7 @@
 import os
 from unittest import mock
 
-from distilagent.models.llms.anyscale import AnyscaleLLM
+from hadron.models.llms.anyscale import AnyscaleLLM
 
 class TestAnyscaleLLM:
     model_id: str = "mistralai/Mixtral-8x7B-Instruct-v0.1"
@@ -53,7 +53,7 @@ class TestAnyscaleLLM:
             "offline_batch_generation_block_until_done": None,
             "use_offline_batch_generation": False,
             "type_info": {
-                "module": "distilagent.models.llms.anyscale",
+                "module": "hadron.models.llms.anyscale",
                 "name": "AnyscaleLLM",
             },
         }

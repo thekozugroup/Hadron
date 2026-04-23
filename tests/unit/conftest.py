@@ -20,13 +20,13 @@ from urllib.request import urlretrieve
 import pytest
 from pydantic import PrivateAttr
 
-from distilagent.models.image_generation.base import AsyncImageGenerationModel
-from distilagent.models.llms.base import LLM, AsyncLLM
-from distilagent.models.mixins.magpie import MagpieChatTemplateMixin
-from distilagent.steps.tasks.base import Task
+from hadron.models.image_generation.base import AsyncImageGenerationModel
+from hadron.models.llms.base import LLM, AsyncLLM
+from hadron.models.mixins.magpie import MagpieChatTemplateMixin
+from hadron.steps.tasks.base import Task
 
 if TYPE_CHECKING:
-    from distilagent.typing import ChatType, FormattedInput, GenerateOutput
+    from hadron.typing import ChatType, FormattedInput, GenerateOutput
 
 # Defined here too, so that the serde still works
 class DummyAsyncLLM(AsyncLLM):
@@ -114,7 +114,7 @@ class DummyAsyncImageGenerationModel(AsyncImageGenerationModel):
         np.random.seed(42)
         arr = np.random.randint(0, 255, (100, 100, 3), dtype=np.uint8)
         random_image = Image.fromarray(arr, "RGB")
-        from distilagent.models.image_generation.utils import image_to_str
+        from hadron.models.image_generation.utils import image_to_str
 
         img_str = image_to_str(random_image)
         return [{"images": [img_str]} for _ in range(num_generations)]

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from distilagent.steps.embeddings.nearest_neighbour import FaissNearestNeighbour
+from hadron.steps.embeddings.nearest_neighbour import FaissNearestNeighbour
 
 class TestFaissNearestNeighbour:
     def test_process(self) -> None:

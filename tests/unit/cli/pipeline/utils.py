@@ -16,7 +16,7 @@ from unittest import mock
 
 import pytest
 
-from distilagent.cli.pipeline.utils import (
+from hadron.cli.pipeline.utils import (
     get_config_from_url,
     parse_runtime_parameters,
     valid_http_url,

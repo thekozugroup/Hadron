@@ -16,12 +16,12 @@ from typing import Generator
 
 import pytest
 
-from distilagent.errors import DistilAgentUserError
-from distilagent.models.llms.vllm import vLLM
-from distilagent.pipeline.ray import RayPipeline
-from distilagent.steps.base import StepResources
-from distilagent.steps.tasks.text_generation import TextGeneration
-from distilagent.utils.serialization import TYPE_INFO_KEY
+from hadron.errors import HadronUserError
+from hadron.models.llms.vllm import vLLM
+from hadron.pipeline.ray import RayPipeline
+from hadron.steps.base import StepResources
+from hadron.steps.tasks.text_generation import TextGeneration
+from hadron.utils.serialization import TYPE_INFO_KEY
 from tests.unit.conftest import DummyAsyncLLM, DummyTaskOfflineBatchGeneration
 
 @pytest.fixture
@@ -52,7 +52,7 @@ class TestRayPipeline:
         dump = pipeline.dump()
 
         assert dump["pipeline"][TYPE_INFO_KEY] == {
-            "module": "distilagent.pipeline.local",
+            "module": "hadron.pipeline.local",
             "name": "Pipeline",
         }
 
@@ -63,7 +63,7 @@ class TestRayPipeline:
             )
 
         with pytest.raises(
-            DistilAgentUserError,
+            HadronUserError,
             match="Step 'unit-test' uses an `LLM` with offline batch generation",
         ):
             pipeline._check_no_llms_using_offline_batch_generation()

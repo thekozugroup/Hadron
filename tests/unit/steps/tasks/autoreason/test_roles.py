@@ -16,7 +16,7 @@ from __future__ import annotations
 
 import pytest
 
-from distilagent.steps.tasks.autoreason.roles import (
+from hadron.steps.tasks.autoreason.roles import (
     parse_critique,
     parse_judge_ranking,
     render_author_b,

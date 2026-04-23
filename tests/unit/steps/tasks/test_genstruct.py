@@ -16,8 +16,8 @@ from typing import Any, Dict, Union
 
 import pytest
 
-from distilagent.pipeline.local import Pipeline
-from distilagent.steps.tasks.genstruct import Genstruct
+from hadron.pipeline.local import Pipeline
+from hadron.steps.tasks.genstruct import Genstruct
 from tests.unit.conftest import DummyAsyncLLM
 
 class TestGenstruct:

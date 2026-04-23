@@ -1,4 +1,4 @@
-"""Summary stats for a distilagent JSONL dataset produced by build_dataset.py."""
+"""Summary stats for a hadron JSONL dataset produced by build_dataset.py."""
 from __future__ import annotations
 
 import argparse
@@ -55,6 +55,6 @@ def main(path: Path) -> int:
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("path", type=Path, nargs="?", default=Path("datasets/distilagent_pilot.jsonl"))
+    ap.add_argument("path", type=Path, nargs="?", default=Path("datasets/hadron_pilot.jsonl"))
     args = ap.parse_args()
     raise SystemExit(main(args.path))

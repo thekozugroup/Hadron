@@ -1,4 +1,4 @@
-"""SQLite metadata store for DistilAgent runs.
+"""SQLite metadata store for Hadron runs.
 
 Schema:
     runs:       one row per dataset-build invocation (status, config, counts)

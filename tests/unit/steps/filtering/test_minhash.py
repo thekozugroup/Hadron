@@ -17,7 +17,7 @@ from typing import List
 import nltk
 import pytest
 
-from distilagent.steps.filtering.minhash import (
+from hadron.steps.filtering.minhash import (
     MinHashDedup,
     tokenize_on_ngrams,
     tokenized_on_words,

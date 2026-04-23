@@ -16,7 +16,7 @@ from typing import List
 
 import pytest
 
-from distilagent.steps.generators.data_sampler import DataSampler
+from hadron.steps.generators.data_sampler import DataSampler
 
 @pytest.mark.parametrize(
     "samples, size, batch_size, expected",

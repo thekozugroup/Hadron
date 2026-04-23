@@ -14,7 +14,7 @@
 
 import pytest
 
-from distilagent.steps.tasks.image_generation import ImageGeneration
+from hadron.steps.tasks.image_generation import ImageGeneration
 from tests.unit.conftest import DummyAsyncImageGenerationModel
 
 class TestImageGeneration:
@@ -42,7 +42,7 @@ class TestImageGeneration:
                 "prompt": "a white siamese cat",
                 "image": img_str,
                 "model_name": "test",
-                "distilagent_metadata": {
+                "hadron_metadata": {
                     "raw_input_image_generation_0": "a white siamese cat",
                     "raw_output_image_generation_0": {
                         "images": [

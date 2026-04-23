@@ -14,7 +14,7 @@
 
 from unittest.mock import MagicMock, Mock
 
-from distilagent.models.embeddings.vllm import vLLMEmbeddings
+from hadron.models.embeddings.vllm import vLLMEmbeddings
 
 # @patch("vllm.entrypoints.LLM")
 class TestSentenceTransformersEmbeddings:

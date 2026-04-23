@@ -14,7 +14,7 @@
 
 import numpy as np
 
-from distilagent.steps.clustering.umap import UMAP
+from hadron.steps.clustering.umap import UMAP
 
 class TestUMAP:
     def test_process(self) -> None:

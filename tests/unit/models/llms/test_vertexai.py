@@ -22,7 +22,7 @@ from vertexai.generative_models import (
     Part,
 )
 
-from distilagent.models.llms.vertexai import VertexAILLM
+from hadron.models.llms.vertexai import VertexAILLM
 
 @patch("vertexai.generative_models.GenerativeModel.generate_content_async")
 class TestVertexAILLM:
@@ -103,7 +103,7 @@ class TestVertexAILLM:
             "offline_batch_generation_block_until_done": None,
             "use_offline_batch_generation": False,
             "type_info": {
-                "module": "distilagent.models.llms.vertexai",
+                "module": "hadron.models.llms.vertexai",
                 "name": "VertexAILLM",
             },
         }

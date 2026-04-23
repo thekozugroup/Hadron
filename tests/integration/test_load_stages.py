@@ -16,8 +16,8 @@ from tempfile import TemporaryDirectory
 from typing import TYPE_CHECKING
 from unittest import mock
 
-from distilagent.pipeline import Pipeline, sample_n_steps
-from distilagent.steps import (
+from hadron.pipeline import Pipeline, sample_n_steps
+from hadron.steps import (
     GroupColumns,
     LoadDataFromDicts,
     StepInput,
@@ -26,8 +26,8 @@ from distilagent.steps import (
 )
 
 if TYPE_CHECKING:
-    from distilagent.pipeline.batch import _Batch
-    from distilagent.typing import StepOutput
+    from hadron.pipeline.batch import _Batch
+    from hadron.typing import StepOutput
 
 routing_batch_function = sample_n_steps(2)
 

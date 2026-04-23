@@ -14,8 +14,8 @@
 
 import pytest
 
-from distilagent.models.llms.openai import OpenAILLM
-from distilagent.steps.tasks.magpie.generator import MagpieGenerator
+from hadron.models.llms.openai import OpenAILLM
+from hadron.steps.tasks.magpie.generator import MagpieGenerator
 from tests.unit.conftest import DummyMagpieLLM
 
 class TestMagpieGenerator:
@@ -183,12 +183,12 @@ class TestMagpieGenerator:
                 {
                     "name": "add_raw_output",
                     "optional": True,
-                    "description": "Whether to include the raw output of the LLM in the key `raw_output_<TASK_NAME>` of the `distilagent_metadata` dictionary output column",
+                    "description": "Whether to include the raw output of the LLM in the key `raw_output_<TASK_NAME>` of the `hadron_metadata` dictionary output column",
                 },
                 {
                     "name": "add_raw_input",
                     "optional": True,
-                    "description": "Whether to include the raw input of the LLM in the key `raw_input_<TASK_NAME>` of the `distilagent_metadata` dictionary column",
+                    "description": "Whether to include the raw input of the LLM in the key `raw_input_<TASK_NAME>` of the `hadron_metadata` dictionary column",
                 },
                 {
                     "name": "num_generations",
@@ -203,7 +203,7 @@ class TestMagpieGenerator:
             ],
             "use_cache": True,
             "type_info": {
-                "module": "distilagent.steps.tasks.magpie.generator",
+                "module": "hadron.steps.tasks.magpie.generator",
                 "name": "MagpieGenerator",
             },
         }

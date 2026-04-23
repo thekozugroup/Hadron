@@ -17,11 +17,11 @@ from typing import TYPE_CHECKING, Dict, List, Optional, Union
 
 import pytest
 
-from distilagent.steps.tasks.text_classification import TextClassification
+from hadron.steps.tasks.text_classification import TextClassification
 from tests.unit.conftest import DummyAsyncLLM
 
 if TYPE_CHECKING:
-    from distilagent.typing import FormattedInput, GenerateOutput
+    from hadron.typing import FormattedInput, GenerateOutput
 
 class TextClassificationLLM(DummyAsyncLLM):
     n: int = 1
@@ -139,6 +139,6 @@ class TestTextClassification:
         assert result[0]["text"] == "SAMPLE_TEXT"
         assert result[0]["labels"] == json.loads(expected)["labels"]
         assert (
-            result[0]["distilagent_metadata"]["raw_output_text_classification_0"]
+            result[0]["hadron_metadata"]["raw_output_text_classification_0"]
             == expected
         )

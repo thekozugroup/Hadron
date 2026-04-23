@@ -14,7 +14,7 @@
 
 import pytest
 
-from distilagent.steps.filtering.embedding import EmbeddingDedup
+from hadron.steps.filtering.embedding import EmbeddingDedup
 
 SAMPLE_DATA = [
     {

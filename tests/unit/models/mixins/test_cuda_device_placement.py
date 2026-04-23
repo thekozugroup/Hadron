@@ -19,11 +19,11 @@ from unittest import mock
 
 import pytest
 
-from distilagent.models.llms.base import LLM
-from distilagent.models.mixins.cuda_device_placement import CudaDevicePlacementMixin
+from hadron.models.llms.base import LLM
+from hadron.models.mixins.cuda_device_placement import CudaDevicePlacementMixin
 
 if TYPE_CHECKING:
-    from distilagent.typing import ChatType
+    from hadron.typing import ChatType
 
 @pytest.fixture
 def mock_pynvml() -> Generator[None, None, None]:

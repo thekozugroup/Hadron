@@ -24,8 +24,8 @@ from openai.types.completion_usage import CompletionUsage
 from pydantic import BaseModel
 from transformers import AutoTokenizer
 
-from distilagent.models.llms import vLLM
-from distilagent.models.llms.vllm import ClientvLLM
+from hadron.models.llms import vLLM
+from hadron.models.llms.vllm import ClientvLLM
 
 class Character(BaseModel):
     name: str
@@ -164,7 +164,7 @@ class TestvLLM:
     ) -> None:
         llm = vLLM(model="dummy")
         tokenizer = AutoTokenizer.from_pretrained(
-            "distilagent-internal-testing/tiny-random-mistral"
+            "hadron-internal-testing/tiny-random-mistral"
         )
         llm._tokenizer = tokenizer
 
@@ -268,7 +268,7 @@ class TestClientvLLM:
     ) -> None:
         llm = ClientvLLM(
             base_url="http://localhost:8000/v1",
-            tokenizer="distilagent-internal-testing/tiny-random-mistral",
+            tokenizer="hadron-internal-testing/tiny-random-mistral",
         )
 
         llm.load()

@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from distilagent.pipeline import Pipeline
-from distilagent.steps.formatting.dpo import (
+from hadron.pipeline import Pipeline
+from hadron.steps.formatting.dpo import (
     FormatChatGenerationDPO,
     FormatTextGenerationDPO,
 )

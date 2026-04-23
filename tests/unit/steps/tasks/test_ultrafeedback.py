@@ -16,9 +16,9 @@ from typing import Any, Dict, List, Union
 
 import pytest
 
-from distilagent.models.llms.base import LLM
-from distilagent.steps.tasks.ultrafeedback import UltraFeedback
-from distilagent.typing import ChatType, GenerateOutput
+from hadron.models.llms.base import LLM
+from hadron.steps.tasks.ultrafeedback import UltraFeedback
+from hadron.typing import ChatType, GenerateOutput
 
 class UltraFeedbackLLM(LLM):
     structured_output: Any = None
@@ -66,7 +66,7 @@ class TestUltraFeedback:
                 "ratings": [1, 2],
                 "rationales": ["text", "text"],
                 "model_name": "ultrafeedback-model",
-                "distilagent_metadata": {
+                "hadron_metadata": {
                     "raw_output_ultrafeedback": "Type: 1\nRationale: text\nRating: 1\nRationale: text\n\nType: 2\nRationale: text\nRating: 2\nRationale: text",
                     "statistics_ultrafeedback": {
                         "input_tokens": 12,
@@ -97,7 +97,7 @@ class TestUltraFeedback:
                 "ratings": [1, 2],
                 "rationales-for-ratings": ["text", "text"],
                 "model_name": "ultrafeedback-model",
-                "distilagent_metadata": {
+                "hadron_metadata": {
                     "raw_output_ultrafeedback": "Type: 1\nRationale: text\nRating: 1\nRationale: text\n\nType: 2\nRationale: text\nRating: 2\nRationale: text",
                     "statistics_ultrafeedback": {
                         "input_tokens": 12,

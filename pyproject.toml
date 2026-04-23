@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "distilagent"
+name = "hadron"
 description = "AutoReason tournament refinement for LLM distillation — higher-quality teacher labels via blind-Borda self-judging."
 readme = "README.md"
 requires-python = ">=3.9"
@@ -45,10 +45,10 @@ dependencies = [
 dynamic = ["version"]
 
 [project.scripts]
-distilagent = "distilagent.cli.app:app"
+hadron = "hadron.cli.app:app"
 
 [project.entry-points."mkdocs.plugins"]
-"distilagent/components-gallery" = "distilagent.utils.mkdocs.components_gallery:ComponentsGalleryPlugin"
+"hadron/components-gallery" = "hadron.utils.mkdocs.components_gallery:ComponentsGalleryPlugin"
 
 [project.optional-dependencies]
 dev = ["ruff == 0.8.1", "pre-commit >= 3.5.0"]
@@ -119,11 +119,11 @@ installer = "pip"
 pip-args = ["--find-links", "https://flashinfer.ai/whl/cu124/torch2.5/flashinfer-python"]
 
 [project.urls]
-Source = "https://github.com/thekozugroup/distilagent"
-Issues = "https://github.com/thekozugroup/distilagent/issues"
+Source = "https://github.com/thekozugroup/hadron"
+Issues = "https://github.com/thekozugroup/hadron/issues"
 
 [tool.hatch.version]
-path = "src/distilagent/__init__.py"
+path = "src/hadron/__init__.py"
 
 [tool.ruff]
 line-length = 88

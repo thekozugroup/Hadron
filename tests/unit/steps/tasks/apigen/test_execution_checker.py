@@ -18,7 +18,7 @@ from typing import Any, Dict
 
 import pytest
 
-from distilagent.steps.tasks.apigen.execution_checker import APIGenExecutionChecker
+from hadron.steps.tasks.apigen.execution_checker import APIGenExecutionChecker
 
 SAMPLE_LIB = Path(__file__).parent / "_sample_module.py"
 SAMPLE_LIB_FOLDER = Path(__file__).parent / "_sample_lib"

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from distilagent.models.embeddings.sentence_transformers import (
+from hadron.models.embeddings.sentence_transformers import (
     SentenceTransformerEmbeddings,
 )
 

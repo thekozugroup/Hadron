@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from distilagent.errors import DistilAgentUserError
+from hadron.errors import HadronUserError
 
-def test_distilagent_user_error() -> None:
-    msg = DistilAgentUserError("This is an error message.")
+def test_hadron_user_error() -> None:
+    msg = HadronUserError("This is an error message.")
     assert str(msg) == "This is an error message."
-    msg = DistilAgentUserError(
+    msg = HadronUserError(
         "This is an error message.", page="sections/getting_started/faq/"
     )
     assert (

@@ -17,10 +17,10 @@ from typing import Any, List
 
 from typing_extensions import override
 
-from distilagent.models.llms.base import LLM
-from distilagent.pipeline.local import Pipeline
-from distilagent.steps.tasks.structured_generation import StructuredGeneration
-from distilagent.typing import GenerateOutput, StructuredInput
+from hadron.models.llms.base import LLM
+from hadron.pipeline.local import Pipeline
+from hadron.steps.tasks.structured_generation import StructuredGeneration
+from hadron.typing import GenerateOutput, StructuredInput
 
 class DummyStructuredLLM(LLM):
     def load(self) -> None:
@@ -128,7 +128,7 @@ class TestStructuredGeneration:
                 },
                 "generation": '{"test": "output"}',
                 "model_name": "test",
-                "distilagent_metadata": {
+                "hadron_metadata": {
                     "raw_output_task": '{"test": "output"}',
                     "statistics_task": {"input_tokens": 12, "output_tokens": 12},
                 },

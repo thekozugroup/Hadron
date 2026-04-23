@@ -18,7 +18,7 @@ from typing import Any, Dict, Generator
 
 import pytest
 
-from distilagent.models.llms.llamacpp import LlamaCppLLM
+from hadron.models.llms.llamacpp import LlamaCppLLM
 
 from .utils import DummyUserDetail
 
@@ -93,7 +93,7 @@ class TestLlamaCppLLM:
                     "offline_batch_generation_block_until_done": None,
                     "use_offline_batch_generation": False,
                     "type_info": {
-                        "module": "distilagent.models.llms.llamacpp",
+                        "module": "hadron.models.llms.llamacpp",
                         "name": "LlamaCppLLM",
                     },
                     "verbose": False,
@@ -123,7 +123,7 @@ class TestLlamaCppLLM:
                     "offline_batch_generation_block_until_done": None,
                     "use_offline_batch_generation": False,
                     "type_info": {
-                        "module": "distilagent.models.llms.llamacpp",
+                        "module": "hadron.models.llms.llamacpp",
                         "name": "LlamaCppLLM",
                     },
                     "verbose": False,

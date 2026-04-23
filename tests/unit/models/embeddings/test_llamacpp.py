@@ -15,7 +15,7 @@
 import numpy as np
 import pytest
 
-from distilagent.models.embeddings import LlamaCppEmbeddings
+from hadron.models.embeddings import LlamaCppEmbeddings
 
 class TestLlamaCppEmbeddings:
     @pytest.fixture(autouse=True)

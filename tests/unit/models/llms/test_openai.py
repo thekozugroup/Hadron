@@ -24,8 +24,8 @@ import orjson
 import pytest
 from openai.types import Batch
 
-from distilagent.exceptions import DistilAgentOfflineBatchGenerationNotFinishedException
-from distilagent.models.llms.openai import _OPENAI_BATCH_API_MAX_FILE_SIZE, OpenAILLM
+from hadron.exceptions import HadronOfflineBatchGenerationNotFinishedException
+from hadron.models.llms.openai import _OPENAI_BATCH_API_MAX_FILE_SIZE, OpenAILLM
 
 from .utils import DummyUserDetail
 
@@ -354,7 +354,7 @@ class TestOpenAILLM:
         llm._create_jobs = mock.MagicMock(return_value=("1234", "5678"))
 
         with pytest.raises(
-            DistilAgentOfflineBatchGenerationNotFinishedException
+            HadronOfflineBatchGenerationNotFinishedException
         ) as exception_info:
             llm.offline_batch_generate(
                 inputs=[{"role": "user", "content": "How much is 2+2?"}]  # type: ignore
@@ -468,7 +468,7 @@ class TestOpenAILLM:
             llm._check_and_get_batch_results()
 
     @pytest.mark.parametrize("status", ("validating", "in_progress", "finalizing"))
-    def test_check_and_get_batch_results_raises_distilagent_exception(
+    def test_check_and_get_batch_results_raises_hadron_exception(
         self, async_openai_mock: MagicMock, openai_mock: MagicMock, status: str
     ) -> None:
         llm = OpenAILLM(model=self.model_id, api_key="api.key", jobs_ids=("1234",))  # type: ignore
@@ -488,7 +488,7 @@ class TestOpenAILLM:
         )
         llm.load()
 
-        with pytest.raises(DistilAgentOfflineBatchGenerationNotFinishedException):
+        with pytest.raises(HadronOfflineBatchGenerationNotFinishedException):
             llm._check_and_get_batch_results()
 
     @pytest.mark.parametrize("status", ("failed", "expired", "cancelled", "cancelling"))
@@ -695,7 +695,7 @@ class TestOpenAILLM:
                     "offline_batch_generation_block_until_done": None,
                     "use_offline_batch_generation": False,
                     "type_info": {
-                        "module": "distilagent.models.llms.openai",
+                        "module": "hadron.models.llms.openai",
                         "name": "OpenAILLM",
                     },
                 },
@@ -723,7 +723,7 @@ class TestOpenAILLM:
                     "offline_batch_generation_block_until_done": None,
                     "use_offline_batch_generation": False,
                     "type_info": {
-                        "module": "distilagent.models.llms.openai",
+                        "module": "hadron.models.llms.openai",
                         "name": "OpenAILLM",
                     },
                 },

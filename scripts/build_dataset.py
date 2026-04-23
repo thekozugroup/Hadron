@@ -46,9 +46,9 @@ from pools import (  # noqa: E402
     route_teacher,
 )
 
-from distilagent.steps.tasks import AutoReasonedGeneration  # noqa: E402  # re-exported for CLI smoke  # noqa: F401
-from distilagent.steps.tasks.autoreason.rate_limit import get_limiter  # noqa: E402
-from distilagent.steps.tasks.autoreason.tournament import TournamentRunner  # noqa: E402
+from hadron.steps.tasks import AutoReasonedGeneration  # noqa: E402  # re-exported for CLI smoke  # noqa: F401
+from hadron.steps.tasks.autoreason.rate_limit import get_limiter  # noqa: E402
+from hadron.steps.tasks.autoreason.tournament import TournamentRunner  # noqa: E402
 
 @dataclass
 class Config:
@@ -116,7 +116,7 @@ def load_agentic_samples() -> List[Dict]:
     return [
         {
             "id": p["id"],
-            "source": "distilagent/agentic-authored",
+            "source": "hadron/agentic-authored",
             "category": p["category"],
             "instruction": p["instruction"],
         }
@@ -238,7 +238,7 @@ async def amain(cfg: Config) -> int:
         gen_kwargs["extra_body"] = extra_body
 
     # Thinking-capable models can take minutes per call; raise the HTTP
-    # client timeout well above the 120s distilagent default.
+    # client timeout well above the 120s hadron default.
     call_timeout_s = int(os.environ.get("LLM_CALL_TIMEOUT", "900"))
 
     def _make_llm(model_id: str):
@@ -424,7 +424,7 @@ async def amain(cfg: Config) -> int:
 
 def parse_args() -> Config:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--out", type=Path, default=Path("datasets/distilagent_pilot.jsonl"))
+    ap.add_argument("--out", type=Path, default=Path("datasets/hadron_pilot.jsonl"))
     ap.add_argument("--checkpoint", type=Path, default=Path("datasets/.checkpoint.json"))
     ap.add_argument(
         "--provider",

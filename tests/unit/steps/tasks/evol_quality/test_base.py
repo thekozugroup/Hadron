@@ -15,12 +15,12 @@
 import pytest
 from pydantic import ValidationError
 
-from distilagent.models.llms.base import LLM
-from distilagent.pipeline.local import Pipeline
-from distilagent.steps.tasks.evol_quality.base import (
+from hadron.models.llms.base import LLM
+from hadron.pipeline.local import Pipeline
+from hadron.steps.tasks.evol_quality.base import (
     EvolQuality,
 )
-from distilagent.steps.tasks.evol_quality.utils import MUTATION_TEMPLATES
+from hadron.steps.tasks.evol_quality.utils import MUTATION_TEMPLATES
 
 class TestEvolQuality:
     def test_with_errors(
@@ -59,7 +59,7 @@ class TestEvolQuality:
                     "response": "mock",
                     "evolved_response": "output",
                     "model_name": "test",
-                    "distilagent_metadata": {
+                    "hadron_metadata": {
                         "statistics_task": {
                             "input_tokens": [12, 12],
                             "output_tokens": [12, 12],
@@ -86,7 +86,7 @@ class TestEvolQuality:
                     "response": "mock",
                     "evolved_responses": ["output", "output"],
                     "model_name": "test",
-                    "distilagent_metadata": {
+                    "hadron_metadata": {
                         "statistics_task": {
                             "input_tokens": [12, 12],
                             "output_tokens": [12, 12],
@@ -197,12 +197,12 @@ class TestEvolQuality:
                     ],
                 },
                 {
-                    "description": "Whether to include the raw output of the LLM in the key `raw_output_<TASK_NAME>` of the `distilagent_metadata` dictionary output column",
+                    "description": "Whether to include the raw output of the LLM in the key `raw_output_<TASK_NAME>` of the `hadron_metadata` dictionary output column",
                     "name": "add_raw_output",
                     "optional": True,
                 },
                 {
-                    "description": "Whether to include the raw input of the LLM in the key `raw_input_<TASK_NAME>` of the `distilagent_metadata` dictionary column",
+                    "description": "Whether to include the raw input of the LLM in the key `raw_input_<TASK_NAME>` of the `hadron_metadata` dictionary column",
                     "name": "add_raw_input",
                     "optional": True,
                 },

@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from distilagent.models.llms.base import LLM
-from distilagent.pipeline.local import Pipeline
-from distilagent.steps.tasks.evol_instruct.evol_complexity.generator import (
+from hadron.models.llms.base import LLM
+from hadron.pipeline.local import Pipeline
+from hadron.steps.tasks.evol_instruct.evol_complexity.generator import (
     EvolComplexityGenerator,
 )
-from distilagent.steps.tasks.evol_instruct.evol_complexity.utils import (
+from hadron.steps.tasks.evol_instruct.evol_complexity.utils import (
     GENERATION_MUTATION_TEMPLATES,
 )
 

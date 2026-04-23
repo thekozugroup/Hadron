@@ -13,8 +13,8 @@
 # limitations under the License.
 import pytest
 
-from distilagent.pipeline.local import Pipeline
-from distilagent.steps.generators.data import LoadDataFromDicts
+from hadron.pipeline.local import Pipeline
+from hadron.steps.generators.data import LoadDataFromDicts
 
 class TestLoadDataFromDicts:
     data = [{"instruction": "test"}] * 10

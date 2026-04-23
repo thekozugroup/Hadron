@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from distilagent.constants import DISTILAGENT_METADATA_KEY
-from distilagent.steps.columns.combine import CombineOutputs
+from hadron.constants import HADRON_METADATA_KEY
+from hadron.steps.columns.combine import CombineOutputs
 
 class TestCombineOutputs:
     def test_process(self) -> None:
@@ -25,14 +25,14 @@ class TestCombineOutputs:
                     {
                         "a": 1,
                         "b": 2,
-                        DISTILAGENT_METADATA_KEY: {"model": "model-1", "a": 1},
+                        HADRON_METADATA_KEY: {"model": "model-1", "a": 1},
                     }
                 ],
                 [
                     {
                         "c": 3,
                         "d": 4,
-                        DISTILAGENT_METADATA_KEY: {"model": "model-2", "b": 1},
+                        HADRON_METADATA_KEY: {"model": "model-2", "b": 1},
                     }
                 ],
             )
@@ -44,7 +44,7 @@ class TestCombineOutputs:
                 "b": 2,
                 "c": 3,
                 "d": 4,
-                DISTILAGENT_METADATA_KEY: {
+                HADRON_METADATA_KEY: {
                     "model": ["model-1", "model-2"],
                     "a": 1,
                     "b": 1,

@@ -21,7 +21,7 @@ import nest_asyncio
 import pytest
 from tokenizers import Tokenizer
 
-from distilagent.models.llms.cohere import CohereLLM
+from hadron.models.llms.cohere import CohereLLM
 
 from .utils import DummyUserDetail
 
@@ -144,13 +144,13 @@ class TestCohereLLM:
                     "generation_kwargs": {},
                     "base_url": "https://api.cohere.ai/v1",
                     "timeout": 120,
-                    "client_name": "distilagent",
+                    "client_name": "hadron",
                     "structured_output": None,
                     "jobs_ids": None,
                     "offline_batch_generation_block_until_done": None,
                     "use_offline_batch_generation": False,
                     "type_info": {
-                        "module": "distilagent.models.llms.cohere",
+                        "module": "hadron.models.llms.cohere",
                         "name": "CohereLLM",
                     },
                 },
@@ -166,7 +166,7 @@ class TestCohereLLM:
                     "generation_kwargs": {},
                     "base_url": "https://api.cohere.ai/v1",
                     "timeout": 120,
-                    "client_name": "distilagent",
+                    "client_name": "hadron",
                     "structured_output": {
                         "schema": DummyUserDetail.model_json_schema(),
                         "mode": "tool_call",
@@ -176,7 +176,7 @@ class TestCohereLLM:
                     "offline_batch_generation_block_until_done": None,
                     "use_offline_batch_generation": False,
                     "type_info": {
-                        "module": "distilagent.models.llms.cohere",
+                        "module": "hadron.models.llms.cohere",
                         "name": "CohereLLM",
                     },
                 },

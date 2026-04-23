@@ -20,7 +20,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 from reasoning_llm import ReasoningOpenRouterLLM  # noqa: E402
 
-from distilagent.steps.tasks.autoreason.roles import (  # noqa: E402
+from hadron.steps.tasks.autoreason.roles import (  # noqa: E402
     TEACHER_SEED_SYSTEM, render_teacher_seed,
 )
 

@@ -14,7 +14,7 @@
 
 from unittest.mock import MagicMock, Mock
 
-from distilagent.models.embeddings.sglang import SGLangEmbeddings
+from hadron.models.embeddings.sglang import SGLangEmbeddings
 
 class TestSentenceTransformersEmbeddings:
     model_name = "group/model-name"

@@ -15,7 +15,7 @@
 import os
 from unittest import mock
 
-from distilagent.models.llms.together import TogetherLLM
+from hadron.models.llms.together import TogetherLLM
 
 class TestTogetherLLM:
     model_id: str = "mistralai/Mixtral-8x7B-Instruct-v0.1"
@@ -53,7 +53,7 @@ class TestTogetherLLM:
             "offline_batch_generation_block_until_done": None,
             "use_offline_batch_generation": False,
             "type_info": {
-                "module": "distilagent.models.llms.together",
+                "module": "hadron.models.llms.together",
                 "name": "TogetherLLM",
             },
         }

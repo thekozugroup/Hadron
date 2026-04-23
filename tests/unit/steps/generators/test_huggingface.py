@@ -20,22 +20,22 @@ from typing import Generator, Union
 import pytest
 from datasets import Dataset, IterableDataset
 
-from distilagent.distiset import Distiset
-from distilagent.pipeline import Pipeline
-from distilagent.steps.generators.huggingface import (
+from hadron.distiset import Distiset
+from hadron.pipeline import Pipeline
+from hadron.steps.generators.huggingface import (
     LoadDataFromDisk,
     LoadDataFromFileSystem,
     LoadDataFromHub,
 )
 from tests.unit.pipeline.utils import DummyStep1
 
-DISTILAGENT_RUN_SLOW_TESTS = os.getenv("DISTILAGENT_RUN_SLOW_TESTS", False)
+HADRON_RUN_SLOW_TESTS = os.getenv("HADRON_RUN_SLOW_TESTS", False)
 
 @pytest.fixture(scope="module")
 def dataset_loader() -> Generator[Union[Dataset, IterableDataset], None, None]:
     load_hub_dataset = LoadDataFromHub(
         name="load_dataset",
-        repo_id="distilagent-internal-testing/instruction-dataset-mini",
+        repo_id="hadron-internal-testing/instruction-dataset-mini",
         split="test",
         batch_size=2,
         pipeline=Pipeline(name="dataset-pipeline"),
@@ -43,7 +43,7 @@ def dataset_loader() -> Generator[Union[Dataset, IterableDataset], None, None]:
     yield load_hub_dataset
 
 @pytest.mark.skipif(
-    not DISTILAGENT_RUN_SLOW_TESTS,
+    not HADRON_RUN_SLOW_TESTS,
     reason="These tests depend on internet connection, are slow and depend mainly on HF API, we don't need to test them often.",
 )
 class TestLoadDataFromHub:
@@ -53,7 +53,7 @@ class TestLoadDataFromHub:
     def test_runtime_parameters(self, streaming: bool, ds_type) -> None:
         load_hub_dataset = LoadDataFromHub(
             name="load_dataset",
-            repo_id="distilagent-internal-testing/instruction-dataset-mini",
+            repo_id="hadron-internal-testing/instruction-dataset-mini",
             split="test",
             streaming=streaming,
             batch_size=2,

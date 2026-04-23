@@ -18,17 +18,17 @@ from typing import TYPE_CHECKING, Any, Callable, Dict, List
 
 import pytest
 
-from distilagent.constants import STEP_ATTR_NAME
-from distilagent.mixins.runtime_parameters import RuntimeParameter
-from distilagent.pipeline._dag import DAG
-from distilagent.pipeline.local import Pipeline
-from distilagent.pipeline.routing_batch_function import routing_batch_function
-from distilagent.steps.base import GeneratorStep, Step, StepInput, StepResources
+from hadron.constants import STEP_ATTR_NAME
+from hadron.mixins.runtime_parameters import RuntimeParameter
+from hadron.pipeline._dag import DAG
+from hadron.pipeline.local import Pipeline
+from hadron.pipeline.routing_batch_function import routing_batch_function
+from hadron.steps.base import GeneratorStep, Step, StepInput, StepResources
 
 from .utils import DummyGeneratorStep, DummyGlobalStep, DummyStep1, DummyStep2
 
 if TYPE_CHECKING:
-    from distilagent.typing import (
+    from hadron.typing import (
         GeneratorStepOutput,
         StepOutput,
     )
@@ -860,7 +860,7 @@ class TestDagSerialization:
                     assert isinstance(dag_from_file, DAG)
 
 class TestDAGDraw:
-    @patch("distilagent.pipeline._dag.requests.get")
+    @patch("hadron.pipeline._dag.requests.get")
     def test_draw_basic(self, mock_get):
         # Mock the response from mermaid.ink
         mock_response = MagicMock()
@@ -885,7 +885,7 @@ class TestDAGDraw:
         called_url = mock_get.call_args[0][0]
         assert "https://mermaid.ink/img/" in called_url
 
-    @patch("distilagent.pipeline._dag.requests.get")
+    @patch("hadron.pipeline._dag.requests.get")
     def test_draw_top_to_bottom(self, mock_get):
         mock_response = MagicMock()
         mock_response.content = b"mocked_image_content"
@@ -906,7 +906,7 @@ class TestDAGDraw:
         ).decode("ascii")
         assert "flowchart TD" in decoded_graph
 
-    @patch("distilagent.pipeline._dag.requests.get")
+    @patch("hadron.pipeline._dag.requests.get")
     def test_draw_without_edge_labels(self, mock_get):
         mock_response = MagicMock()
         mock_response.content = b"mocked_image_content"
@@ -928,7 +928,7 @@ class TestDAGDraw:
         assert "generator --> step1" in decoded_graph
         assert "|" not in decoded_graph  # No edge labels
 
-    @patch("distilagent.pipeline._dag.requests.get")
+    @patch("hadron.pipeline._dag.requests.get")
     def test_draw_with_distiset_step(self, mock_get):
         mock_response = MagicMock()
         mock_response.content = b"mocked_image_content"
@@ -949,7 +949,7 @@ class TestDAGDraw:
         ).decode("ascii")
         assert 'distiset_0["Distiset"]' in decoded_graph
 
-    @patch("distilagent.pipeline._dag.requests.get")
+    @patch("hadron.pipeline._dag.requests.get")
     def test_draw_error_handling(self, mock_get):
         mock_get.side_effect = requests.RequestException("Mocked error")
 

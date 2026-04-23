@@ -17,12 +17,12 @@ from typing import TYPE_CHECKING
 import faiss
 import numpy as np
 
-from distilagent.pipeline import Pipeline
-from distilagent.steps import FaissNearestNeighbour, LoadDataFromDicts, StepInput, step
-from distilagent.steps.filtering.embedding import EmbeddingDedup
+from hadron.pipeline import Pipeline
+from hadron.steps import FaissNearestNeighbour, LoadDataFromDicts, StepInput, step
+from hadron.steps.filtering.embedding import EmbeddingDedup
 
 if TYPE_CHECKING:
-    from distilagent.typing import StepOutput
+    from hadron.typing import StepOutput
 
 SAMPLE_DATA = [
     {

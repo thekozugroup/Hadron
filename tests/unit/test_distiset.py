@@ -23,8 +23,8 @@ import yaml
 from datasets import Dataset, DatasetDict
 from upath import UPath
 
-from distilagent.distiset import Distiset
-from distilagent.utils.serialization import write_json
+from hadron.distiset import Distiset
+from hadron.utils.serialization import write_json
 
 @pytest.fixture(scope="function")
 def distiset() -> Distiset:
@@ -41,7 +41,7 @@ def make_fake_file(filename: Path) -> None:
     filename.touch()
 
 def add_config_to_distiset(distiset: Distiset, folder: Path) -> Distiset:
-    from distilagent.constants import DISTISET_CONFIG_FOLDER
+    from hadron.constants import DISTISET_CONFIG_FOLDER
 
     pipeline_yaml = folder / DISTISET_CONFIG_FOLDER / "pipeline.yaml"
     pipeline_log = folder / DISTISET_CONFIG_FOLDER / "pipeline.log"
@@ -52,7 +52,7 @@ def add_config_to_distiset(distiset: Distiset, folder: Path) -> Distiset:
     return distiset
 
 def add_artifacts_to_distiset(distiset: Distiset, folder: Path) -> Distiset:
-    from distilagent.constants import DISTISET_ARTIFACTS_FOLDER
+    from hadron.constants import DISTISET_ARTIFACTS_FOLDER
 
     artifacts_folder = folder / DISTISET_ARTIFACTS_FOLDER
 
@@ -229,7 +229,7 @@ class TestDistiset:
         metadata = yaml.safe_load(metadata)
         assert metadata == {
             "size_categories": "n<1K",
-            "tags": ["synthetic", "distilagent", "rlaif"],
+            "tags": ["synthetic", "hadron", "rlaif"],
         }
 
     def test_transform_columns_to_image(self):
@@ -238,7 +238,7 @@ class TestDistiset:
 
         arr = np.random.randint(0, 255, (100, 100, 3), dtype=np.uint8)
         image = Image.fromarray(arr, "RGB")
-        from distilagent.models.image_generation.utils import image_to_str
+        from hadron.models.image_generation.utils import image_to_str
 
         img_str = image_to_str(image)
 

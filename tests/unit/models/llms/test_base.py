@@ -14,14 +14,14 @@
 
 import pytest
 
-from distilagent.errors import DistilAgentNotImplementedError
+from hadron.errors import HadronNotImplementedError
 from tests.unit.conftest import DummyLLM
 
 class TestLLM:
-    def test_offline_batch_generate_raise_distilagent_not_implemented_error(
+    def test_offline_batch_generate_raise_hadron_not_implemented_error(
         self,
     ) -> None:
         llm = DummyLLM()
 
-        with pytest.raises(DistilAgentNotImplementedError):
+        with pytest.raises(HadronNotImplementedError):
             llm.offline_batch_generate()

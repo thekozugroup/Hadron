@@ -25,15 +25,15 @@ import pytest
 from jinja2 import Template
 from pydantic import ValidationError
 
-from distilagent.pipeline.local import Pipeline
-from distilagent.steps.tasks.prometheus_eval import _DEFAULT_RUBRICS, PrometheusEval
+from hadron.pipeline.local import Pipeline
+from hadron.steps.tasks.prometheus_eval import _DEFAULT_RUBRICS, PrometheusEval
 from tests.unit.conftest import DummyAsyncLLM
 
 def load_template(template: str) -> Template:
     return Template(
         open(
             str(
-                importlib_resources.files("distilagent")
+                importlib_resources.files("hadron")
                 / "steps/tasks/templates/prometheus"
                 / template
             )

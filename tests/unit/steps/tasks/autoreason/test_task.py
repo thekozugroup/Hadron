@@ -16,7 +16,7 @@
 
 These tests wire up a scripted async LLM, drive the task end-to-end, and
 assert on the shape and contents of the emitted rows. The scripted LLM
-subclasses :class:`distilagent.models.llms.base.AsyncLLM` so that pydantic
+subclasses :class:`hadron.models.llms.base.AsyncLLM` so that pydantic
 validation on ``Task.llm`` passes without gymnastics.
 """
 
@@ -27,18 +27,18 @@ from typing import TYPE_CHECKING, Any, Callable, Dict, List, Optional, Union
 import pytest
 from pydantic import PrivateAttr
 
-from distilagent.models.llms.base import AsyncLLM
-from distilagent.steps.tasks.autoreason.roles import (
+from hadron.models.llms.base import AsyncLLM
+from hadron.steps.tasks.autoreason.roles import (
     AUTHOR_B_SYSTEM,
     CRITIC_SYSTEM,
     JUDGE_SYSTEM,
     SYNTHESIZER_SYSTEM,
     TEACHER_SEED_SYSTEM,
 )
-from distilagent.steps.tasks.autoreason.task import AutoReasonedGeneration
+from hadron.steps.tasks.autoreason.task import AutoReasonedGeneration
 
 if TYPE_CHECKING:
-    from distilagent.typing import FormattedInput, GenerateOutput
+    from hadron.typing import FormattedInput, GenerateOutput
 
 ScriptEntry = Union[List[Any], Callable[[int, list], str]]
 
@@ -307,9 +307,9 @@ def test_failure_produces_empty_row_with_error_metadata():
     assert row["autoreason_trace"] is None
     assert row["autoreason_iterations"] == 0
     assert row["autoreason_converged"] is False
-    # Error is stashed in distilagent_metadata
-    from distilagent.constants import DISTILAGENT_METADATA_KEY
+    # Error is stashed in hadron_metadata
+    from hadron.constants import HADRON_METADATA_KEY
 
-    meta = row[DISTILAGENT_METADATA_KEY]
+    meta = row[HADRON_METADATA_KEY]
     assert any("autoreason_error" in k for k in meta.keys())
     # The full batch didn't crash — we got a row back.

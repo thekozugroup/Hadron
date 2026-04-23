@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from distilagent.steps.clustering.dbscan import DBSCAN
+from hadron.steps.clustering.dbscan import DBSCAN
 
 class TestDBSCAN:
     def test_process(self) -> None:

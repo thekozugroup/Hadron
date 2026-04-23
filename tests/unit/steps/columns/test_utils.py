@@ -12,35 +12,35 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from distilagent.constants import DISTILAGENT_METADATA_KEY
-from distilagent.steps.columns.utils import merge_distilagent_metadata
+from hadron.constants import HADRON_METADATA_KEY
+from hadron.steps.columns.utils import merge_hadron_metadata
 
-def test_merge_distilagent_metadata() -> None:
+def test_merge_hadron_metadata() -> None:
     rows = [
-        {DISTILAGENT_METADATA_KEY: {"a": 1, "b": 1}},
-        {DISTILAGENT_METADATA_KEY: {"a": 2, "b": 2}},
+        {HADRON_METADATA_KEY: {"a": 1, "b": 1}},
+        {HADRON_METADATA_KEY: {"a": 2, "b": 2}},
     ]
-    result = merge_distilagent_metadata(*rows)
+    result = merge_hadron_metadata(*rows)
     assert result == {"a": [1, 2], "b": [1, 2]}
 
-def test_merge_distilagent_metadata_list() -> None:
+def test_merge_hadron_metadata_list() -> None:
     rows = [
         {
-            DISTILAGENT_METADATA_KEY: [
+            HADRON_METADATA_KEY: [
                 {"a": 1.0, "b": 1.0},
                 {"a": 1.1, "b": 1.1},
                 {"a": 1.2, "b": 1.2},
             ]
         },
         {
-            DISTILAGENT_METADATA_KEY: [
+            HADRON_METADATA_KEY: [
                 {"a": 2.0, "b": 2.0},
                 {"a": 2.1, "b": 2.1},
                 {"a": 2.2, "b": 2.2},
             ]
         },
     ]
-    result = merge_distilagent_metadata(*rows)
+    result = merge_hadron_metadata(*rows)
     assert result == [
         {"a": 1.0, "b": 1.0},
         {"a": 1.1, "b": 1.1},

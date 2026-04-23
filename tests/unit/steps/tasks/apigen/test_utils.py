@@ -17,7 +17,7 @@ from typing import Any, Dict
 
 import pytest
 
-from distilagent.steps.tasks.apigen.utils import (
+from hadron.steps.tasks.apigen.utils import (
     execute_from_response,
     load_module_from_path,
 )

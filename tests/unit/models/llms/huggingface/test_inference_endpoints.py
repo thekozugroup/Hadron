@@ -30,7 +30,7 @@ from huggingface_hub import (
     ChatCompletionOutputUsage,
 )
 
-from distilagent.models.llms.huggingface.inference_endpoints import InferenceEndpointsLLM
+from hadron.models.llms.huggingface.inference_endpoints import InferenceEndpointsLLM
 
 @pytest.fixture(autouse=True)
 def mock_hf_token_env_variable() -> Generator[None, None, None]:
@@ -64,7 +64,7 @@ class TestInferenceEndpointsLLM:
         self, mock_inference_client: MagicMock, mock_async_inference_client: MagicMock
     ) -> None:
         llm = InferenceEndpointsLLM(
-            model_id="distilagent-internal-testing/tiny-random-mistral",
+            model_id="hadron-internal-testing/tiny-random-mistral",
             structured_output={"format": "regex", "schema": r"\b[A-Z][a-z]*\b"},
         )
 
@@ -76,7 +76,7 @@ class TestInferenceEndpointsLLM:
         del os.environ["HF_TOKEN"]
 
         llm = InferenceEndpointsLLM(
-            model_id="distilagent-internal-testing/tiny-random-mistral",
+            model_id="hadron-internal-testing/tiny-random-mistral",
             structured_output={"format": "regex", "schema": r"\b[A-Z][a-z]*\b"},
         )
 
@@ -101,18 +101,18 @@ class TestInferenceEndpointsLLM:
         self, mock_inference_client: MagicMock, mock_async_inference_client: MagicMock
     ) -> None:
         llm = InferenceEndpointsLLM(
-            model_id="distilagent-internal-testing/tiny-random-mistral"
+            model_id="hadron-internal-testing/tiny-random-mistral"
         )
 
         assert isinstance(llm, InferenceEndpointsLLM)
-        assert llm.model_name == "distilagent-internal-testing/tiny-random-mistral"
+        assert llm.model_name == "hadron-internal-testing/tiny-random-mistral"
 
     def test_dedicated_inference_endpoints_llm(
         self, mock_inference_client: MagicMock, mock_async_inference_client: MagicMock
     ) -> None:
         llm = InferenceEndpointsLLM(
             endpoint_name="tiny-random-mistral",
-            endpoint_namespace="distilagent-internal-testing",
+            endpoint_namespace="hadron-internal-testing",
         )
 
         assert isinstance(llm, InferenceEndpointsLLM)
@@ -122,14 +122,14 @@ class TestInferenceEndpointsLLM:
         self, mock_inference_client: MagicMock, mock_async_inference_client: MagicMock
     ) -> None:
         llm = InferenceEndpointsLLM(
-            base_url="https://api-inference.huggingface.co/models/distilagent-internal-testing/tiny-random-mistral"
+            base_url="https://api-inference.huggingface.co/models/hadron-internal-testing/tiny-random-mistral"
         )
         llm.load()
 
         assert isinstance(llm, InferenceEndpointsLLM)
         assert (
             llm.model_name
-            == "https://api-inference.huggingface.co/models/distilagent-internal-testing/tiny-random-mistral"
+            == "https://api-inference.huggingface.co/models/hadron-internal-testing/tiny-random-mistral"
         )
 
     @pytest.mark.asyncio
@@ -137,8 +137,8 @@ class TestInferenceEndpointsLLM:
         self, mock_inference_client: MagicMock, mock_async_inference_client: MagicMock
     ) -> None:
         llm = InferenceEndpointsLLM(
-            model_id="distilagent-internal-testing/tiny-random-mistral",
-            tokenizer_id="distilagent-internal-testing/tiny-random-mistral",
+            model_id="hadron-internal-testing/tiny-random-mistral",
+            tokenizer_id="hadron-internal-testing/tiny-random-mistral",
         )
         llm.load()
 
@@ -174,8 +174,8 @@ class TestInferenceEndpointsLLM:
         self, mock_inference_client: MagicMock, mock_async_inference_client: MagicMock
     ) -> None:
         llm = InferenceEndpointsLLM(
-            model_id="distilagent-internal-testing/tiny-random-mistral",
-            tokenizer_id="distilagent-internal-testing/tiny-random-mistral",
+            model_id="hadron-internal-testing/tiny-random-mistral",
+            tokenizer_id="hadron-internal-testing/tiny-random-mistral",
         )
         llm.load()
 
@@ -233,7 +233,7 @@ class TestInferenceEndpointsLLM:
         self, mock_inference_client: MagicMock, mock_async_inference_client: MagicMock
     ) -> None:
         llm = InferenceEndpointsLLM(
-            model_id="distilagent-internal-testing/tiny-random-mistral",
+            model_id="hadron-internal-testing/tiny-random-mistral",
         )
         llm.load()
 
@@ -280,7 +280,7 @@ class TestInferenceEndpointsLLM:
         self, mock_inference_client: MagicMock, mock_async_inference_client: MagicMock
     ) -> None:
         llm = InferenceEndpointsLLM(
-            model_id="distilagent-internal-testing/tiny-random-mistral",
+            model_id="hadron-internal-testing/tiny-random-mistral",
         )
         llm.load()
 
@@ -381,7 +381,7 @@ class TestInferenceEndpointsLLM:
         self, mock_inference_client: MagicMock, mock_async_inference_client: MagicMock
     ) -> None:
         llm = InferenceEndpointsLLM(
-            model_id="distilagent-internal-testing/tiny-random-mistral",
+            model_id="hadron-internal-testing/tiny-random-mistral",
         )
         llm.load()
 
@@ -458,7 +458,7 @@ class TestInferenceEndpointsLLM:
         expected_result: List[Dict[str, Any]],
     ) -> None:
         llm = InferenceEndpointsLLM(
-            model_id="distilagent-internal-testing/tiny-random-mistral",
+            model_id="hadron-internal-testing/tiny-random-mistral",
         )
         llm.load()
 
@@ -505,8 +505,8 @@ class TestInferenceEndpointsLLM:
         self, mock_inference_client: MagicMock, mock_async_inference_client: MagicMock
     ) -> None:
         llm = InferenceEndpointsLLM(
-            model_id="distilagent-internal-testing/tiny-random-mistral",
-            tokenizer_id="distilagent-internal-testing/tiny-random-mistral",
+            model_id="hadron-internal-testing/tiny-random-mistral",
+            tokenizer_id="hadron-internal-testing/tiny-random-mistral",
             structured_output={"format": "regex", "schema": r"\b[A-Z][a-z]*\b"},
         )
         llm.load()
@@ -541,16 +541,16 @@ class TestInferenceEndpointsLLM:
         self, mock_inference_client: MagicMock, mock_async_inference_client: MagicMock
     ) -> None:
         llm = InferenceEndpointsLLM(
-            model_id="distilagent-internal-testing/tiny-random-mistral",
-            tokenizer_id="distilagent-internal-testing/tiny-random-mistral",
+            model_id="hadron-internal-testing/tiny-random-mistral",
+            tokenizer_id="hadron-internal-testing/tiny-random-mistral",
         )
 
         _dump = {
-            "model_id": "distilagent-internal-testing/tiny-random-mistral",
+            "model_id": "hadron-internal-testing/tiny-random-mistral",
             "endpoint_name": None,
             "endpoint_namespace": None,
             "base_url": None,
-            "tokenizer_id": "distilagent-internal-testing/tiny-random-mistral",
+            "tokenizer_id": "hadron-internal-testing/tiny-random-mistral",
             "generation_kwargs": {},
             "magpie_pre_query_template": None,
             "structured_output": None,
@@ -560,7 +560,7 @@ class TestInferenceEndpointsLLM:
             "offline_batch_generation_block_until_done": None,
             "use_offline_batch_generation": False,
             "type_info": {
-                "module": "distilagent.models.llms.huggingface.inference_endpoints",
+                "module": "hadron.models.llms.huggingface.inference_endpoints",
                 "name": "InferenceEndpointsLLM",
             },
         }

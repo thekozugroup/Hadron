@@ -17,8 +17,8 @@ from typing import Union
 
 import pytest
 
-from distilagent.pipeline.local import Pipeline
-from distilagent.steps.columns.expand import ExpandColumns
+from hadron.pipeline.local import Pipeline
+from hadron.steps.columns.expand import ExpandColumns
 
 class TestExpandColumns:
     def test_always_dict(self) -> None:
@@ -40,7 +40,7 @@ class TestExpandColumns:
                     {
                         "column1": [1, 2, 3],
                         "column2": ["a", "b", "c"],
-                        "distilagent_metadata": {
+                        "hadron_metadata": {
                             "statistics_column1": {
                                 "input_tokens": [12],
                                 "output_tokens": [12],
@@ -92,7 +92,7 @@ class TestExpandColumns:
                     {
                         "column1": json.dumps([1, 2, 3]),
                         "column2": json.dumps(["a", "b", "c"]),
-                        "distilagent_metadata": {
+                        "hadron_metadata": {
                             "statistics_column1": {
                                 "input_tokens": [12],
                                 "output_tokens": [12],
@@ -144,7 +144,7 @@ class TestExpandColumns:
                     {
                         "column1": [1, 2, 3],
                         "column2": ["a", "b", "c"],
-                        "distilagent_metadata": {
+                        "hadron_metadata": {
                             "statistics_column1": {
                                 "input_tokens": [12],
                                 "output_tokens": [12],
@@ -196,7 +196,7 @@ class TestExpandColumns:
                     {
                         "column1": [1, 2, 3],
                         "column2": ["a", "b", "c"],
-                        "distilagent_metadata": {
+                        "hadron_metadata": {
                             "statistics_column1": {
                                 "input_tokens": [793],
                                 "output_tokens": [361],
@@ -262,16 +262,16 @@ class TestExpandColumns:
             {
                 "column1": 1,
                 "column2": "a",
-                "distilagent_metadata": stats[0],
+                "hadron_metadata": stats[0],
             },
             {
                 "column1": 2,
                 "column2": "b",
-                "distilagent_metadata": stats[1],
+                "hadron_metadata": stats[1],
             },
             {
                 "column1": 3,
                 "column2": "c",
-                "distilagent_metadata": stats[2],
+                "hadron_metadata": stats[2],
             },
         ]

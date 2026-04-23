@@ -18,8 +18,8 @@ import pandas as pd
 import pytest
 from datasets import Dataset
 
-from distilagent.pipeline.local import Pipeline
-from distilagent.steps.generators.utils import make_generator_step
+from hadron.pipeline.local import Pipeline
+from hadron.steps.generators.utils import make_generator_step
 
 data = [{"instruction": "Tell me a joke."}] * 10
 

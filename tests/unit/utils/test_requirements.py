@@ -16,16 +16,16 @@ from typing import List
 
 import pytest
 
-from distilagent.pipeline import Pipeline
-from distilagent.steps import Step
-from distilagent.steps.base import StepInput
-from distilagent.typing import StepOutput
-from distilagent.utils.requirements import requirements
+from hadron.pipeline import Pipeline
+from hadron.steps import Step
+from hadron.steps.base import StepInput
+from hadron.typing import StepOutput
+from hadron.utils.requirements import requirements
 
 from ..pipeline.utils import DummyGeneratorStep
 
 def test_add_requirements_decorator():
-    @requirements(["distilagent>=0.0.1"])
+    @requirements(["hadron>=0.0.1"])
     class CustomStep(Step):
         @property
         def inputs(self) -> List[str]:
@@ -40,13 +40,13 @@ def test_add_requirements_decorator():
                 input["response"] = "unit test"
             yield inputs
 
-    assert CustomStep.requirements == ["distilagent>=0.0.1"]
+    assert CustomStep.requirements == ["hadron>=0.0.1"]
 
 @pytest.mark.parametrize(
     "requirements_pipeline, expected",
     [
-        ([], ["distilagent>=0.0.1", "numpy"]),
-        (["candle_holder"], ["candle_holder", "distilagent>=0.0.1", "numpy"]),
+        ([], ["hadron>=0.0.1", "numpy"]),
+        (["candle_holder"], ["candle_holder", "hadron>=0.0.1", "numpy"]),
     ],
 )
 def test_add_requirements_to_pipeline(
@@ -54,7 +54,7 @@ def test_add_requirements_to_pipeline(
 ) -> None:
     # Check the pipeline has the requirements from the steps defined within it.
 
-    @requirements(["distilagent>=0.0.1"])
+    @requirements(["hadron>=0.0.1"])
     class CustomStep(Step):
         @property
         def inputs(self) -> List[str]:
@@ -97,10 +97,10 @@ def test_add_requirements_to_pipeline(
     assert pipeline.requirements == expected
 
 def test_requirements_on_step_decorator() -> None:
-    from distilagent.mixins.runtime_parameters import RuntimeParameter
-    from distilagent.steps.decorator import step
+    from hadron.mixins.runtime_parameters import RuntimeParameter
+    from hadron.steps.decorator import step
 
-    @requirements(["distilagent>=0.0.1"])
+    @requirements(["hadron>=0.0.1"])
     @step(inputs=["instruction"], outputs=["generation"])
     def UnitTestStep(
         inputs: StepInput,
@@ -110,4 +110,4 @@ def test_requirements_on_step_decorator() -> None:
         """A dummy step for the unit test"""
         yield []
 
-    assert UnitTestStep.requirements == ["distilagent>=0.0.1"]
+    assert UnitTestStep.requirements == ["hadron>=0.0.1"]

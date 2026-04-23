@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from distilagent.pipeline.local import Pipeline
-from distilagent.steps.columns.keep import KeepColumns
+from hadron.pipeline.local import Pipeline
+from hadron.steps.columns.keep import KeepColumns
 
 class TestKeepColumns:
     def test_init(self) -> None:

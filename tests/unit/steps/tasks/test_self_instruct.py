@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from distilagent.pipeline.local import Pipeline
-from distilagent.steps.tasks.self_instruct import SelfInstruct
+from hadron.pipeline.local import Pipeline
+from hadron.steps.tasks.self_instruct import SelfInstruct
 from tests.unit.conftest import DummyAsyncLLM
 
 class TestSelfInstruct:

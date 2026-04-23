@@ -17,14 +17,14 @@ from typing import TYPE_CHECKING
 import pytest
 from datasets import Dataset
 
-from distilagent.pipeline import Pipeline
-from distilagent.steps import HuggingFaceHubCheckpointer
-from distilagent.steps.base import Step, StepInput
+from hadron.pipeline import Pipeline
+from hadron.steps import HuggingFaceHubCheckpointer
+from hadron.steps.base import Step, StepInput
 
 dataset = Dataset.from_dict({"a": [1, 2] * 50, "b": [5, 6] * 50})
 
 if TYPE_CHECKING:
-    from distilagent.typing import StepOutput
+    from hadron.typing import StepOutput
 
 class DoNothing(Step):
     def process(self, *inputs: StepInput) -> "StepOutput":
@@ -36,7 +36,7 @@ def test_checkpointing() -> None:
     with Pipeline(name="simple-text-generation-pipeline") as pipeline:
         text_generation = DoNothing(input_batch_size=60)
         checkpoint = HuggingFaceHubCheckpointer(
-            repo_id="distilagent-internal-testing/__streaming_test_1",
+            repo_id="hadron-internal-testing/__streaming_test_1",
             private=False,
             input_batch_size=50,
         )
@@ -45,7 +45,7 @@ def test_checkpointing() -> None:
 
     from huggingface_hub import HfFileSystem
 
-    dataset_name = "distilagent-internal-testing/__streaming_test_1"
+    dataset_name = "hadron-internal-testing/__streaming_test_1"
     fs = HfFileSystem()
     filenames = fs.glob(f"datasets/{dataset_name}/**/*.jsonl")
     assert len(filenames) == 2

@@ -17,11 +17,11 @@ from typing import TYPE_CHECKING, Any, Dict, List
 
 import pytest
 
-from distilagent.steps.tasks.math_shepherd.completer import MathShepherdCompleter
+from hadron.steps.tasks.math_shepherd.completer import MathShepherdCompleter
 from tests.unit.conftest import DummyLLM
 
 if TYPE_CHECKING:
-    from distilagent.typing import GenerateOutput
+    from hadron.typing import GenerateOutput
 
 class MathShepherdCompleterLLM(DummyLLM):
     N: int = 3
@@ -154,7 +154,7 @@ class TestMathShepherdCompleter:
                         "Step 3: Those 9 eggs are worth 9 * $2 = $<<9*2=18>>18. The answer is: 18 +",
                     ],
                 ],
-                "distilagent_metadata": {
+                "hadron_metadata": {
                     "statistics_math_shepherd_completer_0": {
                         "input_tokens": [12],
                         "output_tokens": [12],
@@ -337,7 +337,7 @@ The answer is: 18""",
                     ],
                 ],
                 "model_name": "math-shepherd-completer",
-                "distilagent_metadata": {
+                "hadron_metadata": {
                     "statistics_math_shepherd_completer_0": {
                         "input_tokens": [12],
                         "output_tokens": [12],
@@ -463,7 +463,7 @@ The answer is: 18""",
                 ],
                 "solutions": [[], [], []],
                 "model_name": "math-shepherd-completer",
-                "distilagent_metadata": {
+                "hadron_metadata": {
                     "statistics_math_shepherd_completer_0": {
                         "input_tokens": [12],
                         "output_tokens": [12],

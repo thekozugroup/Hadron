@@ -14,7 +14,7 @@
 
 def test_imports() -> None:
     # ruff: noqa
-    from distilagent.models.llms import (
+    from hadron.models.llms import (
         AnthropicLLM,
         AnyscaleLLM,
         AsyncLLM,
@@ -35,9 +35,9 @@ def test_imports() -> None:
         vLLM,
     )
 
-    from distilagent.pipeline import Pipeline
+    from hadron.pipeline import Pipeline
 
-    from distilagent.steps import (
+    from hadron.steps import (
         StepResources,
         GroupColumns,
         MergeColumns,
@@ -61,7 +61,7 @@ def test_imports() -> None:
         step,
     )
 
-    from distilagent.steps.tasks import (
+    from hadron.steps.tasks import (
         Task,
         GeneratorTask,
         ChatItem,

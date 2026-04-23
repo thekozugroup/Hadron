@@ -17,7 +17,7 @@ from unittest.mock import AsyncMock, MagicMock, Mock, patch
 import nest_asyncio
 import pytest
 
-from distilagent.models.llms.litellm import LiteLLM
+from hadron.models.llms.litellm import LiteLLM
 
 @pytest.fixture(params=["mistral/mistral-tiny", "gpt-4"])
 def model(request) -> list:
@@ -95,7 +95,7 @@ class TestLiteLLM:
             "offline_batch_generation_block_until_done": None,
             "use_offline_batch_generation": False,
             "type_info": {
-                "module": "distilagent.models.llms.litellm",
+                "module": "hadron.models.llms.litellm",
                 "name": "LiteLLM",
             },
             "generation_kwargs": {},

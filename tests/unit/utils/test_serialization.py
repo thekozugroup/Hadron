@@ -14,7 +14,7 @@
 
 from pydantic import BaseModel
 
-from distilagent.utils.serialization import _extra_serializable_fields, _Serializable
+from hadron.utils.serialization import _extra_serializable_fields, _Serializable
 
 def test_extra_serializable_fields() -> None:
     class DummyAttribute(BaseModel, _Serializable):

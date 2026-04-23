@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from distilagent.constants import DISTILAGENT_METADATA_KEY
-from distilagent.pipeline.local import Pipeline
-from distilagent.steps.columns.group import GroupColumns
+from hadron.constants import HADRON_METADATA_KEY
+from hadron.pipeline.local import Pipeline
+from hadron.steps.columns.group import GroupColumns
 
 class TestGroupColumns:
     def test_init(self) -> None:
@@ -43,14 +43,14 @@ class TestGroupColumns:
         )
         output = next(
             group.process(
-                [{"a": 1, "b": 2, DISTILAGENT_METADATA_KEY: {"model": "model-1"}}],
-                [{"a": 3, "b": 4, DISTILAGENT_METADATA_KEY: {"model": "model-2"}}],
+                [{"a": 1, "b": 2, HADRON_METADATA_KEY: {"model": "model-1"}}],
+                [{"a": 3, "b": 4, HADRON_METADATA_KEY: {"model": "model-2"}}],
             )
         )
         assert output == [
             {
                 "grouped_a": [1, 3],
                 "grouped_b": [2, 4],
-                DISTILAGENT_METADATA_KEY: {"model": ["model-1", "model-2"]},
+                HADRON_METADATA_KEY: {"model": ["model-1", "model-2"]},
             }
         ]

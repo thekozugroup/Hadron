@@ -14,7 +14,7 @@
 
 import pytest
 
-from distilagent.steps.tasks.urial import URIAL
+from hadron.steps.tasks.urial import URIAL
 from tests.unit.conftest import DummyAsyncLLM
 
 class TestURIAL:

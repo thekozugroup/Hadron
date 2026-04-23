@@ -16,7 +16,7 @@ from typing import Any
 
 import pytest
 
-from distilagent.utils.chat import is_openai_format
+from hadron.utils.chat import is_openai_format
 
 @pytest.mark.parametrize(
     "input, expected",

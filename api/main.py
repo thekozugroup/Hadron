@@ -1,4 +1,4 @@
-"""DistilAgent HTTP API — FastAPI app with SSE event stream."""
+"""Hadron HTTP API — FastAPI app with SSE event stream."""
 from __future__ import annotations
 
 import asyncio
@@ -19,9 +19,9 @@ from . import db as dbmod
 from .runner import RunManager
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s - %(message)s")
-_LOG = logging.getLogger("distilagent.api")
+_LOG = logging.getLogger("hadron.api")
 
-DATA_DIR = Path(os.environ.get("DISTILAGENT_DATA", "/data"))
+DATA_DIR = Path(os.environ.get("HADRON_DATA", "/data"))
 DB_PATH = DATA_DIR / "meta.db"
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SCRIPTS_DIR = REPO_ROOT / "scripts"
@@ -36,7 +36,7 @@ except Exception:  # noqa: BLE001
     GENERALIST_POOL = JUDGE_POOL = []
     CODE_SPECIALIST = REASONING_SPECIALIST = ""
 
-app = FastAPI(title="DistilAgent API", version="0.1.0")
+app = FastAPI(title="Hadron API", version="0.1.0")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -131,7 +131,7 @@ def download_run(run_id: str) -> FileResponse:
     p = Path(run["output_path"])
     if not p.exists():
         raise HTTPException(404, "output file missing")
-    return FileResponse(p, filename=f"distilagent_{run_id}.jsonl", media_type="application/x-ndjson")
+    return FileResponse(p, filename=f"hadron_{run_id}.jsonl", media_type="application/x-ndjson")
 
 @app.get("/api/runs/{run_id}/samples")
 def run_samples(run_id: str, limit: int = 50) -> List[Dict[str, Any]]:
@@ -204,7 +204,7 @@ if WEB_DIST.exists():
 def root_stub() -> Dict[str, Any]:
     # Only reached if the static mount is absent (dev mode).
     return {
-        "service": "distilagent",
+        "service": "hadron",
         "version": "0.1.0",
         "note": "web bundle not present — build `web/` or hit /api/* endpoints directly",
     }

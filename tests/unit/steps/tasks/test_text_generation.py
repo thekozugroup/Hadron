@@ -16,9 +16,9 @@ from typing import Any, Dict, List, Union
 
 import pytest
 
-from distilagent.errors import DistilAgentUserError
-from distilagent.pipeline.local import Pipeline
-from distilagent.steps.tasks.text_generation import ChatGeneration, TextGeneration
+from hadron.errors import HadronUserError
+from hadron.pipeline.local import Pipeline
+from hadron.steps.tasks.text_generation import ChatGeneration, TextGeneration
 from tests.unit.conftest import DummyAsyncLLM
 
 class TestTextGeneration:
@@ -100,7 +100,7 @@ class TestTextGeneration:
                 "instruction": "test",
                 "generation": "output",
                 "model_name": "test",
-                "distilagent_metadata": {
+                "hadron_metadata": {
                     "raw_output_task": "output",
                     "statistics_task": {"input_tokens": 12, "output_tokens": 12},
                 },
@@ -171,7 +171,7 @@ class TestTextGeneration:
             add_raw_input=False,
             add_raw_output=False,
         )
-        with pytest.raises(DistilAgentUserError):
+        with pytest.raises(HadronUserError):
             task.load()
 
 class TestChatGeneration:
@@ -229,7 +229,7 @@ class TestChatGeneration:
                 "messages": [{"role": "user", "content": "Tell me a joke."}],
                 "generation": "output",
                 "model_name": "test",
-                "distilagent_metadata": {
+                "hadron_metadata": {
                     "raw_output_task": "output",
                     "statistics_task": {"input_tokens": 12, "output_tokens": 12},
                 },

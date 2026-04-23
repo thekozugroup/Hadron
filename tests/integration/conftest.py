@@ -22,5 +22,5 @@ import pytest
 def temp_cache_dir() -> Generator[None, None, None]:
     """Set the cache directory to a temporary directory for all tests."""
     with tempfile.TemporaryDirectory() as tmpdirname:
-        os.environ["DISTILAGENT_CACHE_DIR"] = tmpdirname
+        os.environ["HADRON_CACHE_DIR"] = tmpdirname
         yield

@@ -17,8 +17,8 @@ from unittest.mock import MagicMock, patch
 import numpy as np
 import pytest
 
-from distilagent.pipeline.local import Pipeline
-from distilagent.steps.tasks.pair_rm import PairRM
+from hadron.pipeline.local import Pipeline
+from hadron.steps.tasks.pair_rm import PairRM
 
 @pytest.mark.skip(reason="Not maintained and to be deprecated.")
 @patch("llm_blender.Blender")
@@ -111,5 +111,5 @@ class TestPairRM:
                 },
             ],
             "use_cache": True,
-            "type_info": {"module": "distilagent.steps.tasks.pair_rm", "name": "PairRM"},
+            "type_info": {"module": "hadron.steps.tasks.pair_rm", "name": "PairRM"},
         }

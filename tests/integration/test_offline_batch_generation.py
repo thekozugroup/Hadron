@@ -15,14 +15,14 @@
 from tempfile import TemporaryDirectory
 from typing import TYPE_CHECKING, Any, List, Union
 
-from distilagent.exceptions import DistilAgentOfflineBatchGenerationNotFinishedException
-from distilagent.models.llms import LLM
-from distilagent.pipeline import Pipeline
-from distilagent.steps import LoadDataFromDicts
-from distilagent.steps.tasks import TextGeneration
+from hadron.exceptions import HadronOfflineBatchGenerationNotFinishedException
+from hadron.models.llms import LLM
+from hadron.pipeline import Pipeline
+from hadron.steps import LoadDataFromDicts
+from hadron.steps.tasks import TextGeneration
 
 if TYPE_CHECKING:
-    from distilagent.typing import FormattedInput, GenerateOutput
+    from hadron.typing import FormattedInput, GenerateOutput
 
 class DummyOfflineBatchGenerateLLM(LLM):
     def load(self) -> None:
@@ -46,7 +46,7 @@ class DummyOfflineBatchGenerateLLM(LLM):
         # Simulate that the first time we create the jobs
         if not self.jobs_ids:
             self.jobs_ids = ("1234", "5678")
-            raise DistilAgentOfflineBatchGenerationNotFinishedException(
+            raise HadronOfflineBatchGenerationNotFinishedException(
                 jobs_ids=self.jobs_ids  # type: ignore
             )
         return [

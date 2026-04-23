@@ -18,11 +18,11 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from distilagent.pipeline import Pipeline
-from distilagent.steps import LoadDataFromDicts, StepInput, StepResources, step
+from hadron.pipeline import Pipeline
+from hadron.steps import LoadDataFromDicts, StepInput, StepResources, step
 
 if TYPE_CHECKING:
-    from distilagent.typing import StepOutput
+    from hadron.typing import StepOutput
 
 @step(outputs=["generation"])
 def Generate(inputs: StepInput) -> "StepOutput":

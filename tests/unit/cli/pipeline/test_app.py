@@ -16,13 +16,13 @@ from unittest import mock
 
 from typer.testing import CliRunner
 
-from distilagent.cli.app import app
+from hadron.cli.app import app
 from tests.unit.cli.utils import TEST_PIPELINE_PATH
 
 runner = CliRunner()
 
 class TestPipelineRun:
-    @mock.patch("distilagent.pipeline.local.Pipeline.run")
+    @mock.patch("hadron.pipeline.local.Pipeline.run")
     def test_pipeline_run(self, pipeline_run_mock: mock.MagicMock) -> None:
         result = runner.invoke(
             app,
@@ -32,7 +32,7 @@ class TestPipelineRun:
                 "--config",
                 TEST_PIPELINE_PATH,
                 "--param",
-                "load_hub_dataset.repo_id=distilagent-internal-testing/this-does-not-matter-dataset",
+                "load_hub_dataset.repo_id=hadron-internal-testing/this-does-not-matter-dataset",
                 "--param",
                 "load_hub_dataset.split=train",
                 "--param",
@@ -44,10 +44,10 @@ class TestPipelineRun:
                 "--param",
                 "text_generation_gpt_2.llm.generation_kwargs.top_k=10",
                 "--param",
-                "push_to_hub.repo_id=distilagent-internal-testing/testing-distilagent-push-to-hub",
+                "push_to_hub.repo_id=hadron-internal-testing/testing-hadron-push-to-hub",
                 "--param",
-                "push_to_hub_2.repo_id=distilagent-internal-testing/testing-distilagent-push-to-hub-2",
-                "--repo-id=distilagent-internal-testing/testing-distilagent-push-to-hub",
+                "push_to_hub_2.repo_id=hadron-internal-testing/testing-hadron-push-to-hub-2",
+                "--repo-id=hadron-internal-testing/testing-hadron-push-to-hub",
                 "--commit-message=Testing",
                 "--private",
                 "--token",
@@ -59,7 +59,7 @@ class TestPipelineRun:
         pipeline_run_mock.assert_called_once_with(
             parameters={
                 "load_hub_dataset": {
-                    "repo_id": "distilagent-internal-testing/this-does-not-matter-dataset",
+                    "repo_id": "hadron-internal-testing/this-does-not-matter-dataset",
                     "split": "train",
                 },
                 "text_generation_gpt": {"num_generations": "3"},
@@ -68,17 +68,17 @@ class TestPipelineRun:
                     "llm": {"generation_kwargs": {"top_p": "0.5", "top_k": "10"}},
                 },
                 "push_to_hub": {
-                    "repo_id": "distilagent-internal-testing/testing-distilagent-push-to-hub"
+                    "repo_id": "hadron-internal-testing/testing-hadron-push-to-hub"
                 },
                 "push_to_hub_2": {
-                    "repo_id": "distilagent-internal-testing/testing-distilagent-push-to-hub-2"
+                    "repo_id": "hadron-internal-testing/testing-hadron-push-to-hub-2"
                 },
             },
             use_cache=False,
         )
 
         pipeline_run_mock.return_value.push_to_hub.assert_called_once_with(
-            repo_id="distilagent-internal-testing/testing-distilagent-push-to-hub",
+            repo_id="hadron-internal-testing/testing-hadron-push-to-hub",
             commit_message="Testing",
             private=True,
             token="this-is-a-token",
@@ -86,7 +86,7 @@ class TestPipelineRun:
 
         assert result.exit_code == 0
 
-    @mock.patch("distilagent.pipeline.local.Pipeline.run")
+    @mock.patch("hadron.pipeline.local.Pipeline.run")
     def test_pipeline_run_without_repo_id(
         self, pipeline_run_mock: mock.MagicMock
     ) -> None:
@@ -99,7 +99,7 @@ class TestPipelineRun:
 
         assert result.exit_code == 0
 
-    @mock.patch("distilagent.pipeline.local.Pipeline.run")
+    @mock.patch("hadron.pipeline.local.Pipeline.run")
     def test_pipeline_run_config_does_not_exist(
         self, pipeline_run_mock: mock.MagicMock
     ) -> None:

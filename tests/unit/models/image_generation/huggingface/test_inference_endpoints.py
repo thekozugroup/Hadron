@@ -19,7 +19,7 @@ import numpy as np
 import pytest
 from PIL import Image
 
-from distilagent.models.image_generation.huggingface.inference_endpoints import (
+from hadron.models.image_generation.huggingface.inference_endpoints import (
     InferenceEndpointsImageGeneration,
 )
 

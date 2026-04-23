@@ -18,7 +18,7 @@ from typing import List
 from pydantic import BaseModel, Field, StringConstraints, conint
 from typing_extensions import Annotated
 
-from distilagent.steps.tasks.structured_outputs.utils import json_schema_to_model
+from hadron.steps.tasks.structured_outputs.utils import json_schema_to_model
 
 class Node(BaseModel):
     id: int

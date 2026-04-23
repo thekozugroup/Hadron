@@ -18,11 +18,11 @@ from typing import TYPE_CHECKING, List, Union
 
 import pytest
 
-from distilagent.steps.tasks.apigen.generator import APIGenGenerator
+from hadron.steps.tasks.apigen.generator import APIGenGenerator
 from tests.unit.conftest import DummyLLM
 
 if TYPE_CHECKING:
-    from distilagent.typing import FormattedInput, GenerateOutput
+    from hadron.typing import FormattedInput, GenerateOutput
 
 class DummyAPIGenLLM(DummyLLM):
     use_structured_output: bool = False

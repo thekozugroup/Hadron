@@ -23,7 +23,7 @@ import pytest
 from .utils import DummyUserDetail
 
 try:
-    from distilagent.models.llms.mistral import MistralLLM
+    from hadron.models.llms.mistral import MistralLLM
 except ImportError:
     MistralLLM = None
 
@@ -157,7 +157,7 @@ class TestMistralLLM:
                     "offline_batch_generation_block_until_done": None,
                     "use_offline_batch_generation": False,
                     "type_info": {
-                        "module": "distilagent.models.llms.mistral",
+                        "module": "hadron.models.llms.mistral",
                         "name": "MistralLLM",
                     },
                 },
@@ -184,7 +184,7 @@ class TestMistralLLM:
                     "offline_batch_generation_block_until_done": None,
                     "use_offline_batch_generation": False,
                     "type_info": {
-                        "module": "distilagent.models.llms.mistral",
+                        "module": "hadron.models.llms.mistral",
                         "name": "MistralLLM",
                     },
                 },
@@ -209,7 +209,7 @@ class TestMistralLLM:
             "offline_batch_generation_block_until_done": None,
             "use_offline_batch_generation": False,
             "type_info": {
-                "module": "distilagent.models.llms.mistral",
+                "module": "hadron.models.llms.mistral",
                 "name": "MistralLLM",
             },
         }

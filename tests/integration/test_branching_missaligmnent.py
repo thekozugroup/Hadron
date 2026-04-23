@@ -14,11 +14,11 @@
 
 from typing import TYPE_CHECKING
 
-from distilagent.pipeline import Pipeline
-from distilagent.steps import GroupColumns, LoadDataFromDicts, StepInput, step
+from hadron.pipeline import Pipeline
+from hadron.steps import GroupColumns, LoadDataFromDicts, StepInput, step
 
 if TYPE_CHECKING:
-    from distilagent.steps import StepOutput
+    from hadron.steps import StepOutput
 
 @step(inputs=["instruction"], outputs=["response"])
 def FailAlways(_: StepInput) -> "StepOutput":

@@ -16,13 +16,13 @@ from typing import TYPE_CHECKING, Dict, List
 
 import pytest
 
-from distilagent.mixins.runtime_parameters import RuntimeParameter
-from distilagent.pipeline.ray import RayPipeline
-from distilagent.steps.base import Step, StepInput
-from distilagent.steps.generators.data import LoadDataFromDicts
+from hadron.mixins.runtime_parameters import RuntimeParameter
+from hadron.pipeline.ray import RayPipeline
+from hadron.steps.base import Step, StepInput
+from hadron.steps.generators.data import LoadDataFromDicts
 
 if TYPE_CHECKING:
-    from distilagent.typing import StepOutput
+    from hadron.typing import StepOutput
 
 DATA = [
     {"prompt": "Tell me a joke"},

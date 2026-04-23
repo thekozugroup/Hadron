@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from distilagent.pipeline import Pipeline
-from distilagent.steps import LoadDataFromDicts, MinHashDedup
+from hadron.pipeline import Pipeline
+from hadron.steps import LoadDataFromDicts, MinHashDedup
 
 def test_minhash_deduplication() -> None:
     with Pipeline() as pipeline:

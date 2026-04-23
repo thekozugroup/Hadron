@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from distilagent.pipeline.local import Pipeline
-from distilagent.steps.deita import DeitaFiltering
+from hadron.pipeline.local import Pipeline
+from hadron.steps.deita import DeitaFiltering
 
 class TestDeitaFiltering:
     def test_process(self) -> None:

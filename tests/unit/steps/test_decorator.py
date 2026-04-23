@@ -16,16 +16,16 @@ from unittest import mock
 
 import pytest
 
-from distilagent.mixins.runtime_parameters import RuntimeParameter
-from distilagent.pipeline.local import Pipeline
-from distilagent.steps.base import (
+from hadron.mixins.runtime_parameters import RuntimeParameter
+from hadron.pipeline.local import Pipeline
+from hadron.steps.base import (
     GeneratorStep,
     GlobalStep,
     Step,
     StepInput,
 )
-from distilagent.steps.decorator import step
-from distilagent.typing import GeneratorStepOutput, StepOutput
+from hadron.steps.decorator import step
+from hadron.typing import GeneratorStepOutput, StepOutput
 
 class TestStepDecorator:
     def test_creating_step(self) -> None:

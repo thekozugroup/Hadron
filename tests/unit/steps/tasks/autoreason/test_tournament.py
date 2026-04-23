@@ -20,15 +20,15 @@ from typing import Any, Callable, Dict, List, Union
 
 import pytest
 
-from distilagent.steps.tasks.autoreason.rate_limit import AsyncTokenBucket
-from distilagent.steps.tasks.autoreason.roles import (
+from hadron.steps.tasks.autoreason.rate_limit import AsyncTokenBucket
+from hadron.steps.tasks.autoreason.roles import (
     AUTHOR_B_SYSTEM,
     CRITIC_SYSTEM,
     JUDGE_SYSTEM,
     SYNTHESIZER_SYSTEM,
     TEACHER_SEED_SYSTEM,
 )
-from distilagent.steps.tasks.autoreason.tournament import TournamentRunner
+from hadron.steps.tasks.autoreason.tournament import TournamentRunner
 
 pytestmark = pytest.mark.asyncio
 
@@ -47,7 +47,7 @@ class ScriptedLLM:
     ``(call_idx, input)`` and returning a string.
 
     Routing is by the *system prompt* of ``input[0]``, matched against the
-    role system constants from :mod:`distilagent.steps.tasks.autoreason.roles`.
+    role system constants from :mod:`hadron.steps.tasks.autoreason.roles`.
     """
 
     _SYSTEM_TO_ROLE = {

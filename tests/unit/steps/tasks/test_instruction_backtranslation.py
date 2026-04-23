@@ -14,12 +14,12 @@
 
 from typing import Any, List
 
-from distilagent.models.llms.base import LLM
-from distilagent.pipeline.local import Pipeline
-from distilagent.steps.tasks.instruction_backtranslation import (
+from hadron.models.llms.base import LLM
+from hadron.pipeline.local import Pipeline
+from hadron.steps.tasks.instruction_backtranslation import (
     InstructionBacktranslation,
 )
-from distilagent.typing import ChatType, GenerateOutput
+from hadron.typing import ChatType, GenerateOutput
 
 class InstructionBacktranslationLLM(LLM):
     def load(self) -> None:
@@ -92,7 +92,7 @@ class TestInstructionBacktranslation:
                 "score": 1,
                 "reason": "This is the reason.",
                 "model_name": "instruction-backtranslation-model",
-                "distilagent_metadata": {
+                "hadron_metadata": {
                     "raw_output_instruction-backtranslation": "This is the reason. Score: 1",
                     "statistics_instruction-backtranslation": {
                         "input_tokens": 12,

@@ -14,7 +14,7 @@
 
 import pytest
 
-from distilagent.steps.reward_model import RewardModelScore
+from hadron.steps.reward_model import RewardModelScore
 
 class TestRewardModelScore:
     def test_process(self) -> None:

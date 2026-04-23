@@ -16,7 +16,7 @@ import inspect
 
 from typing_extensions import Annotated
 
-from distilagent.utils.typing_ import is_parameter_annotated_with
+from hadron.utils.typing_ import is_parameter_annotated_with
 
 def test_is_parameter_annotated_with() -> None:
     def dummy_function(arg: Annotated[int, "unit-test"], arg2: int) -> None:

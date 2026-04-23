@@ -15,7 +15,7 @@
 import os
 from unittest import mock
 
-from distilagent.models.llms.openrouter import OpenRouterLLM
+from hadron.models.llms.openrouter import OpenRouterLLM
 
 class TestOpenRouterLLM:
     model_id: str = "deepseek/deepseek-chat-v3-0324:free"
@@ -53,7 +53,7 @@ class TestOpenRouterLLM:
             "offline_batch_generation_block_until_done": None,
             "use_offline_batch_generation": False,
             "type_info": {
-                "module": "distilagent.models.llms.openrouter",
+                "module": "hadron.models.llms.openrouter",
                 "name": "OpenRouterLLM",
             },
         }

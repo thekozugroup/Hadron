@@ -18,11 +18,11 @@ from typing import TYPE_CHECKING, List
 
 import pytest
 
-from distilagent.pipeline import Pipeline, routing_batch_function
-from distilagent.steps import LoadDataFromDicts, StepInput, step
+from hadron.pipeline import Pipeline, routing_batch_function
+from hadron.steps import LoadDataFromDicts, StepInput, step
 
 if TYPE_CHECKING:
-    from distilagent.typing import StepOutput
+    from hadron.typing import StepOutput
 
 @routing_batch_function()
 def random_routing_batch(steps: List[str]) -> List[str]:

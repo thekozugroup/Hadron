@@ -19,12 +19,12 @@ from uuid import uuid4
 
 from pydantic import PrivateAttr
 
-from distilagent.pipeline import Pipeline
-from distilagent.steps import LoadDataFromDicts
-from distilagent.steps.base import Step, StepInput
+from hadron.pipeline import Pipeline
+from hadron.steps import LoadDataFromDicts
+from hadron.steps.base import Step, StepInput
 
 if TYPE_CHECKING:
-    from distilagent.pipeline.batch import _Batch
+    from hadron.pipeline.batch import _Batch
 
 class DummyStep(Step):
     attr: int = 5

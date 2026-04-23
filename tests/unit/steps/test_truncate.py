@@ -16,7 +16,7 @@ from typing import Optional
 
 import pytest
 
-from distilagent.steps.truncate import TruncateTextColumn
+from hadron.steps.truncate import TruncateTextColumn
 
 @pytest.mark.parametrize(
     "max_length, text, tokenizer, expected",

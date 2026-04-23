@@ -16,7 +16,7 @@ from typing import Any, Dict, Union
 
 import pytest
 
-from distilagent.steps.tasks.clair import CLAIR
+from hadron.steps.tasks.clair import CLAIR
 from tests.unit.conftest import DummyLLM
 
 class TestCLAIR:

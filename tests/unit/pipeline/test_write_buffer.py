@@ -15,10 +15,10 @@
 import tempfile
 from pathlib import Path
 
-from distilagent.constants import STEPS_OUTPUTS_PATH
-from distilagent.distiset import Distiset, create_distiset
-from distilagent.pipeline.local import Pipeline
-from distilagent.pipeline.write_buffer import _WriteBuffer
+from hadron.constants import STEPS_OUTPUTS_PATH
+from hadron.distiset import Distiset, create_distiset
+from hadron.pipeline.local import Pipeline
+from hadron.pipeline.write_buffer import _WriteBuffer
 from tests.unit.pipeline.utils import (
     DummyGeneratorStep,
     DummyStep1,

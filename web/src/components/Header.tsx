@@ -19,7 +19,7 @@ export function Header() {
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
         <Link to="/" className="flex items-center gap-2 font-semibold">
           <Sparkles className="h-5 w-5 text-primary" />
-          <span>DistilAgent</span>
+          <span>Hadron</span>
           <span className="ml-2 text-xs font-normal text-muted-foreground">AutoReason dashboard</span>
         </Link>
         <div className="flex items-center gap-4 text-sm">

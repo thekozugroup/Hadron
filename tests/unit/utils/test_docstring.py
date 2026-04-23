@@ -14,7 +14,7 @@
 
 import textwrap
 
-from distilagent.utils.docstring import parse_google_docstring
+from hadron.utils.docstring import parse_google_docstring
 
 def test_parse_google_docstring() -> None:
     def dummy_function() -> None:
@@ -62,7 +62,7 @@ def test_parse_google_docstring() -> None:
         "citations": [],
     }
 
-def test_parse_google_docstring_with_distilagent_peculiarities() -> None:
+def test_parse_google_docstring_with_hadron_peculiarities() -> None:
     class DummyClass:
         """This is a dummy function.
 

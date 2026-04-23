@@ -16,8 +16,8 @@ from typing import Any, Dict, Union
 
 import pytest
 
-from distilagent.pipeline.local import Pipeline
-from distilagent.steps.tasks.complexity_scorer import ComplexityScorer
+from hadron.pipeline.local import Pipeline
+from hadron.steps.tasks.complexity_scorer import ComplexityScorer
 from tests.unit.conftest import DummyAsyncLLM
 
 class TestComplexityScorer:

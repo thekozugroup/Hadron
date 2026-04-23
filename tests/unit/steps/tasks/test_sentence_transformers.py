@@ -16,7 +16,7 @@ from typing import Any, Dict
 
 import pytest
 
-from distilagent.steps.tasks.sentence_transformers import (
+from hadron.steps.tasks.sentence_transformers import (
     CONTEXT_INTRO,
     NEGATIVE_STYLE,
     POSITIVE_NEGATIVE_SYSTEM_PROMPT,
